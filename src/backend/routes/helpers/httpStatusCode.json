@@ -1,0 +1,523 @@
+{
+  "100":{
+    "name": "Continue",
+    "message": "Continue operation",
+    "translate":{
+      "ptbr":"Continuando operação"
+    },
+    "target": "referral",
+    "innerError": {
+      "code": "innerErrorCode",
+      "message": "Continue referral access"
+    }
+    
+  },
+  
+  "101":{
+    "name": "Switching Protocols",
+    "message": "Successful operation",
+    "translate":{
+      "ptbr":"Operação bem sucedida"
+    },
+    "target": "referral",
+    "innerError": {
+      "code": "innerErrorCode",
+      "message": "Switching protocols referral access"
+    }
+    
+  },
+  "103":{
+    "name": "Early Hints",
+    "message": "Successful operation",
+    "translate":{
+      "ptbr":"Operação bem sucedida"
+    },
+    "target": "referral",
+    "innerError": {
+      "code": "innerErrorCode",
+      "message": "Early Hints referral access"
+    }
+  },
+  "200": {
+    "name": "Success",
+    "message": "Successful request",
+    "translate":{
+      "ptbr":"Requisição bem sucedida"
+    },
+    "target": "referral",
+    "innerError": {
+      "code": "innerErrorCode",
+      "message": "Successful referral access"
+    }
+  },
+  "201": {
+    "name": "Created",
+    "message": "Sucess requests, new resource has been created",
+    "translate":{
+      "ptbr":"Requisição foi bem suscedida, novo recurso foi criado"
+    },
+    "target": "referral",
+    "innerError": {
+      "code": "innerErrorCode",
+      "message": "Sucess requests"
+    }
+  },
+  "202": {
+    "name": "Accepted",
+    "message": "Accepted request",
+    "translate":{
+      "ptbr":"Requisição aceita"
+    },
+    "target": "referral",
+    "innerError": {
+      "code": "innerErrorCode",
+      "message": "Accepted request"
+    }
+  },
+  "203": {
+    "name": "Non-Authoritative Information",
+    "message": "Sucess requests. However content has been modified by a proxy",
+    "translate":{
+      "ptbr":"Requisição foi bem suscedida. Porém o conteúdo foi modificado por algum proxy"
+    },
+    "target": "referral",
+    "innerError": {
+      "code": "innerErrorCode",
+      "message": "Sucess requests"
+    }
+  },
+  "204": {
+    "name": "No Content",
+    "message": "Sucess requests. Is no additional content to send in the response payload body",
+    "translate":{
+      "ptbr":"Requisição foi bem suscedida. Sem conteúdo adicional para ser retornado no corpo da resposta"
+    },
+    "target": "referral",
+    "innerError": {
+      "code": "innerErrorCode",
+      "message": "Sucess requests"
+    }
+  },
+  "205": {
+    "name": "Reset Content",
+    "message": "Reset the document from which the original request was sent",
+    "translate":{
+      "ptbr":"Redefina o documento o qual a requisição original foi solicitada"
+    },
+    "target": "referral",
+    "innerError": {
+      "code": "innerErrorCode",
+      "message": "Sucess requests"
+    }
+  },
+  "206": {
+    "name": "Partial Content",
+    "message": "Sucess Requests. Partial content in bytes from resource solicited",
+    "translate":{
+      "ptbr":"Requisição bem sucedida. Conteúdo parcial ou partes do conteúdo do recurso solicitado"
+    },
+    "target": "referral",
+    "innerError": {
+      "code": "innerErrorCode",
+      "message": "Sucess requests"
+    }
+  },
+ "300":{
+    "name": "Multiple Choices",
+    "message": "The request has more than one possible response",
+    "translate":{
+      "ptbr":"A requisição tem mais de uma possibilidade de resposta"
+    },
+    "target": "referral",
+    "innerError": {
+      "code": "innerErrorCode",
+      "message": "Redirect"
+    }
+  }, 
+  "301":{
+    "name": "Moved Permanently",
+    "message": "The resource was moved permanently. It's has a new URL",
+    "translate":{
+      "ptbr":"O recurso foi movido permanentemente. Ele tem uma nova URL"
+    },
+    "target": "referral",
+    "innerError": {
+      "code": "innerErrorCode",
+      "message": "Redirect"
+    }
+  },
+  "302":{
+    "name": "Found",
+    "message": "Resource resides temporarily under a different URI",
+    "translate":{
+      "ptbr":"Recurso está temporariamente em uma URL diferente"
+    },
+    "target": "referral",
+    "innerError": {
+      "code": "innerErrorCode",
+      "message": "Redirect"
+    }
+  },
+  "303":{
+    "name": "See Other",
+    "message": "Redirect to another resource",
+    "translate":{
+      "ptbr":"Redirecionamento para outro recurso"
+    },
+    "target": "referral",
+    "innerError": {
+      "code": "innerErrorCode",
+      "message": "Redirect"
+    }
+  },
+  "304":{
+    "name": "Not Modified",
+    "message": "The response has not been modified",
+    "translate":{
+      "ptbr":"A resposta não foi modifica"
+    },
+    "target": "referral",
+    "innerError": {
+      "code": "innerErrorCode",
+      "message": "Redirect"
+    }
+  },
+  "307":{
+    "name": "Temporary Redirect",
+    "message": "Resource has been changed to link in header",
+    "translate":{
+      "ptbr":"Recurso foi modificado temporariamente para o link no cabeçalho"
+    },
+    "target": "referral",
+    "innerError": {
+      "code": "innerErrorCode",
+      "message": "Redirect"
+    }
+  },
+  "308":{
+    "name": "Permanent Redirect",
+    "message": "Resource permanently modified to another URL",
+    "translate":{
+      "ptbr":"Recurso foi permanentemente movido para outra URL"
+    },
+    "target": "referral",
+    "innerError": {
+      "code": "innerErrorCode",
+      "message": "Redirect"
+    }
+  },
+  "400": {
+    "name": "Bad Request",
+    "message": "Request will not process. There is something client error",
+    "translate":{
+      "ptbr":"Requisição não será processada. Há algum erro do cliente"
+    },
+    "target": "referral",
+    "innerError": {
+      "code": "innerErrorCode",
+      "message": "Client Error"
+    }
+  },
+  "401": {
+      "name": "Unauthorized",
+      "message": "You are not authenticated to access this resource.",
+      "translate":{
+        "ptbr":"Você não está autenticado para acessar este recurso."
+      },
+      "target": "referral",
+      "innerError": {
+        "code": "innerErrorCode",
+        "message": "Unauthorized referral access"
+      }
+  },
+  "403": {
+    "name": "Forbidden",
+    "message": "You are not authorized to access the resource.",
+    "translate":{
+      "ptbr":"Você não tem autorização para acessar esse recurso."
+    },
+    "target": "referral",
+    "innerError": {
+      "code": "innerErrorCode",
+      "message": "Forbidden referral access"
+    }
+  },
+ 
+  "404": {
+    "name": "Not Found",
+    "message": "The resource was not found.",
+    "target": "referral",
+    "translate":{
+      "ptbr":"Recurso não foi encontrado"
+    },
+    "innerError": {
+      "code": "innerErrorCode",
+      "message": "Not Found referral access"
+    }
+  },
+  "405": {
+    "name": "Method Not Allowed",
+    "message": "The request method is not allowed",
+    "target": "referral",
+    "translate":{
+      "ptbr":"O método de reuisição não é permitido."
+    },
+    "innerError": {
+      "code": "innerErrorCode",
+      "message": "Cliente error. Method Not Allowed"
+    }
+  },
+  "406": {
+    "name": "Not Acceptable",
+    "message": "The target resource has not anwser to acceptable to the client",
+    "target": "referral",
+    "translate":{
+      "ptbr":"O recurso alvo não tem uma resposta aceitável para o cliente"
+    },
+    "innerError": {
+      "code": "innerErrorCode",
+      "message": "Cliente error"
+    }
+  },
+  "407": {
+    "name": "Proxy Authentication Required",
+    "message": "Client needs to authenticate itself in order to use a proxy server",
+    "target": "referral",
+    "translate":{
+      "ptbr":"O cliente precisa se autenticar por um server proxy"
+    },
+    "innerError": {
+      "code": "innerErrorCode",
+      "message": "Cliente error. Proxy Authentication Required"
+    }
+  },
+  "408": {
+    "name": "Request Timeout",
+    "message": "Request timeout was reached. Connection will be terminated",
+    "target": "referral",
+    "translate":{
+      "ptbr":"Tempo limite de requisição atingido. Conexão será encerrada"
+    },
+    "innerError": {
+      "code": "innerErrorCode",
+      "message": "Cliente error. Request Timeout"
+    }
+  },
+  "409": {
+    "name": "Conflict",
+    "message": "Request could not be completed due to a conflict with the current state of the target resource",
+    "target": "referral",
+    "translate":{
+      "ptbr":"Requisição não pode ser completada por um conflito por causa do estado atual do recurso"
+    },
+    "innerError": {
+      "code": "innerErrorCode",
+      "message": "Cliente Error. Conflict"
+    }
+  },
+  "410": {
+    "name": "Gone",
+    "message": "The resource is not avaliable on origin server",
+    "target": "referral",
+    "translate":{
+      "ptbr":"O recurso não está disponível no servidor de origem"
+    },
+    "innerError": {
+      "code": "innerErrorCode",
+      "message": "Cliente Error. Resource is not avaliable"
+    }
+  },
+  "411": {
+    "name": "Length Required",
+    "message": "The server to deny requests without a defined content-length",
+    "target": "referral",
+    "translate":{
+      "ptbr":"O servidor nega requisições sem um cabeçalho"
+    },
+    "innerError": {
+      "code": "innerErrorCode",
+      "message": "Cliente Error. Requests wihtout content-length"
+    }
+  },
+  "412": {
+    "name": "Precondition Failed",
+    "message": "Conditions given in the request header fields evaluated to false when tested on the server",
+    "target": "referral",
+    "translate":{
+      "ptbr":"Condições dadas no cabeçalho da requisição foram avaliadas falsas, quando testadas no servidor"
+    },
+    "innerError": {
+      "code": "innerErrorCode",
+      "message": "Cliente Error. False conditions in the header"
+    }
+  },
+  "413": {
+    "name": "Payload Too Large",
+    "message": " Refusing to process a request because the request payload is larger than the server is willing or able to process",
+    "target": "referral",
+    "translate":{
+      "ptbr":"Recusa-se a processar requisições que são maiores que a capacidade do servidor processar"
+    },
+    "innerError": {
+      "code": "innerErrorCode",
+      "message": "Cliente Error. Refusig to process the request"
+    }
+  },
+  "414": {
+    "name": "URI Too Long",
+    "message": "URL too long for the server to interpret",
+    "target": "referral",
+    "translate":{
+      "ptbr":"URL muito grande para o servidor processar"
+    },
+    "innerError": {
+      "code": "innerErrorCode",
+      "message": "Cliente Error. URL to long"
+    }
+  },
+  "415": {
+    "name": "Unsupported Media Type",
+    "message": "Refusing to service the request because the payload is in a format not supported by this method on the target resource",
+    "target": "referral",
+    "translate":{
+      "ptbr":"Recusando requisições porque a carga útil está em um formato não suportado por este método no recurso de destino"
+    },
+    "innerError": {
+      "code": "innerErrorCode",
+      "message": "Cliente Error. URL to long"
+    }
+  },
+  "416": {
+    "name": "Range Not Satisfiable",
+    "message": "The ranges in the request's Range header field is invalid",
+    "target": "referral",
+    "translate":{
+      "ptbr":"Intervalo no cabeçalho da requisição é inválido"
+    },
+    "innerError": {
+      "code": "innerErrorCode",
+      "message": "Cliente Error. Ranger header field ins invalid"
+    }
+  },
+  "500": {
+    "name": "Internal Server Error",
+    "message": "Unexpected condition. Request not answered ",
+    "target": "referral",
+    "translate":{
+      "ptbr":"Condição inesperada. Requisição não será atendida"
+    },
+    "innerError": {
+      "code": "innerErrorCode",
+      "message": "Server Error"
+    }
+  },
+  "501": {
+    "name": "Not Implemented",
+    "message": "The server does not support the functionality required to fulfill the request",
+    "target": "referral",
+    "translate":{
+      "ptbr":"O servidor não suporta a funcionalidade necessária para atender a solicitação"
+    },
+    "innerError": {
+      "code": "innerErrorCode",
+      "message": "Server Error"
+    }
+  },
+  "502": {
+    "name": "Bad Gateway",
+    "message": "Received an invalid response from an inbound server it accessed while attempting to fulfill the request.",
+    "target": "referral",
+    "translate":{
+      "ptbr":"Resposta inválida, recebida por um servidor"
+    },
+    "innerError": {
+      "code": "innerErrorCode",
+      "message": "Server Error"
+    }
+  },
+  "503": {
+    "name": "Service Unavailable",
+    "message": "Server currently unable to handle the request",
+    "target": "referral",
+    "translate":{
+      "ptbr":"Servidor atualmente incapaz de receber requisição"
+    },
+    "innerError": {
+      "code": "innerErrorCode",
+      "message": "Server Error"
+    }
+  },
+  "504": {
+    "name": "Gateway Timeout",
+    "message": "The server while acting as gateway or proxy, failed to respond in time request",
+    "target": "referral",
+    "translate":{
+      "ptbr":"O servidor enquanto atuava como gateway ou proxy, não conseguiu responder em tempo"
+    },
+    "innerError": {
+      "code": "innerErrorCode",
+      "message": "Server Error"
+    }
+  },
+  "505": {
+    "name": "HTTP Version Not Supported",
+    "message": "HTTP version used in the request is not supported by the server",
+    "target": "referral",
+    "translate":{
+      "ptbr":"A versão do HTTP não é suportada pelo servidor"
+    },
+    "innerError": {
+      "code": "innerErrorCode",
+      "message": "Server Error"
+    }
+  },
+  "506": {
+    "name": "Variant Also Negotiates",
+    "message": "Error in the server's internal configuration where the chosen variant is itself configured to enter a content negotiation, so it is not an appropriate negotiation endpoint",
+    "target": "referral",
+    "translate":{
+      "ptbr":"Erro na configuração interna do servidor na qual a variante escolhida é em si configurada para entrar em uma negociação de conteúdo, então não é um endpoint de negociação apropriado"
+    },
+    "innerError": {
+      "code": "innerErrorCode",
+      "message": "Server Error"
+    }
+  },
+  "507": {
+    "name": "Insufficient Storage",
+    "message": "The method cannot be executed because the server cannot save the representation needed to successfully complete the request. ",
+    "target": "referral",
+    "translate":{
+      "ptbr":"O método não pode ser executado porque o servidor não pode salvar a representação necessária para completar a requisição com sucesso"
+    },
+    "innerError": {
+      "code": "innerErrorCode",
+      "message": "Server Error"
+    }
+  },
+  "508": {
+    "name": "Loop Detected",
+    "message": "the server terminated an operation because it encountered an infinite loop while processing a request with 'Depth: infinity'",
+    "target": "referral",
+    "translate":{
+      "ptbr":"o servidor finalizou uma operação porque encontrou um loop infinito enquando processava a requisição com 'Depth: infinity'"
+    },
+    "innerError": {
+      "code": "innerErrorCode",
+      "message": "Server Error"
+    }
+  },
+  "510": {
+    "name": "Not Extended",
+    "message": "the server terminated an operation because it encountered an infinite loop while processing a request with 'Depth: infinity'",
+    "target": "referral",
+    "translate":{
+      "ptbr":"o servidor finalizou uma operação porque encontrou um loop infinito enquando processava a requisição com 'Depth: infinity'"
+    },
+    "innerError": {
+      "code": "innerErrorCode",
+      "message": "Server Error"
+    }
+  }
+
+}

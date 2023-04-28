@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="../images/icon/apple-icon-mezzomo.png">
+    <link rel="icon" type="image/png" href="../images/icon/favicon_mezzomo3.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>
+        Cadastro de Administrador
+    </title>
+    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <!--       CSS Files         -->
+ 
+    <!--     Custom styles       -->
+    <link rel="stylesheet" type="text/css" href="../local/stylecadastromezzomo.css">
+    <script src="../assets/js/core/jquery.min.js"></script>
+</head>
+
+<body class="off-canvas-sidebar">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top text-white">
+        <div class="container">
+            <div class="navbar-wrapper">
+                <a class="navbar-brand" href="/cadastro-usuario/confirmar-cadastro-usuario">Página de Cadastro</a>
+            </div>
+
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="navbar-toggler-icon icon-bar"></span>
+                <span class="navbar-toggler-icon icon-bar"></span>
+                <span class="navbar-toggler-icon icon-bar"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end">
+                <ul class="navbar-nav">
+                    <li class="nav-item  active ">
+                        <a href="../acesso" class="nav-link">
+                            <i class="material-icons">fingerprint</i> Acesso
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar -->
+    <div class="wrapper wrapper-full-page">
+        <div class="page-header cadastro-page header-filter" filter-color="yellow">
+            <!-- style="background-image: url('../../assets/img/register.jpg'); background-size: cover; background-position: top center;"> -->
+            <div class="container">
+                <div class="row">
+                    <div data-aos="fade-down" class="col-lg-5 col-md-8 col-sm-8 ml-auto mr-auto">
+                        <div class="card card-login card-hidden">
+                            <div class="card-header card-header-black text-center">
+                                <h2 class="card-title text-center" style="font-weight: 600;">Cadastro de Administrador</h2>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+
+                                    <div class="col-md-12 mr-auto">
+                                        <!--<div class="social text-center">
+                                            <button class="btn btn-just-icon btn-round btn-github">
+                                                <i class="fa fa-google"></i>
+                                            </button>
+                                            <button class="btn btn-just-icon btn-round btn-github">
+                                                <i class="fa fa-facebook"> </i>
+                                            </button>
+                                            <h4 class="mt-3"> ...ou faça o cadastro manual. </h4>
+                                        </div>-->
+                                        <form id="form-cadastrar-senha" class="form" method="post" action="/cadastro-escritorio/cadastrar-administrador">
+                                            <!--CNPJ-->
+                                            <div class="form-group has-default">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            <i class="material-icons">payment</i>
+                                                        </span>
+                                                    </div>
+                                                    <input id="new_cnpj" name="cnpj" type="text" class="form-control" placeholder="CNPJ" autocomplete="off"
+                                                    onchange="onChangeCNPJ(this)" oninput="this.className=''"
+                                                    onkeypress="$(this).mask('00.000.000/0000-00')">
+                                            </div>
+
+                                            </div>
+                                            
+                                             <!--USUÁRIO-->
+                                             <div class="form-group has-default">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            <i class="material-icons">face</i>
+                                                        </span>
+                                                    </div>
+                                                    <input name="nome_usuario" type="text" class="form-control" placeholder="Insira seu nome de usuário..." >
+                                                </div>
+                                            </div>
+                                            
+                                            <!--EMAIL
+                                            <div class="form-group has-default">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            <i class="material-icons">mail</i>
+                                                        </span>
+                                                    </div>
+                                                    <input name="email_usuario" type="email" class="form-control" placeholder="Insira seu email..." >
+                                                </div>
+                                            </div> 
+                                            -->
+
+                                            <!--SENHA-->
+                                            <div class="form-group has-default">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            <i class="material-icons">lock_outline</i>
+                                                        </span>
+                                                    </div>
+                                                    <input id="newpass" name="senha" type="password" placeholder="Insira sua senha..." class="form-control" required>
+                                                </div>
+                                            </div>
+                                            <!--CONFIRMAR SENHA-->
+                                            <div class="form-group has-default">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            <i class="material-icons">lock_outline</i>
+                                                        </span>
+                                                    </div>
+                                                    <input id="newpassok" name="senha_confirmada" type="password" class="form-control" placeholder="Confirme sua senha..." required>
+                                                </div>
+                                            </div>
+                                           
+                                            <center>
+                                                <span id="message"></span>
+                                            </center>
+                                            <!--HIDEN ID-->
+                                            <input type="hidden" name="id_escritorio" class="form-control" value="{{ id_escritorio }}">
+                                            <input type="hidden" name="email_responsavel" class="form-control" value="{{ email_responsavel }}">
+                                            <div class="text-center">
+                                                <button id="btn-salvar" type="submit" class="btn-cadastro btn-black btn disable">Salvar</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{> escritorio/footer_outside}}
+        </div>
+    </div>
+
+    <!--Correção do Violation Scroll non-passive event-->
+    <script src=" ../local/plugins/fix-non-passive.js"></script>
+    <!--   Core JS Files   -->
+    
+    <script src="../assets/js/core/popper.min.js"></script>
+    <script src="../assets/js/core/bootstrap-material-design.js"></script>
+    <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+    <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="../assets/js/material-dashboard.min.js" type="text/javascript"></script>
+    <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+    <!--  Notifications Plugin    -->
+    <script src="../assets/js/plugins/bootstrap-notify.js"></script>
+    <!--SWEET ALERT-->
+    <!--LOCAL-->
+    <script src="../local/plugins/sweetalert/js/sweetalert2.min.js"></script>
+   
+    <!--LIVE ONLINE  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9/dist/sweetalert2.min.js"></script>  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@9/dist/sweetalert2.min.css" id="theme-styles">  -->
+    
+    <!-- AJAX JQUERY POST UPDATE update_form_pendente MODAL -->
+    <script src="../local/metodos/post/form_alterar_senha.js"></script>
+    <script>
+        $(document).ready(function() {
+            //md.checkFullPageBackgroundImage();
+            setTimeout(function() {
+                // after 1000 ms we add the class animated to the login/register card
+                $('.card').removeClass('card-hidden');
+            }, 400);
+        });
+        $('#newpass, #newpassok').on('keyup', function() {
+            if ($('#newpass').val() == $('#newpassok').val()) {
+                $('#message').html('').css('color', 'green');
+                var btn = document.querySelector('#btn-salvar');
+                btn.classList.remove('disabled');
+            } else {
+                $('#message').html('Senhas não conferem').css('color', 'red');
+                var btn = document.querySelector('#btn-salvar');
+                btn.classList.add('disabled');
+            }
+        });
+    </script>
+
+    <script>
+            $(document).ready(function () {
+            function criaToast(icon, response) {
+                Swal.fire({
+                    customClass: {
+                        confirmButton: 'btn btn-black',
+                    },
+                    title: response,
+                    icon: icon,
+                })
+            }
+
+            $("#form-cadastrar-senha").submit(function (e) {
+                e.preventDefault();
+                var post_url = $(this).attr("action");
+                var request_method = $(this).attr("method");
+                var form_data = $(this).serialize();
+            
+
+                $.ajax({
+                    async: "false",
+                    url: post_url,
+                    type: request_method,
+                    data: form_data
+                }).done(function (response) { //
+                    console.log("response: ", response);
+                    var {msg, error, status, redirect, redirectUrl} = response;
+
+                    var gif = "";
+                    var hidein = 2000;
+                    
+                    error ? gif='warning' : gif='success';
+                    status ? gif='success' : gif='warning';
+                    
+                    //criaToast(gif, response)
+
+                    if (msg == "Cadastro realizado com sucesso!") {
+                        msg = msg + '\nVocê será redirecionado para à página de acesso.'
+                        gif = "success";
+                    } 
+                    if (msg == "Falha no cadastro, CNPJ já está cadastrado no banco") {
+                        gif = 'warning';
+                    } 
+                    if (msg == "CNJP inválido.") {
+                        gif = 'warning';
+                    }  
+                    Swal.fire({
+                        customClass: {
+                            confirmButton: 'btn btn-black',
+                        },
+                        position: 'center',
+                        icon: gif,
+                        title: msg,
+                        showConfirmButton: true,
+                        confirmButtonText: "Ok"
+                    }).then((result) => {
+                        if (result.isConfirmed && msg == 'Cadastro realizado com sucesso!') {
+                            redirectURL('/acesso', 10);
+                        }                        
+                    })
+                    
+                });
+
+                const redirectURL = async (url, time) => {
+                    setTimeout(function () {
+                        window.location.href = url;
+                    }, time)
+                }
+
+                const reloadPage = async (time) => {
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, time)
+                }
+
+            });
+
+        })
+    </script>
+
+    <script>
+         function onChangeCNPJ(elemento) {
+            var cnpj = document.getElementById("new_cnpj").value;
+            if (cnpj) {
+                //console.log("Qual o CNPJ? ")
+                cnpj=cnpj.replace(/\./g, "").replace(/-/g, "").replace(/\//g, "")
+
+                if (cnpj.length == 14) {
+                    //console.log("esse é o cnpj=", cnpj)
+                    $.ajax({
+                        url: '/antecipados/get-cnpj',
+                        type: 'POST',
+                        data: {
+                            'cnpj': cnpj
+                        }
+                    }).done(function (response) {
+                        console.log("onChangeCNPJ response ", response)
+                        if (response) {
+                            $('#new_razao').val(response.razao_social);
+                            $('#new_nome_fantasia').val(response.nome_fantasia);
+                            $('#new_cidade').val(response.municipio);
+                            $('#new_uf').val(response.uf);
+                            $('#new_cep').val(response.cep)
+                            $('#new_endereco').val(`${response.logradouro}, ${response.numero}, ${response.bairro}`)
+                            $('#new_numero').val(response.numero);
+
+                        } else {
+                            $('#new_razao').val('');
+                            $('#new_nome_fantasia').val('');
+                            $('#new_cidade').val('');
+                            $('#new_uf').val('');
+                            $('#new_cep').val('');
+                            $('#new_endereco').val('');
+                            $('#new_numero').val('')
+                        }
+                    })
+                } else {
+                    var textmsg = 'O CNPJ deve ter 14 digitos!';
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'info',
+                        title: textmsg,
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+
+                }
+            }
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,120 @@
+<html>
+	<head>
+		<title>read-excel-file</title>
+
+		<meta charset="utf-8">
+
+		<script src="./read-excel-file.min.js"></script>
+
+		<style>
+			body
+			{
+				margin : 20px;
+				font-family : Arial, Helvetica;
+			}
+
+			#input
+			{
+				margin-top    : 20px;
+				margin-bottom : 10px;
+			}
+
+
+			#result-table table
+			{
+				width : 100%;
+				border-collapse : collapse;
+				margin-top    : 2.5em;
+				margin-bottom : 2.5em;
+				font-size     : 12px;
+  		}
+
+			#result-table table td
+			{
+				border : 1px solid black;
+				padding : 0.5em;
+
+				text-overflow : ellipsis;
+				overflow      : hidden;
+				max-width     : 10em;
+				white-space   : nowrap;
+			}
+
+			#main-link
+			{
+				display     : block;
+				font-size   : 24px;
+				color       : #0093C4;
+				font-family : monospace;
+				text-decoration : none;
+			}
+		</style>
+	</head>
+
+	<body>
+		<a id="main-link" href="https://gitlab.com/catamphetamine/read-excel-file">
+			read-excel-file
+		</a>
+
+		<input type="file" id="input" />
+
+		<div style="font-size: 12px">
+			* Parsing to JSON with a strict schema is supported. <a target="_blank" href="https://gitlab.com/catamphetamine/read-excel-file#json" style="color: #0093C4; text-decoration: none">Read more</a>.
+		</div>
+
+		<div id="result-table"></div>
+
+		<pre id="result"></pre>
+
+		<script>
+				var arrayObjeto = []
+				
+			
+				var input = document.getElementById('input')
+				input.addEventListener('change', function() {
+					readXlsxFile(input.files[0]).then(function(res) {
+					
+					var resposta = res
+
+					delete resposta[0]
+					delete resposta[1]
+				
+					resposta.forEach(function(el, index) {
+					
+						var objeto = {}
+
+						el.forEach(function(aux_el, aux_index) {
+
+							if(aux_index > 0 && aux_index < 5) {
+								if(aux_index == 1 && aux_el) {
+									objeto.name = aux_el
+								}
+								if(aux_index == 2  && aux_el) {
+									objeto.cnpj = aux_el
+								}
+								if(aux_index == 3  && aux_el) {
+									objeto.tributacao = aux_el
+								}
+								if(aux_index == 4  && aux_el) {
+									objeto.unidade = aux_el
+								}
+							}
+						})
+
+						if(Object.entries(objeto).length == 4) {
+							arrayObjeto.push(objeto)
+						}
+						
+					});
+
+					//
+					console.log('dado final: ', arrayObjeto)
+
+
+					})
+				})
+
+
+		</script>
+	</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="../images/icon/apple-icon-mezzomo.png">
+    <link rel="icon" type="image/png" href="../images/icon/favicon_mezzomo3.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Robotax: Gráficos </title>
+    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+
+    <!--NOSSO CSS -->
+    <link rel="stylesheet" type="text/css" href="../local/stylenotasmezzomo.css">
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css"
+        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <!-- CSS Files -->
+    <link href="../assets/css/material-dashboard.min.css?v=2.1.2" rel="stylesheet" />
+
+    <!--local CSS -->
+    <link rel="stylesheet" type="text/css" href="../local/stylenotasmezzomo.css">
+
+    <script src="../assets/js/core/jquery-3.5.1.js"></script>
+
+</head>
+
+<body class="">
+    <div class="wrapper ">
+        <!-- Navbar -->
+        <div class="sidebar" data-color="yellow" data-background-color="black"
+            data-image="../assets/img/contabeisbw.jpg">
+            <!--
+        Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
+
+        Tip 2: you can also add an image using data-image tag
+                      -->
+            <div class="sidebar-wrapper">
+                <ul class="nav">
+                    <!--CARD NO SIDE BAR - LOGO DO USÚARIO E NOME -->
+
+                    {{> escritorio/navbar_nf}}
+
+
+                </ul>
+            </div>
+        </div>
+
+
+
+
+
+        <!-- Plugin for the momentJs  -->
+        <script src="../assets/js/plugins/moment.min.js"></script>
+        <!-- Plugin for the momentJs TRADUÇÕES LOCAIS  -->
+        <script src="../assets/js/plugins/moment-with-locales.js"></script>
+
+        <div class="main-panel">
+            <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute sticky-top">
+                {{> escritorio/testegratis}}
+            </nav>
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-transparent">
+                <div class="container-fluid">
+                    <div class="navbar-wrapper">
+                        <div class="navbar-minimize">
+                            <button id="minimizeSidebar" class="btn btn-just-icon btn-white btn-fab btn-round">
+                                <i class="material-icons text_align-center visible-on-sidebar-regular">more_vert</i>
+                                <i class="material-icons design_bullet-list-67 visible-on-sidebar-mini">view_list</i>
+                            </button>
+                        </div>
+                        <a class="navbar-brand" href="/notas/graficos">Relatórios</a>
+                    </div>
+                    {{> escritorio/menu_apps_back}} {{> escritorio/help_btn}}
+
+
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="navbar-toggler-icon icon-bar"></span>
+                        <span class="navbar-toggler-icon icon-bar"></span>
+                        <span class="navbar-toggler-icon icon-bar"></span>
+                    </button>
+
+                </div>
+            </nav>
+            <!-- End Navbar -->
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <!--CARD 1 BUSCAR-->
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header card-header-yellow">
+                                    <h4 class="card-title">Análise de dados</h4>
+                                    <p class="card-category"> </p>
+                                </div>
+                                <div class="card-body">
+                                    <!--POWER BI - API-->
+                                    <iframe id="frameBI" class="col-sm-12" width="1400px" height="800px"
+                                        src="https://app.powerbi.com/view?r={{bi}}" frameborder="0"
+                                        allowFullScreen="true">
+                                    </iframe>
+                                    <!--POWER BI - API-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{> escritorio/footer_internal}}
+        </div>
+
+    </div>
+
+    	<!--Correção do Violation Scroll non-passive event-->
+	<script src=" ../local/plugins/fix-non-passive.js"></script>
+    <!--   Core JS Files   -->
+    <script src="../assets/js/core/popper.min.js"></script>
+    <script src="../assets/js/core/bootstrap-material-design.js"></script>
+    <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+    <!--  Plugin for Sweet Alert -->
+    <script src="../assets/js/plugins/sweetalert2.js"></script>
+    <!-- Forms Validations Plugin -->
+    <script src="../assets/js/plugins/jquery.validate.min.js"></script>
+    <!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
+    <script src="../assets/js/plugins/jquery.bootstrap-wizard.js"></script>
+    <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+    <script src="../assets/js/plugins/bootstrap-selectpicker.js"></script>
+    <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+    <script src="../assets/js/plugins/bootstrap-datetimepicker.min.js"></script>
+    <!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
+    <script src="../assets/js/plugins/jquery.dataTables.min.js"></script>
+    <!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
+    <script src="../assets/js/plugins/bootstrap-tagsinput.js"></script>
+    <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+    <script src="../assets/js/plugins/jasny-bootstrap.min.js"></script>
+    <!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
+    <script src="../assets/js/plugins/fullcalendar.min.js"></script>
+    <!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
+    <script src="../assets/js/plugins/jquery-jvectormap.js"></script>
+    <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+    <!-- Library for adding dinamically elements -->
+    <script src="../assets/js/plugins/arrive.min.js"></script>
+    <!--  Notifications Plugin    -->
+    <script src="../assets/js/plugins/bootstrap-notify.js"></script>
+    <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="../assets/js/material-dashboard.min.js?v=2.1.2" type="text/javascript"></script>
+
+    <script src="../local/plugins/apexchart/apexchart.js"></script>
+
+    <link rel="stylesheet" href="../local/graficos.css">
+
+
+    <!--NOSSO-->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //ACTIVE NAV-ITEM
+            var navs = document.getElementsByClassName('nav-item');
+            for (var x = 0; x < navs.length; x++) {
+                if (navs[x].childNodes[1].attributes[1].nodeValue == location.pathname) {
+                    var nav = navs[x]
+                    $(nav).addClass('active')
+                }
+            }
+        });
+    </script>
+
+
+    {{> escritorio/modal_adquirir}} {{> escritorio/modal_chamados}}
+
+</body>
+
+
+</html>

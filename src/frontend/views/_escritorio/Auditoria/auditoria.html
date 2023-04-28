@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-Br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+    <link rel="apple-touch-icon" sizes="76x76" href="../images/icon/apple-icon-mezzomo.png">
+    <link rel="icon" type="image/png" href="../images/icon/favicon_mezzomo3.png">
+    <title>Robotax: Auditória Tributária</title>
+
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Material+Icons" >
+    <link rel="stylesheet" type="text/css" href="../assets/css/material-dashboard.min.css">
+    <link rel="stylesheet" type="text/css" href="../local/auditoria.css">
+
+    <script src="../assets/js/core/jquery-3.5.1.js"></script>
+    
+</head>
+
+<body>
+    <div class="wrapper">
+
+        <div class="sidebar" data-color="yellow" data-background-color="black" data-image="../assets/img/contabeisbw.jpg">
+            <div class="sidebar-wrapper">
+                <ul class="nav">
+                    {{> escritorio/navbar_auditoria}}
+                </ul>
+            </div>
+        </div>
+
+        <div class="main-panel">
+            <nav class="navbar navbar-expand-lg navbar-transparent">
+                <div class="container-fluid">
+					<div class="navbar-wrapper">
+						<div class="navbar-minimize">
+							<button id="minimizeSidebar" class="btn btn-just-icon btn-white btn-fab btn-round">
+								<i class="material-icons text_align-center visible-on-sidebar-regular">more_vert</i>
+								<i class="material-icons design_bullet-list-67 visible-on-sidebar-mini">view_list</i>
+							</button>
+						</div>
+						<a class="navbar-brand" href="/auditoria">Auditoria Tributária</a>
+					</div>
+					{{> escritorio/menu_apps_back}} {{> escritorio/help_btn}}
+					<button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
+						aria-expanded="false" aria-label="Toggle navigation">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="navbar-toggler-icon icon-bar"></span>
+						<span class="navbar-toggler-icon icon-bar"></span>
+						<span class="navbar-toggler-icon icon-bar"></span>
+					</button>
+				</div>
+            </nav>
+
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="card">
+                        <div class="card-header card-auditoria">
+                            <h4 class="card-title title-auditoria">Buscar</h4>
+                            <p class="card-category subtitle-auditoria">Insira o nome da Pessoa Jurídica ou CNPJ</p>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="container">
+                                <form id="form-busca" method="post" role="form">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="bmd-label-floating">Nome da Pessoa Jurídica</label>
+                                                <input id="nomeBuscadoNotas" name="nomeBuscadoNotas" type="text" class="form-control" value="" autocomplete="off" required>
+                                            </div>
+                                            <span class="suggestions_local" id="suggestions_span"></span>
+                                        </div>
+
+                                        <div class="col-lg-3 col-md-3 col-sm-6">
+                                            <div class="form-group" id="form_periodoinicial">
+                                                <label class="bmd-label-floating">Período Inicial</label>
+                                                <div class='input-group date'>
+                                                    <input type='text' class="form-control" id='periodoinicial'
+                                                        name="periodoinicial" autocomplete="off" value="" />
+                                                    <span class="input-group-addon">
+                                                        <i class="material-icons">today</i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-3 col-sm-6">
+                                            <div class="form-group" id="form_periodofinal">
+                                                <label class="bmd-label-floating">Período Final</label>
+                                                <div class='input-group date'>
+                                                    <input type='text' class="form-control" id='periodofinal'
+                                                        name="periodofinal" autocomplete="off" value="" />
+                                                    <span class="input-group-addon">
+                                                        <i class="material-icons">today</i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-check form-check-radio btn-section-operation">
+                                        <label class="form-check-label radio-label">
+                                            <input class="form-check-input" type="radio" name="radioNotas"
+                                                id="radioEntrada" value="entrada" onclick="radioBold(this)" checked>
+                                            Notas de Entrada (NF-e)
+                                            <span class="circle">
+                                                <span class="check"></span>
+                                            </span>
+                                        </label>
+                                    </div>
+
+                                    <div class="form-check form-check-radio btn-section-operation">
+                                        <label class="form-check-label radio-label">
+                                            <input class="form-check-input" type="radio" name="radioNotas"
+                                                id="radioSaida" value="saida" onclick="radioBold(this)">
+                                            Notas de Saída (NF-e/NFC-e)
+                                            <span class="circle">
+                                                <span class="check"></span>
+                                            </span>
+                                        </label>
+                                    </div>
+
+                                    <div id="default_area_btn_buscar">
+                                        <button id="btn_buscar" type="submit" class="btn pull-right btn_auditoria"
+                                            name="btnbusca">Buscar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="card-footer">
+
+                        </div>
+                    </div>
+
+                    <div class="card" style="margin-top: 3rem;">
+                        <div class="card-header card-auditoria">
+                            <h4 class="card-title title-auditoria">Exportar XML</h4>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="col-lg-12">
+                                <div class="row justify-content-center targetclear"
+                                    onclick="certificado(this)">
+                                    <div class="CERTmsg areaClick">
+                                        <h5 class="clickAqui">Arquivo XML</h5>
+                                        <label class="clickAqui"> (Clique para Inserir)
+                                        </label>
+                                    </div>
+                                </div>
+                                <input class="InputUploader" type="file" name="file"
+                                    accept=".pfx,application/x-pkcs12">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{> escritorio/footer_internal}}
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <script src="../assets/js/core/popper.min.js"></script>
+    <script src="../assets/js/core/bootstrap-material-design.js"></script>
+    <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+    <script src="../assets/js/plugins/moment.min.js"></script>
+    <script src="../assets/js/plugins/moment-with-locales.js"></script>
+    <script src="../assets/js/material-dashboard.min.js?v=2.1.2" type="text/javascript"></script>
+   
+    <!--Script para funcionamento do Suggestion-->
+    <script src="../local/plugins/suggestion/suggestion.js"></script>
+    <!--Script para abrir o calendário-->
+    <script src="../assets/js/plugins/bootstrap-datetimepicker.min.js"></script>
+    <!--Script de configuração dos datetimepicker-->
+    <script type="text/javascript" src="../local/page_document_ready/script_notas_fiscais.js"></script>
+    <!--Script para aplicar mascára-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+
+
+    <script>
+		//variável que contém a tabela
+		var tabelaNotasFiscais = null;
+		var suggestions_nomepj = [];
+		$(document).ready(function () {
+			//1st GET SUGGESTIONS
+			$.ajax({
+				url: '/notas/get-suggestions',
+				type: 'get'
+			}).done(function (data) {
+				suggestions_nomepj = data
+			})
+			//ACTIVE NAV-ITEM
+			var navs = document.getElementsByClassName('nav-item');
+			for (var x = 0; x < navs.length; x++) {
+				if (navs[x].childNodes[1].attributes[1].nodeValue == location.pathname) {
+					var nav = navs[x]
+					$(nav).addClass('active')
+				}
+			}
+		});
+	</script>
+    <script>
+        function certificado(ThisArea) {
+            var PreviewArea = ThisArea;
+            var uploader = $($(PreviewArea)[0].parentNode)[0].children[1];
+            uploader.click();
+            var filePlace = $(ThisArea)[0].children[0];
+            var clickAqui = $(ThisArea)[0].children[1];
+            
+            $(uploader).on('change', function () {
+                var FileName = $(uploader)[0].files[0];
+                if (FileName != undefined) {
+                    $(filePlace).empty()
+                    .prepend(`<div class="IconP12"></div>
+                              <span class="spanFileName">${$(uploader)[0].files[0].name}</span>
+                              <span class="spanAlterar">ALTERAR</span>`);
+                    $(clickAqui).empty();
+                } else {
+                    $(filePlace).empty().prepend(`<h5 class="clickAqui">Arquivo XML</h5><label class="clickAqui">(Clique para Inserir)</label>`);
+                    //$(clickAqui).empty().prepend('(Clique para Inserir)');
+
+                }
+            })
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,1830 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<!--HEADER-->
+
+<head>
+	<meta charset="utf-8" />
+	<link rel="apple-touch-icon" sizes="76x76" href="../images/icon/apple-icon-mezzomo.png">
+	<link rel="icon" type="image/png" href="../images/icon/favicon_mezzomo3.png">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>Robotax: Notas Fiscais</title>
+	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+	<!-- Fonts and icons -->
+	<link rel="stylesheet" type="text/css"
+		href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+	<link src="../local/plugins/printjs/printjs.css">
+	</link>
+
+
+
+	<!--<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css"
+	rel="stylesheet">-->
+
+
+
+	<!-- CSS Files -->
+	<link href="../assets/css/material-dashboard.min.css" rel="stylesheet" />
+	<!--sweetalert2 -->
+	<link rel="stylesheet" href="../local/plugins/sweetalert/css/sweetalert2.min.css" id="theme-styles">
+	<!--local CSS -->
+	<link rel="stylesheet" type="text/css" href="../local/notasfiscais.css">
+	<link href="../local/plugins/select2/select2.min.css" rel="stylesheet" />
+	<script src="../assets/js/core/jquery-3.5.1.js"></script>
+
+</head>
+<!--HEADER_X-->
+
+<body class="">
+	<div class="wrapper">
+		<!-- SIDEBAR -->
+		<div class="sidebar" data-color="yellow" data-background-color="black"
+			data-image="../assets/img/contabeisbw.jpg">
+			<!--Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger" Tip 2: you can also add an image using data-image tag -->
+			<div class="sidebar-wrapper">
+				<ul class="nav">
+					<!--CARD NO SIDE BAR - LOGO DO USÚARIO E NOME -->
+					{{> navbar_nf}}
+				</ul>
+			</div>
+		</div>
+
+		<!-- Plugin for the momentJs -->
+		<script src="../assets/js/plugins/moment.min.js"></script>
+		<!-- Plugin for the momentJs TRADUÇÕES LOCAIS -->
+		<script src="../assets/js/plugins/moment-with-locales.js"></script>
+		<!-- MAIN PANEL -->
+		<div class="main-panel">
+			<nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute sticky-top">
+				{{> testegratis}}
+			</nav>
+			<!-- NAVBAR -->
+			<nav class="navbar navbar-expand-lg navbar-transparent">
+				<div class="container-fluid">
+					<div class="navbar-wrapper">
+						<div class="navbar-minimize">
+							<button id="minimizeSidebar" class="btn btn-just-icon btn-white btn-fab btn-round">
+								<i class="material-icons text_align-center visible-on-sidebar-regular">more_vert</i>
+								<i class="material-icons design_bullet-list-67 visible-on-sidebar-mini">view_list</i>
+							</button>
+						</div>
+						<a class="navbar-brand" href="/notas/notas-fiscais">Notas Fiscais</a>
+					</div>
+					{{> escritorio/menu_apps_back}} {{> escritorio/help_btn}}
+					<button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
+						aria-expanded="false" aria-label="Toggle navigation">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="navbar-toggler-icon icon-bar"></span>
+						<span class="navbar-toggler-icon icon-bar"></span>
+						<span class="navbar-toggler-icon icon-bar"></span>
+					</button>
+				</div>
+			</nav>
+			<!-- End Navbar -->
+			<div class="content" style="margin-top: 70px;">
+				<div class="container-fluid">
+					<!-- container ROW 1 -->
+					<div class="row">
+						<!--CARD 1 BUSCAR & FILTROS-->
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-header card-header-info2">
+									<h4 class="card-title">Buscar</h4>
+									<p class="card-category">Insira o nome da Pessoa Jurídica ou CNPJ</p>
+								</div>
+								<div class="card-body">
+
+									<!--FOMULARIO-->
+									<form id='form_search_by_chave_acesso' method="post"
+										action="/notas/by-chave-de-acesso">
+										<div class="col-lg-12">
+											<div class="row align-items-center d-flex justify-content-end ">
+												<div class="col-lg-4 card-body-input card-input mr-2">
+													<div class="input-group form-group input-card-border card-busca">
+														<label class="bmd-label-floating">Chave de
+															acesso</label>
+														<input id="input_chave_acesso" name="chave_de_acesso"
+															type="text" class="form-control" autocomplete="off"
+															required>
+													</div>
+												</div>
+												<div class="col-lg-1 ml-3">
+													<button type="submit" id='btn_search_by_chave_acesso'
+														class="btn pull-right">
+														<i class="material-icons">visibility</i>
+													</button>
+												</div>
+											</div>
+										</div>
+									</form>
+
+									<form id="form_busca" role="form" method="post" action="/notas/requestdados">
+										<div class="row">
+											<!--NOMEPJ-->
+											<div class="col-md-7 card-body-input">
+												<div class="input-group form-group input-card-border">
+													<label class="bmd-label-floating">Pessoa Jurídica, CNPJ ou Número da
+														nota</label>
+													<input id="nomeBuscadoNotas" name="nomeBuscadoNotas" type="text"
+														class="form-control" required autocomplete="off" value="">
+												</div>
+												<span class="suggestions_local" id="suggestions_span"></span>
+											</div>
+
+											<!--DATA INICIAL-->
+											<div class="col-md-2 card-body-input">
+												<div class="form-group input-card-border" id="formdata1">
+													<label class="bmd-label-floating">Data Inicial</label>
+													<div class='input-group date'>
+														<input type='text' class="form-control" id='datainicial'
+															name="datainicial" autocomplete="off" value="" />
+														<span class="input-group-addon"><i
+																class="material-icons">today</i></span>
+													</div>
+												</div>
+											</div>
+											<!--DATA FINAL-->
+											<div class="col-md-2 card-body-input">
+												<div class="form-group input-card-border" id="formdata2">
+													<label class="bmd-label-floating">Data Final</label>
+													<div class='input-group date'>
+														<input type='text' class="form-control" id='datafinal'
+															name="datafinal" autocomplete="off" value="" />
+														<span class="input-group-addon"><i
+																class="material-icons">today</i></span>
+													</div>
+												</div>
+											</div>
+										</div>
+
+
+										<div class="form-check form-check-radio btn-section-operation">
+											<label class="form-check-label radio-label">
+												<input class="form-check-input" type="radio" name="radioNotas"
+													id="radioEntrada" value="entrada" onclick="radioBold(this)" checked>
+												Notas de Entrada (NF-e)
+												<span class="circle">
+													<span class="check"></span>
+												</span>
+											</label>
+										</div>
+										<div class="form-check form-check-radio btn-section-operation">
+											<label class="form-check-label radio-label">
+												<input class="form-check-input" type="radio" name="radioNotas"
+													id="radioSaida" value="saida" onclick="radioBold(this)">
+												Notas de Saída (NF-e/NFC-e)
+												<span class="circle">
+													<span class="check"></span>
+												</span>
+											</label>
+										</div>
+										<div class="form-check form-check-radio btn-section-operation">
+											<label class="form-check-label radio-label">
+												<input class="form-check-input" type="radio" name="radioNotas"
+													id="radioServico" value="servico" onclick="radioBold(this)"
+													disabled>
+												Notas de Serviços (NS-e)
+												<span class="circle">
+													<span class="check"></span>
+												</span>
+											</label>
+										</div>
+										<div id="default_area_btn_buscar">
+											<button id="btn_buscar" type="submit" class="btn pull-right"
+												name="btnbusca">Buscar</button>
+										</div>
+										<div class="row">
+											<div class="col-md-12">
+												<!--TABELA - INICIO-->
+												<div class="divtabela">
+													<h1 class="h1invisivel"> </h1>
+													<div class="row">
+														<div class="col-sm-12 col-md-12 col-lg-12">
+															<p>
+																<button id="btn_filtrar"
+																	onClick="changeFilterStatus(this)"
+																	class="btn btn-link btn-sm" type="button"
+																	data-toggle="collapse"
+																	data-target="#collapseExample" aria-expanded="false"
+																	aria-controls="collapseExample">
+																	Filtrar<i class="material-icons">expand_more</i>
+																</button>
+															</p>
+															<div class="collapse" id="collapseExample">
+																<div class="col-sm-12 col-md-12 col-lg-12 mb-3">
+																	<div class="row align-items-center">
+																		<div class="col-sm-12 col-md-6 col-lg-4">
+																			<div class="form-group has-default">
+																				<div class="input-group">
+																					<label>
+																						<h6 style="font-weight: bold;">
+																							Status</h6>
+																					</label>
+																					<select name="nf_status"
+																						title='Selecionar status'
+																						class="custom-select form-control selectpicker "
+																						data-style="btn-2 btn-link "
+																						type="text "
+																						oninput="this.className=''">
+																						<option value="">Limpar Filtro
+																						</option>
+																						<option value="Autorizada">
+																							Autorizadas
+																						</option>
+																						<option value="Cancelada">
+																							Canceladas
+																						</option>
+																						<option value="Não Autorizada">
+																							Não Autorizadas
+																						</option>
+																						<option value="Inutilizada">
+																							Inutilizadas
+																						</option>
+																					</select>
+																				</div>
+																			</div>
+																		</div>
+																		<div class="col-sm-12 col-md-6 col-lg-4">
+																			<!--<h5>Manifestação</h5>-->
+																			<div class="form-group has-default">
+																				<div class="input-group">
+																					<label>
+																						<h6 style="font-weight: bold;">
+																							Manifestação</h6>
+																					</label>
+																					<select name="nf_manifestacao"
+																						title='Selecionar manifestação'
+																						class="custom-select form-control selectpicker "
+																						data-style="btn-2 btn-link "
+																						type="text "
+																						oninput="this.className=''">
+																						<option value="Ciente">Ciente
+																						</option>
+																						<option value="Confirmada">
+																							Confirmada </option>
+																						<option value="Não Realizada">
+																							Não Realizada </option>
+																						<option value="Desconhecida">
+																							Desconhecida </option>
+																						<option
+																							value="Sem Manifestação">Sem
+																							Manifestação </option>
+																					</select>
+																				</div>
+																			</div>
+																		</div>
+																		<div class="col-sm-12 col-md-6 col-lg-4">
+																			<div class="form-group has-default">
+																				<div class="input-group">
+																					<label>
+																						<h6 style="font-weight: bold;">
+																							Origem</h6>
+																					</label>
+																					<select name="nf_origem"
+																						title='Selecionar origem'
+																						class="custom-select form-control selectpicker "
+																						data-style="btn-2 btn-link "
+																						type="text "
+																						oninput="this.className=''">
+																						<option value="1">SEFAZ</option>
+																						<option value="0">Upload XML
+																							Site</option>
+																					</select>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<div class="col-sm-12 col-md-12 col-lg-12">
+																	<div class="row align-items-center">
+																		<div class="col-sm-12 col-md-6 col-lg-2 card-body-input mr-0 ml-0"
+																			style="padding: 0 15px;">
+																			<label>
+																				<h6 style="font-weight: bold;">Valor
+																					Inicial
+																				</h6>
+																			</label>
+																			<div
+																				class="input-group form-group input-card-border p-0 m-0">
+																				<input name="nf_valor_inicial"
+																					type="text" class="form-control p-2"
+																					placeholder="0,00"
+																					autocomplete="off" value="">
+																				<span
+																					class="input-group-addon group-addon">
+																					<i
+																						class="material-icons">attach_money</i>
+																				</span>
+																			</div>
+																		</div>
+																		<div class="com-sm-12 col-md-6 col-lg-2 card-body-input mr-0 ml-0"
+																			style="padding: 0 15px;">
+																			<label>
+																				<h6 style="font-weight: bold;">Valor
+																					Final
+																				</h6>
+																			</label>
+																			<div
+																				class="input-group form-group input-card-border p-0 m-0">
+																				<input name="nf_valor_final" type="text"
+																					class="form-control p-2"
+																					placeholder="999.999,99"
+																					autocomplete="off" value="">
+																				<span
+																					class="input-group-addon group-addon">
+																					<i
+																						class="material-icons">attach_money</i>
+																				</span>
+																			</div>
+																		</div>
+																		<div class="col-sm-12 col-md-6 col-lg-4 card-body-input mr-0 ml-0"
+																			style="padding: 0 15px;">
+																			<!--<h5>Competência</h5>-->
+																			<label>
+																				<h6 style="font-weight: bold;">
+																					Data de Entrada</h6>
+																			</label>
+																			<div
+																				class="input-group form-group input-card-border p-0 m-0">
+																				<input name="nf_mes_referencia"
+																					id="datepickerDataDeEntrada"
+																					type="text"
+																					class="form-control p-2 monthPicker"
+																					placeholder="Selecionar Data de Entrada"
+																					autocomplete="off" value="">
+																				<span
+																					class="input-group-addon group-addon">
+																					<i class="material-icons">today</i>
+																				</span>
+																			</div>
+																		</div>
+																		<div class="col-sm-12 col-md-6 col-lg-4">
+																			<div class="form-group has-default">
+																				<div class="input-group">
+																					<label>
+																						<h6 style="font-weight: bold;">
+																							Etiquetas</h6>
+																					</label>
+																					<select name="nf_etiquetas"
+																						id="nf_etiquetas"
+																						title='Selecionar Etiqueta'
+																						class="custom-select form-control selectpicker nf-etiquetas-filtro"
+																						data-style="btn-2 btn-link "
+																						type="text "
+																						oninput="this.className=''">
+																						<option value="">Limpar Filtro
+																						</option>
+																					</select>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<div id="filter_area_btn_buscar">
+
+																</div>
+															</div>
+															<div class="clearfix">
+
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- container ROW 1 ENDS -->
+
+					<!-- container ROW 2 -->
+					<div id="rowDataTable" class="row hideRowCard">
+						<div class="col-md-12">
+							<!--CARD 2 DATA TABLE-->
+							<div class="card">
+								<div class="card-header card-header-info2">
+									<h4 id="cardTitle" class="card-title"></h4>
+									<!--<p class="card-category">Nenhum dado encontrado, tente mudar os parâmetros da sua busca</p>-->
+								</div>
+								<div class="card-body">
+									<label class="label-notas">Valor total R$ <strong id='total_valor'
+											style="color: #edcd00!important; font-weight: 600!important;"></strong> .
+										Números
+										de notas:
+										<strong id='total_notas'
+											style="color: #edcd00!important; font-weight: 600!important;"></strong>
+									</label>
+									<br>
+									<!--ABRE IF QUE EXIBE OU NAO NOME DAS COLUNAS DE ACORDO COM CONTEUDO FALSE OU TRUE-->
+									<div class="row">
+										<div class="col-sm-12 col-md-12 col-lg-12">
+											<div class="table-responsive box drag">
+
+												<div class="row mb-5">
+													<div class="col-lg-12" id="t" style="text-align: end;">
+														<!-- victor edit --->
+														<select id="selecionarEtiqueta"
+															onchange="updateEtiquetaForSelected(this)" value=""
+															class="custom-select form-control selectpicker dropdown-toggle-suggestions-target">
+															<option value="">Selecionar</option>
+														</select>
+														<!--'<select onchange="updateEtiqueta(this, this.value,\'' + row.chavedeacesso + '\')" value="' + data + '" class="custom-select form-control selectpicker dropdown-toggle-suggestions-target">' -->
+													</div>
+												</div>
+
+												<table id="mytable"
+													class="table display table-striped table-no-bordered table-hover"
+													cellspacing="0" width="100%" style="width:100%">
+													<thead class="thead-light">
+														<!--TABELA CABEÇALHO-->
+														<tr class="table-header">
+															<th>
+																<div class="form-check">
+																	<label class="form-check-label">
+																		<input id="checkall" name="checkbox"
+																			onchange="marcartodos()"
+																			class="form-check-input form-check-input"
+																			type="checkbox" value="">
+																		<span class="form-check-sign">
+																			<span class="check"></span>
+																		</span>
+																	</label>
+																</div>
+															</th>
+															<th>ID</th>
+															<th>Ver</th>
+															<th>Número</th>
+															<th>Emitente</th>
+															<th>Valor</th>
+															<th>Data de Emissao</th>
+															<th>Status</th>
+															<th>Etiqueta</th>
+															<th>Chave de Acesso</th>
+															<th>CNPJ</th>
+															<th>Inscrição Estadual</th>
+															<th>Data de Entrada</th>
+															<th>Origem</th>
+															<th>Modelo</th>
+															<th>Série</th>
+															<th>Competência</th>
+															<th>UF Origem</th>
+															<th>UF Destino</th>
+															<th>Protocolada</th>
+														</tr>
+													</thead>
+													<tbody>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+									<!--FECHA IF QUE EXIBE OU NAO NOME DAS COLUNAS DE ACORDO COM CONTEUDO FALSE OU TRUE-->
+								</div>
+								<!--TABELA-FIM-->
+							</div>
+						</div>
+					</div>
+					<!-- container ROW 2 ENDS -->
+				</div>
+			</div>
+			{{> escritorio/footer_internal}}
+		</div>
+	</div>
+
+	{{!-- MODAL TO VIEW NOTA BY CHAVE DE ACESSO--}}
+	<div class="modal fade" id="modal_view_by_chave_acesso" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title text-center ml-4" id="exampleModalLabel">
+					</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<div class="container" style="width: 35%;">
+						<div class="row">
+							<button id="btn_imprimir_pdf" class="btn btn-sm buttons-excel buttons-html5" tabindex="0"
+								aria-controls="mytable" type="button"><span><i class="material-icons">print</i>
+								</span>
+								<div class="ripple-container"></div>
+							</button>
+							<button id="btn_download_pdf" class="btn btn-sm buttons-excel buttons-html5" tabindex="0"
+								aria-controls="mytable" type="button">PDF<span>
+								</span>
+								<div class="ripple-container"></div>
+							</button>
+							<button id="btn_download_xml" class="btn btn-sm buttons-excel buttons-html5" tabindex="0"
+								aria-controls="mytable" type="button">XML<span>
+								</span>
+								<div class="ripple-container"></div>
+							</button>
+						</div>
+					</div>
+
+				</div>
+				<div class="modal-body">
+					<div id="viewer_by_chave_acesso">
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="modal_add_tag" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
+		<form method="POST" action="/notas/adicionarsuggestion" id="inserirSuggestionEtiqueta">
+			<div class="modal-dialog modal-sm" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title text-center" id="exampleModalLabel">Nova Etiqueta
+						</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="container p-0 mb-4">
+							<div class="form-group">
+								<label class="bmd-label-floating">Nome da Etiqueta</label>
+								<input class="form-control" id="nome_etiqueta" name="nome_etiqueta"
+									onkeyup="$(this).val($(this).val().substr(0, 1).toUpperCase() + $(this).val().substr(1));"
+									type="text" required autocomplete="off">
+							</div>
+						</div>
+						<div class="container p-0">
+							<!--
+							<label style="color: #292929;">Cor</label>
+							<div class="radio-toolbar">
+								<input name="cor_etiqueta" type="radio" id="tagyellow" name="radiotag" value="#edcd00">
+								<label style="background-color: #edcd00;" for="tagyellow"></label>
+
+								<input name="cor_etiqueta" type="radio" id="tagblack" name="radiotag" value="#b29000">
+								<label style="background-color: #b29000;" for="tagblack"></label>
+
+								<input name="cor_etiqueta" type="radio" id="taggrey" name="radiotag" value="#272727">
+								<label style="background-color: #272727;" for="taggrey"></label>
+
+								<input name="cor_etiqueta" type="radio" id="tagwhite" name="radiotag" value="#eeeeee">
+								<label style="background-color: #eeeeee;" for="tagwhite"></label>
+							</div>
+							-->
+							<label for="exampleColorInput" class="form-label">Clique e selecione a cor da
+								etiqueta</label>
+							<input type="color" id="cor_etiqueta" name="cor_etiqueta"
+								class="form-control form-control-color ml-auto mr-auto" value="#edcd00"
+								title="Selecionar a Cor">
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn" data-dismiss="modal">Cancelar</button>
+						<button type="submit" class="btn" id="salvardata">SALVAR</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<div class="modal fade" id="modal_delete_tag" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+		<div class="modal-dialog modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title text-center" id="exampleModalLabel">Deletar Etiqueta
+					</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div id="rowtag" class="modal-body text-center rowtag">
+
+				</div>
+
+
+				<h5 class="text-center">Você ainda não possui etiquetas</h5>
+
+				<div class="modal-footer">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--Correção do Violation Scroll non-passive event-->
+    <script src=" ../local/plugins/fix-non-passive.js"></script>
+	<!-- Core JS Files -->
+	<script src="../assets/js/core/popper.min.js"></script>
+	<script src="../assets/js/core/bootstrap-material-design.js"></script>
+	<script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+	<!-- Plugin for Sweet Alert -->
+	<!--<script src="../assets/js/plugins/sweetalert2.js"></script>-->
+	<script src="../local/plugins/sweetalert/js/sweetalert2.min.js"></script>
+	<!--<link rel="stylesheet" href="../local/plugins/sweetalert/css/sweetalert2.min.css" id="theme-styles"> TRANSPORTADO PARA O HEADER-->
+	<!-- Forms Validations Plugin -->
+	<script src="../assets/js/plugins/jquery.validate.min.js"></script>
+	<!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
+	<script src="../assets/js/plugins/jquery.bootstrap-wizard.js"></script>
+	<!-- Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+	<script src="../assets/js/plugins/bootstrap-selectpicker.js"></script>
+	<!-- Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+	<script src="../assets/js/plugins/bootstrap-datetimepicker.min.js"></script>
+	<!-- Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs -->
+	<script src="../assets/js/plugins/bootstrap-tagsinput.js"></script>
+	<!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+	<script src="../assets/js/plugins/jasny-bootstrap.min.js"></script>
+	<!-- Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar -->
+	<script src="../assets/js/plugins/fullcalendar.min.js"></script>
+	<!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
+	<script src="../assets/js/plugins/jquery-jvectormap.js"></script>
+	<!-- Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+	<script src="../assets/js/plugins/nouislider.min.js"></script>
+	<!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+	<!-- Library for adding dinamically elements -->
+	<script src="../assets/js/plugins/arrive.min.js"></script>
+	<!-- Chartist JS -->
+	<script src="../assets/js/plugins/chartist.min.js"></script>
+	<!-- Notifications Plugin -->
+	<script src="../assets/js/plugins/bootstrap-notify.js"></script>
+	<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+	<script src="../assets/js/material-dashboard.min.js?v=2.1.2" type="text/javascript"></script>
+	<!--_______________________________________________LOCAL________________________________________________-->
+	<!-- DataTables.net Plugin, full documentation here: https://datatables.net/ -->
+	<script src="../local/plugins/dataTables/dataTables.min.js"></script>
+	<!--SORTING DATE EU-->
+	<script src="https://cdn.datatables.net/plug-ins/1.10.12/sorting/date-eu.js"></script>
+	<!--ROWGROUP-->
+	<script src="https://cdn.datatables.net/rowgroup/1.0.2/js/dataTables.rowGroup.min.js"></script>
+	<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.colVis.min.js"></script>
+	<!--DRAG MOUSE-->
+	<script src="../local/plugins/drag/drag.js"></script>
+	<!--SUGGESTIONS FROM SERVER-->
+	<script src="../local/plugins/suggestion/suggestion.js"></script>
+	<!--MASK FOR FORMS-->
+	<script src="../local/plugins/mask_input/jquery.maskedinput.js" type="text/javascript"></script>
+	<!-- SELECTED2 CLIPBOARD -->
+	<script src="../local/plugins/dataTables/selected2clipboard.js"></script>
+	{{> escritorio/modal_adquirir}} {{> escritorio/modal_chamados}}
+	<script src="../local/page_document_ready/script_notas_fiscais.js" type="text/javascript"></script>
+	<!--______________________________________________LOCAL________________________________________________--->
+	<!-- <script src="../local/metodos/post/import_notas_fiscais.js"></script> -->
+	<!-- SELECTED2 CLIPBOARD -->
+	<script src="../local/plugins/dataTables/selected2clipboard.js"></script>
+	<!-- AJAX JQUERY POST FORM DATA MODAL -->
+	<script src="../local/metodos/post/update_modal_data.js"></script>
+	<script src="../local/plugins/printjs/print.min.js"></script>
+	<script src="../local/plugins/mascara/abreviaNumero.js"></script>
+
+	<script src=" ../local/plugins/select2/select2.min.js"></script>
+
+	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>-->
+
+	<script>
+		function radioBold(thisRadio) {
+			//removendo classe radio-label de todos
+			var labelradios = $(".radio-label");
+			labelradios.map(function () {
+				$(this).removeClass('radio-bold');
+			})
+			//adicionando classe radio-label somente ao item clicado
+			var label = thisRadio.parentNode
+			$(label).addClass('radio-bold');
+		}
+	</script>
+
+	<script>
+		//variável que contém a tabela
+		var tabelaNotasFiscais;
+		var suggestions_nomepj = [];
+		$(document).ready(function () {
+			//1st GET SUGGESTIONS
+			$.ajax({
+				//async: true,
+				url: '/antecipados/get-suggestions',
+				type: 'get'
+
+			}).done(function (data) {
+				suggestions_nomepj = data
+			})
+			//ACTIVE NAV-ITEM
+			var navs = document.getElementsByClassName('nav-item');
+			for (var x = 0; x < navs.length; x++) {
+				if (navs[x].childNodes[1].attributes[1].nodeValue == location.pathname) {
+					var nav = navs[x]
+					$(nav).addClass('active')
+				}
+			}
+		});
+	</script>
+
+	<!-- <script src="../local/plugins/checkboxes/checkall-data-entrada.js" type="text/javascript"> </script> -->
+	<script>
+		$(document).ready(function () {
+			$('button.toggle-button').on('click', function (e) {
+				$(this).toggleClass('btnpressed');
+			});
+		});
+	</script>
+
+	<script src="../local/metodos/alert/loading.js"></script>
+
+	<script>
+		function hideColumns(colunas) {
+			let table = $('#mytable').DataTable();
+			for (i = 0; i < colunas.length; i++) {
+				//var table = $('#mytable').DataTable();
+				table.column(colunas[i]).visible(!table.column(colunas[i]).visible());
+			}
+		}
+	</script>
+
+	<script src="../local/plugins/JsBarCode/JsBarcode.code128.min.js"></script>
+
+	<script>
+		$("#form_search_by_chave_acesso").submit(function (e) {
+			e.preventDefault()
+			localStorage.setItem('chave_de_acesso', $('#input_chave_acesso').val())
+			getDataPreviewXML()
+		})
+		$("#btn_imprimir_pdf").on('click', function () {
+			printPDF()
+		})
+		$("#btn_download_pdf").on("click", function () {
+			downloadPDF()
+		})
+		$("#btn_download_xml").on("click", function () {
+			downloadXML()
+		})
+
+		function getDataPreviewXML() {
+			let chave_de_acesso = localStorage.getItem('chave_de_acesso')
+			if (chave_de_acesso) {
+				$.ajax({
+					url: '/notas/by-chave-de-acesso',
+					type: 'post',
+					data: {
+						"chave_de_acesso": chave_de_acesso
+					},
+				}).done(function (data) {
+					if (data) {
+						if (data == "Nenhuma nota encontrada") {
+							gif = 'warning';
+							Swal.fire({
+								customClass: {
+									confirmButton: 'btn btn-black btn-login',
+								},
+								buttonsStyling: false,
+								position: 'center',
+								icon: gif,
+								title: data,
+								showConfirmButton: true,
+								timer: 0
+							});
+						} else {
+							$('#viewer_by_chave_acesso').empty().append(data)
+							$("#coddebarras_chavedeacesso").JsBarcode(chave_de_acesso, {
+								displayValue: false
+							});
+							$('#modal_view_by_chave_acesso').modal('show')
+						}
+					} else {
+						gif = 'warning';
+						Swal.fire({
+							customClass: {
+								confirmButton: 'btn btn-black btn-login',
+							},
+							buttonsStyling: false,
+							position: 'center',
+							icon: gif,
+							title: data,
+							showConfirmButton: true,
+							timer: 0
+						});
+					}
+				})
+			}
+		}
+
+		function printPDF() {
+			let chave_de_acesso = localStorage.getItem('chave_de_acesso')
+			if (chave_de_acesso) {
+				$.ajax({
+					url: '/notas/download-pdf',
+					type: 'post',
+					data: {
+						"chave_de_acesso": chave_de_acesso
+					},
+					xhr: function () {
+						var xhr = new XMLHttpRequest();
+						xhr.onreadystatechange = function () {
+							if (xhr.readyState == 2) {
+								if (xhr.status == 200) {
+									xhr.responseType = "blob";
+								} else {
+									xhr.responseType = "text";
+								}
+							}
+						};
+						return xhr;
+					},
+				}).done(function (data) {
+					if (data == "Arquivo não encontrado") {
+						//sweetalert aqui
+					} else {
+						//Convert the Byte Data to BLOB object.
+						var blob = new Blob([data], {
+							type: "application/octet-stream"
+						});
+						//Check the Browser type and download the File.
+						var isIE = false || !!document.documentMode;
+						if (isIE) {
+							window.navigator.msSaveBlob(blob, `${chave_de_acesso}.pdf`);
+						} else {
+							var pdfFile = new Blob([data], {
+								type: "application/pdf"
+							});
+							var pdfUrl = URL.createObjectURL(pdfFile);
+							//window.open(pdfUrl);
+							printJS(pdfUrl);
+						}
+					}
+				})
+			}
+		}
+
+		function downloadPDF() {
+			let chave_de_acesso = localStorage.getItem('chave_de_acesso')
+			if (chave_de_acesso) {
+				$.ajax({
+					url: '/notas/download-pdf',
+					type: 'post',
+					data: {
+						"chave_de_acesso": chave_de_acesso
+					},
+					xhr: function () {
+						var xhr = new XMLHttpRequest();
+						xhr.onreadystatechange = function () {
+							if (xhr.readyState == 2) {
+								if (xhr.status == 200) {
+									xhr.responseType = "blob";
+								} else {
+									xhr.responseType = "text";
+								}
+							}
+						};
+						return xhr;
+					},
+				}).done(function (data) {
+					if (data == "Arquivo não encontrado") {
+						//sweetalert aqui
+					} else {
+						//Convert the Byte Data to BLOB object.
+						var blob = new Blob([data], {
+							type: "application/octet-stream"
+						});
+						//Check the Browser type and download the File.
+						var isIE = false || !!document.documentMode;
+						if (isIE) {
+							window.navigator.msSaveBlob(blob, `${chave_de_acesso}.pdf`);
+						} else {
+							var url = window.URL || window.webkitURL;
+							var link = url.createObjectURL(blob);
+							var a = $("<a />");
+							a.attr("download", `${chave_de_acesso}.pdf`);
+							a.attr("href", link);
+							$("body").append(a);
+							a[0].click();
+							$("body").remove(a);
+						}
+					}
+				})
+			}
+		}
+
+		function downloadXML() {
+			let chave_de_acesso = localStorage.getItem('chave_de_acesso')
+			if (chave_de_acesso) {
+				$.ajax({
+					url: '/notas/download-xml',
+					type: 'post',
+					data: {
+						"chave_de_acesso": chave_de_acesso
+					},
+					xhr: function () {
+						var xhr = new XMLHttpRequest();
+						xhr.onreadystatechange = function () {
+							if (xhr.readyState == 2) {
+								if (xhr.status == 200) {
+									xhr.responseType = "blob";
+								} else {
+									xhr.responseType = "text";
+								}
+							}
+						};
+						return xhr;
+					},
+				}).done(function (data) {
+					if (data == "Arquivo não encontrado") {
+						//sweetalert aqui
+					} else {
+						//Convert the Byte Data to BLOB object.
+						var blob = new Blob([data], {
+							type: "application/xml"
+						});
+						//Check the Browser type and download the File.
+						var isIE = false || !!document.documentMode;
+						if (isIE) {
+							window.navigator.msSaveBlob(blob, `${chave_de_acesso}.xml`);
+						} else {
+							var url = window.URL || window.webkitURL;
+							link = url.createObjectURL(blob);
+							var a = $("<a />");
+							a.attr("download", `${chave_de_acesso}.xml`);
+							a.attr("href", link);
+							$("body").append(a);
+							a[0].click();
+							$("body").remove(a);
+						}
+					}
+				})
+			}
+		}
+
+		function downloadXMLbyKeyAccess(key) {
+			if (key) {
+				$.ajax({
+					url: '/notas/download-xml',
+					type: 'post',
+					data: {
+						"chave_de_acesso": key
+					},
+					xhr: function () {
+						var xhr = new XMLHttpRequest();
+						xhr.onreadystatechange = function () {
+							if (xhr.readyState == 2) {
+								if (xhr.status == 200) {
+									xhr.responseType = "blob";
+								} else {
+									xhr.responseType = "text";
+								}
+							}
+						};
+						return xhr;
+					},
+				}).done(function (data) {
+					if (data == "Arquivo não encontrado") {
+						//sweetalert aqui
+					} else {
+						//Convert the Byte Data to BLOB object.
+						var blob = new Blob([data], {
+							type: "application/xml"
+						});
+						//Check the Browser type and download the File.
+						var isIE = false || !!document.documentMode;
+						if (isIE) {
+							window.navigator.msSaveBlob(blob, `${key}.xml`);
+						} else {
+							var url = window.URL || window.webkitURL;
+							link = url.createObjectURL(blob);
+							var a = $("<a />");
+							a.attr("download", `${key}.xml`);
+							a.attr("href", link);
+							$("body").append(a);
+							a[0].click();
+							$("body").remove(a);
+						}
+					}
+				})
+			}
+		}
+
+		function downloadPDFbyKeyAccess(key) {
+			if (key) {
+				$.ajax({
+					url: '/notas/download-pdf',
+					type: 'post',
+					data: {
+						"chave_de_acesso": key
+					},
+					xhr: function () {
+						var xhr = new XMLHttpRequest();
+						xhr.onreadystatechange = function () {
+							if (xhr.readyState == 2) {
+								if (xhr.status == 200) {
+									xhr.responseType = "blob";
+								} else {
+									xhr.responseType = "text";
+								}
+							}
+						};
+						return xhr;
+					},
+				}).done(function (data) {
+					if (data == "Arquivo não encontrado") {
+						//sweetalert aqui
+					} else {
+						//Convert the Byte Data to BLOB object.
+						var blob = new Blob([data], {
+							type: "application/octet-stream"
+						});
+						//Check the Browser type and download the File.
+						var isIE = false || !!document.documentMode;
+						if (isIE) {
+							window.navigator.msSaveBlob(blob, `${key}.pdf`);
+						} else {
+							var url = window.URL || window.webkitURL;
+							var link = url.createObjectURL(blob);
+							var a = $("<a />");
+							a.attr("download", `${key}.pdf`);
+							a.attr("href", link);
+							$("body").append(a);
+							a[0].click();
+							$("body").remove(a);
+						}
+					}
+				})
+			}
+		}
+
+		function getByRowChavedeAcesso(row_chave_de_acesso) {
+			localStorage.setItem('chave_de_acesso', row_chave_de_acesso)
+			getDataPreviewXML()
+		}
+	</script>
+
+	<script>
+		//PEGA O ID DOS ITENS MARCADOS-----------------------------------------------
+		var ids = [];
+
+		function marcados(temp) {
+			ids = [];
+			$('#mytable :checkbox:checked').each(function (index) {
+				var currentRow = this.parentNode.parentNode.parentNode.parentNode;
+				var closestTr = currentRow.getElementsByTagName("td")[9];
+				//var a = closestTr.className.textContent;
+				if (typeof closestTr !== "undefined") {
+					ids.push(closestTr.textContent);
+				}
+			});
+		}
+		//SELECIONAR TODOS OS CHECK BOXs VISIVEIS
+		function marcartodos() {
+			ids = [];
+			$("#checkall").each(function () {
+
+				$(".bodycheckbox").prop("checked", $(this).prop("checked"))
+				if (checkall.checked == true) {
+
+					$('#mytable :checkbox:checked').each(function (index) {
+						var currentRow = this.parentNode.parentNode.parentNode.parentNode;
+						var closestTr = currentRow.getElementsByTagName("td")[9];
+						$(".bodycheckbox").prop("checked", $(this).prop("checked"))
+						if (typeof closestTr !== "undefined") {
+							ids.push(closestTr.textContent);
+						}
+					});
+				}
+			})
+		}
+
+		//DESMARCA TODOS OS CHECKBOXs
+		function desmarcartodos() {
+			$('input[type="checkbox"]:checked').prop('checked', false);
+			marcados();
+		}
+		//QUANDO MUDAR A PAGINA DA TABELA DESMARCAR TODOS OS CHECKBOXES
+		$('#mytable').on('page.dt', function () {
+			desmarcartodos()
+		}).on('search.dt', function () {
+			desmarcartodos()
+		});
+
+		function downloadCheckedXML() {
+			var chaves = ids
+			if (chaves) {
+				for (var i = 0; i < chaves.length; i++) {
+					downloadXMLbyKeyAccess(chaves[i])
+				}
+			}
+		}
+
+		function adicionarTag() {
+			//console.log("adicionarTagadicionarTagadicionarTagadicionarTagadicionarTag")
+			$('#modal_add_tag').modal('show')
+		}
+
+		function deletetagmongo(etiqueta) {
+			if (etiqueta) {
+				$.ajax(
+					{
+						url: '/notas/remover-etiqueta',
+						type: 'post',
+						data: {
+							"etiqueta": etiqueta
+						},
+					}).done(function (data) {
+						if (data) {
+							if (data == "Etiqueta deletada com sucesso!") {
+
+								var aux = []
+
+								delete userEtiquetas[etiqueta]
+
+								aux = userEtiquetas
+
+								//console.log('entrei aqui - etiquetas')
+
+								$("#rowtag").empty() //limpar a div para inserir novamente os elementos
+
+								Object.entries(userEtiquetas).forEach(([nomeEt, corEt]) => {
+									$("#rowtag").append(`<div class="row" style="font-weight: bold; color: #fff; text-shadow: 2px 2px 2px #000; padding: 6px; background:${corEt};">${nomeEt}
+								<span name="tagnamedelete" style="width:90%!important; position: absolute"</span>
+									<button id="${nomeEt}" onClick="deletetagmongo('${nomeEt}')" class="btn pull-right" style="margin: 0!important;padding: 5px!important;">
+										<i class="material-icons">clear</i>
+									</button>
+								</div>`)
+								});
+
+								realoadTable(dadosTabelaNotasFiscais)
+								setOptionsEtiquetasOffline()
+								setTimeout(buttonBackgroudColor, 100)
+
+
+
+							} else {
+
+							}
+
+						}
+					})
+
+			}
+		}
+
+		function removerTag() {
+
+			$('#modal_delete_tag').modal('show')
+
+			$("#rowtag").empty() //limpar a div para inserir novamente os elementos
+
+			Object.entries(userEtiquetas).forEach(([nomeEt, corEt]) => {
+				$("#rowtag").append(`<div class="row" style="font-weight: bold; color: #fff; text-shadow: 2px 2px 2px #000; padding: 6px; background:${corEt};">${nomeEt}
+				<span name="tagnamedelete" style="width:90%!important; position: absolute"</span>
+					<button id="${nomeEt}" onClick="deletetagmongo('${nomeEt}')" class="btn pull-right" style="margin: 0!important;padding: 5px!important;">
+						<i class="material-icons">clear</i>
+					</button>
+				</div>`)
+			});
+
+
+		}
+
+		function downloadCheckedPDF() {
+			var chaves = ids
+			if (chaves) {
+				for (var i = 0; i < chaves.length; i++) {
+					downloadPDFbyKeyAccess(chaves[i])
+				}
+			}
+		}
+
+		async function staticsTableNF(data) {
+			var sum = 0
+			var num_notas = data.length
+			data.forEach(function (dataElement, index) {
+				sum += parseFloat(dataElement.valor_nf)
+			});
+			const sum_format = await abreviaNumero(sum)
+			//$("#total_notas").text(`Valor total R$ ${sum_format} . Números de notas: ${num_notas}`)
+			$("#total_valor").text(`${sum_format}`)
+
+			$("#total_notas").text(`${num_notas}`)
+		}
+
+		async function changeFilterStatus(btn) {
+			var filter_status = $(btn).attr("aria-expanded")
+			if (filter_status == 'true') {
+				$("#btn_buscar").remove()
+				$("#default_area_btn_buscar").append('<button id="btn_buscar" type="submit" class="btn pull-right" name="btnbusca">Buscar</button>')
+			} else {
+				$("#btn_buscar").remove()
+				$("#filter_area_btn_buscar").append('<button id="btn_buscar" type="submit" class="btn pull-right" name="btnbusca">Buscar</button>')
+			}
+		}
+	</script>
+
+	<script>
+		$(document).ready(async function () {
+			populateTicketsFilter(await getTicketsFilter())
+		})
+
+		var dadosTabelaNotasFiscais = []
+		var userEtiquetas;
+
+		//--------------- busca etiquetas no mongodb e salva em userEtiquetas no formato {'nome_etiqueta': '#hexa' } ------------------
+		async function getTicketsFilter() {
+			return $.ajax({
+				url: '/notas/get-suggestions-etiquetas',
+				type: 'GET',
+			}).done((response) => {
+				//response{Data, EtiquetaJSON}
+				userEtiquetas = response
+			})
+		}
+
+		var optionsForSelectTable
+		async function populateTicketsFilter(dataJSON) {
+			if (dataJSON) {
+				optionsForSelectTable = ''
+				Object.entries(dataJSON).forEach(([nomeEt, corEt]) => {
+					optionsForSelectTable += `<option value="${nomeEt}" style="background-color:${corEt}" >${nomeEt}</option>`
+				});
+
+				$("#nf_etiquetas").find('option:not(:first)').remove()
+				$("#nf_etiquetas").append(optionsForSelectTable).selectpicker('refresh')
+			}
+		}
+		//------------------------------------------------------------------------------------------------------
+
+		async function realoadTable(data) {
+			if (data) {
+				$("#mytable").DataTable().clear().rows.add(data).draw()
+				buttonBackgroudColor()
+			}
+		}
+
+		async function addNewOption4Ticket() {
+			let novo_nome = $("#nome_etiqueta").val()
+			let nova_cor = document.getElementById("cor_etiqueta").value;
+
+			$("#nf_etiquetas").append(`<option value="${novo_nome}" style="background-color:${nova_cor}" >${novo_nome}</option>`).selectpicker('refresh')
+			//Atualiza a variável local userEtiquetas
+			userEtiquetas[novo_nome] = nova_cor
+		}
+
+		$("#inserirSuggestionEtiqueta").submit(function (e) {
+			e.preventDefault();
+			var post_url = $(this).attr("action");
+			var request_method = $(this).attr("method");
+			var form_data = $(this).serialize();
+			$.ajax({
+				url: post_url,
+				type: request_method,
+				data: form_data
+			}).done(function (response) {
+				if (response == "Nova etiqueta inserida com sucesso") {
+					addNewOption4Ticket()
+					document.getElementById("inserirSuggestionEtiqueta").reset();
+					$('#modal_add_tag').modal('hide')
+
+					$('#form_busca').submit()
+					//realoadTable(dadosTabelaNotasFiscais)
+					//setOptionsEtiquetasOffline()
+					//pickerSetSelected()
+
+
+					//OR
+					//$("#btn_buscar").submit()
+				}
+			})
+		})
+
+
+		async function getSuggestionsEtiquetas() {
+			var result;
+			$.ajax({
+				url: '/notas/get-suggestions-etiquetas',
+				type: 'GET',
+			}).done((response) => {
+				userEtiquetas = response
+				let selectOptions = ''
+				if (userEtiquetas) {
+					Object.entries(userEtiquetas).forEach(([key, value]) => {
+						selectOptions += `<option value="${key}" style="background-color:${value}">${key}</option>`
+					});
+
+					setTimeout(() => {
+						addSuggetionsToSelet(selectOptions)
+					}, 100)
+				} else {
+					result = false
+				}
+			})
+			if (result) return result
+		}
+
+		var selectOptions
+		async function setOptionsEtiquetasOffline() {
+			selectOptions = ``
+			if (userEtiquetas) {
+				Object.entries(userEtiquetas).forEach(([key, value]) => {
+					selectOptions += `<option value="${key}" style="background-color:${value}">${key}</option>`
+				});
+				setTimeout(() => {
+					addSuggetionsToSelet(selectOptions)
+				}, 100)
+			}
+		}
+
+		async function addSuggetionsToSelet(selectOptions) {
+			$(".dropdown-toggle-suggestions-target").each((index, el) => {
+				var count = $(el).children('option').length
+				if (count == 1) {
+					$(el).append(selectOptions).selectpicker('refresh')
+				}
+			})
+			return true
+		}
+
+		/* atribui o valor do select com o valor da inicialização da tabela */
+		async function pickerSetSelected() {
+			setTimeout(() => {
+				$(".dropdown-toggle-suggestions-target").each(function (index, el) {
+					let value = $(el).data('tagvalue')
+					if (value) {
+						$(el).val(value).selectpicker('refresh')
+					}
+				})
+				//setOptionsEtiquetasOffline()
+				buttonBackgroudColor()
+			}, 500)
+		}
+
+		const renderEtiquetasDataTables = function (data, type, row) {
+			if (data == null) {
+				data = 'Selecionar'
+			}
+
+
+			var selectPicker = ""
+			selectPicker = '<div class="area_select_etiqueta">' +
+				'<select id="' + row.chavedeacesso + '" onchange="updateEtiqueta(this, this.value, \'' + row.chavedeacesso + '\')" data-tagvalue="' + data + '" class="custom-select form-control selectpicker dropdown-toggle-suggestions-target">' +
+				'<option value="Selecionar">Selecionar</option>' +
+				'</select>' +
+				'</div>'
+
+
+			/* colocar os dados da tabela para refresh após vir do banco*/
+			if (type === 'display') {
+				return selectPicker
+			} else {
+				return data;
+			}
+
+			//item = '<select onchange="updateEtiqueta(this, this.value,\'' + row.chavedeacesso + '\')" value="' + data + '" class="custom-select form-control selectpicker dropdown-toggle-suggestions-target">'
+
+			/*
+			Object.entries(userEtiquetas).forEach(function (nomeEt, corEt) {
+				if (nomeEt == data) {
+					if (corEt == "#eeeeee") {
+						item = '<select onchange="updateEtiqueta(this, this.value, \'' + row.chavedeacesso + '\')" value="' + data + '" class="custom-select form-control selectpicker dropdown-toggle-suggestions-target">'
+					} else {
+						item = '<select onchange="updateEtiqueta(this, this.value, \'' + row.chavedeacesso + '\')" value="' + data + '" class="custom-select form-control selectpicker dropdown-toggle-suggestions-target">'
+					}
+				}
+			})*/
+			//
+		}
+
+		function updateEtiqueta(element, tag, chave_de_acesso) {
+			console.log('valor do botão: ', tag)
+			if (tag && chave_de_acesso) {
+				//Update ticket of "nota fiscal" in MSSQL
+				$.ajax({
+					url: '/notas/atualizar-etiqueta',
+					type: 'POST',
+					data: {
+						"tag": tag,
+						"chave_de_acesso": chave_de_acesso
+					}
+				}).done(function (response) {
+					if (response) {
+
+						//atribui o novo valor ao select através do data-tagvalue
+						$(`#${chave_de_acesso}`).attr('data-tagvalue', tag)
+
+						//rowReloadTicketColor(element, tag)
+						pickerSetSelected()
+						//setTimeout(buttonBackgroudColor, 100)
+
+					}
+				})
+			}
+		}
+
+
+		function rowReloadTicketColor(element, tag) {
+			//Update button color according to ticket name
+			var tagIcon = '<i class="material-icons tag-icon">sell</i>'
+
+			if (userEtiquetas) {
+				//console.log('cores:', userEtiquetas)
+				var color = userEtiquetas[tag]
+				if (color) {
+					if (color == "#eeeeee") {
+						$(element).next("button").attr('style', 'color: #272727 !important').css('background', color)
+					} else {
+						$(element).next("button").attr('style', 'color: #ffff !important').css('background', color)
+					}
+				}
+			}
+		}
+
+
+
+		async function verificarExistentes() {
+			$(".dropdown-toggle-suggestions-target").each((index, el) => {
+				var conteudo = $(el).children().next('button').length
+
+			})
+		}
+
+
+		async function buttonBackgroudColor() {
+			setTimeout(() => {
+				$('.btn.dropdown-toggle.btn-light').each((index, el) => {
+					var descricaoiBtn = $(el).children().children().children().text()
+					var tagIcon = '<i class="material-icons tag-icon">sell</i>'
+					if (userEtiquetas) {
+						var color = userEtiquetas[descricaoiBtn]
+						if (color) {
+							if (color == "#eeeeee") {
+								$(el).attr("style", "color: #272727 !important").css('background', color)
+							} else {
+								$(el).attr("style", "color: #ffff !important").css('background', color)
+							}
+						}
+					}
+				})
+			}, 100)
+		}
+
+
+
+		$('#selecionarEtiqueta').attr('disabled', true).selectpicker('refresh')
+		//Setar etiqueta aos itens com o checkbox selecionado
+		function updateEtiquetaForSelected(elem) {
+			let elemId = $(elem).attr('id')
+			//console.log('ssssssss ', elemId)
+			let selectedOption = $(`#${elemId} option:selected`)
+
+			var tag = $(elem).val()
+			var color = $(selectedOption).css("background-color")
+			updateEtiqueta(elem, tag, ids)
+
+
+			if (tag && color) {
+				if (ids.length > 0) {
+					setTimeout(() => {
+						$('#form_busca').submit()
+						//voltar o select para selecionar
+						$(elem).val('')
+						$(`#${elemId}`).parent().next('button').css('background', '')
+						$(elem).selectpicker('refresh')
+					}, 1000)
+				}
+
+			}
+		}
+
+
+
+
+		//criação da tabela
+		$(document).ready(function () {
+
+
+
+
+			var collapsedGroups = {};
+
+			const data = moment();
+
+			$("#form_busca").submit(function (e) {
+				e.preventDefault(); //prevent default action
+				var post_url = $(this).attr("action"); //get form action url /importnotas
+				var request_method = $(this).attr("method"); //get form GET/POST method
+				var form_data = $(this).serialize(); //Encode form elements for submission
+				showLoading();
+				$.ajax({
+					url: post_url,
+					type: request_method,
+					data: form_data
+				}).done(function (response) {
+					hideLoading();
+					let cardTitleNode = document.getElementById('cardTitle'); //Atribui o titulo do card 2 (CARD DA TABELA)
+					cardTitleNode.textContent = (response.nomeBuscadoNotas);
+
+					dadosTabelaNotasFiscais = JSON.parse(response.datasend)
+					staticsTableNF(dadosTabelaNotasFiscais)
+
+					getSuggestionsEtiquetas()
+
+					if (dadosTabelaNotasFiscais.length > 0) {
+						tabelaNotasFiscais = $('#mytable').DataTable({
+							destroy: true,
+							data: dadosTabelaNotasFiscais,
+							columns: [{
+								defaultContent: '<div class="form-check">' +
+									'<label class="form-check-label">' +
+									'<input name="checkbox" class="form-check-input bodycheckbox" type="checkbox" value="" onchange="marcados(this.checkbox)">' +
+									'<span class="form-check-sign">' +
+									'<span class="check"></span>' +
+									'</span>' +
+									'</label>' +
+									'</div>'
+							}, //CHECKBOXES 
+							{
+								data: "id_nota"
+							}, {
+								data: 'chavedeacesso',
+								render: function (data, type, row) {
+									return '<button type="button" onClick="getByRowChavedeAcesso(\'' + row.chavedeacesso + '\')" class="btn pull-right">' +
+										'<i class="material-icons">visibility</i>' +
+										'</button>'
+								}
+							}, {
+								data: "numero_nota"
+							}, {
+								data: "emitente"
+							}, {
+								data: "valor_nf"
+							}, {
+								data: "data_emissao",
+								type: "date-eu"
+							}, //data de abertura - inserido , type: "date-eu"
+							{
+								data: "status"
+							}, {
+								data: "tag",
+								render: renderEtiquetasDataTables //Insere os selects no corpo da tabela
+							}, {
+								data: "chavedeacesso"
+							}, {
+								data: "cnpj_emitente"
+							}, {
+								data: "inscricao_estadual_emitente"
+							}, {
+								data: "data_entrada"
+							},
+							//{ data: "data_entrada", type: "date-eu" },
+							{
+								data: "origem"
+							}, {
+								data: "modelo_doc"
+							}, {
+								data: "serie_nota"
+							}, {
+								data: "data_entrada"
+							}, {
+								data: "uf_origem"
+							}, {
+								data: "uf_destino"
+							}, {
+								data: "protocolada"
+							}
+							],
+							columnDefs: [{
+								orderable: false,
+								targets: [0, 1, 2]
+							}, {
+								targets: 2,
+								className: "td-actions"
+							},
+							//{ visible: false, targets: 1 }, //ocultar coluna ID desse modo não teremos id no corpo da tabela > solução abaixo
+							{
+								sClass: "hideIdTable",
+								"aTargets": [1]
+							} //id visivelmente oculto (presente)
+							],
+							//aoColumnDefs: [{
+							//}],
+
+
+							processing: true,
+							order: [
+								[4, 'desc']
+							],
+							fixedHeader: {
+								header: false,
+								footer: false
+							},
+							select: {
+								style: 'os',
+								items: 'cell',
+								selector: `
+								tr>td:nth-child(4), 
+								tr>td:nth-child(5), 
+								tr>td:nth-child(6), 
+								tr>td:nth-child(7), 
+								tr>td:nth-child(8), 
+								tr>td:nth-child(10), 
+								tr>td:nth-child(11), 
+								tr>td:nth-child(12), 
+								tr>td:nth-child(13), 
+								tr>td:nth-child(14), 
+								tr>td:nth-child(15), 
+								tr>td:nth-child(16), 
+								tr>td:nth-child(17), 
+								tr>td:nth-child(18), 
+								tr>td:nth-child(19), 
+								tr>td:nth-child(20)`
+							},
+							dom: 'Blfrtip',
+							buttons: [
+								{
+									extend: 'collection',
+									text: '<i class="material-icons">sell</i>',
+									buttons: [{
+										text: 'Criar Tag',
+										action: adicionarTag
+									}, {
+										text: 'Deletar Tag',
+										action: removerTag
+									}],
+								}, {
+									extend: 'collection',
+									text: '<i class="material-icons">download</i>',
+									buttons: [{
+										text: 'XML',
+										action: downloadCheckedXML
+									}, {
+										text: 'PDF',
+										action: downloadCheckedPDF
+									}]
+								}, {
+									extend: 'collection',
+									text: 'Periodo',
+									className: 'dropdown',
+									background: false,
+									buttons: [{
+										text: 'Mês Atual',
+										action: function () {
+
+											var month = data.format('MM')
+											var newDataTables = []
+
+											for (var i = 0; i < dadosTabelaNotasFiscais.length; i++) {
+												var aux = dadosTabelaNotasFiscais[i].data_emissao.split("/")
+												if (aux[1] == month) {
+													newDataTables.push(dadosTabelaNotasFiscais[i])
+												}
+
+											}
+
+											realoadTable(newDataTables)
+										}
+									}, {
+										text: 'Mês Anterior',
+										action: function () {
+											var month = data.format('MM')
+											var newDataTables = []
+
+											for (var i = 0; i < dadosTabelaNotasFiscais.length; i++) {
+												var aux = dadosTabelaNotasFiscais[i].data_emissao.split("/")
+												if (aux[1] == month - 1) {
+													newDataTables.push(dadosTabelaNotasFiscais[i])
+												}
+
+											}
+
+											realoadTable(newDataTables)
+
+										}
+									}, {
+										text: 'Ano Atual',
+										action: function () {
+
+											var year = data.format('YYYY')
+											var newDataTables = []
+
+											for (var i = 0; i < dadosTabelaNotasFiscais.length; i++) {
+												var aux = dadosTabelaNotasFiscais[i].data_emissao.split("/")
+												if (aux[2] == year) {
+													newDataTables.push(dadosTabelaNotasFiscais[i])
+												}
+											}
+
+											realoadTable(newDataTables)
+
+										}
+									}, {
+										text: 'Ano Anterior',
+										action: function () {
+
+											var year = data.format('YYYY')
+											var newDataTables = []
+
+											for (var i = 0; i < dadosTabelaNotasFiscais.length; i++) {
+												var aux = dadosTabelaNotasFiscais[i].data_emissao.split("/")
+
+												if (aux[2] == year - 1) {
+													newDataTables.push(dadosTabelaNotasFiscais[i])
+												}
+
+											}
+
+											realoadTable(newDataTables)
+
+										}
+									}, {
+										text: 'Total',
+										action: function () {
+											realoadTable(dadosTabelaNotasFiscais)
+										}
+									}]
+								},
+								{
+									extend: 'excel',
+									text: 'Exportar'
+								},
+							],
+							pagingType: "full_numbers",
+							lengthMenu: [
+								[50, 100, 1000, -1],
+								[50, 100, 1000, "Todos"]
+							],
+							responsive: false,
+							language: {
+								"url": "../assets/js/plugins/dataTables.ptbr.lang",
+								search: "_INPUT_",
+								searchPlaceholder: "",
+							},
+							sScrollXInner: "100%",
+							/*scrollY: false,*/
+							rowCallback: function (row, data) {
+								//Função que Habilita os botões de AÇÕES ao clicarem em qualquer checkbox do tbody
+								var element = $(row).find('.form-check-input');
+								element.on("change", function () {
+									//Habilita os botões de AÇÕES
+									$("button[name='btnalterardata']").prop('disabled', !$("input[name='checkbox']:checked").length);
+									$("button[name='btnalteraliquota']").prop('disabled', !$("input[name='checkbox']:checked").length);
+									$("button[name='btnnotadevolvida']").prop('disabled', !$("input[name='checkbox']:checked").length);
+									$("button[name='btnretornarprovacao']").prop('disabled', !$("input[name='checkbox']:checked").length);
+
+									//Habilita selecionarEtiqueta
+									$('#selecionarEtiqueta').prop('disabled', !$("input[name='checkbox']:checked").length).selectpicker('refresh')
+
+								});
+							},
+							initComplete: function (settings, json) {
+
+								pickerSetSelected()
+
+								$('#mytable').on('draw.dt', function () {
+									//recarregr etiquetas aqui
+									getTicketsFilter()
+									setOptionsEtiquetasOffline()
+									pickerSetSelected()
+									// $(".dropdown-toggle-suggestions-target").selectpicker('refresh')
+								});
+
+								// Enable TFOOT scoll bars
+								$('.dataTables_scrollFoot').css('overflow', 'auto');
+
+								$('.dataTables_scrollHead').css('overflow', 'auto');
+
+								// Sync TFOOT scrolling with TBODY
+								$('.dataTables_scrollFoot').on('scroll', function () {
+									$('.dataTables_scrollBody').scrollLeft($(this).scrollLeft());
+								});
+
+								$('.dataTables_scrollHead').on('scroll', function () {
+									$('.dataTables_scrollBody').scrollLeft($(this).scrollLeft());
+								});
+							}
+						});
+
+					} else {
+						if (tabelaNotasFiscais) {
+							tabelaNotasFiscais.clear().draw()
+						}
+					}
+
+					$("#rowDataTable").removeClass('hideRowCard')
+					$('#mytable tbody').on('click', 'tr.group-start', function () {
+						var numero = $(this).data('numero');
+						collapsedGroups[numero] = !collapsedGroups[numero];
+						tabelaNotasFiscais.draw(false);
+					});
+					//Função que Habilita os botões de AÇÕES ao clicarem marcar todos (Check box Thead)
+					$('#checkall').on('click', function () {
+						$("button[name='btnalterardata']").prop('disabled', !$(this).prop("checked"));
+						$("button[name='btnalteraliquota']").prop('disabled', !$(this).prop("checked"));
+						$("button[name='btnnotadevolvida']").prop('disabled', !$(this).prop("checked"));
+						$("button[name='btnretornarprovacao']").prop('disabled', !$(this).prop("checked"));
+
+						//Habilita selecionarEtiqueta
+						$('#selecionarEtiqueta').prop('disabled', !$(this).prop("checked")).selectpicker('refresh')
+					});
+
+
+				});
+			});
+		});
+	</script>
+</body>
+
+</html>

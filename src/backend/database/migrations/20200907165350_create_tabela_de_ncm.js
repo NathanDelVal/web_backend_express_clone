@@ -1,0 +1,20 @@
+exports.up = knex => knex.schema.createTable('ncm_tbl_knex', table =>{
+    table.increments('id').unique().notNullable()
+
+    table.string('capitulo', [100]).notNullable()
+    table.string('ncm', [50])
+    table.string('descricao', [255])
+    table.string('mva_7', [50])
+    table.string('mva_12', [50])
+    table.string('tipo_antecipado', [50])
+    table.string('data_vigencia', [50])
+    table.string('cest', [50])
+
+    table.timestamp('created_at').defaultTo(knex.fn.now())
+    table.timestamp('updated_at').defaultTo(knex.fn.now())
+
+
+});
+
+exports.down = knex => knex.schema.dropTable('ncm_tbl_knex');
+

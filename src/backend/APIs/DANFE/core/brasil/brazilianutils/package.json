@@ -1,0 +1,90 @@
+{
+  "_from": "brazilianutils@0.0.1",
+  "_id": "brazilianutils@0.0.1",
+  "_inBundle": false,
+  "_integrity": "sha512-tj8OscikqIbAv8yzXggwFLxwAoIWWrxE0jkuN0mhmKJSmLHg/eZnT61HcXEF32b36tVV8hvFZ9YfXrLUeEi4UA==",
+  "_location": "/brazilianutils",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "brazilianutils@0.0.1",
+    "name": "brazilianutils",
+    "escapedName": "brazilianutils",
+    "rawSpec": "0.0.1",
+    "saveSpec": null,
+    "fetchSpec": "0.0.1"
+  },
+  "_requiredBy": [
+    "/brazilian"
+  ],
+  "_resolved": "https://registry.npmjs.org/brazilianutils/-/brazilianutils-0.0.1.tgz",
+  "_shasum": "85043e9594805da6fd0fd0ef3c0cbe5b01dbef1f",
+  "_spec": "brazilianutils@0.0.1",
+  "_where": "C:\\Users\\Geovani Amaral\\Documents\\test-danfe\\node_modules\\brazilian",
+  "author": {
+    "name": "Giovanni Fersan",
+    "email": "thefersan@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/thefersan/brazilianutils/issues"
+  },
+  "bundleDependencies": false,
+  "contributors": [
+    {
+      "name": "Giovanni Fersan",
+      "email": "thefersan@gmail.com"
+    }
+  ],
+  "dependencies": {},
+  "deprecated": false,
+  "description": "Lots of utilities for Node.js",
+  "devDependencies": {
+    "alltested": "0.0.3",
+    "glob": "^4.0.6",
+    "grunt": "^0.4.5",
+    "grunt-contrib-htmlmin": "^0.3.0",
+    "grunt-contrib-jshint": "~0.7.1",
+    "grunt-contrib-nodeunit": "~0.2.2",
+    "highlight.js": "^8.2.0",
+    "js-beautify": "^1.5.1",
+    "marked": "^0.3.2",
+    "nodeunit": "~0.8.0",
+    "rewire": "^2.0.0",
+    "semver": "~2.2.1",
+    "underscore": "^1.7.0"
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "homepage": "https://github.com/thefersan/brazilianutils#readme",
+  "keywords": [
+    "util",
+    "utils",
+    "utilities",
+    "swiss",
+    "army",
+    "knife",
+    "string",
+    "array",
+    "number",
+    "format",
+    "date",
+    "crypto",
+    "cryptography",
+    "controller",
+    "fs",
+    "file system"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "brazilianutils",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/thefersan/brazilianutils.git"
+  },
+  "scripts": {
+    "test": "grunt test --verbose"
+  },
+  "version": "0.0.1"
+}

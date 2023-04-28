@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<!--HEADER-->
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="../images/icon/apple-icon-mezzomo.png">
+    <link rel="icon" type="image/png" href="../images/icon/favicon_mezzomo3.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>
+        Robotax: Cadastrar Escritório
+    </title>
+    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+    <!-- Fonts and icons -->
+    <link rel="stylesheet" type="text/css"
+        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <!--Custom CSS styles-->
+    <link rel="stylesheet" type="text/css" href="../local/style-cadastrar-escritorio.css">
+    <!--SWEET ALERT-->
+    <link rel="stylesheet" href="../local/plugins/sweetalert/css/sweetalert2.min.css" id="theme-styles">
+    
+    <script src="../assets/js/core/jquery-3.5.1.js"></script>
+
+</head>
+<!--HEADER_X-->
+
+<body class="off-canvas-sidebar header-filter" filter-color="yellow" style="overflow: auto;">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-transparent text-white">
+        
+        <div class="navbar-wrapper">
+            <a href="/" style="margin-left: 2rem;">
+                <div class="container" style="display: flex; flex-direction: column;">
+                    <img src="../images/logo-black-fixed.svg" style="height: 6rem">
+                    <img src="../images/maintittle.svg" style="height: 1rem; margin-top: .5rem;">
+                    <!-- <span class="txt-rotate" style="font-weight: 800; margin-left: 0.5rem; color: white;" data-period="2000"
+                    data-rotate='[ "Antecipados", "Robô Fiscal", "Documentos", "Robô Contábil", "Notas Fiscais"]'></span> -->
+                </div>
+            </a>
+        </div>
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="navbar-toggler-icon icon-bar"></span>
+                <span class="navbar-toggler-icon icon-bar"></span>
+                <span class="navbar-toggler-icon icon-bar"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end">
+                <ul class="navbar-nav">
+                    <li class="nav-item  active">
+                        <a href="/acesso" class="nav-link">
+                            <i class="material-icons">redo</i> Acesso
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="wrapper wrapper-full-page mt-5" style="z-index: 2;">
+        <div class="page-header cadastro-page">
+            <div class="container login-page">
+                <div class="row">
+                    <div data-aos="fade-down" class="col-lg-12 ml-auto mr-auto">
+                        <div id="card-principal" class="card card-login card-cadastro card-hidden wizard-card"
+                            data-color="red" id="wizard">
+                            <div class="card-header card-header-black text-center">
+                                <h2 class="card-title text-center">Cadastrar Escritório</h2>
+                            </div>
+
+                            <div class="card-body" id="card-cadastro">
+                                <div class="row align-items-center ">
+                                    <div class="col-lg-12">
+                                        <div class="text-center">
+                                            <button class="btn btn-black btn_pf">
+                                                Pessoa Física
+                                            </button>
+                                            <button class="btn btn-black btn_pj">
+                                                Pessoa Jurídica
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        
+                                        <div class="form_pf" style="display: block;">
+                                            <form id="formulario_cadastro_pf" class="form" method="post"
+                                                action="/cadastro-escritorio/efetuar-cadastro-escritorio">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <input name="tipo_conta" value="pf" type="hidden">
+
+                                                        <div class="col-lg-12">
+                                                            <h4 class="info-title text-center">Seus dados pessoais</h4>
+                                                            <div class="row">
+                                                                
+                                                                <div class="col-lg-4">
+                                                                    <div class="form-group has-default">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-prepend">
+                                                                                <span class="input-group-text"><i
+                                                                                        class="material-icons">face</i></span>
+                                                                            </div>
+                                                                            <input name="nome_completo" type="text" autocomplete="off"
+                                                                                class="form-control" placeholder="Seu nome completo"
+                                                                                oninput="this.className=''">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="col-lg-4">
+                                                                    <div class="form-group has-default">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-prepend">
+                                                                                <span class="input-group-text"><i
+                                                                                        class="material-icons">badge</i></span>
+                                                                            </div>
+                                                                            <input id="cpf" name="cpf" type="text" autocomplete="nope"
+                                                                                class="form-control" minlength="14" maxlength="14" onkeypress="$(this).mask('000.000.000-00');" placeholder="Informe o seu CPF"
+                                                                                oninput="this.className=''">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="col-lg-4">
+                                                                    <div class="form-group has-default">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-prepend">
+                                                                                <span class="input-group-text"><i
+                                                                                        class="material-icons">mail</i></span>
+                                                                            </div>
+                                                                            <input name="email" type="email" autocomplete="nope" class="form-control"
+                                                                                placeholder="Email para contato"
+                                                                                oninput="this.className=''">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="col-lg-4">
+                                                                    <div class="form-group has-default">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-prepend">
+                                                                                <span class="input-group-text"><i
+                                                                                        class="material-icons">perm_phone_msg</i></span>
+                                                                            </div>
+                                                                            <input name="numero_contato" type="text" autocomplete="nope"
+                                                                                placeholder="Telefone para contato"
+                                                                                class="form-control" oninput="this.className=''" 
+                                                                                onkeypress="$(this).mask('(00) 0000-00009')">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-lg-12 mt-3">
+                                                            <h4 class="info-title text-center">Dados da sua empresa</h4>
+                                                            <div class="row">
+                                                                
+                                                                <div class="col-lg-4">
+                                                                    <div class="form-group has-default">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-prepend">
+                                                                                <span class="input-group-text"><i
+                                                                                        class="material-icons">mood</i></span>
+                                                                            </div>
+                                                                            <input id="new_nome_fantasia" name="nome_fantasia"
+                                                                                type="text" autocomplete="nope" class="form-control "
+                                                                                placeholder="Nome Fantasia "
+                                                                                oninput="this.className=''">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-lg-4">
+                                                                    <div class="form-group has-default">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-prepend">
+                                                                                <span class="input-group-text"><i
+                                                                                        class="material-icons">add_location</i></span>
+                                                                            </div>
+                                                                            <input name="cep" type="text" autocomplete="nope"
+                                                                                class="form-control " placeholder="CEP"
+                                                                                oninput="this.className=''" onkeypress="$(this).mask('00.000-000')">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-lg-4">
+                                                                    <div class="form-group has-default">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-prepend">
+                                                                                <span class="input-group-text"><i
+                                                                                        class="material-icons">location_city</i></span>
+                                                                            </div>
+                                                                            <input id="new_municipio" name="municipio" type="text" autocomplete="nope"
+                                                                                class="form-control" placeholder="Municipio"
+                                                                                oninput="this.className=''">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-lg-4">
+                                                                    <div class="form-group has-default">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-prepend">
+                                                                                <span class="input-group-text"><i
+                                                                                        class="material-icons">location_on</i></span>
+                                                                            </div>
+                                                                            <input name="uf" type="text" autocomplete="nope"
+                                                                                class="form-control" placeholder="UF"
+                                                                                oninput="this.className=''">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-lg-4">
+                                                                    <div class="form-group has-default">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-prepend">
+                                                                                <span class="input-group-text"><i
+                                                                                        class="material-icons">edit_road</i></span>
+                                                                            </div>
+                                                                            <input name="endereco" type="text" autocomplete="nope"
+                                                                                class="form-control" placeholder="Rua/Logradouro"
+                                                                                oninput="this.className=''">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-lg-4">
+                                                                    <div class="form-group has-default">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-prepend">
+                                                                                <span class="input-group-text"><i
+                                                                                        class="material-icons">pin</i></span>
+                                                                            </div>
+                                                                            <input id="new_numero" name="numero_endereco" autocomplete="nope"
+                                                                                type="text" class="form-control "
+                                                                                placeholder="Número " oninput="this.className=''">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-lg-4">
+                                                                    <div class="form-group has-default">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-prepend">
+                                                                                <span class="input-group-text"><i
+                                                                                        class="material-icons">business</i></span>
+                                                                            </div>
+                                                                            <input id="new_bairro" name="bairro" autocomplete="nope"
+                                                                                type="text" class="form-control "
+                                                                                placeholder="Bairro" oninput="this.className=''">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-lg-4">
+                                                                    <div class="form-group has-default">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-prepend">
+                                                                                <span class="input-group-text">
+                                                                                    <i class="material-icons">web</i>
+                                                                                </span>
+                                                                            </div>
+                                                                            <input id="new_website" name="website" type="text" autocomplete="nope"
+                                                                                class="form-control" placeholder="Website" oninput="this.className=''">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                            
+                                                        <div class="col-lg-12 mt-3">
+                                                            <h4 class="info-title text-center">Qual produto você deseja adquirir?</h4>
+                                                            <div class="row justify-content-between">
+                                                                <div class="col-lg-2">
+                                                                    <div class="choice" data-toggle="wizard-radio"
+                                                                        rel="tooltip"
+                                                                        data-original-title="Antecipados por periodo limitado de 7 dias com inserção manual de notas">
+                                                                        <input type="radio" class="form-check-input"
+                                                                            name="plano" value="Robotax1">
+                                                                        <div class="icon">
+                                                                            <img class="img img-cadastro circle_off"
+                                                                                src="../images/divulgacao/demo.svg " />
+                                                                        </div>
+                                                                        <h5 class="card-prod-cadastro">
+                                                                            Robotax Notas 1
+                                                                        </h5>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-lg-2">
+                                                                    <div class="choice" data-toggle="wizard-radio"
+                                                                        rel="tooltip"
+                                                                        data-original-title="Antecipados completo com download automático de notas (até 500 notas mensais valor: R$ 250,00, a partir desse limite será cobrado R$ 400,00)">
+                                                                        <input type="radio" class="form-check-input"
+                                                                            name="plano" value="Robotax2">
+                                                                        <div class="icon">
+                                                                            <img class="img img-cadastro circle_off"
+                                                                                src="../images/svg_apps/antecipados.svg " />
+                                                                        </div>
+                                                                        <h5 class="card-prod-cadastro">
+                                                                            Robotax Notas 2</h5>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-lg-2">
+                                                                    <div class="choice" data-toggle="wizard-radio"
+                                                                        rel="tooltip"
+                                                                        data-original-title="Antecipados completo com download automático de notas (até 500 notas mensais valor: R$ 250,00, a partir desse limite será cobrado R$ 400,00) + Robô fiscal para inserção em seu ERP">
+                                                                        <input type="radio" class="form-check-input"
+                                                                            name="plano" value="RobotaxFiscal">
+                                                                        <div class="icon">
+                                                                            <img class="img img-cadastro circle_off"
+                                                                                src="../images/svg_apps/robo-fiscal.svg " />
+                                                                        </div>
+                                                                        <h5 class="card-prod-cadastro">
+                                                                            Robotax Fiscal
+                                                                        </h5>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-lg-2">
+                                                                    <div class="choice" data-toggle="wizard-radio"
+                                                                        rel="tooltip"
+                                                                        data-original-title="Antecipados completo com download automático de notas (até 500 notas mensais valor: R$ 250,00, a partir desse limite será cobrado R$ 400,00) + Robô fiscal para inserção em seu ERP + Robô contabil + GED">
+                                                                        <input type="radio" class="form-check-input"
+                                                                            name="plano" value="RobotaxDocs">
+                                                                        <div class="icon">
+                                                                            <img class="img img-cadastro circle_off"
+                                                                                src="../images/svg_apps/ged.svg " />
+                                                                        </div>
+
+                                                                        <h5 class="card-prod-cadastro">
+                                                                            Robotax Docs
+                                                                        </h5>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-lg-2">
+                                                                    <div class="choice" data-toggle="wizard-radio"
+                                                                        rel="tooltip"
+                                                                        data-original-title="Antecipados completo com download automático de notas (até 500 notas mensais valor: R$ 250,00, a partir desse limite será cobrado R$ 400,00) + Robô fiscal para inserção em seu ERP + Robô contabil + GED">
+                                                                        <input type="radio" class="form-check-input"
+                                                                            name="plano" value="RobotaxControl">
+                                                                        <div class="icon">
+                                                                            <img class="img img-cadastro circle_off"
+                                                                                src="../images/svg_apps/ged.svg " />
+                                                                        </div>
+
+                                                                        <h5 class="card-prod-cadastro">
+                                                                            Robotax Controladoria
+                                                                        </h5>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-lg-12">
+                                                            <div class="row">
+                                                                <div class="col-lg-6">
+                                                                    <h4 class="info-title text-center">Selecione a forma de pagamento</h4>
+                                                                    <div class="row">
+                                                                        <div class="col-lg-4" style="filter: blur(1px);">
+                                                                            <div class="form-check form-check-radio btn-section-operation">
+                                                                                <label class="form-check-label radio-label"
+                                                                                    rel="tooltip"
+                                                                                    data-original-title="Ainda não disponivel">
+                                                                                    <input class="form-check-input disabled"
+                                                                                        type="radio" id="formaPagamento"
+                                                                                        name="formapagamento"
+                                                                                        value="credito" disabled>
+                                                                                    <span class="circle">
+                                                                                        <span class="check"></span>
+                                                                                    </span>
+                                                                                </label>
+                                                                            </div>
+                                                                            <img style="width: 30px; margin-top: 1rem;"
+                                                                                src="../images/credit-card.svg">
+                                                                            <h6>Crédito</h6>
+                                                                        </div>
+
+                                                                        <div class="col-lg-4" style="filter: blur(1px);">
+                                                                            <div
+                                                                                class="form-check form-check-radio btn-section-operation">
+                                                                                <label class="form-check-label radio-label"
+                                                                                    rel="tooltip"
+                                                                                    data-original-title="Ainda não disponivel">
+                                                                                    <input class="form-check-input disabled"
+                                                                                        type="radio" id="formaPagamento"
+                                                                                        name="formapagamento" value="debito"
+                                                                                        disabled>
+                                                                                    <span class="circle">
+                                                                                        <span class="check"></span>
+                                                                                    </span>
+                                                                                </label>
+                                                                            </div>
+                                                                            <img style="width: 30px; margin-top: 1rem;"
+                                                                                src="../images/debit-card.svg">
+                                                                            <h6>Débito</h6>
+                                                                        </div>
+
+                                                                        <div class="col-lg-4">
+                                                                            <div class="form-check form-check-radio btn-section-operation">
+                                                                                <label class="form-check-label radio-label">
+                                                                                    <input class="form-check-input"
+                                                                                        type="radio" id="formaPagamento"
+                                                                                        name="formapagamento"
+                                                                                        value="boleto">
+                                                                                    <span class="circle">
+                                                                                        <span class="check"></span>
+                                                                                    </span>
+                                                                                </label>
+                                                                            </div>
+                                                                            <img style="width: 30px; margin-top: 1rem;"
+                                                                                src="../images/bar-code.svg">
+                                                                            <h6>Boleto</h6>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <div class="col-lg-6">
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <table id="tabela-price" style="width: 100%;">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th>Item</th>
+                                                                                        <th class="text-right">Preço</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody id="cart-pre-checkout">
+
+                                                                                    <tr>
+                                                                                        <td>Nenhum Item</td>
+                                                                                        <td class="text-right">0,00</td>
+                                                                                    </tr>
+
+                                                                                </tbody>
+                                                                                <tfoot style="border-top: 3px dotted #c4bfbf">
+                                                                                    <hr>
+                                                                                    <tr>
+                                                                                        <td>TOTAL</td>
+                                                                                        <td id="checkout-total" class="text-right">
+                                                                                            0,00<br>
+                                                                                            <strong
+                                                                                                style="font-size: 0.7rem; font-weight: bold;">mensal</strong>
+                                                                                        </td>
+                                                                                </tfoot>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="text-right">
+                                                    <button class="btn-cadastro btn-black btn" form="formulario_cadastro_pf" type="submit">Enviar</button>
+                                                </div>
+                                            </form>
+
+                                        </div>
+
+                                        <div class="form_pj" style="display: none;">
+                                            <form id="formulario_cadastro_pj" class="form" method="post"
+                                                action="/cadastro-escritorio/efetuar-cadastro-escritorio">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <input name="tipo_conta" value="pj" type="hidden">
+                                                        
+                                                        <div class="col-lg-12">
+                                                            <h4 class="info-title text-center">Seus dados pessoais</h4>
+                                                            <div class="row">
+                                                                
+                                                                <div class="col-lg-4">
+                                                                    <div class="form-group has-default">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-prepend">
+                                                                                <span class="input-group-text"><i
+                                                                                        class="material-icons">face</i></span>
+                                                                            </div>
+                                                                            <input name="nome_completo" type="text" autocomplete="off"
+                                                                                class="form-control" placeholder="Seu nome completo"
+                                                                                oninput="this.className=''">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="col-lg-4">
+                                                                    <div class="form-group has-default">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-prepend">
+                                                                                <span class="input-group-text"><i
+                                                                                        class="material-icons">badge</i></span>
+                                                                            </div>
+                                                                            <input id="cpf" name="cpf" type="text" autocomplete="nope"
+                                                                                class="form-control" minlength="14" maxlength="14" onkeypress="$(this).mask('000.000.000-00');" placeholder="Informe o seu CPF"
+                                                                                oninput="this.className=''">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="col-lg-4">
+                                                                    <div class="form-group has-default">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-prepend">
+                                                                                <span class="input-group-text"><i
+                                                                                        class="material-icons">mail</i></span>
+                                                                            </div>
+                                                                            <input name="email" type="email" autocomplete="nope" class="form-control"
+                                                                                placeholder="Email para contato"
+                                                                                oninput="this.className=''">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="col-lg-4">
+                                                                    <div class="form-group has-default">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-prepend">
+                                                                                <span class="input-group-text"><i
+                                                                                        class="material-icons">perm_phone_msg</i></span>
+                                                                            </div>
+                                                                            <input name="numero_contato" type="text" autocomplete="nope"
+                                                                                placeholder="Telefone para contato"
+                                                                                class="form-control" oninput="this.className=''" 
+                                                                                onkeypress="$(this).mask('(00) 0000-00009')">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-lg-12 mt-3">
+                                                            <h4 class="info-title text-center">Dados da sua empresa</h4>
+                                                            <div class="row">
+                                                                <div class="col-lg-4">
+                                                                    <div class="form-group has-default">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-prepend">
+                                                                                <span class="input-group-text"><i
+                                                                                        class="material-icons">payment</i></span>
+                                                                            </div>
+                                                                            <input id="new_cnpj" name="cnpj" type="text" autocomplete="nope"
+                                                                                class="form-control" placeholder="CNPJ"
+                                                                                onchange="onChangeCNPJ(this)"
+                                                                                oninput="this.className=''"
+                                                                                onkeypress="$(this).mask('00.000.000/0000-00')">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="col-lg-4">
+                                                                    <div class="form-group has-default">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-prepend">
+                                                                                <span class="input-group-text"><i
+                                                                                        class="material-icons">perm_identity</i></span>
+                                                                            </div>
+                                                                            <input id="new_razao" name="razao_social" type="text" autocomplete="nope"
+                                                                                class="form-control" placeholder="Razão Social"
+                                                                                oninput="this.className=''">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="col-lg-4">
+                                                                    <div class="form-group has-default">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-prepend">
+                                                                                <span class="input-group-text"><i
+                                                                                        class="material-icons">mood</i></span>
+                                                                            </div>
+                                                                            <input id="new_nome_fantasia" name="nome_fantasia"
+                                                                                type="text" autocomplete="nope" class="form-control "
+                                                                                placeholder="Nome Fantasia "
+                                                                                oninput="this.className=''">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-lg-4">
+                                                                    <div class="form-group has-default">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-prepend">
+                                                                                <span class="input-group-text"><i
+                                                                                        class="material-icons">add_location</i></span>
+                                                                            </div>
+                                                                            <input id="new_cep" name="cep" type="text" autocomplete="nope"
+                                                                                class="form-control " placeholder="CEP"
+                                                                                oninput="this.className=''" onkeypress="$(this).mask('00.000-000')">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-lg-4">
+                                                                    <div class="form-group has-default">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-prepend">
+                                                                                <span class="input-group-text"><i
+                                                                                        class="material-icons">edit_road</i></span>
+                                                                            </div>
+                                                                            <input id="new_endereco" name="endereco" type="text" autocomplete="nope"
+                                                                                class="form-control" placeholder="Rua/Logradouro"
+                                                                                oninput="this.className=''">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-lg-4">
+                                                                    <div class="form-group has-default">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-prepend">
+                                                                                <span class="input-group-text"><i
+                                                                                        class="material-icons">location_on</i></span>
+                                                                            </div>
+                                                                            <input id="new_uf" name="uf" type="text" autocomplete="nope"
+                                                                                class="form-control" placeholder="UF"
+                                                                                oninput="this.className=''">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-lg-4">
+                                                                    <div class="form-group has-default">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-prepend">
+                                                                                <span class="input-group-text"><i
+                                                                                        class="material-icons">location_city</i></span>
+                                                                            </div>
+                                                                            <input id="new_cidade" name="municipio" type="text" autocomplete="nope"
+                                                                                class="form-control" placeholder="Município"
+                                                                                oninput="this.className=''">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-lg-4">
+                                                                    <div class="form-group has-default">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-prepend">
+                                                                                <span class="input-group-text"><i
+                                                                                        class="material-icons">pin</i></span>
+                                                                            </div>
+                                                                            <input id="new_numero" name="numero_endereco" autocomplete="nope"
+                                                                                type="text" class="form-control "
+                                                                                placeholder="Número " oninput="this.className=''">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-lg-4">
+                                                                    <div class="form-group has-default">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-prepend">
+                                                                                <span class="input-group-text"><i
+                                                                                        class="material-icons">business</i></span>
+                                                                            </div>
+                                                                            <input id="new_bairro" name="bairro" autocomplete="nope"
+                                                                                type="text" class="form-control "
+                                                                                placeholder="Bairro" oninput="this.className=''">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-lg-4">
+                                                                    <div class="form-group has-default">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-prepend">
+                                                                                <span class="input-group-text"><i
+                                                                                        class="material-icons">web</i></span>
+                                                                            </div>
+                                                                            <input id="new_website" name="website" type="text" autocomplete="nope"
+                                                                                class="form-control" placeholder="Website"
+                                                                                oninput="this.className=''">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                            
+                                                        <div class="col-lg-12 mt-3">
+                                                            <h4 class="info-title text-center">Qual produto você deseja adquirir?</h4>
+                                                            <div class="row justify-content-between">
+                                                                <div class="col-lg-2">
+                                                                    <div class="choice" data-toggle="wizard-radio"
+                                                                        rel="tooltip"
+                                                                        data-original-title="Antecipados por periodo limitado de 7 dias com inserção manual de notas">
+                                                                        <input type="radio" class="form-check-input"
+                                                                            name="plano" value="Robotax1">
+                                                                        <div class="icon">
+                                                                            <img class="img img-cadastro circle_off"
+                                                                                src="../images/divulgacao/demo.svg " />
+                                                                        </div>
+                                                                        <h5 class="card-prod-cadastro">
+                                                                            Robotax Notas 1
+                                                                        </h5>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-lg-2">
+                                                                    <div class="choice" data-toggle="wizard-radio"
+                                                                        rel="tooltip"
+                                                                        data-original-title="Antecipados completo com download automático de notas (até 500 notas mensais valor: R$ 250,00, a partir desse limite será cobrado R$ 400,00)">
+                                                                        <input type="radio" class="form-check-input"
+                                                                            name="plano" value="Robotax2">
+                                                                        <div class="icon">
+                                                                            <img class="img img-cadastro circle_off"
+                                                                                src="../images/svg_apps/antecipados.svg " />
+                                                                        </div>
+                                                                        <h5 class="card-prod-cadastro">
+                                                                            Robotax Notas 2</h5>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-lg-2">
+                                                                    <div class="choice" data-toggle="wizard-radio"
+                                                                        rel="tooltip"
+                                                                        data-original-title="Antecipados completo com download automático de notas (até 500 notas mensais valor: R$ 250,00, a partir desse limite será cobrado R$ 400,00) + Robô fiscal para inserção em seu ERP">
+                                                                        <input type="radio" class="form-check-input"
+                                                                            name="plano" value="RobotaxFiscal">
+                                                                        <div class="icon">
+                                                                            <img class="img img-cadastro circle_off"
+                                                                                src="../images/svg_apps/robo-fiscal.svg " />
+                                                                        </div>
+                                                                        <h5 class="card-prod-cadastro">
+                                                                            Robotax Fiscal
+                                                                        </h5>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-lg-2">
+                                                                    <div class="choice" data-toggle="wizard-radio"
+                                                                        rel="tooltip"
+                                                                        data-original-title="Antecipados completo com download automático de notas (até 500 notas mensais valor: R$ 250,00, a partir desse limite será cobrado R$ 400,00) + Robô fiscal para inserção em seu ERP + Robô contabil + GED">
+                                                                        <input type="radio" class="form-check-input"
+                                                                            name="plano" value="RobotaxDocs">
+                                                                        <div class="icon">
+                                                                            <img class="img img-cadastro circle_off"
+                                                                                src="../images/svg_apps/ged.svg " />
+                                                                        </div>
+
+                                                                        <h5 class="card-prod-cadastro">
+                                                                            Robotax Docs
+                                                                        </h5>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-lg-2">
+                                                                    <div class="choice" data-toggle="wizard-radio"
+                                                                        rel="tooltip"
+                                                                        data-original-title="Antecipados completo com download automático de notas (até 500 notas mensais valor: R$ 250,00, a partir desse limite será cobrado R$ 400,00) + Robô fiscal para inserção em seu ERP + Robô contabil + GED">
+                                                                        <input type="radio" class="form-check-input"
+                                                                            name="plano" value="RobotaxControl">
+                                                                        <div class="icon">
+                                                                            <img class="img img-cadastro circle_off"
+                                                                                src="../images/svg_apps/ged.svg " />
+                                                                        </div>
+
+                                                                        <h5 class="card-prod-cadastro">
+                                                                            Robotax Controladoria
+                                                                        </h5>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-lg-12">
+                                                            <div class="row">
+                                                                <div class="col-lg-6">
+                                                                    <h4 class="info-title text-center">Selecione a forma de pagamento</h4>
+                                                                    <div class="row">
+                                                                        <div class="col-lg-4" style="filter: blur(1px);">
+                                                                            <div class="form-check form-check-radio btn-section-operation">
+                                                                                <label class="form-check-label radio-label"
+                                                                                    rel="tooltip"
+                                                                                    data-original-title="Ainda não disponivel">
+                                                                                    <input class="form-check-input disabled"
+                                                                                        type="radio" id="formaPagamento"
+                                                                                        name="formapagamento"
+                                                                                        value="credito" disabled>
+                                                                                    <span class="circle">
+                                                                                        <span class="check"></span>
+                                                                                    </span>
+                                                                                </label>
+                                                                            </div>
+                                                                            <img style="width: 30px; margin-top: 1rem;"
+                                                                                src="../images/credit-card.svg">
+                                                                            <h6>Crédito</h6>
+                                                                        </div>
+
+                                                                        <div class="col-lg-4" style="filter: blur(1px);">
+                                                                            <div
+                                                                                class="form-check form-check-radio btn-section-operation">
+                                                                                <label class="form-check-label radio-label"
+                                                                                    rel="tooltip"
+                                                                                    data-original-title="Ainda não disponivel">
+                                                                                    <input class="form-check-input disabled"
+                                                                                        type="radio" id="formaPagamento"
+                                                                                        name="formapagamento" value="debito"
+                                                                                        disabled>
+                                                                                    <span class="circle">
+                                                                                        <span class="check"></span>
+                                                                                    </span>
+                                                                                </label>
+                                                                            </div>
+                                                                            <img style="width: 30px; margin-top: 1rem;"
+                                                                                src="../images/debit-card.svg">
+                                                                            <h6>Débito</h6>
+                                                                        </div>
+
+                                                                        <div class="col-lg-4">
+                                                                            <div class="form-check form-check-radio btn-section-operation">
+                                                                                <label class="form-check-label radio-label">
+                                                                                    <input class="form-check-input"
+                                                                                        type="radio" id="formaPagamento"
+                                                                                        name="formapagamento"
+                                                                                        value="boleto">
+                                                                                    <span class="circle">
+                                                                                        <span class="check"></span>
+                                                                                    </span>
+                                                                                </label>
+                                                                            </div>
+                                                                            <img style="width: 30px; margin-top: 1rem;"
+                                                                                src="../images/bar-code.svg">
+                                                                            <h6>Boleto</h6>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <div class="col-lg-6">
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <table id="tabela-price" style="width: 100%;">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th>Item</th>
+                                                                                        <th class="text-right">Preço</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody id="cart-pre-checkout">
+
+                                                                                    <tr>
+                                                                                        <td>Nenhum Item</td>
+                                                                                        <td class="text-right">0,00</td>
+                                                                                    </tr>
+
+                                                                                </tbody>
+                                                                                <tfoot style="border-top: 3px dotted #c4bfbf">
+                                                                                    <hr>
+                                                                                    <tr>
+                                                                                        <td>TOTAL</td>
+                                                                                        <td id="checkout-total" class="text-right">
+                                                                                            0,00<br>
+                                                                                            <strong
+                                                                                                style="font-size: 0.7rem; font-weight: bold;">mensal</strong>
+                                                                                        </td>
+                                                                                </tfoot>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            
+                                                <div class="text-right">
+                                                    <button class="btn-cadastro btn-black btn" form="formulario_cadastro_pj" type="submit">Enviar</button>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card-footer">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{> escritorio/footer_outside}}
+    </div>
+
+    <!--Correção do Violation Scroll non-passive event-->
+    <script src=" ../local/plugins/fix-non-passive.js"></script>
+    <!-- Core JS Files -->
+    <!--mask https://www.blogson.com.br/como-formatar-campos-de-cpf-cep-telefone-e-moeda-com-jquery-jmask/-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+    <script src="../assets/js/core/popper.min.js"></script>
+    <script src="../assets/js/core/bootstrap-material-design.js"></script>
+    <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+    <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="../assets/js/material-dashboard.min.js " type="text/javascript"></script>
+    <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+    <!-- Notifications Plugin -->
+    <script src="../assets/js/plugins/bootstrap-notify.js"></script>
+    <!-- Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+    <script src="../assets/js/plugins/bootstrap-selectpicker.js"></script>
+    <!--SWEET ALERT-->
+    <script src="../local/plugins/sweetalert/js/sweetalert2.min.js"></script>
+
+    <link rel="stylesheet" href="../local/plugins/sweetalert/css/sweetalert2.min.css" id="theme-styles">
+
+    <script src="../assets/js/plugins/jquery.validate.min.js"></script>
+    <script src="../assets/js/plugins/material-bootstrap-wizard.js"></script>
+    <script src="../assets/js/plugins/jquery.bootstrap.js"></script>
+
+    <!-- AJAX JQUERY POST UPDATE update_form_pendente MODAL -->
+    <script src="../local/metodos/post/form_cadastro.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            //md.checkFullPageBackgroundImage();
+            setTimeout(function () {
+                // after 1000 ms we add the class animated to the login/register card
+                $('.card').removeClass('card-hidden');
+            }, 400);
+        });
+    </script>
+
+    <script>
+        $(function () {
+            $('select').selectpicker();
+        });
+    </script>
+
+    <script>
+        function onChangeCNPJ(elemento) {
+            var cnpj = document.getElementById("new_cnpj").value;
+            if (cnpj) {
+                //console.log("Qual o CNPJ? ")
+                cnpj=cnpj.replace(/\./g, "").replace(/-/g, "").replace(/\//g, "")
+
+                if (cnpj.length == 14) {
+                    //console.log("esse é o cnpj=", cnpj)
+                    $.ajax({
+                        url: '/antecipados/get-cnpj',
+                        type: 'POST',
+                        data: {
+                            'cnpj': cnpj
+                        }
+                    }).done(function (response) {
+                        console.log("onChangeCNPJ response ", response)
+                        if (response) {
+                            $('#new_razao').val(response.razao_social);
+                            $('#new_nome_fantasia').val(response.nome_fantasia);
+                            $('#new_cidade').val(response.municipio);
+                            $('#new_uf').val(response.uf);
+                            $('#new_cep').val(response.cep)
+                            $('#new_endereco').val(`${response.logradouro}, ${response.numero}, ${response.bairro}`)
+                            $('#new_numero').val(response.numero);
+
+                        } else {
+                            $('#new_razao').val('');
+                            $('#new_nome_fantasia').val('');
+                            $('#new_cidade').val('');
+                            $('#new_uf').val('');
+                            $('#new_cep').val('');
+                            $('#new_endereco').val('');
+                            $('#new_numero').val('')
+                        }
+                    })
+                } else {
+                    var textmsg = 'O CNPJ deve ter 14 digitos!';
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'info',
+                        title: textmsg,
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+
+                }
+            }
+        }
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            function criaToast(icon, response) {
+                Swal.fire({
+                    customClass: {
+                        confirmButton: 'btn btn-black',
+                    },
+                    title: response,
+                    icon: icon,
+                })
+            }
+            function enviarFormulario(form){
+                            var post_url = form.attr("action");
+                            var request_method = form.attr("method");
+                            var form_data = form.serialize();
+                            console.log("form_data>.>>>>>", form_data)
+                            $.ajax({
+                                async: "false",
+                                url: post_url,
+                                type: request_method,
+                                data: form_data
+                            }).done(function (response) { //
+                                var {msg, error, status, redirect, redirectUrl} = response;
+                                console.log('>>>>> Response: ', response);
+                                var gif = "";
+                                var hidein = 2000;
+                                var tempURL = window.location.origin;
+
+                                error ? gif='warning' : gif='success';
+                                status ? gif='success' : gif='warning';
+
+                                if (msg == "Escritorio pré-cadastrado com sucesso"){
+                                    reloadPage(4000);
+                                }
+                                if (msg == "Falha no cadastro, CNPJ já está cadastrado no banco"){
+                                    hidein = 3000;
+                                }
+                                if (msg == "Falha no cadastro do escritório"){
+                                    hidein = 3000;
+                                }
+                                if (msg == "Falha ao atualizar o cadastro da Empresa"){
+                                    hidein = 3000;
+                                }
+                                Swal.fire({
+                                    customClass: {
+                                        confirmButton: 'btn btn-black',
+                                    },
+                                    position: 'center',
+                                    icon: gif,
+                                    title: msg,
+                                    showConfirmButton: true,
+                                    timer: hidein
+                                })
+                            });
+
+                            const redirectURL = async (url, time) => {
+                                setTimeout(function () {
+                                    window.location.replace(url);
+                                }, time)
+                            }
+
+                            const reloadPage = async (time) => {
+                                setTimeout(function () {
+                                    window.location.reload();
+                                }, time)
+                            }
+
+            }
+
+
+            $("#formulario_cadastro_pf").submit(function (e) {
+                e.preventDefault();
+                //$(this) == $(e.currentTarget)
+                enviarFormulario($(this));
+            });
+
+            $("#formulario_cadastro_pj").submit(function (e) {
+                e.preventDefault();
+                enviarFormulario($(this));
+            });
+
+
+            
+        })
+    </script>
+
+    <script>
+        var TxtRotate = function (el, toRotate, period) {
+            this.toRotate = toRotate;
+            this.el = el;
+            this.loopNum = 0;
+            this.period = parseInt(period, 10) || 2000;
+            this.txt = '';
+            this.tick();
+            this.isDeleting = false;
+        };
+
+        TxtRotate.prototype.tick = function () {
+            var i = this.loopNum % this.toRotate.length;
+            var fullTxt = this.toRotate[i];
+
+            if (this.isDeleting) {
+                this.txt = fullTxt.substring(0, this.txt.length - 1);
+            } else {
+                this.txt = fullTxt.substring(0, this.txt.length + 1);
+            }
+
+            this.el.innerHTML = '<span class="wrap">' + this.txt + '</span>';
+
+            var that = this;
+            var delta = 300 - Math.random() * 100;
+
+            if (this.isDeleting) {
+                delta /= 2;
+            }
+
+            if (!this.isDeleting && this.txt === fullTxt) {
+                delta = this.period;
+                this.isDeleting = true;
+            } else if (this.isDeleting && this.txt === '') {
+                this.isDeleting = false;
+                this.loopNum++;
+                delta = 500;
+            }
+
+            setTimeout(function () {
+                that.tick();
+            }, delta);
+        };
+
+        window.onload = function () {
+            var elements = document.getElementsByClassName('txt-rotate');
+            for (var i = 0; i < elements.length; i++) {
+                var toRotate = elements[i].getAttribute('data-rotate');
+                var period = elements[i].getAttribute('data-period');
+                if (toRotate) {
+                    new TxtRotate(elements[i], JSON.parse(toRotate), period);
+                }
+            }
+            // INJECT CSS
+            var css = document.createElement("style");
+            css.type = "text/css";
+            css.innerHTML = ".txt-rotate > .wrap { border-right: 0.08em solid #666 }";
+            document.body.appendChild(css);
+        };
+    </script>
+
+    <script>
+    
+        function CPF(){"user_strict";function r(r){for(var t=null,n=0;9>n;++n)t+=r.toString().charAt(n)*(10-n);var i=t%11;return i=2>i?0:11-i}function t(r){for(var t=null,n=0;10>n;++n)t+=r.toString().charAt(n)*(11-n);var i=t%11;return i=2>i?0:11-i}var n="CPF Inválido",i="CPF Válido";this.gera=function(){for(var n="",i=0;9>i;++i)n+=Math.floor(9*Math.random())+"";var o=r(n),a=n+"-"+o+t(n+""+o);return a},this.valida=function(o){for(var a=o.replace(/\D/g,""),u=a.substring(0,9),f=a.substring(9,11),v=0;10>v;v++)if(""+u+f==""+v+v+v+v+v+v+v+v+v+v+v)return n;var c=r(u),e=t(u+""+c);return f.toString()===c.toString()+e.toString()?i:n}}
+
+        var CPF = new CPF();
+
+        $("#cpf").keypress(function(){
+            $(this).css("background", "#fff");
+        });
+
+        /* $("#cpf").blur(function(){
+            if(CPF.valida($(this).val()) == "CPF Inválido"){
+                $(this).val("")
+                $(this).css("background", "#fff898");
+                $(this).attr("placeholder", "Insira um CPF válido.")
+            } 
+        }); */
+
+    </script>
+
+    <script>
+        $('.form_pj').hide();
+
+        $('.btn_pf').click(function(e) {
+            e.preventDefault();
+            $(this).addClass('active');
+            $('.btn_pj').removeClass('active');
+            $('.form_pf').show();
+            $('.form_pj').hide();
+        });
+
+        $('.btn_pj').click(function(e) {
+            e.preventDefault();
+            $(this).addClass('active');
+            $('.btn_pf').removeClass('active');
+            $('.form_pj').show();
+            $('.form_pf').hide();
+        });
+    </script>
+</body>
+
+</html>

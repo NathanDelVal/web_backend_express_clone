@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="../images/icon/apple-icon-mezzomo.png">
+    <link rel="icon" type="image/png" href="../images/icon/favicon_mezzomo3.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>
+        Robotax: Chamados de Suporte
+    </title>
+    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css"
+        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <!-- CSS Files -->
+    <link href="../assets/css/material-dashboard.min.css?v=2.1.2" rel="stylesheet" />
+    <!--local CSS -->
+    <link rel="stylesheet" type="text/css" href="../local/clientes.css">
+    <script src="../assets/js/core/jquery-3.5.1.js"></script>
+</head>
+
+<body class="">
+    <div class="wrapper">
+        <!-- Navbar -->
+        <div class="sidebar" data-color="yellow" data-background-color="black"
+            data-image="../assets/img/contabeisbw.jpg">
+            <!--
+        Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
+
+        Tip 2: you can also add an image using data-image tag
+    -->
+            <div class="sidebar-wrapper">
+                <ul class="nav">
+                    <!--CARD NO SIDE BAR - LOGO DO USÚARIO E NOME -->
+
+                    {{> escritorio/navbar_suporte}}
+
+                    <li class="nav-item ">
+                        <a class="nav-link" href="/suporte/sair">
+                            <i class="material-icons">exit_to_app</i>
+                            <p>Sair</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--MAIN PANEL-->
+        <div class="main-panel">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+                <div class="container-fluid">
+                    <div class="navbar-wrapper">
+                        <div class="navbar-minimize">
+                            <button id="minimizeSidebar" class="btn btn-just-icon btn-white btn-fab btn-round">
+                                <i class="material-icons text_align-center visible-on-sidebar-regular">more_vert</i>
+                                <i class="material-icons design_bullet-list-67 visible-on-sidebar-mini">view_list</i>
+                            </button>
+                        </div>
+                        <a class="navbar-brand" href="/suporte/suporte-chamados">Chamados Suporte</a>
+                    </div>
+
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="navbar-toggler-icon icon-bar"></span>
+                        <span class="navbar-toggler-icon icon-bar"></span>
+                        <span class="navbar-toggler-icon icon-bar"></span>
+                    </button>
+                </div>
+            </nav>
+            <!-- End Navbar -->
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header card-header-info2">
+                                    <h4 class="card-title">Fila de Chamados</h4>
+                                    <p class="card-category">----</p>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <div class="table-responsive box drag">
+                                                <table id="tableChamadosSuporte"
+                                                    class="table display table-striped table-no-bordered table-hover"
+                                                    cellspacing="0" width="100%" style="width:100%">
+                                                    <thead>
+                                                        <tr class="table-header">
+                                                            <th>ID</th>
+                                                            <th>Número do Chamado</th>
+                                                            <th>Assunto</th>
+                                                            <th>Tipo</th>
+                                                            <th>Descrição</th>
+                                                            <th>Status</th>
+                                                            <th>Resposta</th>
+                                                            <th>Usuário</th>
+                                                            <th>Email</th>
+                                                            <th>Prioridade</th>
+                                                            <th>Inserido</th>
+                                                            <th>Ações</th>
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--FOOTER-->
+            {{> escritorio/footer_internal}}
+
+        </div>
+        <!--MAIN PANEL_X-->
+
+    </div>
+
+    <!--Correção do Violation Scroll non-passive event-->
+    <script src=" ../local/plugins/fix-non-passive.js"></script>
+    <!--   Core JS Files   -->
+    <script src="../assets/js/core/popper.min.js"></script>
+    <script src="../assets/js/core/bootstrap-material-design.js"></script>
+    <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+    <!-- Plugin for the momentJs  -->
+    <script src="../assets/js/plugins/moment.min.js"></script>
+    <!-- Plugin for the momentJs TRADUÇÕES LOCAIS  -->
+    <script src="../assets/js/plugins/moment-with-locales.js"></script>
+    <!--  Plugin for Sweet Alert -->
+    <script src="../assets/js/plugins/sweetalert2.js"></script>
+    <!-- Forms Validations Plugin -->
+    <script src="../assets/js/plugins/jquery.validate.min.js"></script>
+    <!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
+    <script src="../assets/js/plugins/jquery.bootstrap-wizard.js"></script>
+    <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+    <script src="../assets/js/plugins/bootstrap-selectpicker.js"></script>
+    <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+    <script src="../assets/js/plugins/bootstrap-datetimepicker.min.js"></script>
+    <!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
+    <script src="../assets/js/plugins/jquery.dataTables.min.js"></script>
+    <!--SORTING DATE EU-->
+    <script src="https://cdn.datatables.net/plug-ins/1.10.12/sorting/date-eu.js"></script>
+    <!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
+    <script src="../assets/js/plugins/bootstrap-tagsinput.js"></script>
+    <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+    <script src="../assets/js/plugins/jasny-bootstrap.min.js"></script>
+    <!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
+    <script src="../assets/js/plugins/fullcalendar.min.js"></script>
+    <!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
+    <script src="../assets/js/plugins/jquery-jvectormap.js"></script>
+    <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+    <script src="../assets/js/plugins/nouislider.min.js"></script>
+    <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+    <!-- Library for adding dinamically elements -->
+    <script src="../assets/js/plugins/arrive.min.js"></script>
+    <!-- Chartist JS -->
+    <script src="../assets/js/plugins/chartist.min.js"></script>
+    <!--  Notifications Plugin    -->
+    <script src="../assets/js/plugins/bootstrap-notify.js"></script>
+
+    <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="../assets/js/material-dashboard.min.js?v=2.1.2" type="text/javascript"></script>
+
+
+    <!--LOCAL-->
+    <!--  SELECTED2 CLIPBOARD -->
+    <script src="../local/plugins/dataTables/selected2clipboard.js"></script>
+    <!--SWEET ALERT-->
+    <script src="../local/plugins/sweetalert/js/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="../local/plugins/sweetalert/css/sweetalert2.min.css" id="theme-styles">
+
+	<script src=" ../local/plugins/select2/select2.min.js"></script>
+    <!--local-->
+    <!-- AJAX JQUERY POST FORM
+  <script src="../local/metodos/post/update_modal_aprovar_itens.js"></script> -->
+    <!-- AJAX JQUERY POST UPDATE update_form_pendente MODAL  <script src="../local/metodos/post/update_input_aprovar_notas.js"></script> -->
+
+    <!--MASK FOR FORMS-->
+    <script src="../local/plugins/mask_input/jquery.maskedinput.js"></script>
+
+    <!-- HANDLE SELECT BoxeS ON TABLE
+  <script src="../assets/js/plugins/datatables_select_rows.js"></script> -->
+
+    <!-- HANDLE CheckBoxes
+  <script src="../local/metodos/post/update_aprovar_itens_selecionados.js" type="text/javascript"> </script>
+-->
+
+
+
+    <!-- HANDLE CheckBoxes
+  <script src="../local/metodos/post/update_aprovar_itens_selecionados.js" type="text/javascript"> </script>
+-->
+    <script src="../local/plugins/drag/drag.js"></script>
+
+    <!-- ACTIVE NAV-ITEM -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //ACTIVE NAV-ITEM
+            var navs = document.getElementsByClassName('nav-item');
+            for (var x = 0; x < navs.length; x++) {
+                console.log(navs[x].childNodes[1].attributes[1].nodeValue, location.pathname)
+                if (navs[x].childNodes[1].attributes[1].nodeValue == location.pathname) {
+                    var nav = navs[x];
+                    $(nav).addClass('active');
+                }
+            }
+                     
+        });
+    </script>
+
+
+
+    <script>
+        /*
+            $('#addinputuser').click(function () {
+              $('.form').append(
+                '<div class="row">' +
+                '<div class="col-md-4">' +
+                ' <h6 class="label-modal">Nome do Usuário</h6>' +
+                '<input id="mva_7_modal_multiplos" name="cliente" type="text" class="form-control" autocomplete="off" required>' +
+                '</div>' +
+
+                '<div class="col-md-8">' +
+                '<h6 class="label-modal">Email</h6>' +
+                '<input id="mva_12_linha_modal_multiplos" name="email" type="email" class="form-control" autocomplete="off" required>' +
+                '</div>' +
+                '</div>'
+              );
+            });
+            */
+    </script>
+
+
+
+    <script>
+        //____________________________________DOCUMENT READY_________________________________________
+        $(document).ready(function () {
+            //-------------------------------------------------------------------DEFINIÇPÇÕES DA TABELA
+            //AJAX QUE SOLICITA OS DADOS PARA A TABELA DE SUPORTE CHAMADOS
+            $.ajax({
+                url: 'suporte-getchamados',
+                type: 'get',
+            }).done(function (response) { //
+                var DadosChamados = JSON.parse(response.dataTableChamados)
+                if (DadosChamados.length > 0) {
+                    /* var tablenotas = tablenotas.draw(true); */
+                    $('#tableChamadosSuporte').DataTable({
+                        destroy: true, //retirar essa linha caso você nunca recarregar a tabela
+                        data: DadosChamados,
+                        createdRow: function (row, data, dataIndex) {
+                            if (data.Status == "Aberto") {
+                                $(row).addClass('ColorAlertChatSuporte');
+                            }
+                        },
+                        columns: [{
+                                data: "id_chamado"
+                            }, {
+                                data: "numerochamado"
+                            }, {
+                                data: "assunto"
+                            }, {
+                                data: "tipo"
+                            }, {
+                                data: "descricao"
+                            }, {
+                                data: "status"
+                            }, {
+                                data: "resposta"
+                            }, {
+                                data: "usuarionome"
+                            }, {
+                                data: "usuarioemail"
+                            }, {
+                                data: "prioridade"
+                            }, {
+                                data: "inserido",
+                                type: "date-eu"
+                            }, {
+                                className: "td-actions text-center",
+                                defaultContent: '<button id="btn-detalhesChamado" onclick="modal_details(this)" name="tbl_td_btn_editarlinha"' +
+                                    'type="button" rel="tooltip" class="btn btn-black">' +
+                                    '<i class="material-icons">mode_comment</i>' +
+                                    '</button>'
+                            } //AÇÕES
+
+
+                        ],
+                        columnDefs: [
+                            //{ visible: false, targets: 0 }, //ocultar ID Porém desse modo não conseguiremossalvar o id numa var posteriormente (caso necessario)
+                            {
+                                orderable: false,
+                                targets: 0
+                            }, {
+                                sClass: "hideIdTable",
+                                "aTargets": [0, 4, 6]
+                            }, //id visivelmente oculto (presente)
+                            {
+                                className: "text-center",
+                                targets: "_all"
+                            }
+                        ],
+                        order: [
+                            [5, 'asc'],
+                            [9, 'desc'],
+                            [10, 'desc']
+                        ],
+                        select: {
+							style: 'os',
+							items: 'cell',
+                        },
+                        fixedHeader: {
+                            header: false,
+                            footer: false
+                        },
+                        dom: 'Blfrtip',
+                        buttons: [{
+                            extend: 'excel',
+                            text: 'Exportar'
+                        }],
+                        pagingType: "full_numbers",
+                        lengthMenu: [
+                            [20, 50, 100, -1],
+                            [20, 50, 100, "Todos"]
+                        ],
+                        responsive: false,
+                        language: {
+                            "url": "../assets/js/plugins/dataTables.ptbr.lang",
+                            search: "_INPUT_",
+                            searchPlaceholder: "",
+                        }
+                    });
+                    /*
+                    $('#msgnenhumchamado').empty()
+                    $('#tableChamadosAbertos').removeClass('hideElement');
+                    UserChamado = response.UserName
+
+                    */
+
+                } else {
+                    /*
+                    $('#msgnenhumchamado').empty().append('<div class="col-md-12">' +
+                      '<center>' +
+                      '<h5 class="NenhumChamado"> Você Não Possui Nenhum Chamado Aberto </h5>' +
+                      '<center>' +
+                      '</div>')
+                      */
+                }
+            });
+
+            //Exibir modal_suporte
+            //$('#modal_suporte').modal('show'); //Abre o modal
+
+            //$('.Nome_PJ_Emitente').val(Nome_PJ_Emitente);
+            //$('.Data_Entrada').val(Data_Entrada);
+            //$('#marcados_alterar_data').val(rows_ids);
+            //------------------------------------------------------------------------------X
+
+            //--------------------------------------------------------------------MASK PARA FORMULÁRIOS
+            jQuery(function ($) {
+                $("#datamodal").mask("99/99/9999", {
+                    placeholder: "DD/MM/AAAA"
+                });
+            });
+
+        });
+        //_________________________________________________________________________________________x
+    </script>
+
+
+
+    <!-- MODAL CHAMADOS - SUPORTE CHAMADO ROW -->
+    <div class="modal fade" id="modal_suporte_chamado_row" tabindex="-1" role="modal-dialog"
+        aria-labelledby="ModalLabelchamadoAberto" aria-hidden="true" style="overflow: auto; display: none">
+        <div class="modal-dialog modal-lg" role="document">
+
+            <div class="modal-content">
+                <form id="AtenderChamado_form" method="post" action="/suporte/suporte-atender-chamado">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ModalLabelchamadoAberto">Detalhes do Chamado
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                <h6 id='labelChamado' class="label-modal">
+                                </h6>
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="row">
+                            <input type="hidden" id="usuarioDataName">
+                            <input type="hidden" id="inputChamado" name="numeroChamado">
+                            <div class="col-sm-4 col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <h6 class="label-modal">Status</h6>
+                                    <input id="statusInput" class="form-control" name="status" type="text" disabled>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <h6 class="label-modal">Tipo</h6>
+                                    <select id="tipo_chamado" title="SELECIONE" class="form-control  selectpicker"
+                                        data-style="btn" name="tipo" type="text" required>
+                                        <option value="Problema na página">Problema na página</option>
+                                        <option value="Tributação">Tributação</option>
+                                        <option value="Dúvidas">Dúvidas</option>
+                                        <option value="Outros">Outros</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <h6 class="label-modal">Data de abertura</h6>
+                                    <input id="abertoInput" class="form-control" name="aberto" type="text" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                <div class="form-group">
+                                    <h6 class="label-modal">Assunto</h6>
+                                    <input id="assuntoInput" name="assunto" class="form-control" type="text" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                <div class="form-group">
+                                    <h6 class="label-modal">Descrição</h6>
+                                    <textarea id="descricaoInput" name="descricao" class="form-control" type="text"
+                                        rows="4" disabled> </textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                <div class="form-group">
+                                    <h6 class="label-modal">Resposta</h6>
+                                    <textarea id="respostaInput" name="resposta" class="form-control" type="text"
+                                        rows="4"> </textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                <div class="form-group">
+                                    <h6 class="label-modal">Suporte Chat</h6>
+                                    <div id="chatArea" class="chatArea"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-sm-10 col-md-10 col-lg-10">
+                                <div>
+                                    <h6 class="label-modal">Nova Mensagem</h6>
+                                    <input id="UInewMsg" class="form-control" type="text">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-2 col-md-2 col-lg-2">
+                                <button type="button" id="btn_NovaMensagem" class="btn" style="margin-top: 20px;"
+                                    onclick="SendChat(this)">
+                                    <i class="material-icons ">send</i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="btn_hideModalChamadoAberto" type="button" class="btn"
+                            data-dismiss="modal">Fechar</button>
+                        <button id="btn_EnviarResposta" type="button" class="btn">Enviar Resposta</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- MODAL CHAMADOS - SUPORTE CHAMADO ROW- FIM-->
+
+
+    <script>
+        function RowToBottom() {
+            $("#chatArea").animate({
+                scrollTop: $(
+                    '#chatArea').get(0).scrollHeight
+            }, 1000);
+        };
+    </script>
+
+    <script>
+        $('#AtenderChamado_form').on('keyup', function (e) {
+            var keyCode = e.keyCode || e.which;
+            if (keyCode === 13) {
+                e.preventDefault();
+                return false;
+            } else if (keyCode != 13) {}
+        });
+
+
+
+        $("#btn_EnviarResposta").click(function (e) {
+            e.preventDefault();
+
+            var form = $("#AtenderChamado_form")
+            var post_url = $(form).attr("action");
+            var request_method = $(form).attr("method");
+            var form_data = $(form).serialize();
+
+            $.ajax({
+                url: post_url,
+                type: request_method,
+                data: form_data
+            }).done(function (response) {
+                if (response) {
+                    var gif = "";
+                    if (response == "Chamado respondido!") {
+                        $('#ModalConfirmacaoCloseChamado').modal('hide');
+                        gif = "success";
+                    } else {
+                        response = 'Chamado não respondido!'
+                        gif = "warning";
+                    }
+                    Swal.fire({
+                        position: 'center',
+                        icon: gif,
+                        title: response,
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                }
+            });
+
+
+        })
+
+        /*
+    
+            $("#AtenderChamado_form").submit(function (e) {
+              e.preventDefault(); //prevent default action
+              var post_url = $(this).attr("action");
+              var request_method = $(this).attr("method");
+              var form_data = $(this).serialize();
+              console.log("ajax pass")
+              $.ajax({
+                url: post_url,
+                type: request_method,
+                data: form_data
+              }).done(function (response) {
+                if (response) {
+                  var gif = "";
+                  if (response == "Chamado respondido!") {
+                    $('#ModalConfirmacaoCloseChamado').modal('hide');
+                    gif = "success";
+                  } else {
+                    response = 'Chamado não respondido!'
+                    gif = "warning";
+                  }
+                  Swal.fire({
+                    position: 'center',
+                    icon: gif,
+                    title: response,
+                    showConfirmButton: false,
+                    timer: 2000
+                  });
+                }
+              });
+    
+            });
+              */
+    </script>
+
+    <script src="../local/plugins/socketio/socket.io.js"></script>
+
+
+    <!--_____________________SOCKET______________________-->
+
+    <!--SOCKET CONNECT & TOPICOS-->
+    <script>
+        const socket = io.connect();
+
+        socket.on("ClientChannel", function (msg) {});
+    </script>
+    <!--SOCKET DYNAMICO-->
+    <script>
+        var canaisAbertos = [];
+
+        function OuvinteSocket(chamadoHASH) {
+            //LISTENING SERVER MSGs BY USER CH
+            if (chamadoHASH) {
+                if (canaisAbertos.includes(chamadoHASH) == false) {
+                    //console.log("A brindo ouvinte socket ", chamadoHASH)
+                    socket.on(chamadoHASH, function (msgSocket) {
+                        //console.log("msg socket ====", msgSocket)
+                        if (msgSocket) {
+                            LoadChat(msgSocket)
+                        }
+                    })
+                    canaisAbertos.push(chamadoHASH)
+                } else {
+                    //console.log("Já abri esse socket uma vez.")
+                }
+            } else {}
+        }
+    </script>
+    <!--_________________________________________________-->
+
+
+    <!--____________________VARIÁVEIS____________________-->
+    <script>
+        var UserChamado;
+        var ChatAtual;
+        var emailData;
+    </script>
+    <!--_________________________________________________-->
+
+    <script>
+        var numeroChamado = '';
+        var assunto = '';
+        var tipo = '';
+        var descricao = '';
+        var status = '';
+        var usuarioData = '';
+        var emailData = '';
+        var aberto = '';
+
+        //Exibir modal detalhes do chamado aberto
+        function modal_details(rowN) {
+            var linha = rowN.parentNode.parentNode
+            //console.log("linha ==============", linha)
+            numeroChamado = $(linha)[0].children[1].textContent
+            assunto = $(linha)[0].children[2].textContent
+            tipo = $(linha)[0].children[3].textContent
+            descricao = $(linha)[0].children[4].textContent
+            status = $(linha)[0].children[5].textContent
+            usuarioData = $(linha)[0].children[7].textContent
+            emailData = $(linha)[0].children[8].textContent
+            aberto = $(linha)[0].children[10].textContent
+
+            $('#labelChamado').text(numeroChamado);
+            $('#inputChamado').val(numeroChamado);
+            $('#statusInput').val(status);
+            $('#assuntoInput').val(assunto);
+            $('#descricaoInput').val(descricao);
+            $('#tipo_chamado').val(tipo).change();
+            $('#usuarioDataName').val(usuarioData);
+            $('#abertoInput').val(aberto);
+
+            OuvinteSocket(numeroChamado);
+
+            //AJAX QUE SOLICITA OS DADOS DO CHAMADO ATUAL
+            $.ajax({
+                url: '/suporte/suporte-getchat',
+                type: 'post',
+                data: {
+                    usuario: usuarioData,
+                    chamado: numeroChamado,
+                    email: emailData
+                }
+            }).done(function (response) { //
+                //console.log("chegou no response ==============", response)
+                if (response.SupportChat) {
+                    $('#modal_suporte_chamado_row').modal('show'); //Abre o modal novoChamado
+                    ChatAtual = response.SupportChat
+                    LoadChat(ChatAtual);
+                } else {
+                    $('#modal_suporte_chamado_row').modal('show'); //Abre o modal novoChamado
+                    ChatAtual = []
+                    LoadChat(ChatAtual);
+                }
+            });
+
+        }
+
+
+        $(document).ready(function () {
+
+
+            //Exibir modal novoChamado
+            $('#btn-novoChamado').on('click', function () {
+                $('#modal_suporte').modal('hide'); //Oculta o modal modal_suporte
+                $('#modal_suporte_novoChamado').modal('show'); //Abre o modal novoChamado
+            });
+            //-------------------------------MODAL HIDE
+            function modal_suporte_hide() {
+                $('#modal_suporte').modal('hide')
+            }
+        });
+
+        //$('#btn_teste').on('click', function () {
+        //  socket.emit("TextChat", "testando");
+        //socket.broadcast.emit("bbragap@gmail.com", "testando")
+        //})
+
+
+
+        function SendChat(button) {
+            var msg = document.getElementById('UInewMsg').value
+            /*
+                var numeroChamado = $(linha)[0].children[1].textContent
+                      var assunto = $(linha)[0].children[2].textContent
+                      var tipo = $(linha)[0].children[3].textContent
+                      var descricao = $(linha)[0].children[4].textContent
+                      var status = $(linha)[0].children[5].textContent
+                      var usuarioData = $(linha)[0].children[7].textContent
+                      var emailData = $(linha)[0].children[8].textContent
+                      var aberto = $(linha)[0].children[10].textContent
+      
+                */
+
+            if (msg && numeroChamado && emailData) {
+
+                var socketMsg = {
+                    "chamado": numeroChamado,
+                    "msg": msg,
+                    "emailusuario": emailData,
+                    "from": 'supportChatMsg'
+                }
+                socket.emit("ServerChannel", socketMsg)
+
+                // ChatAtual.push(newMsg)
+
+                //Apagando Input
+                $('#UInewMsg').val('')
+
+                /*
+        LoadChat(ChatAtual);
+  
+        $.ajax({
+          url: '/suporte/suporte-postchatchamados',
+          type: 'POST',
+          data: socketMsg
+        }).done(function (response) {
+          //$("#server-results").html(response);
+        });
+        */
+            }
+
+        }
+        //----------------------------------------------------------------------------------------x
+
+        function LoadChat(ChatAtualMSG) {
+            if (ChatAtualMSG) {
+                if (Array.isArray(ChatAtualMSG)) {
+                    document.getElementById('chatArea').textContent = "";
+                    var chats = [];
+                    var str = '';
+                    ChatAtualMSG.forEach(ChatAtualMSG => str += '<br><div class="' + ChatAtualMSG.from + '">' +
+                        ChatAtualMSG.msg + '</div>')
+                    chats.push(str)
+                    document.getElementById('chatArea').textContent = chats.join('<hr>');
+                    RowToBottom();
+                } else if (!Array.isArray(ChatAtualMSG)) {
+                    var str = ('<br><div class="' + ChatAtualMSG.from + '">' + ChatAtualMSG.msg + '</div>');
+                    // $('#chatArea').append(str);
+                    document.getElementById('chatArea').insertAdjacentHTML('beforeend', str);
+                    RowToBottom();
+                }
+            }
+        }
+    </script>
+
+    <script>
+        $("#UInewMsg").keyup(function (event) {
+            if (event.which === 13) {
+                $("#btn_NovaMensagem").click();
+            }
+        });
+    </script>
+
+</body>
+
+</html>

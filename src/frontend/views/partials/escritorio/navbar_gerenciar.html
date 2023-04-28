@@ -1,0 +1,76 @@
+<li>
+    <br>
+    <div class="card-profile">
+        <!--<div class="card-avatar">
+            <img class="img" src="../images/logoMezzomo2_white.png" />
+        </div> -->
+        <img class="img nav-img" src="../images/logo-black-fixed-yellow.svg" />
+        <h3 class="title-nav">{{escritorio}}</h3>
+        <br>
+    </div>
+</li>
+
+{{#ifCond suporte '==' NULL}} {{#ifCond administrador '==' "SIM"}}
+<li class="nav-item">
+    <a class="nav-link" href="/gerenciar/consumo">
+        <i class="material-icons">speed</i>
+        <p>Consumo</p>
+    </a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="/gerenciar/usuarios">
+        <i class="material-icons">supervisor_account</i>
+        <p>Usuários</p>
+    </a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="/gerenciar/clientes">
+        <i class="material-icons">work</i>
+        <p>Clientes</p>
+    </a>
+</li>
+<!--
+<li class="nav-item">
+    <a class="nav-link" href="/gerenciar/pendencias">
+        <i class="material-icons">pending_actions</i>
+        <p>Conflitos</p>
+    </a>
+</li>
+-->
+{{/ifCond}} {{#ifCond root '==' "SIM"}}
+<li class="nav-item ">
+    <a class="nav-link" href="/gerenciar/aprovar-itens">
+        <i class="material-icons">playlist_add_check</i>
+        <p>Aprovar Itens</p>
+    </a>
+</li>
+<li class="nav-item ">
+    <a class="nav-link" href="/gerenciar/corrigir-aprovados">
+        <i class="material-icons">edit_note</i>
+        <p>Corrigir Aprovados</p>
+    </a>
+</li>
+<li class="nav-item ">
+    <a class="nav-link" href="/gerenciar/classificar-itens">
+        <i class="material-icons">label</i>
+        <p>Classificar Itens</p>
+    </a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="/#">
+        <i class="material-icons">build</i>
+        <p>Regras</p>
+    </a>
+    <!--href="/gerenciar/alterar-regras"-->
+</li>
+{{/ifCond}} {{/ifCond}}
+
+
+<!--
+<li class="nav-item ">
+    <a class="nav-link" href="../sair">
+        <i class="material-icons">exit_to_app</i>
+        <p>Sair</p>
+    </a>
+</li>
+-->

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<!--HEADER-->
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="../images/icon/apple-icon-mezzomo.png">
+    <link rel="icon" type="image/png" href="../images/icon/favicon_mezzomo3.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>
+        Robotax: Enviar Notas
+    </title>
+    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+    <!--Fonts and icons-->
+    <link rel="stylesheet" type="text/css"
+        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <!-- CSS Files -->
+    <link href="../assets/css/material-dashboard.min.css?v=2.1.2" rel="stylesheet" />
+
+    <!--DROPZONE CSS  -->
+    <link href="../local/plugins/dropzone/css/dropzone.css" rel="stylesheet">
+    <link href="../local/plugins/dropzone/css/style.css" rel="stylesheet">
+
+
+    <!--local CSS -->
+    <link rel="stylesheet" type="text/css" href="../local/enviar-notas-style.css">
+
+    <script src="../assets/js/core/jquery-3.5.1.js"></script>
+</head>
+
+<body class="">
+    <div class="wrapper ">
+        <!-- SIDEBAR -->
+        <div class="sidebar" data-color="yellow" data-background-color="black"
+            data-image="../assets/img/contabeisbw.jpg">
+            <!--Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger" Tip 2: you can also add an image using data-image tag    -->
+            <div class="sidebar-wrapper">
+                <ul class="nav">
+                    <!--CARD NO SIDE BAR - LOGO DO USÚARIO E NOME -->
+
+                    {{> escritorio/navbar}}
+
+                </ul>
+            </div>
+        </div>
+
+        <!-- Plugin for the momentJs  -->
+        <script src="../assets/js/plugins/moment.min.js"></script>
+        <!-- Plugin for the momentJs TRADUÇÕES LOCAIS  -->
+        <script src="../assets/js/plugins/moment-with-locales.js"></script>
+
+        <!-- MAIN PANEL -->
+        <div class="main-panel">
+            <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute sticky-top">
+                {{> escritorio/testegratis}}
+            </nav>
+            <!-- NAVBAR -->
+            <nav class="navbar navbar-expand-lg navbar-transparent">
+                <div class="container-fluid">
+                    <div class="navbar-wrapper">
+                        <div class="navbar-minimize">
+                            <button id="minimizeSidebar" class="btn btn-just-icon btn-white btn-fab btn-round">
+                                <i class="material-icons text_align-center visible-on-sidebar-regular">more_vert</i>
+                                <i class="material-icons design_bullet-list-67 visible-on-sidebar-mini">view_list</i>
+                            </button>
+                        </div>
+                        <a class="navbar-brand" style="text-shadow: 0 2px 5px rgb(33 33 33 / 50%);"
+                            href="/antecipados/enviar-notas">Enviar Notas</a>
+                    </div>
+
+
+                    {{> escritorio/menu_apps_back}} {{> escritorio/help_btn}}
+
+
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="navbar-toggler-icon icon-bar"></span>
+                        <span class="navbar-toggler-icon icon-bar"></span>
+                        <span class="navbar-toggler-icon icon-bar"></span>
+                    </button>
+                </div>
+            </nav>
+
+            <!-- End Navbar -->
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header card-header-info2">
+                                    <h4 class="card-title">Enviar XML</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div id="meudropzone hideElement" class="o">
+                                                <form action="/notas/upload-notas"
+                                                    class="dropzone files-container">
+                                                    <div class="fallback">
+
+                                                        <input id="dz_input" name="file" type="file" class="hideElement"
+                                                            multiple />
+                                                    </div>
+                                                </form>
+
+                                                <span>Apenas arquivos XML são suportados.</span>
+                                                <span>O tamanho máximo aceito 25MB.</span>
+                                                <div class="preview-container dz-preview uploaded-files">
+                                                    <div id="previews">
+                                                        <div id="onyx-dropzone-template">
+                                                            <div class="onyx-dropzone-info">
+                                                                <div class="thumb-container">
+                                                                    <img data-dz-thumbnail />
+                                                                </div>
+                                                                <div class="details">
+                                                                    <div>
+                                                                        <span data-dz-name></span> <span
+                                                                            data-dz-size></span>
+                                                                    </div>
+                                                                    <div class="dz-progress"><span class="dz-upload"
+                                                                            data-dz-uploadprogress></span></div>
+                                                                    <div class="dz-error-message"><span
+                                                                            data-dz-errormessage></span></div>
+                                                                    <div class="actions">
+                                                                        <a href="#!" data-dz-remove><i
+                                                                                class="fa fa-times"></i></a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        <div id="actions" class="row justify-content-center">
+                                            <button id="fileinput-button"
+                                                class="col-lg-3 btn btn-black fileinput-button">
+                                                <i class="glyphicon glyphicon-plus"></i>
+                                                <span>Adicionar Xml</span>
+                                            </button>
+                                            <button id="start" class=" col-lg-3 btn btn-black start">
+                                                <i class="glyphicon glyphicon-upload"></i>
+                                                <span>Enviar Todos</span>
+                                            </button>
+                                            <button id="cancel" type="reset" class=" col-lg-3 btn btn-black cancel">
+                                                <i class="glyphicon glyphicon-ban-circle"></i>
+                                                <span>Cancelar</span>
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--FOOTER-->
+            {{> escritorio/footer_internal}}
+
+        </div>
+    </div>
+
+    	<!--Correção do Violation Scroll non-passive event-->
+	<script src=" ../local/plugins/fix-non-passive.js"></script>
+    <!--   Core JS Files   -->
+    <script src="../assets/js/core/popper.min.js"></script>
+    <script src="../assets/js/core/bootstrap-material-design.js"></script>
+    <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+    <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+    <script src="../assets/js/plugins/bootstrap-selectpicker.js"></script>
+    <!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
+    <script src="../assets/js/plugins/bootstrap-tagsinput.js"></script>
+    <!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
+    <script src="../assets/js/plugins/jquery.dataTables.min.js"></script>
+    <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+    <!-- Library for adding dinamically elements -->
+    <script src="../assets/js/plugins/arrive.min.js"></script>
+    <!--  Notifications Plugin    -->
+    <script src="../assets/js/plugins/bootstrap-notify.js"></script>
+    <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="../assets/js/material-dashboard.min.js?v=2.1.2" type="text/javascript"></script>
+
+    <!--SWEET ALERT-->
+    <!--LOCAL-->
+    <script src="../local/plugins/sweetalert/js/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="../local/plugins/sweetalert/css/sweetalert2.min.css" id="theme-styles">
+
+
+    <script src="../local/plugins/dropzone/dropzone.min.js"></script>
+
+    <script src="../local/plugins/dropzone/dropzoneinit.js"></script>
+
+    <script>
+        Dropzone.autoDiscover = false;
+    </script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //ACTIVE NAV-ITEM
+            var navs = document.getElementsByClassName('nav-item');
+            for (var x = 0; x < navs.length; x++) {
+                if (navs[x].childNodes[1].attributes[1].nodeValue == location.pathname) {
+                    var nav = navs[x]
+                    $(nav).addClass('active')
+                }
+            }
+        });
+    </script>
+
+
+
+
+    <!--DRAG AND DROP - DROPZONE <script src="../local/plugins/dropzone/js/dropzone.min.js"></script>
+  <script src="../local/plugins/dropzoneOriginal/dropzone.js"></script>
+-->
+    <!--ONXY SCRIPT DROPZONE-->
+
+    <script>
+        function showErros(resp) {
+            //console.log("response from dropzoneinit: ", response)
+            var response = resp
+
+
+            //var saida = response.replace("COD1", "Nota Obsoleta");
+            //var saida2 = saida.replace("COD2", "Não é NFe");
+            //var saida3 = saida2.replace("COD3", "Nota enviada anteriormente");
+            //var saida4 = saida3.replace("COD4", "Nota inválida");
+
+            var erros = response.map(function (t, i) {
+                var str = t
+                var mapObj = {
+                    COD1: "<h5>Nota Obsoleta: </h5>",
+                    COD2: "<h5>Não é NFe: </h5>",
+                    COD4: "<h5>Nota enviada anteriormente: </h5>",
+                    COD4: "<h5>Nota inválida: </h5>"
+                };
+                str = str.replace(/COD1|COD2|COD3|COD4/gi, function (matched) {
+                    return mapObj[matched];
+                });
+                return '<h4>' + ((i + 1) || 'Erro') + ':</h4> ' + str
+            })
+
+            document.getElementById('notaserror').innerHTML =
+                '<li>' + erros.join('</li><li>') + '</li>'
+        }
+    </script>
+
+
+
+    <script>
+        /*
+                                                                                        function feeedbacknota() {
+
+                                                                                          var x = document.getElementsByClassName("data-dz-name").text()
+                                                                                          console.log("VAR X", x)
+
+
+                                                                                          $.ajax({
+                                                                                            async: "false",
+                                                                                            url: "/antecipados/statusnotapy",
+                                                                                            type: "get",
+                                                                                            data: {
+                                                                                              nomenota: "Mmo!15150313017518-procNFe.xml",
+                                                                                              algumacoisa: "isso"
+                                                                                            }
+                                                                                            //data: form_data
+                                                                                          }).done(function (response) { //
+                                                                                            //A RESPOSTA CHEGOU COM SUCESSO
+                                                                                            //chartUltimaSemana(response)
+                                                                                            console.log("AJX: ", response)
+                                                                                            if (response == "Mezzomo!15150313017518000180550010000050611760543415-procNFe.xml") {
+                                                                                              alert("Xml versão obsoleta, não poderá ser processado")
+                                                                                              alert(response)
+                                                                                            }
+
+                                                                                          });
+                                                                                        }
+
+                                                                                        window.setInterval(function () {
+                                                                                          feeedbacknota();
+                                                                                        }, 2000)
+
+                                                                                    */
+    </script>
+
+    {{> escritorio/modal_chamados}} {{> escritorio/modal_adquirir}}
+
+</body>
+
+</html>

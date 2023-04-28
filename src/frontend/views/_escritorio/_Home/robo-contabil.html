@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="../images/icon/apple-icon-mezzomo.png">
+    <link rel="icon" type="image/png" href="../images/icon/favicon_mezzomo3.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>
+        Robotax: Robô Contábil
+    </title>
+    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+
+    <!--Custom CSS styles-->
+    <link rel="stylesheet" type="text/css" href="../local/stylerobo-contabil.css">
+    <!--Custom CSS styles-->
+    <link rel="stylesheet" type="text/css" href="../assets/css/material-dashboard.min.css">
+    <!--SWEET ALERT-->
+    <link rel="stylesheet" href="../local/plugins/sweetalert/css/sweetalert2.min.css" id="theme-styles">
+    <link rel="stylesheet" href="../local/plugins/multiselect/bootstrap-multiselect.css" type="text/css" />
+</head>
+
+<body class="off-canvas-sidebar header-filter" filter-color="yellow" style="overflow-y: auto;">
+
+    <div class="text-right">
+        {{> escritorio/help_btn}}
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-transparent stick-top text-white">
+        <div class="container-fluid">
+				<a href="/">
+					<div class="row align-items-center">
+                        <div class="container">
+						<img src="../images/logo-black-fixed-yellow.svg" style="height: 6rem; z-index:2">
+                        <h3 class="nav-robo">Robô Contábil</h3>
+                        </div>
+					</div>
+				</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="navbar-toggler-icon icon-bar"></span>
+
+                <span class="navbar-toggler-icon icon-bar"></span>
+                <span class="navbar-toggler-icon icon-bar"></span>
+            </button> {{> escritorio/menu_apps_back}} 
+        </div>
+    </nav>
+    <div class="container container-80">
+
+        <!--ROW 4 CARDS-->
+        <div class="row">
+            <div class="col-lg-12 header-robo" style="z-index: 2;">
+                <h2>Monitor de Processamento</h2>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6" style="z-index: 3!important;">
+                <div class="card card-stats">
+                    <div class="card-header card-header-black card-header-icon">
+                        <div class="card-icon">
+                            <img id="antecipados_loading" src="../images/loading.svg"></img>
+                            <h4 id="antecipados_valor"></h4>
+                        </div>
+                        <p class="card-category">Atualizados no ERP</p>
+                        <h3 class="card-title">Antecipados</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6" style="z-index: 3!important;">
+                <div class="card card-stats">
+                    <div class="card-header card-header-black card-header-icon">
+                        <div class="card-icon">
+                            <img id="icms_loading" src="../images/loading.svg"></img>
+                            <h4 id="icms_valor"></h4>
+                        </div>
+                        <p class="card-category">Atualizados no ERP</p>
+                        <h3 class="card-title">ICMS</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6" style="z-index: 3!important;">
+                <div class="card card-stats">
+                    <div class="card-header card-header-black card-header-icon">
+                        <div class="card-icon">
+                            <img id="piscofins_loading" src="../images/loading.svg"></img>
+                            <h4 id="piscofins_valor"></h4>
+                        </div>
+                        <p class="card-category">Atualizados no ERP</p>
+                        <h3 class="card-title">PIS/COFINS</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6" style="z-index: 3!important;">
+                <div class="card card-stats">
+                    <div class="card-header card-header-black card-header-icon">
+                        <div class="card-icon">
+                            <img id="erro_loading" src="../images/loading.svg"></img>
+                            <h4 id="erro_valor"></h4>
+                        </div>
+                        <p class="card-category">Erros de atualização</p>
+                        <h3 class="card-title">Erros</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--FIM ROW 4 CARDS-->
+    </div>
+
+    <div class="container text-right"  style="z-index: 4!important; position: relative!important;">
+        <select name='mes' class="multiselect btn" id="examplemultiple" multiple="multiple">
+            <option value="1">Janeiro</option>
+            <option value="2">Fevereiro</option>
+            <option value="3">Março</option>
+            <option value="4">Abril</option>
+            <option value="5">Maio</option>
+            <option value="6">Junho</option>
+            <option value="7">Julho</option>
+            <option value="8">Agosto</option>
+            <option value="9">Setembro</option>
+            <option value="10">Outubro</option>
+            <option value="11">Novembro</option>
+            <option value="12">Dezembro</option>
+        </select>
+    </div>
+
+    <div class="container container-80">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card" style="z-index: 3!important;">
+                    <div class="card-header card-header-yellow">
+                        <h4 class="card-title">Notas Atualizadas</h4>
+                        <p class="card-category">Listagem das notas fiscais atualizadas em seu ERP</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                <div class="table-responsive box drag">
+                                    <table id="tabela-robo-contabil-notas" class="table display table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                                        <thead>
+                                            <tr class="table-header">
+                                                <th>ID</th>
+                                                <th class="text-center">Chave de Acesso</th>
+                                                <th class="text-center">Número</th>
+                                                <th class="text-center">Emitente</th>
+                                                <th class="text-center">Cliente</th>
+                                                <th class="text-center">Total Itens</th>
+                                                <th class="text-center">Data Atualização</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="#row_tableproduto" class="row hideElement">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-yellow">
+                        <h4 class="card-title">Produtos Atualizados</h4>
+                        <p class="card-category">Atualização dos impostos dos produtos em seu ERP</p>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="table-responsive box drag">
+                            <table id="tabela-robo-contabil-produtos" class="table display table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                                <thead>
+                                    <th>ID</th>
+                                    <th class="text-center">Cliente NF</th>
+                                    <th class="text-center">Total Itens</th>
+                                    <th class="text-center">ERP</th>
+                                    <th class="text-center">Tipo de Sincronização</th>
+                                    <th class="text-center">Data Atualização</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+<!--Correção do Violation Scroll non-passive event-->
+<script src=" ../local/plugins/fix-non-passive.js"></script>
+<!--   Core JS Files   -->
+<script src="../assets/js/core/jquery-3.5.1.js"></script>
+<script src="../assets/js/core/popper.min.js"></script>
+<script src="../assets/js/core/bootstrap-material-design.js"></script>
+<script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+<!-- Plugin for the momentJs-->
+<script src="../assets/js/plugins/moment.min.js"></script>
+<!-- Plugin for the momentJs TRADUÇÕES LOCAIS-->
+<script src="../assets/js/plugins/moment-with-locales.js"></script>
+<!--  Plugin for Sweet Alert -->
+<script src="../assets/js/plugins/sweetalert2.js"></script>
+<!-- Forms Validations Plugin -->
+<script src="../assets/js/plugins/jquery.validate.min.js"></script>
+<!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
+<script src="../assets/js/plugins/jquery.bootstrap-wizard.js"></script>
+<!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+<script src="../assets/js/plugins/bootstrap-selectpicker.js"></script>
+<!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+<script src="../assets/js/plugins/bootstrap-datetimepicker.min.js"></script>
+<!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
+<script src="../assets/js/plugins/bootstrap-tagsinput.js"></script>
+<!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+<script src="../assets/js/plugins/jasny-bootstrap.min.js"></script>
+<!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
+<script src="../assets/js/plugins/fullcalendar.min.js"></script>
+<!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
+<script src="../assets/js/plugins/jquery-jvectormap.js"></script>
+<!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+<script src="../assets/js/plugins/nouislider.min.js"></script>
+<!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+<!-- Library for adding dinamically elements -->
+<script src="../assets/js/plugins/arrive.min.js"></script>
+<!-- Chartist JS -->
+<script src="../assets/js/plugins/chartist.min.js"></script>
+<!--  Notifications Plugin    -->
+<script src="../assets/js/plugins/bootstrap-notify.js"></script>
+<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+<script src="../assets/js/material-dashboard.min.js?v=2.1.2" type="text/javascript"></script>
+
+<!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
+<script src="../local/plugins/dataTables/dataTables.min.js"></script>
+<!--SORTING DATE EU-->
+<script src="https://cdn.datatables.net/plug-ins/1.10.12/sorting/date-eu.js"></script>
+<!--ROWGROUP-->
+<script src="https://cdn.datatables.net/rowgroup/1.0.2/js/dataTables.rowGroup.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.colVis.min.js"></script>
+
+<!-- Include the plugin's CSS and JS multiselect: -->
+<script type="text/javascript" src="../local/plugins/multiselect/bootstrap-multiselect.js"></script>
+<!--SWEET ALERT-->
+<script src="../local/plugins/sweetalert/js/sweetalert2.min.js"></script>
+<link rel="stylesheet" href="../local/plugins/sweetalert/css/sweetalert2.min.css" id="theme-styles">
+
+<!-- AJAX POST FORM RECUPERAR SENHA MODAL -->
+<script src="../local/metodos/post/form_recuperar_senha.js"></script>
+
+<script src="../local/plugins/drag/drag.js"></script>
+
+<script src="../local/plugins/mascara/abrevia.js"></script>
+
+{{> escritorio/modal_chamados}}
+
+
+<script>
+    const LoadRoboContabilInfo = async(contador) => {
+
+        if (contador.length == 0) {
+            $('#antecipados_valor').text('0')
+            $('#piscofins_valor').text('0')
+            $('#erro_valor').text('0')
+            $('#icms_valor').text('0')
+        } else {
+
+            const antecipacos_sum = await abreviaNumero(contador.rf_notas_antecipados_sum_mes);
+            const notas_icms_sum = await abreviaNumero(contador.rf_notas_icms_sum)
+            const piscofins_sum = await abreviaNumero(contador.rf_notas_piscofins_sum)
+            const notas_erro_sum = await abreviaNumero(contador.rf_notas_erro_sum)
+
+            if (!antecipacos_sum) {
+                $('#antecipados_valor').text('0')
+            } else {
+                $('#antecipados_valor').text(antecipacos_sum)
+            }
+            if (!piscofins_sum) {
+                $('#piscofins_valor').text('0')
+            } else {
+                $('#piscofins_valor').text(piscofins_sum)
+            }
+            if (!notas_erro_sum) {
+                $('#erro_valor').text('0')
+            } else {
+                $('#erro_valor').text(notas_erro_sum)
+            }
+            if (!notas_icms_sum) {
+                $('#icms_valor').text('0')
+            } else {
+                $('#icms_valor').text(notas_icms_sum)
+            }
+        }
+
+    }
+
+    //GET DEFAULT DATA BY AJAX
+    function LoadDeafaultDataTableRoboContabilNotas() {
+        $.ajax({
+            url: '/get-data-robo-contabil-notas',
+            type: 'GET',
+            //data: form_data
+        }).done(function(response) {
+            //console.log("ok sr. pic")
+            //console.log(response)
+            if (response) {
+
+                //console.log("dados que temos ==>", response)
+             
+                var data4Table = JSON.parse(response.data4Table)
+                var contador = JSON.parse(response.contador)
+
+                $('#antecipados_loading').addClass('hideElement')
+                $('#icms_loading').addClass('hideElement')
+                $('#piscofins_loading').addClass('hideElement')
+                $('#erro_loading').addClass('hideElement')
+
+                //console.log("contador do mês -->", contador)
+
+                LoadRoboContabilInfo(contador)
+
+                if (data4Table.length > 0) {
+
+                    InitTableRoboContabilNotas(data4Table) //Inicializa a tabela pela primeira vez.
+
+                } else if (roboContabilNotas) {
+                    roboContabilNotas.clear().draw()
+                }
+            } else {
+                return
+            }
+        });
+    }
+
+    /* DATATABLE DA TABELA NOTAS*/
+    var roboContabilNotas;
+    var collapsedGroups = {};
+
+    $('#tabela-robo-contabil-notas tbody').on('click', 'tr.group-start', function() {
+        var cliente = $(this).data('cliente');
+        collapsedGroups[cliente] = !collapsedGroups[cliente];
+        roboContabilNotas.draw(false);
+    });
+
+    //Inicializa a tabela
+    function InitTableRoboContabilNotas(data4table) {
+        let idTable = '#tabela-robo-contabil-notas'
+        if (data4table) {
+            if (data4table.length > 0) {
+                roboContabilNotas = $(idTable).DataTable({
+                    destroy: true,
+                    deferRender: true,
+                    data: data4table,
+                    columns: [{
+                        data: "rf_notas_id"
+                    }, {
+                        data: "rf_notas_chave_de_acesso"
+                    }, {
+                        data: "numero"
+                    }, {
+                        data: "nome_pj_emitente"
+                    }, {
+                        data: "cliente"
+                    }, {
+                        data: "rf_notas_itens_atualizados"
+                    }, {
+                        data: "rf_notas_data_sincronizacao",
+                        type: "date-eu"
+                    }],
+                    columnDefs: [{
+                            orderable: false,
+                            targets: [0]
+                        },
+                        //{ visible: false, targets: 1 }, //ocultar coluna ID desse modo não teremos id no corpo da tabela > solução abaixo
+                        {
+                            sClass: "hideIdTable",
+                            "aTargets": [0, 1, 4]
+                        }, //id visivelmente oculto (presente)
+                    ],
+                    processing: true,
+                    order: [
+                        [4, 'desc']
+                    ],
+                    fixedHeader: {
+                        header: false,
+                        footer: false
+                    },
+                    dom: 'Blfrtip',
+                    buttons: [{
+                        extend: 'excel',
+                        text: 'Exportar'
+                    }],
+                    pagingType: "full_numbers",
+                    lengthMenu: [
+                        [50, 100, 1000, -1],
+                        [50, 100, 1000, "Todos"]
+                    ],
+                    responsive: false,
+                    language: {
+                        "url": "../assets/js/plugins/dataTables.ptbr.lang",
+                        search: "_INPUT_",
+                        searchPlaceholder: "",
+                    },
+                    rowGroup: {
+                        // Uses the 'row group' plugin
+                        dataSrc: "cliente",
+                        startRender: function(rows, group) {
+                            var collapsed = !!collapsedGroups[group];
+                            rows.nodes().each(function(r) {
+                                r.style.display = collapsed ? 'none' : '';
+                            });
+                            // Add category name to the <tr>. NOTE: Hardcoded colspan
+                            return $('<tr/>')
+                                .append('<td colspan="5" style="background-color: #333; color: white; text-align: left!important; border-radios: 5px;">' + 'Cliente: ' + group + ' (' + rows.count() + ')</td>')
+                                .attr('data-cliente', group)
+                                .toggleClass('collapsed', collapsed);
+                        }
+                    },
+                    //rowCallback: function (row, data) {
+                    //console.log('rowCalback : ', row, data) 
+                    //}
+                });
+            } else if (roboContabilNotas) {
+                roboContabilNotas.clear().draw();
+            }
+        } else if (roboContabilNotas) {
+            //console.log("data vazia")
+            roboContabilNotas.clear().draw();
+        }
+    }
+    //Carrega a tabela com dados novos
+    function LoadTableRoboContabilNotas(data) {
+        if (data) {
+            if (data.length > 0 && roboContabilNotas) {
+                roboContabilNotas.clear().draw();
+                roboContabilNotas.rows.add(data); // Add new data
+                roboContabilNotas.columns.adjust().draw();
+            } else if (roboContabilNotas) {
+                roboContabilNotas.clear().draw();
+            } else {
+                return
+            }
+        } else {
+            return
+        }
+    }
+
+
+
+
+    $(document).ready(function() {
+
+        //Primeira solicitação para iniciar a tabela Notas
+        LoadDeafaultDataTableRoboContabilNotas()
+
+
+
+        /* DATATABLE DA TABELA PRODUTOS*/
+
+        $.ajax({
+            url: '/get-data-robo-contabil-produtos',
+            type: 'GET',
+        }).done(function(response) {
+            var dataTable = JSON.parse(response.dataTable)
+            if (dataTable.length > 0) {
+                roboContabilProd = $('#tabela-robo-contabil-produtos').DataTable({
+                    destroy: true,
+                    deferRender: true,
+                    //processing: true,
+                    data: dataTable,
+                    columns: [{
+                            data: "rf_prod_id"
+                        }, //id (hidden)
+                        {
+                            data: "cliente"
+                        }, //
+                        {
+                            data: "rf_prod_itens_atualizados"
+                        }, //
+                        {
+                            data: "rf_prod_erp"
+                        }, //
+                        {
+                            data: "rf_prod_tipo_sincronizacao"
+                        }, //
+                        {
+                            data: "rf_prod_data_sincronizacao",
+                            type: "date-eu"
+                        },
+                    ],
+                    columnDefs: [{
+                            orderable: false,
+                            targets: [0]
+                        },
+                        //{ visible: false, targets: 1 }, //ocultar coluna ID desse modo não teremos id no corpo da tabela > solução abaixo
+                        {
+                            sClass: "hideIdTable",
+                            "aTargets": [0]
+                        } //id visivelmente oculto (presente)
+                    ],
+                    //aoColumnDefs: [{
+                    //}],
+                    order: [
+                        [5, 'desc']
+                    ],
+                    fixedHeader: {
+                        header: false,
+                        footer: false
+                    },
+                    dom: 'Blfrtip',
+                    buttons: [{
+                        extend: 'excel',
+                        text: 'Exportar'
+                    }],
+                    pagingType: "full_numbers",
+                    lengthMenu: [
+                        [50, 100, 1000, -1],
+                        [50, 100, 1000, "Todos"]
+                    ],
+                    responsive: false,
+                    language: {
+                        "url": "../assets/js/plugins/dataTables.ptbr.lang",
+                        search: "_INPUT_",
+                        searchPlaceholder: "",
+                    },
+                    rowCallback: function(row, data) {
+                        //console.log('rowCalback : ', row, data) 
+                    }
+                });
+                $("#row_tableproduto").removeClass("hideElement")
+            } else if (roboContabilProd) {
+                roboContabilProd.clear().draw() //renderiza a tabela sem dados
+                    //$("#row_tableproduto").addClass("hideElement")  //Descomentar caso não queira mostrar a tabela sem dados
+
+            }
+        });
+
+    });
+</script>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#examplemultiple').multiselect();
+
+    });
+
+
+
+
+    //Multiselect Meses
+    $('#examplemultiple').bind('change', function(event) {
+        fetch_DataNotasTable($('#examplemultiple').val())
+    });
+</script>
+
+
+
+
+<script>
+    //--> FUNÇÕES
+    fetch_DataNotasTable = async(months) => {
+        if (months) {
+            if (months.length > 0) {
+                $.ajax({
+                    async: true,
+                    url: '/getdata-robocontabilnotas-bymonth',
+                    type: 'post',
+                    data: {
+                        "months": months
+                    }
+                }).done(function(response) {
+
+
+                    //console.log("response =====>", response)
+
+
+                    if (response.contador) {
+                        //console.log("entrei na criado do objeto")
+                        if (response.contador.length > 0) {
+                            //console.log("maior que zero")
+                                //atualizar dados do monitor de processo
+                            var contador = JSON.parse(response.contador)
+                            //console.log("dados do mes ====>", response.contador)
+
+                            LoadRoboContabilInfo(contador)
+
+                        }
+                    } else {
+                        //console.log("passei no else")
+                        var contador = []
+                        LoadRoboContabilInfo(contador)
+
+                    }
+
+                    if (response.data4Table) {
+
+                        if (response.data4Table.length > 0) {
+                            let data = JSON.parse(response.data4Table)
+                            if (data) {
+                                if (data.length > 0) {
+                                    LoadTableRoboContabilNotas(data)
+                                } else if (roboContabilNotas) {
+                                    roboContabilNotas.clear().draw() //renderiza a tabela sem dados
+                                        //$("#row_tableproduto").addClass("hideElement")  //Descomentar caso não queira mostrar a tabela sem dados
+                                    return
+                                }
+                            } else if (roboContabilNotas) {
+                                roboContabilNotas.clear().draw() //renderiza a tabela sem dados
+                                    //$("#row_tableproduto").addClass("hideElement")  //Descomentar caso não queira mostrar a tabela sem dados
+                                return
+                            }
+                        }
+
+
+                    }
+
+                });
+            } else {
+                LoadDeafaultDataTableRoboContabilNotas()
+                return
+            }
+        } else {
+           // console.log("fetch_DataNotasTable(Nenhum dado foi passado)")
+            return
+        }
+    }
+
+
+</script>
+
+</html>

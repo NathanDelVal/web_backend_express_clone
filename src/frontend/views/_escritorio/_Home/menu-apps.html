@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="../images/icon/apple-icon-mezzomo.png">
+    <link rel="icon" type="image/png" href="../images/icon/favicon_mezzomo3.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>
+        Robotax: Acesso
+    </title>
+    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+
+    <!-- Fonts and icons -->
+    <link rel="stylesheet" type="text/css"
+        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+
+    <!--Custom CSS styles-->
+    <link rel="stylesheet" type="text/css" href="../local/menu_mid.css">
+    <!--SWEET ALERT-->
+    <link rel="stylesheet" href="../local/plugins/sweetalert/css/sweetalert2.min.css" id="theme-styles">
+    <!--Scroll CSS-->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="../assets/js/core/jquery-3.5.1.js"></script> 
+    <!-- Plugin for the momentJs-->
+    <script src="../assets/js/plugins/moment.min.js"></script>
+    <!-- Plugin for the momentJs TRADUÇÕES LOCAIS-->
+    <script src="../assets/js/plugins/moment-with-locales.js"></script>
+</head>
+
+<body class="off-canvas-sidebar header-filter" filter-color="yellow" style="overflow-y: auto;">
+    <!-- Navbar -->
+
+    <nav class="navbar navbar-expand-lg navbar-transparent" style="z-index: 3;">
+        <div class="navbar-wrapper" style="width: 50%;">
+            <div class="align-items-center" style="margin-left: 2rem;">
+                <div class="container" style="display: flex; flex-direction: column;">
+                    <img src="../images/logo-black-fixed.svg" style="height: 6rem">
+                    <img src="../images/maintittle.svg" style="height: 1rem; margin-top: .5rem;">
+                </div>
+             </div>
+        </div>
+    
+        <div class="container">
+            <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" aria-controls="navigation-index"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="navbar-toggler-icon icon-bar"></span>
+                <span class="navbar-toggler-icon icon-bar"></span>
+                <span class="navbar-toggler-icon icon-bar"></span>
+            </button>
+    
+            <div class="collapse navbar-collapse justify-content-end">
+                <ul class="navbar-nav">
+                    {{#ifCond conta_escritorio '==' true}}
+                        {{#ifCond administrador '==' "SIM"}}
+                            <li class="nav-item ">
+                                <a href="../gerenciar" class="nav-link">
+                                    <i class="material-icons">manage_accounts</i> Gerenciar
+                                </a>
+                            </li>
+                        {{/ifCond}}
+                    {{/ifCond}}
+                    <li class="nav-item ">
+                        <a href="../sair" class="nav-link">
+                            <i class="material-icons">logout</i>Sair
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+
+    <div class="container">
+        {{> escritorio/testegratis}}
+    </div>
+
+    <div class="wrapper wrapper-full-page" style="z-index: 2;">      
+        
+            <div class="container-fluid" id="cards" style="margin-top: 4rem">
+                <div class="col-lg-12">
+                    <div class="row ">
+                        <!--
+                        <div class="col-sm-12 col-md-6 col-lg-4 card-marg">
+                            <a {{#ifCond prod1 "==" true }} href="/#vem_ai" {{else}} href="../antecipados/notas" {{/ifCond}}>
+                                <div class="card card-menu-mid ml-auto{{#ifCond prod1 "==" true }}  inative-menu {{/ifCond}} "
+                                    {{#ifCond prod1 "==" true }} data-tooltip="Saiba Mais"{{/ifCond}}>
+                                    <div class="card-body">
+                                        <img class="img img-menu-mid" src="../images/svg_apps/antecipados.svg" />
+                                        <h5 class="card-title text-center text-menu-image">Antecipados</h5>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        -->
+
+                        {{#ifCond conta_empresa '==' true}}
+                        <div class="col-sm-12 col-md-6 col-lg-4 card-marg">
+                            <a href="/empresa/notasfiscais">
+                                <div class="card card-menu-mid ml-auto">
+                                    <div class="card-body">
+                                        <img class="img img-menu-mid" src="../images/svg_apps/antecipados.svg" />
+                                        <h5 class="card-title text-center text-menu-image">Notas Fiscais Empresa</h5>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        {{/ifCond}}
+
+
+
+                        
+                        {{#ifCond conta_escritorio '==' true}}
+                        <div class="col-sm-12 col-md-6 col-lg-4 card-marg">
+                            <a {{#ifCond prod1 "==" true }} href="/notas/notasfiscais" {{else}} href="/#vem_ai" {{/ifCond}}>
+                                <div class="card card-menu-mid ml-auto {{#ifCond prod1 "==" false }} inative-menu {{/ifCond}} "{{#ifCond prod1 "==" false }} data-tooltip="Saiba Mais"{{/ifCond}}>
+                                    <div class="card-body">
+                                        <img class="img img-menu-mid" src="../images/svg_apps/antecipados.svg" />
+                                        <h5 class="card-title text-center text-menu-image">Notas Fiscais</h5>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        
+                        <div class="col-sm-12 col-md-6 col-lg-4 card-marg">
+                            <a  href="{{#ifCond prod2 "==" true }}/robo-fiscal{{else}} href="/#vem_ai" {{/ifCond}}">
+                                <div class="card card-menu-mid ml-auto mr-auto {{#ifCond prod2 "==" false }} inative-menu {{/ifCond}} "  {{#ifCond prod1 "==" false }} data-tooltip="Saiba Mais"{{/ifCond}}>
+                                    <div class="card-body">
+                                        <img class="img img-menu-mid" src="../images/svg_apps/robo-fiscal.svg" />
+                                        <h5 class="card-title text-center text-menu-image">Robô Fiscal</h5>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 col-lg-4 card-marg">
+                            <a {{#ifCond prod4 "==" true }} href="/ged"{{else}} href="/#vem_ai" {{/ifCond}}>
+                                <div class="card card-menu-mid mr-auto {{#ifCond prod4 "==" false }}  inative-menu {{/ifCond}} " {{#ifCond prod4 "==" false }} data-tooltip="Saiba Mais"{{/ifCond}}>
+                                    <div class="card-body">
+                                        <img class="img img-menu-mid" src="../images/svg_apps/ged.svg" />
+                                        <h5 class="card-title text-center text-menu-image">Documentos</h5>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 col-lg-4 card-marg ml-auto">
+                            <a {{#ifCond prod4 "==" true }}  href="/auditoria" {{else}} href="/#vem_ai"{{/ifCond}}>
+                                <div class="card card-menu-mid ml-auto mr-auto {{#ifCond prod4 "==" false }}  inative-menu {{/ifCond}} " {{#ifCond prod4 "==" false }} data-tooltip="Saiba Mais"{{/ifCond}}>
+                                    <div class="card-body">
+                                        <img class="img img-menu-mid" src="../images/svg_apps/robo-contabil.svg" />
+                                        <h5 class="card-title text-center text-menu-image">Robô Contábil</h5>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 col-lg-4 card-marg mr-auto">
+                            <a {{#ifCond prod4 "==" true }} href="/ct/controladoria" {{else}} href="/#vem_ai" {{/ifCond}}>
+                                <div class="card card-menu-mid ml-auto mr-auto{{#ifCond prod4 "==" false }}  inative-menu {{/ifCond}} " {{#ifCond prod4 "==" false }} data-tooltip="Saiba Mais"{{/ifCond}}>
+                                    <div class="card-body">
+                                        <img class="img img-menu-mid" src="../images/svg_apps/controladoria.svg" />
+                                        <h5 class="card-title text-center text-menu-image">Controladoria</h5>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        {{/ifCond}}
+
+                    </div>
+                </div>
+            </div>
+    </div>
+
+
+    <!--Correção do Violation Scroll non-passive event-->
+    <script src=" ../local/plugins/fix-non-passive.js"></script>
+    <!-- Core JS Files -->
+    <script src="../assets/js/core/popper.min.js"></script>
+    <script src="../assets/js/core/bootstrap-material-design.js"></script>
+    <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+
+
+    <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="../assets/js/material-dashboard.min.js" type="text/javascript"></script>
+    <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+    <!-- Notifications Plugin -->
+    <script src="../assets/js/plugins/bootstrap-notify.js"></script>
+
+    <!--SWEET ALERT-->
+    <script src="../local/plugins/sweetalert/js/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="../local/plugins/sweetalert/css/sweetalert2.min.css" id="theme-styles">
+
+    <!-- AJAX POST FORM RECUPERAR SENHA MODAL -->
+    <script src="../local/metodos/post/form_recuperar_senha.js"></script>
+    <!--Scroll Animation-->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+    {{> escritorio/modal_adquirir}}
+    <script>
+        AOS.init();
+
+        var TxtRotate = function (el, toRotate, period) {
+            this.toRotate = toRotate;
+            this.el = el;
+            this.loopNum = 0;
+            this.period = parseInt(period, 10) || 2000;
+            this.txt = '';
+            this.tick();
+            this.isDeleting = false;
+        };
+
+        TxtRotate.prototype.tick = function () {
+            var i = this.loopNum % this.toRotate.length;
+            var fullTxt = this.toRotate[i];
+
+            if (this.isDeleting) {
+                this.txt = fullTxt.substring(0, this.txt.length - 1);
+            } else {
+                this.txt = fullTxt.substring(0, this.txt.length + 1);
+            }
+
+            this.el.innerHTML = '<span class="wrap">' + this.txt + '</span>';
+
+            var that = this;
+            var delta = 300 - Math.random() * 100;
+
+            if (this.isDeleting) {
+                delta /= 2;
+            }
+
+            if (!this.isDeleting && this.txt === fullTxt) {
+                delta = this.period;
+                this.isDeleting = true;
+            } else if (this.isDeleting && this.txt === '') {
+                this.isDeleting = false;
+                this.loopNum++;
+                delta = 500;
+            }
+
+            setTimeout(function () {
+                that.tick();
+            }, delta);
+        };
+
+
+        window.onload = function () {
+            var elements = document.getElementsByClassName('txt-rotate');
+            for (var i = 0; i < elements.length; i++) {
+                var toRotate = elements[i].getAttribute('data-rotate');
+                var period = elements[i].getAttribute('data-period');
+                if (toRotate) {
+                    new TxtRotate(elements[i], JSON.parse(toRotate), period);
+                }
+            }
+            // INJECT CSS
+            var css = document.createElement("style");
+            css.type = "text/css";
+            css.innerHTML = ".txt-rotate > .wrap { border-right: 0.08em solid #666 }";
+            document.body.appendChild(css);
+        };
+    </script>
+
+</body>
+
+
+</html>

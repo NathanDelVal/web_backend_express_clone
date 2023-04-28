@@ -1,0 +1,3030 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="../images/icon/apple-icon-mezzomo.png">
+    <link rel="icon" type="image/png" href="../images/icon/favicon_mezzomo3.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>
+        Robotax: Gerênciar Clientes
+    </title>
+    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css"
+        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <!-- CSS Files -->
+    <link href="../assets/css/material-dashboard.min.css?v=2.1.2" rel="stylesheet" />
+    <!--local CSS -->
+    <link rel="stylesheet" type="text/css" href="../local/clientes.css">
+    <!-- <link href="../../public/local/plugins/dropzone/css/style_clientes.css" rel="stylesheet">-->
+    <script src="../assets/js/core/jquery-3.5.1.js"></script>
+
+    <link rel="stylesheet" href="../local/plugins/checkbox_filter/filter_multi_select.css">
+
+
+
+    <!-- mbd-->
+    <!-- <link rel="stylesheet" href="../local/mdb/css/mdb.css"> -->
+    <link rel="stylesheet" href="../local/mdb/css/mdb-mezz-select.css">
+
+    <!--Acho que falta inicializar o select   $('#id').mdbSelect({}) tem que ver como é o nome  dessa funcao -->
+
+
+
+</head>
+
+<body class="off-canvas-sidebar">
+    <div class="wrapper">
+        <!-- Navbar -->
+        <div class="sidebar" data-color="yellow" data-background-color="black"
+            data-image="../assets/img/contabeisbw.jpg">
+            <!--        Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"   Tip 2: you can also add an image using data-image tag    -->
+            <div class="sidebar-wrapper">
+                <ul class="nav">
+                    <!--CARD NO SIDE BAR - LOGO DO USÚARIO E NOME -->
+                    {{> escritorio/navbar_gerenciar}}
+                </ul>
+            </div>
+        </div>
+        <!--MAIN PANEL-->
+        <div class="main-panel">
+
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-transparent">
+                <div class="container-fluid">
+                    <div class="navbar-wrapper">
+                        <div class="navbar-minimize">
+                            <button id="minimizeSidebar" class="btn btn-just-icon btn-white btn-fab btn-round">
+                                <i class="material-icons text_align-center visible-on-sidebar-regular">more_vert</i>
+                                <i class="material-icons design_bullet-list-67 visible-on-sidebar-mini">view_list</i>
+                            </button>
+                        </div>
+                        <a class="navbar-brand" href="/gerenciar/clientes">Gerênciar Clientes</a>
+                    </div>
+
+                    {{> escritorio/menu_apps_back}} {{> escritorio/help_btn}}
+
+
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="navbar-toggler-icon icon-bar"></span>
+                        <span class="navbar-toggler-icon icon-bar"></span>
+                        <span class="navbar-toggler-icon icon-bar"></span>
+                    </button>
+                </div>
+            </nav>
+
+            <!-- Plugin for the momentJs  -->
+            <script src="../assets/js/plugins/moment.min.js"></script>
+            <!-- Plugin for the momentJs TRADUÇÕES LOCAIS  -->
+            <script src="../assets/js/plugins/moment-with-locales.js"></script>
+            <div class="sticky-top navbar-absolute">
+                {{> escritorio/testegratis}}
+            </div>
+            <!-- End Navbar -->
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header card-header-info2">
+                                    <h4 class="card-title">Tabela de Clientes</h4>
+                                    <p class="card-category">Edite e adicione clientes através dos botões de ações</p>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <div class="table-responsive box drag">
+                                                <table id="tabela-clientes"
+                                                    class="table display table-striped table-no-bordered table-hover"
+                                                    cellspacing="0" width="100%" style="width:100%">
+                                                    <thead>
+                                                        <tr class="table-header">
+                                                            <th width="44px">
+                                                                <div class="form-check">
+                                                                    <label class="form-check-label">
+                                                                        <input id="checkall" name="checkbox"
+                                                                            onchange="marcartodos()"
+                                                                            class="form-check-input form-check-input-blank"
+                                                                            type="checkbox" value="">
+                                                                        <span class="form-check-sign">
+                                                                            <span class="check"></span>
+                                                                        </span>
+                                                                    </label>
+                                                                </div>
+                                                            </th>
+                                                            <th>ID</th>
+                                                            <th class="text-right td-actions" width="90px">
+                                                                <button id="tbl_th_btn_acumuladores"
+                                                                    name="tbl_th_btn_acumuladores" type="button"
+                                                                    class="btn btn-black" title="Inserir Acumuladores" disabled>
+                                                                    <i class="material-icons">rule</i>
+                                                                </button>
+                                                                <button id="tbl_th_btn_editarselecionados"
+                                                                    name="tbl_th_btn_editarselecionados" type="button"
+                                                                 class="btn btn-warning" title="Editar Clientes" disabled>
+                                                                    <i class="material-icons">edit</i>
+                                                                </button>
+                                                                <button id="tbl_th_btn_adicionar"
+                                                                    name="tbl_th_btn_adicionar" type="button"
+                                                                    class="btn btn-success" title="Inserir Clientes">
+                                                                    <i class="material-icons">playlist_add</i>
+                                                                </button>
+                                                            </th>
+                                                            <th class="text-center  min-width-80">Cliente</th>
+                                                            <th class="text-center  min-width-80">CNPJ</th>
+                                                            <th class="text-center  min-width-80">Regime Tributário</th>
+                                                            <th class="text-center  min-width-80">Unidade</th>
+                                                            <th class="text-center  min-width-80">Venc. Certificado</th>
+                                                            <th class="text-center  min-width-80">Situação</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--FOOTER-->
+            {{> escritorio/footer_internal}}
+
+            <!-- MODAL - Modal_Cliente-->
+            <form id="update_form_cliente" method="post" action="/gerenciar/update-cliente">
+                <div class="modal fade" id="EditModal_Cliente" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Atualizar dados do usuário</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form">
+                                    <div class="row align-items-center">
+                                        <div class="col-lg-6">
+                                            <input id="id_modal" name="id_item" type="hidden">
+
+                                            <div class="col-md-12">
+                                                <h6 class="label-modal">Cliente (Razão Social)</h6>
+                                                <input id="cliente_modal" name="cliente" type="text"
+                                                    class="form-control" required>
+                                            </div>
+
+                                            <!--<  div class="col-md-12 cols-modal-clientes-update">-->
+                                            <!-- Col Esquerda -->
+                                            <div class="col-md-12" name="col-left">
+                                                <div class="col-md-6">
+                                                    <h6 class="label-modal">CNPJ</h6>
+                                                    <input id="cnpj_linha_modal" type="text" class="form-control"
+                                                        disabled>
+                                                    <input id="cnpj_linha_modal_hidden" name="cnpj" type="hidden"
+                                                        class="form-control">
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <h6 class="label-modal">Regime Tributário</h6>
+                                                   <select title='SELECIONE UMA OPÇÃO'
+                                                        class="custom-select form-control selectpicker" data-style="btn btn-link"
+                                                        id="regime_linha_modal" name="regime" type="text" required>
+                                                        <option value="Simples-Nacional">Simples-Nacional</option>
+                                                        <option value="Lucro Presumido">Lucro Presumido</option>
+                                                        <option value="Lucro Real">Lucro Real</option>
+                                                        <option value="CEI">CEI</option>
+                                                        <option value="Imune/Isentas">Imune/Isentas</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <h6 class="label-modal">Unidade (Cidade)</h6>
+                                                    <input id="unidade_linha_modal" name="unidade" type="text"
+                                                        class="form-control" required>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <h6 class="label-modal">Situação <em> (obrigatório)</em></h6>
+                                                    <div class="form-check form-check-radio">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="radio" name="situacao"
+                                                                value="Ativa" id="situacao_ativa" required>
+                                                            Ativa
+                                                            <span class="circle">
+                                                                <span class="check"></span>
+                                                            </span>
+                                                        </label>
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="radio" name="situacao"
+                                                                value="Inativa" id="situacao_inativa">
+                                                            Inativa
+                                                            <span class="circle">
+                                                                <span class="check"></span>
+                                                            </span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <!-- Col Esquerda -->
+                                        <!-- Col Direita -->
+                                        <div class="col-lg-6">
+                                            <div class="col-lg-12">
+                                                <div class="row justify-content-center targetclear"
+                                                    onclick="certificado(this)">
+                                                    <div class="CERTmsg areaClick">
+                                                        <h5 class="clickAqui">Certificado Digital
+                                                        </h5>
+                                                        <label class="clickAqui"> (Clique para Inserir)
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <input class="InputUploader" type="file" name="file"
+                                                    accept=".pfx,application/x-pkcs12">
+                                            </div>
+                                            <div class="col-md-12">
+                                                <h6 class="label-modal">Senha Certificado</h6>
+                                                <input id="senha_cd_linha_modal" name="senhaCertificado" type="password"
+                                                    class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Col Direita -->
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn" data-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn" id="btn_salvar_modal">SALVAR</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- MODAL - Aprovar_Itens Modal - FIM-->
+
+    <!-- MODAL - UPDATE_Multiplos_Itens-->
+    <form id="update_form_cliente_multiplos" method="post" action="/gerenciar/update-cliente-multiplos">
+        <div class="modal fade" id="EditModal_Clientes_Multiplos" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-md" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Cuidado ao Preencher</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+
+                            <input id="ids_modal_multiplos" name="ids_multiplos" type="hidden">
+
+                            <div class="col-md-12">
+                                <h6 class="label-modal">Regime Tributário</h6>
+                                <select title='SELECIONE UMA OPÇÃO' class="form-control selectpicker"
+                                    data-style="btn btn-link" id="regime_linha_modal2" name="regime" type="text">
+                                    <option value="Simples-Nacional">Simples-Nacional</option>
+                                    <option value="Lucro Presumido">Lucro Presumido</option>
+                                    <option value="Lucro Real">Lucro Real</option>
+                                    <option value="CEI">CEI</option>
+                                    <option value="Imune/Isentas">Imune/Isentas</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-12">
+                                <h6 class="label-modal">Situação <em> (obrigatório)</em></h6>
+                                <div class="form-check form-check-radio">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" name="situacao" value="Ativa"
+                                            required>
+                                        Ativa
+                                        <span class="circle">
+                                            <span class="check"></span>
+                                        </span>
+                                    </label>
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" name="situacao" value="Inativa">
+                                        Inativa
+                                        <span class="circle">
+                                            <span class="check"></span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn" id="salvardata">SALVAR</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- MODAL - UPDATE_Multiplos_Itens Modal - FIM-->
+
+    <!-- MODAL - INSERIR_InserirClientes-->
+    <div class="modal fade" id="EditModal_InserirClientes" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <!-- style="width:80%!important; margin-left:auto!important; margin-right:auto!important; margin-top:5%;"> -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"><b>Inserir Cliente</b></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!--BOTAO ADICIONAR CAMPO-->
+                    <div class="row">
+                        <button type="button" id="cliente-excel" class="btn ml-auto mr-auto col-lg-2">Inserir via
+                            Excel</button>
+                    </div>
+                    <div class="padding-btn-left">
+                        <button id="addinputuser" name="tbl_th_btn_adicionar" type="button" rel="tooltip"
+                            class="btn btn-sm btn-success ">
+                            <i class="material-icons">add</i>
+                        </button>
+                    </div>
+                    <form id="form_inserir_clientes" method="POST" action="/gerenciar/insert-cliente"
+                        enctype="multipart/form-data" style="max-height:none!important;">
+                        <div id="dinamicAppend">
+                            <!--1º CARD-->
+                            <div id="card_InserirClientes" class="card"
+                                style="padding:20px; box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.157);">
+                                <!--12COLUNAS-->
+                                <!--<  div class="row">-->
+                                <!--12colunas CARD-->
+                                <!--<  div class="col-lg-12">-->
+                                <div class="row align-items-center">
+                                    <div class="col-sm-11 col-md-11 col-lg-11">1#
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <div class="row">
+
+                                            <div class="col-md-4">
+                                                <h6 class="label-modal">CNPJ</h6>
+                                                <input id="name_cnpj" name="cnpj" type="text" step="any"
+                                                    class="form-control" placeholder="Digite seu CNPJ"
+                                                    autocomplete="off" onchange="onChangeCNPJ(this)" 
+                                                    onkeypress="$(this).mask('00.000.000/0000-00')" required>
+                                                <!--onchange="getByCNPJ(this)"-->
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <h6 class="label-modal">Cliente (Razão Social)
+                                                </h6>
+                                                <input id="name_cliente" name="cliente" type="text" class="form-control"
+                                                    placeholder="Digite seu Nome" autocomplete="off"
+                                                    onkeyup='var start = this.selectionStart; var end = this.selectionEnd; this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);'
+                                                    required>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <h6 class="label-modal">Unidade (Cidade)</h6>
+                                                <input id="name_unidade" name="unidade" type="text" class="form-control"
+                                                    placeholder="Informe sua Cidade" autocomplete="off"
+                                                    onkeyup='var start = this.selectionStart; var end = this.selectionEnd; this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);'
+                                                    required>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <h6 class="label-modal">Regime Tributário</h6>
+                                                <select id="regime" title="SELECIONE" class="form-control  selectpicker"
+                                                    data-style="btn" name="regime" type="text" required>
+                                                    <option value='Simples-Nacional'>
+                                                        Simples-Nacional</option>
+                                                    <option value='Lucro Presumido'>Lucro
+                                                        Presumido</option>
+                                                    <option value='Lucro Real'>Lucro Real
+                                                    </option>
+                                                    <option value='CEI'>CEI</option>
+                                                    <option value='Imune/Isentas'>Imune/Isentas
+                                                    </option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <h6 class="label-modal">Situação
+                                                    <em>(obrigatório)</em>
+
+                                                </h6>
+                                                <div class="form-check form-check-radio">
+                                                    <label class="form-check-label">
+                                                        <input id="name_situacao_ativa" class="form-check-input "
+                                                            type="radio" name="situacao[0]" value="Ativa"
+                                                            autocomplete="off" required checked>
+                                                        Ativa
+                                                        <span class="circle">
+                                                            <span class="check"></span>
+                                                        </span>
+                                                    </label>
+                                                    <label class="form-check-label">
+                                                        <input id="name_situacao_inativa" class="form-check-input "
+                                                            type="radio" name="situacao[0]" value="Inativa"
+                                                            autocomplete="off">
+                                                        Inativa
+                                                        <span class="circle">
+                                                            <span class="check"></span>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <h6 class="label-modal">Senha do Certificado Digital
+                                                </h6>
+                                                <input id="name_senha" name="senhacert" type="password"
+                                                    class="form-control" placeholder="Digite sua senha"
+                                                    autocomplete="off" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3">
+                                        <div class="col-lg-12">
+                                            <div class="row justify-content-center targetclear"
+                                                onclick="certificado(this)">
+                                                <div class="CERTmsg areaClick">
+                                                    <h5 class="clickAqui">Certificado Digital
+                                                    </h5>
+                                                    <label class="clickAqui"> (Clique para Inserir)
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <input class="InputUploader" type="file" name="file"
+                                                accept=".pfx,application/x-pkcs12">
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--12colunas CARD-->
+                        <div class="modal-footer">
+                            <div id="actions" class="row">
+                                <div id="actions" class="col-lg-12 centralizar-h">
+                                    <button id="cancel" type="reset" class="btn cancel">LIMPAR</button>
+                                    <button type="submit" id="start" class="btn start">SALVAR</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!--FIM DO 1º CARD-->
+        </div>
+    </div>
+
+    <div class="modal fade" id="EditModal_InserirClientesExcel" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel"><b>Inserir Clientes via Excel</b></h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-lg-12 text-center mb-3">
+                        <button type="button" onclick="downloadXLSX()" class="btn" id="baixar_modelo">Baixar
+                            Modelo</button>
+                    </div>
+
+                    <div class="col-lg-12">
+                        <div class="row justify-content-center targetclear" onClick="fileInputXLSXUsuarios(this)">
+                            <div class="XlsxMsg areaClick">
+                                <h5 id="fileTypeMsg_usuarios" class="clickAqui">Inserir o formulário em excel</h5>
+                                <label id="clickMsg_usuarios" class="clickAqui"> (Clique para Inserir)</label>
+                            </div>
+                        </div>
+
+                        <input id="InputUploaderXLSX_usuarios" class="InputUploader" type="file" name="file"
+                            accept=".xlsx,application/xlsx">
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <div class="col-lg-12 text-center">
+                        <button id="sendClientesXLSX" type="button" onclick="clientesSendXLSX()" class="btn"
+                            disabled>Enviar</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="EditModal_InserirAcumuladoresExcel" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id=""><b>Inserir Acumuladores via Excel</b></h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-lg-12 text-center mb-3">
+                        <button type="button" onclick="downloadXLSXAcumuladores()" class="btn" id="baixar_modelo">Baixar
+                            Modelo</button>
+                    </div>
+
+                    <div class="col-lg-12">
+                        <div class="row justify-content-center targetclear" onClick="fileInputXLSXAcumuladores(this)">
+                            <div class="XlsxMsg areaClick">
+                                <h5 id="fileTypeMsg_acumuladores" class="clickAqui">Inserir o formulário em excel</h5>
+                                <label id="clickMsg_acumuladores" class="clickAqui"> (Clique para Inserir)</label>
+                            </div>
+                        </div>
+
+                        <input id="InputUploaderXLSX_acumuladores" class="InputUploader" type="file" name="file"
+                            accept=".xlsx,application/xlsx">
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <div class="col-lg-12 text-center">
+                        <button id="sendAcumuladoresXLSX" type="button" onclick="acumuladoresSendXLSX()" class="btn"
+                            disabled>Enviar</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal_mobile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <form method="POST" action="" id="mobile">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title text-center" id="exampleModalLabel">Acesso ao Aplicativo
+                        </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <h5 class="text-center" style="font-weight: bold;">Enviar e-mail para cliente cadastrar
+                                acesso ao aplicativo Mobile?</h5>
+                        </div>
+
+                        <div class="input-group form-group input-card-border card-busca">
+                            <label class="bmd-label-floating">Informe o email do cliente</label>
+                            <input id="input_mobile" name="input_mobile" type="text" class="form-control"
+                                autocomplete="off" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn" id="enviar">Enviar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="modal fade" id="modal_acumuladores" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title text-center" id="exampleModalLabel">Acumuladores</h4>
+                    <button id="close_acumuladores" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <hr>
+                    <label style="font-weight: bold;">Criar Acumulador</label>
+                    <div class="row align-content-center mb-3">
+                        <div class="col-lg-12">
+                            <form id="form_criar_acumulador" method="POST" action="/gerenciar/criar-acumulador">
+                                <input id="cnpj_novo_acumulador" name="cnpj_novo_acumulador" type="hidden">
+                                <button type="button" onclick="submitFormAcumuladores(this)" class="btn btn-sm"
+                                    id="showr">
+                                    <i class="material-icons">add</i>
+                                </button>
+                                <div id="area_categoria_acumulador" class="addAcumuladorInput">
+                                    <label>Categoria</label>
+                                    <select name="select_new_categoria_acumulador" id="select_new_categoria_acumulador"
+                                        class="selectblack" required>
+
+                                    </select>
+                                </div>
+                                <div id="area_antecipado_acumulador" class="addAcumuladorInput">
+                                    <label>Tipo Antecipado</label>
+                                    <select name="select_new_antecipado_acumulador"
+                                        id="select_new_antecipado_acumulador" class="selectblack" required>
+
+                                    </select>
+                                </div>
+
+                                <div class="addAcumuladorInput width-10">
+                                    <label>MVA (%)</label>
+                                    <input id="new_acumulador_mva" name="mva" type="number" autocomplete="false" min="0" value="0" step=".0001" autocomplete="false" placeholder="ex: 150.5900" required>
+                                </div>
+
+                                <div class="addAcumuladorInput width-10">
+                                    <label>CFOP</label>
+                                    <input id="new_acumulador_cfop" name="cfop" type="text" autocomplete="false" placeholder="2101" required>
+                                </div>
+
+                                <div class="addAcumuladorInput width-10">
+                                    <label>Acumulador</label>
+                                    <input id="new_acumulador_acumulador" name="acumulador" type="text" autocomplete="false" placeholder="70" required>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <hr>
+                    <label style="font-weight: bold;">Relacionar Acumulador</label>
+                    <div class="row align-content-center mb-3">
+                        <div class="col-lg-3">
+                            <label style="color:black">Categoria</label>
+                            <div id="area_categoria_relacionar" class="selectblack">
+                                <select name="relacionamentoCFOP_categoria" id="relacionamentoCFOP_categoria" onchange="getCfopRealacao(this)" class="select mdb-select"
+                                    data-mdb-container=".modal-body">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <label style="color:black">CFOP da Nota</label>
+                            <div id="area_cfop_nota" class="selectblack">
+                                <select id="relacionamentoCFOP_nota" name="relacionamentoCFOP_nota"  class="select mdb-select"
+                                    data-mdb-container=".modal-body" searchable="Buscar..." data-mdb-filter="true">
+                                    <option value="" >Selecionar CFOP Conversão</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-1">
+                            <span class="material-icons">sync_alt</span>
+                        </div> 
+                        <div class="col-lg-3" style="display: flex; flex-direction: column;">
+                            <label style="color:black">CFOP Selecionado</label>
+                            <input id="cfop_interno" placeholder="Inserir CFOP">
+                        </div>
+
+
+                    </div>
+
+
+                    <hr>
+                    <label style="font-weight: bold;">Definir Acumulador</label>
+                    <div class="row justify-content-center" style="margin-bottom: 15rem;">
+                        <div class="col-lg-4">
+                            <label style="color:black">Categoria</label>
+                            <div id="area_categoria" class="selectblack ">
+                                <select name="select_categoria" id="select_categoria" class="select mdb-select"
+                                    data-mdb-container=".modal-body">
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <label style="color:black">CFOP</label>
+                            <div id="area_cfop" class="selectblack">
+                                <select id="select_cfop"  name="select_cfop"  class="select mdb-select"
+                                    data-mdb-container=".modal-body" searchable="Buscar..." data-mdb-filter="true" multiple>
+                                    <option value="" disabled>Selecionar CFOP</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <label style="color:black">Antecipado</label>
+                            <div id="area_tipo_antecipado" class="selectblack">
+                                <select multiple name="select_tipo_antecipado" id="select_tipo_antecipado"
+                                    class="select mdb-select" data-mdb-container=".modal-body" searchable="Buscar..."
+                                    data-mdb-filter="true">
+                                    <option value="" disabled>Selecionar Tipo Antecipado</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row justify-content-center">
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                            <div id="tooltip-acumuladores" class="tooltip-acumuladores">
+                                <div id="table-acumuladores">
+
+                                </div>
+                                <span>
+                                    <h6>Clique para editar</h6>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal_acumuladores_multiplos" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title text-center" id="exampleModalLabel">Acumuladores</h4>
+                    <button id="close_acumuladores" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row align-content-center mb-3">
+                        <div class="col-lg-12">
+                            <form id="form_criar_acumulador_multiplo" method="POST" action="/gerenciar/criar-acumulador-multiplos">
+                                <button type="button" onClick="submitFormAcumuladoresMultiplos(this)" class="btn btn-sm"
+                                    id="showr_multiplo">
+                                    <i class="material-icons">add</i>
+                                </button>
+                                <div id="area_categoria_acumulador_multiplo" class="addAcumuladorInput_multiplos">
+                                    <label>Categoria</label>
+                                    <select name="select_new_categoria_acumulador_multiplo" id="select_new_categoria_acumulador_multiplo"
+                                        class="selectblack" required>
+
+                                    </select>
+                                </div>
+                                <div id="area_antecipado_acumulador_multiplo" class="addAcumuladorInput_multiplos">
+                                    <label>Tipo Antecipado</label>
+                                    <select name="select_new_antecipado_acumulador_multiplo"
+                                        id="select_new_antecipado_acumulador_multiplo" class="selectblack" required>
+
+                                    </select>
+                                </div>
+
+                                <div class="addAcumuladorInput_multiplos width-10">
+                                    <label>MVA (%)</label>
+                                    <input id="new_acumulador_mva_multiplo" name="mva_multiplo" type="number" min="0" value="0" step=".0001" autocomplete="false" placeholder="ex: 150.5900" required>
+                                </div>
+
+                                <div class="addAcumuladorInput_multiplos width-10">
+                                    <label>CFOP</label>
+                                    <input id="new_acumulador_cfop_multiplo" name="cfop_multiplo" type="text" autocomplete="false" placeholder="2101"  required>
+                                </div>
+
+                                <div class="addAcumuladorInput_multiplos width-10">
+                                    <label>Acumulador</label>
+                                    <input id="new_acumulador_acumulador_multiplo" name="acumulador_multiplo" type="text" autocomplete="false" placeholder="70"  autocomplete="false"required>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                            <div id="tooltip-acumuladores" class="tooltip-acumuladores">
+                                <div id="table-acumuladores">
+
+                                </div>
+                                <span>
+                                    <h6>Clique para editar</h6>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--Correção do Violation Scroll non-passive event-->
+    <script src=" ../local/plugins/fix-non-passive.js"></script>
+    <!--   Core JS Files   -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+    <script src="../assets/js/core/popper.min.js"></script>
+    <script src="../assets/js/core/bootstrap-material-design.js"></script>
+    <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+    <!-- Forms Validations Plugin -->
+    <script src="../assets/js/plugins/jquery.validate.min.js"></script>
+    <!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
+    <script src="../assets/js/plugins/jquery.bootstrap-wizard.js"></script>
+    <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+    <script src="../assets/js/plugins/bootstrap-selectpicker.js"></script>
+    <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+    <script src="../assets/js/plugins/bootstrap-datetimepicker.min.js"></script>
+    <!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
+    <script src="../assets/js/plugins/jquery.dataTables.min.js"></script>
+
+    <!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
+    <script src="../assets/js/plugins/bootstrap-tagsinput.js"></script>
+    <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+    <script src="../assets/js/plugins/jasny-bootstrap.min.js"></script>
+    <!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
+    <script src="../assets/js/plugins/fullcalendar.min.js"></script>
+    <!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
+    <script src="../assets/js/plugins/jquery-jvectormap.js"></script>
+    <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+    <script src="../assets/js/plugins/nouislider.min.js"></script>
+    <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+
+    <!-- Chartist JS -->
+    <script src="../assets/js/plugins/chartist.min.js"></script>
+    <!--  Notifications Plugin    -->
+    <script src="../assets/js/plugins/bootstrap-notify.js"></script>
+
+    <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="../assets/js/material-dashboard.min.js?v=2.1.2" type="text/javascript"></script>
+
+
+    <!--SWEET ALERT-->
+    <!--LOCAL-->
+    <script src="../local/plugins/sweetalert/js/sweetalert2.min.js"></script>
+    <script src="../local/metodos/alert/loading.js"></script>
+    <link rel="stylesheet" href="../local/plugins/sweetalert/css/sweetalert2.min.css" id="theme-styles">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <script src="../local/plugins/drag/drag.js"></script>
+    <!--local-->
+    <!-- AJAX JQUERY POST FORM  <script src="../local/metodos/post/update_modal_aprovar_itens.js"></script> -->
+    <!-- AJAX JQUERY POST UPDATE update_form_pendente MODAL  <script src="../local/metodos/post/update_input_aprovar_notas.js"></script> -->
+
+    <!--MASK FOR FORMS
+    <script src="../local/plugins/mask_input/jquery.maskedinput.js"></script>-->
+
+    <!--  SELECTED2 CLIPBOARD -->
+    <script src="../local/plugins/dataTables/selected2clipboard.js"></script>
+
+
+    <!-- MDB  -->
+    <!-- mdb/src é o js sem compilar eu acho, use os compilad<script src="../local/mdb/js/jquery.js"></script>-->
+    <script src="../local/mdb/js/mdb.js"></script>
+    <script src="../local/mdb/js/popper.min.js"></script>
+
+    <!-- HANDLE SELECT BoxeS ON TABLE  <script src="../assets/js/plugins/datatables_select_rows.js"></script> -->
+
+    <!-- HANDLE CheckBoxes  <script src="../local/metodos/post/update_aprovar_itens_selecionados.js" type="text/javascript"> </script>-->
+
+    <!-- HANDLE CheckBoxes  <script src="../local/metodos/post/update_aprovar_itens_selecionados.js" type="text/javascript"> </script>-->
+
+    <!--<script src="../local/plugins/checkbox_filter/filter-multi-select-bundle.min.js"></script>-->
+
+    <!-- ACTIVE NAV-ITEM -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //ACTIVE NAV-ITEM
+            var navs = document.getElementsByClassName('nav-item');
+            for (var x = 1; x < navs.length; x++) {
+                if (navs[x].childNodes[1].attributes[1].nodeValue == location.pathname) {
+                    var nav = navs[x]
+                    $(nav).addClass('active')
+                }
+            }
+        });
+    </script>
+
+
+
+    <script>
+        /*
+ $('#addinputuser').click(function () {
+     $('.form').append(
+       '< div class="row">' +
+       '< div class="col-md-4">' +
+       ' <h6 class="label-modal">Nome do Usuário</h6>' +
+       '<input id="mva_7_modal_multiplos" name="cliente" type="text" class="form-control" autocomplete="off" required>' +
+       '<  /div>' +
+
+       '< div class="col-md-8">' +
+       '<h6 class="label-modal">Email</h6>' +
+       '<input id="mva_12_linha_modal_multiplos" name="email" type="email" class="form-control" autocomplete="off" required>' +
+       '< /div>' +
+       '< /div>'
+     );
+ });
+                                                                          */
+    </script>
+
+
+
+    <script>
+        var TabelaClientes = //TABELA E SUAS CONFIGS
+            //____________________________________DOCUMENT READY_________________________________________
+            $(document).ready(function () {
+                //-------------------------------------------------------------------DEFINIÇPÇÕES DA TABELA
+                TabelaClientes = $('#tabela-clientes').DataTable({
+                    destroy: true,
+                    deferRender: false,
+                    processing: true,
+                    ajax: {
+                        url: '/gerenciar/get-clientes',
+                        type: 'GET',
+                        dataSrc: function (data) {
+                            return JSON.parse(data.dataTable)
+                        }
+                    },
+                    columns: [{
+                            defaultContent: '<div class="form-check">' +
+                                '<label class= "form-check-label" >' +
+                                '<input name="checkbox" class="form-check-input checkinput" type="checkbox" value="" onchange="marcados(this.checkbox)">' +
+                                '<span class="form-check-sign">' +
+                                '<span class="check"></span>' +
+                                '</span>' +
+                                '</label> ' +
+                                '</div> '
+                        }, //CHECKBOXES
+                        {
+                            data: "id_empresa"
+                        }, //id (hidden)
+                        {
+                            data: 'erp',
+                            render: function (data, type, row) {
+                                var tdActions = ''
+                                if (data == 'Dominio' || data == 'Questor') {
+                                    tdActions +=
+                                        '<button id="tbl_td_btn_acumuladores" onClick="getCNPJ(' +
+                                        `'${row.cnpj}'` +
+                                        ')" name="tbl_td_btn_acumuladores" type="button" rel="tooltip" class= "btn btn-black" title="Editar Acumulador" disabled> <i class="material-icons">rule</i> </button >'
+                                }
+                                tdActions +=
+                                    '<button id="tbl_td_btn_editarlinha" name="tbl_td_btn_editarlinha" type="button" rel="tooltip" class="btn btn-warning" title="Editar Cliente" disabled>' +
+                                    '<i class="material-icons">edit</i>' +
+                                    '</button >' +
+                                    '<button id="tbl_td_btn_mobile" name="tbl_td_btn_mobile" type="button" rel="tooltip" class= "btn btn-success">' +
+                                    '<i class="material-icons">phone_iphone</i>' +
+                                    '</button >'
+
+                                    $('.excel_acumuladores').removeClass('hideElement')
+                                return tdActions
+                            }
+                        },
+                        {
+                            data: "cliente"
+                        }, //Numero do Chamado
+                        {
+                            data: "cnpj"
+                        }, //Status
+                        {
+                            data: "regime_tributario"
+                        }, //DATA DE ABERTURA - INSERIDO , type: "date-eu"
+                        {
+                            data: "unidade"
+                        }, {
+                            data: "expiration_date"
+                        }, {
+                            data: "situacao"
+                        },
+                    ],
+                    fixedHeader: {
+                        header: true,
+                        footer: true
+                    },
+                    select: {
+                        style: 'os',
+                        items: 'cell',
+                        selector: `
+								tr>td:nth-child(3),
+                                tr>td:nth-child(4), 
+                                tr>td:nth-child(5), 
+								tr>td:nth-child(6), 
+								tr>td:nth-child(7),
+                                tr>td:nth-child(8)`
+                    },
+                    dom: 'Blftip',
+                    buttons: [
+                        {
+                            text: 'Acumuladores via Excel',
+                            className: ['excel_acumuladores', 'hideElement']
+                        }
+                        ,{
+                            extend: 'excel',
+                            text: 'Exportar',
+                            className: 'exportar_clientes'
+                        }
+                    ],
+                    pagingType: "full_numbers",
+                    lengthMenu: [
+                        [20, 25, 50, -1],
+                        [20, 25, 50, "Todos"]
+                    ],
+                    responsive: false,
+                    language: {
+                        "url": "../assets/js/plugins/dataTables.ptbr.lang",
+                        search: "_INPUT_",
+                        searchPlaceholder: "",
+                    },
+                    columnDefs: [{
+                            sClass: "hideIdTable",
+                            "aTargets": 1
+                        }, //id visivelmente oculto (presente)
+                        {
+                            orderable: false,
+                            targets: [0, 2]
+                        }, {
+                            targets: 2,
+                            className: 'td-actions'
+                        }, {
+                            targets: [0, 1, 2, 3, 4, 5, 6, 7, 8],
+                            className: 'text-center'
+                        }
+                    ],
+                    order: [
+                        [2, 'asc']
+                    ],
+                    rowCallback: function (row, data) {
+
+                        $(row).find("button[name='tbl_td_btn_editarlinha']").prop('disabled', false);
+                        $(row).find("button[name='tbl_td_btn_acumuladores']").prop('disabled', false);
+
+                        var elementCheckBoxBody = $(row).find("input[name='checkbox']");
+                        //--------------------------------Habilita botão alterar data se algum check box estiver selecionado & desabilita os botões dos rows
+                        elementCheckBoxBody.on("click", function () {
+                            //Habilita o botão EDITAR MARCADOS (HEADER) se algum check box estiver selecionado - disabled = true
+                            $("button[name='tbl_th_btn_editarselecionados']").prop('disabled', !
+                                $("input[name='checkbox']:checked").length);
+                            $("button[name='tbl_th_btn_acumuladores']").prop('disabled', !$(
+                                "input[name='checkbox']:checked").length);
+
+                            //Desabilita os botões editar linha se algum check box estiver selecionado - disabled = true
+                            $("button[name='tbl_td_btn_editarlinha']").prop('disabled', $(
+                                "input[name='checkbox']:checked").length);
+                            $("button[name='tbl_td_btn_acumuladores']").prop('disabled', $(
+                                "input[name='checkbox']:checked").length);
+                            //Habilita o botão VALIDAR marcados (HEADER) se algum check box estiver selecionado - disabled = true
+                            // $("button[name='tbl_th_btn_adicionar']").prop('disabled', !$("input[name='checkbox']:checked").length);
+                        })
+
+
+
+                    },
+                    initComplete: function (settings, json) {
+
+                         /* multi-search table header */
+                         this.api().columns().every( function () {
+                            var that = this;
+            
+                            $('input', this.header()).on( 'keyup change clear', function () {
+                                if (that.search() !== this.value ) {
+                                    that.search(this.value).draw();
+                                }
+                            });
+                        });
+
+
+                    }
+                });
+
+
+               
+
+                //--------------------------------------------------------------------MASK PARA FORMULÁRIOS
+                jQuery(function ($) {
+                    $("#datamodal").mask("99/99/9999", {
+                        placeholder: "DD/MM/AAAA"
+                    });
+                });
+
+            });
+
+             /* multi-search table header - item */
+             $('#tabela-clientes thead th').each( function (index, element) {
+                    //excluir primeiro e último
+                    if(index != 0 && index != 2) {
+                        var title = $(this).text();
+                        $(this).html( '<input class="filtercolumnhead" type="text" placeholder="'+title+'" />' );
+                    }
+                });
+
+        //_________________________________________________________________________________________x
+
+        //_______________________________________BOTÕES DE AÇÕES_____________________________________________
+        //---------------------------------------------------------------OUVINTE DO BOTÃO EDITAR / ABRE MODAL
+        $(document).on('click', '#tbl_td_btn_editarlinha', function (e) {
+            e.preventDefault;
+            var currentRow = $(this).closest('tr').find('td');
+            const id_linha = currentRow[1].textContent
+            const cliente_item_linha = currentRow[3].textContent
+            const cnpj_linha = currentRow[4].textContent
+            const regime_linha = currentRow[5].textContent
+            const unidade_linha = currentRow[6].textContent
+            const situacao_linha = currentRow[7].textContent
+
+            $('#id_modal').val(id_linha);
+            $('#cliente_modal').val(cliente_item_linha);
+            $('#cnpj_linha_modal').val(cnpj_linha);
+            $('#cnpj_linha_modal_hidden').val(cnpj_linha);
+
+            $('#regime_linha_modal').val(regime_linha);
+
+            $('#regime_linha_modal').change();
+            $('#unidade_linha_modal').val(unidade_linha);
+
+            if (situacao_linha == 'Ativa') {
+                $('#situacao_ativa').prop('checked', true);
+            } else if (situacao_linha == 'Inativa') {
+                $q('#situacao_inativa').prop('checked', true);
+            }
+
+            //$(this).attr("placeholder", "Type your answer here");
+            $('#EditModal_Cliente').modal('show');
+        });
+
+
+        //---------------------------------------------------------------OUVINTE DO BOTÃO EDITAR ITENS / ABRE MODAL
+        $(document).on('click', '#tbl_th_btn_editarselecionados', function (e) {
+            e.preventDefault;
+            const ids_linha = itens_selecionados
+
+            $('#ids_modal_multiplos').val(ids_linha);
+            //$(this).attr("placeholder", "Type your answer here");
+            $('#EditModal_Clientes_Multiplos').modal('show');
+        });
+
+        $(document).on('click', '#tbl_td_btn_mobile', function (e) {
+            e.preventDefault;
+            $('#modal_mobile').modal('show');
+        });
+
+        $(document).on('click', '#tbl_th_btn_acumuladores', function (e) {
+            e.preventDefault;
+            $('#modal_acumuladores_multiplos').modal('show');
+        });
+        $(document).on('click', '#tbl_td_btn_acumuladores', function (e) {
+            e.preventDefault;
+            $('#modal_acumuladores').modal('show');
+            
+            //get cfops
+            //get acumuladores
+
+           
+
+
+        });
+
+
+        getCfopRealacao = async(element)=>{
+            console.log("get de cfop")
+        var categoria = $(element).val()
+            $.ajax({
+                    url: "/gerenciar/get-cfopsByCnpj",
+                    type: "POST",
+                    data: {
+                        "cnpj_req": globalCNPJ,
+                        "categoria_req":categoria,
+            }
+
+            }).done((response)=>{
+
+                initSelectCfopRelacionar(response)
+                
+            })
+        }
+
+
+
+        //POST TO UPDATE RELAÇÃO CFOP
+updateRealacao = async()=>{
+        var categoria = $("#relacionamentoCFOP_categoria").val()
+            var cfop_nota = $("#relacionamentoCFOP_nota").val()
+            var cfop_erp = $("#relacionamentoCFOP_erp").val()
+
+            $.ajax({
+                    url: "/gerenciar/get",
+                    type: "POST",
+                    data: {"cnpj_req": globalCNPJ,
+                "cfop_nota":cfop_nota,
+                "cfop_erp": cfop_erp }
+
+            }).done((response)=>{
+
+                if(response){
+                    console.log("response ", response)
+                }
+            })
+        }
+
+
+
+        //---------------------------------------------------------------OUVINTE DO BOTÃO ADICIONAR USUÁRIOS / ABRE MODAL
+        $(document).on('click', '#tbl_th_btn_adicionar', function (e) {
+            e.preventDefault;
+
+            $('#EditModal_InserirClientes').modal('show');
+        });
+
+        $(document).on('click', '#cliente-excel', function (e) {
+            e.preventDefault;
+
+            $('#EditModal_InserirClientesExcel').modal('show');
+        });
+
+        $(document).on('click', '.excel_acumuladores', function (e) {
+            e.preventDefault;
+
+            $('#EditModal_InserirAcumuladoresExcel').modal('show');
+        });
+
+        //____________________________________BOTÃO SALVAR MODAL_______________________________________
+        //--------------------------------------------------------------AJAX POST DO BOTÃO SALVAR MODAL UPDATE CLIENTE
+        $("#update_form_cliente").submit(function (e) {
+            e.preventDefault(); //prevent default action
+            var form = $('#update_form_cliente')[0];
+            var data = new FormData(form)
+
+            var post_url = $(this).attr("action"); //get form action url
+            var request_method = $(this).attr("method"); //get form GET/POST method
+
+
+            //var form_data = $(this).serialize(); //Encode form elements for submission
+            //console.log("form_data AJAX")
+            //console.log(form_data);
+            $.ajax({
+                url: post_url,
+                type: request_method,
+                data: data,
+                enctype: 'multipart/form-data',
+
+                processData: false, // Important!
+                contentType: false,
+                cache: false
+            }).done(function (response) { //
+                //$("#server-results").html(response);
+                var gif = "";
+                if (response == "Dados atualizados!") {
+                    gif = "success";
+                }
+                if (response == "Erro ao gravar novos dados!") {
+                    gif = "warning";
+                }
+                Swal.fire({
+                    position: 'center',
+                    icon: gif,
+                    title: response,
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+                setTimeout(function () {
+                    modal_hide_Single();
+                    //reloadPage();
+                }, 2000);
+                window.reloadPage();
+            });
+        });
+        //----------------------------------------------------------------------------------------x
+
+
+        //--------------------------------------------------------------AJAX POST DO BOTÃO SALVAR MODAL UPDATE MULTIPLOS CLIENTES
+        $("#update_form_cliente_multiplos").submit(function (evm) {
+            evm.preventDefault(); //prevent default action
+            var post_url = $(this).attr("action"); //get form action url
+            var request_method = $(this).attr("method"); //get form GET/POST method
+            var form_data = $(this).serialize(); //Encode form elements for submission
+            //console.log("form_data AJAX")
+            //console.log(form_data);
+            $.ajax({
+                async: "false",
+                url: post_url,
+                type: request_method,
+                data: form_data
+            }).done(function (response) { //
+                //$("#server-results").html(response);
+                var gif = "";
+                if (response == "Dados atualizados!") {
+                    gif = "success";
+                }
+                if (response == "Erro ao gravar novos dados!") {
+                    gif = "waning";
+                }
+                if (response == "Tipo Antecipado das linhas selecionadas foram atualizado!") {
+                    gif = "success";
+                }
+                if (response == "Erro ao atualizar Tipo Antecipado!") {
+                    gif = "waning";
+                }
+                Swal.fire({
+                    position: 'center',
+                    icon: gif,
+                    title: response,
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+                setTimeout(function () {
+                    modal_hide_Multiplos();
+                    reloadPage();
+                }, 2000);
+            });
+        });
+        //----------------------------------------------------------------------------------------x
+
+
+
+        //--------------------------------------------------------------AJAX POST DO BOTÃO SALVAR MODAL INSERT MULTIPLOS CLIENTES
+        $("#form_inserir_clientes").submit(function (e) {
+            e.preventDefault(); //prevent default action
+
+            var form = $('#form_inserir_clientes')[0];
+            var data = new FormData(form);
+
+
+            var post_url = $(this).attr("action"); //get form action url
+            var request_method = $(this).attr("method"); //get form GET/POST method
+            //console.log("enctype AJAX ", $(this).attr("enctype"))
+
+            $.ajax({
+                url: post_url,
+                type: request_method,
+                data: data,
+                enctype: 'multipart/form-data',
+
+                processData: false, // Important!
+                contentType: false,
+                cache: false
+            }).done(function (response) { //
+                //console.log("resposta = ", response)
+                //$("#server-results").html(response);
+                var gif = "";
+                var Clientes = [];
+
+
+                //_______________________________________________________________________________Limpando formulario
+                //foreach para limpar form
+                $(".CERTmsg.areaClick").each(function (index, element) {
+                    $(element).empty().prepend(
+                        '<h5 class="clickAqui">Certificado Digital</h5><label class="clickAqui"> (Clique para Inserir) </label>'
+                    )
+                })
+                $('.targetclearx').each(function (index, element) {
+                    if (element) {
+                        $(element).click()
+                    }
+                })
+                $('#regime').change()
+                $('#cancel').click()
+                //_______________________________________________________________________________Limpando formulario
+
+                if (response.EmpresasExistentes) {
+                    if (response.EmpresasExistentes.length != 0) {
+                        gif = "warning";
+                        if (response.EmpresasExistentes.length > 1) {
+                            for (var i = 0; i < response.EmpresasExistentes.length; i++) {
+                                Clientes.push(`\n '${response.EmpresasExistentes[i]}`)
+                            }
+                            response = 'Os seguintes clientes ' + Clientes +
+                                ' \n não foram inseridos pois já haviam sido cadastrados anteriormente.'
+                        } else {
+                            response = "O cliente " + response.EmpresasExistentes +
+                                ' não foi inserido pois já estava cadastrado.';
+
+                        }
+                    }
+                }
+
+                if (response == "Cliente inserido com sucesso!") {
+                    gif = "success";
+                }
+                if (response == "Clientes inseridos com sucesso!") {
+                    gif = "success";
+                }
+                if (response == "Erro ao inserir novo cliente. Tente Novamente!") {
+                    gif = "warning";
+                }
+                if (response == "Erro ao inserir novos clientes. Tente Novamente!") {
+                    gif = "warning";
+                }
+                if (response == "Você não possui as permissões necessárias!") {
+                    gif = "warning";
+                }
+
+                //console.log("Clientes ", Clientes)
+
+                Swal.fire({
+                    position: 'center',
+                    icon: gif,
+                    title: response,
+                    showConfirmButton: false,
+                    timer: 0
+                });
+
+                setTimeout(function () {
+                    //modal_hide_Multiplos();
+                    //reloadPage();
+                }, 4000);
+
+            });
+        });
+        //----------------------------------------------------------------------------------------x
+
+
+
+
+        //PEGA O ID DOS ITENS MARCADOS-----------------------------------------------
+        var itens_selecionados = [];
+        var itens_selecionados_cnpj = [];
+
+        function marcados(temp) {
+
+            //console.log("marcados?")
+            itens_selecionados = [];
+            itens_selecionados_cnpj = [];
+
+            $('#tabela-clientes :checkbox:checked').each(function (index) {
+                var currentRow = this.parentNode.parentNode.parentNode.parentNode;
+                var closestTr = currentRow.getElementsByTagName("td")[1];
+                var closestTrCNPJ = currentRow.getElementsByTagName("td")[3];
+                
+        
+                if (typeof closestTr !== "undefined") {
+                    itens_selecionados.push(closestTr.textContent);
+                }
+
+                if (typeof closestTrCNPJ !== "undefined") {
+                    itens_selecionados_cnpj.push(closestTrCNPJ.textContent);
+                }
+             
+            });
+
+        }
+
+
+        //SELECIONAR TODOS OS CHECK BOXs VISIVEIS
+        function marcartodos() {
+            $("#checkall").each(function () {
+                $(".form-check-input:visible").prop("checked", $(this).prop("checked"))
+                if (checkall.checked == true) {
+                    marcados();
+                }
+                //console.log("MARQUEI TODOS OS CHECK BOX: ", itens_selecionados);
+            })
+        }
+
+
+
+        //___________________________________FUNÇÕES DIVERSAS______________________________________
+
+        //-------------------------------------------------------------------------------MODAL HIDE
+        function modal_hide_Single() {
+            $('#EditModal_Cliente').modal('hide')
+        }
+
+        function modal_hide_Multiplos() {
+            $('#EditModal_Clientes_Multiplos').modal('hide')
+        }
+
+        function modal_hide_InserirClientes() {
+            $('#EditModal_InserirClientes').modal('hide')
+        }
+
+        function modal_hide_InserirClientes() {
+            $('#EditModal_InserirClientesExcel').modal('hide')
+        }
+        //----------------------------------------------------------------------RECARREGA A PÁGINA
+        function reloadPage() {
+            location.reload(true);
+        }
+
+        //--------------------------------------------------------------DESMARCA TODOS OS CHECKBOXs
+        function desmarcartodos() {
+            //console.log("desmarcando");
+            $('input[type="checkbox"]:checked').prop('checked', false);
+            //Re-contar itens marcados
+            marcados();
+            //console.log("Itens marcado: ", itens_selecionados);
+        }
+
+        //-----------------------------QUANDO MUDAR A PAGINA DA TABELA DESMARCAR TODOS OS CHECKBOXES
+        $("#tabela-clientes").on("page.dt", function () {
+            desmarcartodos();
+            //console.log("1")
+        }).on('search.dt', function () {
+            desmarcartodos();
+            //console.log("2")
+        });
+        //________________________________________________________________________________________x
+
+
+        //--------------------------------Habilita botão alterar data se algum check box estiver selecionado & desabilita os botões dos rows
+        $("input[name='checkbox']").on('change', function () {
+            //Habilita o botão EDITAR MARCADOS (HEADER) se algum check box estiver selecionado - disabled = true
+            $("button[name='tbl_th_btn_editarselecionados']").prop('disabled', !$(
+                "input[name='checkbox']:checked").length);
+            $("button[name='tbl_th_btn_acumuladores']").prop('disabled', !$("input[name='checkbox']:checked")
+                .length);
+            //Desabilita os botões editar linha se algum check box estiver selecionado - disabled = true
+            $("button[name='tbl_td_btn_editarlinha']").prop('disabled', $("input[name='checkbox']:checked")
+                .length);
+            $("button[name='tbl_td_btn_acumuladores']").prop('disabled', $("input[name='checkbox']:checked")
+                .length);
+        })
+    </script>
+
+
+
+    <script>
+        $(document).ready(function () {
+            var max_fields = 20; //maximum input boxes allowed
+            var wrapper = $('#dinamicAppend'); //Fields wrapper
+            var add_button = $('#addinputuser'); //Add button ID
+            var x = 0; //initlal text box count
+            var formCardNumber = 1;
+
+            $(add_button).click(function (e) { //on add input button click
+                e.preventDefault();
+                if (x < max_fields) { //max input box allowed
+                    x++; //text box increment
+                    formCardNumber++; //formCardNumber increment to append card initial 2 (++)
+                    $(wrapper).append('<!--' + formCardNumber + 'º CARD-->' +
+                        '<div class="card" style="padding:20px; box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.157);">' +
+                        '<!--12COLUNAS-->' +
+                        '<div class="row">' +
+                        '<!--12colunas CARD-->' +
+                        '<div class="col-lg-12">' +
+                        '<div class="row align-items-center">' +
+                        '<div class="col-sm-11 col-md-11 col-lg-11">' + formCardNumber + '#' +
+                        '</div>' +
+                        '<div class="col-sm-1 col-md-1 col-lg-1">' +
+                        '<button type="button" class="close remove_field targetclearx">' +
+                        '<span aria-hidden="true">&times;</span></button>' +
+                        '</div>' +
+                        '<!--10COLUNAS-->' +
+                        '<div class="col-lg-8">' +
+                        '<div class="row">' +
+
+                        '<div class="col-md-4">' +
+                        '<h6 class="label-modal">CNPJ</h6>' +
+                        '<input  id="name_cnpj' + x +
+                        '" name="cnpj" type="number" step="any" class="form-control " placeholder="Digite seu CNPJ" onchange="onChangeCNPJ(this)" autocomplete="off" required>' +
+                        '</div>' +
+
+                        '<div class="col-md-4">' +
+                        '<h6 class="label-modal">Cliente (Razão Social)</h6>' +
+                        '<input id="name_cliente' + x +
+                        '" name="cliente" type="text" class="form-control " placeholder="Digite seu Nome" autocomplete="off" onkeyup="var start = this.selectionStart; var end = this.selectionEnd; this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" required>' +
+                        '</div>' +
+
+                        '<div class="col-md-4">' +
+                        '<h6 class="label-modal">Unidade (Cidade)</h6>' +
+                        '<input id="name_unidade' + x +
+                        '" name="unidade" type="text" class="form-control " placeholder="Informe sua Cidade" autocomplete="off" onkeyup="var start = this.selectionStart; var end = this.selectionEnd; this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" required>' +
+                        '</div>' +
+
+                        '<div class="col-md-4">' +
+                        '<h6 class="label-modal">Regime Tributário</h6>' +
+                        '<select  title="SELECIONE" class="form-control  selectpicker" data-style="btn" name="regime" type="text" required>' +
+                        '<option required>Simples-Nacional</option>' +
+                        '<option>Lucro Presumido</option>' +
+                        '<option>Lucro Real</option>' +
+                        '<option>CEI</option>' +
+                        '<option>Imune/Isentas</option>' +
+                        '</select>' +
+                        '</div>' +
+
+                        '<div class="col-md-4">' +
+                        '<h6 class="label-modal">Situação <em>(obrigatório)</em></h6>' +
+                        '<div class="form-check form-check-radio">' +
+                        '<label class="form-check-label">' +
+                        '<input id="name_situacao_ativa[' + x +
+                        ']" class="form-check-input " type="radio" name="situacao[' + x +
+                        ']" value="Ativa" autocomplete="off" required>Ativa<span class="circle">' +
+                        '<span class="check"></span>' +
+                        '</span>' +
+                        '</label>' +
+                        '<label class="form-check-label">' +
+                        '<input id="name_situacao_inativa[' + x +
+                        ']" class="form-check-input " type="radio" name="situacao[' + x +
+                        ']" value="Inativa" autocomplete="off">Inativa<span class="circle">' +
+                        '<span class="check"></span>' +
+                        '</span>' +
+                        '</label>' +
+                        '</div>' +
+                        '</div>' +
+
+                        '<div class="col-md-4">' +
+                        '<h6 class="label-modal">Senha do Certificado Digital</h6>' +
+                        '<input name="senhacert" type="password" class="form-control " placeholder="Digite seu Senha" autocomplete="off" required>' +
+                        '</div>' +
+
+                        '</div>' +
+                        '</div>' +
+                        '<!--10COLUNAS-->' +
+                        '<div class="col-lg-3">' +
+                        '<div class="col-lg-12">' +
+                        '<div class="row justify-content-center targetclear" onclick="certificado(this)" >' +
+                        '<div class="CERTmsg areaClick">' +
+                        '<h5 class="clickAqui">Certificado Digital</h5>' +
+                        '<label class="clickAqui"> (Clique para Inserir) </label>' +
+                        '</div>' +
+                        '</div>' +
+                        '<input  class="InputUploader" type="file" name="file" accept=".pfx,application/x-pkcs12">' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '<!--FIM DO' + x + 'º CARD-->');
+
+                    $('.selectpicker').selectpicker('refresh');
+                }
+            });
+
+            $(wrapper).on("click", ".remove_field", function (e) { //user click on remove text
+                e.preventDefault();
+                $(this).parent('div').parent('div').parent('div').parent('div').parent('div').remove();
+                x--;
+            })
+        });
+    </script>
+
+
+    <!--DROPZONE CSS  -->
+    <!-- <link href="../local/plugins/dropzone/css/dropzone.css" rel="stylesheet">
+    <link href="../local/plugins/dropzone/css/style_clientes.css" rel="stylesheet">-->
+
+    <!--CERTIFICADO DIGITAL INPUT FILE-->
+
+
+
+    <script>
+        function certificado(ThisArea) {
+            var PreviewArea = ThisArea
+            var uploader = $($(PreviewArea)[0].parentNode)[0].children[1]
+            uploader.click()
+            var filePlace = $(ThisArea)[0].children[0]
+            var clickAqui = $(ThisArea)[0].children[1]
+            $(uploader).on('change', function () {
+                var FileName = $(uploader)[0].files[0]
+                if (FileName != undefined) {
+                    $(filePlace).empty().prepend('<div class="IconP12"></div><span class="spanFileName">' + $(
+                        uploader)[0].files[0].name + '</span><span class="spanAlterar">ALTERAR</span>')
+                    $(clickAqui).empty()
+                } else {
+                    $(filePlace).empty().prepend('Certificado Digital')
+                    $(clickAqui).empty().prepend('(Clique para Inserir)')
+
+                }
+            })
+        }
+    </script>
+
+
+    <script>
+        var indexID
+
+        function onChangeCNPJ(elemento) {
+            var cnpj
+            indexID = '';
+            indexID = $(elemento).attr('id')
+
+            if (indexID.length > 9) {
+                indexID = indexID.trim()
+                indexID = (indexID[indexID.length - 1])
+
+                cnpj = document.getElementById(`name_cnpj${indexID}`).value;
+            } else {
+                cnpj = document.getElementById('name_cnpj').value;
+            }
+
+
+            if (cnpj.length == 14) {
+                $.ajax({
+                    url: '/antecipados/get-cnpj',
+                    type: 'POST',
+                    data: {
+                        'cnpj': cnpj
+                    }
+                }).done(function (response) {
+                    if (indexID.length === 1) {
+                        $(`#name_cliente${indexID}`).val(response.razao_social);
+                        $(`#name_unidade${indexID}`).val(response.municipio);
+                    } else if (indexID.length === 9) {
+                        $("#name_cliente").val(response.razao_social);
+                        $("#name_unidade").val(response.municipio);
+                    }
+                })
+            }
+
+        }
+    </script>
+
+    <script>
+        var globalCNPJ
+
+        function getCNPJ(cnpj) {
+            globalCNPJ = cnpj
+        }
+        
+        initSelectCategoria = async () => {
+            $('#select_categoria').empty()
+            var dataCategoria = ["Fora do Estado", "Dentro do Estado", "Substituição Tributária", "Específico"];
+
+            var categoriaOptions = '<option value="" >Selecionar Categoria</option>'
+            await $(dataCategoria).each(function (index, element) {
+                categoriaOptions += `<option value="${element}">${element}</option>`
+            })
+            $('#select_categoria').append(categoriaOptions)
+            $('#select_categoria').materialSelect()
+
+            $('#area_categoria ul :first-child').first('li').addClass('hideElement')
+
+        }
+
+        initSelectCategoriaRelacionamento = async () => {
+            $('#relacionamentoCFOP_categoria').empty()
+            var dataCategoria = ["Transferência de Mercadorias"];
+
+            var categoriaOptions = '<option value="" >Selecionar Categoria</option>'
+            await $(dataCategoria).each(function (index, element) {
+                categoriaOptions += `<option value="${element}">${element}</option>`
+            })
+            $('#relacionamentoCFOP_categoria').append(categoriaOptions)
+            $('#relacionamentoCFOP_categoria').materialSelect()
+
+            $('#area_categoria_relacionar ul :first-child').first('li').addClass('hideElement')
+
+        }
+        
+
+        initSelectCfop = async () => {
+            $("#select_cfop").empty().val('').append(
+                `<option value="" disabled>Selecionar CFOP</option>`)
+            $("#select_cfop").materialSelect()
+            $(`#area_cfop ul :first-child`).next('li').addClass('hideElement')
+
+        }
+
+        initSelectCfopRelacionar = async (rows) => {
+            $("#relacionamentoCFOP_nota").empty().val('')
+            
+            //victor
+            var cfopsOptions = '<option value="" >Selecionar CFOP</option>'
+            
+            await $(rows).each(function (index, row) {
+              Object.entries(row).forEach(([row_title, row_value]) => {
+                 cfopsOptions += `<option value="${row_value}">${row_value}</option>`
+             })
+            })
+
+            await $("#relacionamentoCFOP_nota").append(cfopsOptions)
+            await $("#relacionamentoCFOP_nota").materialSelect()
+            $(`#area_cfop_nota ul :first-child`).first('li').addClass('hideElement')
+
+        }
+
+        initSelectTipoAntecipado = async () => {
+            $("#select_tipo_antecipado").empty().val('').append(
+                `<option value="" disabled>Selecionar Tipo Antecipado</option>`)
+            $("#select_tipo_antecipado").materialSelect()
+            $(`#area_tipo_antecipado ul :first-child`).next('li').addClass('hideElement')
+        }
+
+        initSelectCategoriaAcumuladores = async () => {
+            var dataCategoria = ["Fora do Estado", "Dentro do Estado", "Substituição Tributária", "Específico"];
+
+            var categoriaOptions = '<option value="" >Selecionar Categoria</option>'
+            await $(dataCategoria).each(function (index, element) {
+                categoriaOptions += `<option value="${element}">${element}</option>`
+            })
+
+            $('#select_new_categoria_acumulador').empty().append(categoriaOptions)
+            $('#select_new_categoria_acumulador').materialSelect()
+
+            $('#area_categoria_acumulador ul :first-child').first('li').addClass('hideElement')
+
+        }
+
+        initSelectCategoriaTipoAntecipadoAcumuladores = async () => {
+            var dataAntecipado = ["Antecipado de Entrada", "Antecipado Especial", "Cesta Básica",
+                "Medicamentos", "Crédito Presumido", "Isento"
+            ];
+            var value_antecipado_coluna_db = ["ANTECIPADO_DE_ENTRADAS", "ANTECIPADO_ESPECIAL", "CESTA_BASICA",
+                "MEDICAMENTOS", "CREDITO_PRESUMIDO", "ISENTO"
+            ];
+
+            var antecipadoOptions = '<option value="" >Selecionar Antecipado</option>'
+            await $(dataAntecipado).each(function (index, element) {
+                antecipadoOptions +=
+                    `<option value="${value_antecipado_coluna_db[index]}">${element}</option>`
+            })
+
+            $('#select_new_antecipado_acumulador').empty().append(antecipadoOptions)
+            $('#select_new_antecipado_acumulador').materialSelect()
+
+            $('#area_antecipado_acumulador ul :first-child').first('li').addClass('hideElement')
+        }
+
+        /* para iniciar select dos acumuladores multiplos */
+        initSelectCategoriaAcumuladores_multiplos = async () => {
+            var dataCategoria = ["Fora do Estado", "Dentro do Estado", "Substituição Tributária", "Específico"];
+
+            var categoriaOptions = '<option value="" >Selecionar Categoria</option>'
+            await $(dataCategoria).each(function (index, element) {
+                categoriaOptions += `<option value="${element}">${element}</option>`
+            })
+
+            $('#select_new_categoria_acumulador_multiplo').empty().append(categoriaOptions)
+            $('#select_new_categoria_acumulador_multiplo').materialSelect()
+
+            $('#area_categoria_acumulador_multiplo ul :first-child').first('li').addClass('hideElement')
+
+        }
+
+        initSelectCategoriaTipoAntecipadoAcumuladores_multiplos = async () => {
+            var dataAntecipado = ["Antecipado de Entrada", "Antecipado Especial", "Cesta Básica",
+                "Medicamentos", "Crédito Presumido", "Isento"
+            ];
+            var value_antecipado_coluna_db = ["ANTECIPADO_DE_ENTRADAS", "ANTECIPADO_ESPECIAL", "CESTA_BASICA",
+                "MEDICAMENTOS", "CREDITO_PRESUMIDO", "ISENTO"
+            ];
+
+            var antecipadoOptions = '<option value="" >Selecionar Antecipado</option>'
+            await $(dataAntecipado).each(function (index, element) {
+                antecipadoOptions +=
+                    `<option value="${value_antecipado_coluna_db[index]}">${element}</option>`
+            })
+
+            $('#select_new_antecipado_acumulador_multiplo').empty().append(antecipadoOptions)
+            $('#select_new_antecipado_acumulador_multiplo').materialSelect()
+
+            $('#area_antecipado_acumulador_multiplo ul :first-child').first('li').addClass('hideElement')
+        }
+
+
+
+
+        /* click no botão destroy os dados da tabela - single */
+        $("#close_acumuladores").on('click', function () {
+
+            if (tabelaAcumulador) {
+                tabelaAcumulador.destroy()
+            }
+
+            initSelectCategoria()
+
+            initSelectCfop()
+
+            initSelectTipoAntecipado()
+
+
+            /* esconder itens de um novo acumulador */
+            $(".addAcumuladorInput").last().hide("fast", function hidePrev() {
+                $(this).prev(".addAcumuladorInput").hide("fast", hidePrev);
+            });
+            $("#showr").removeClass("submitNewAcumulador")
+
+            initSelectCategoriaAcumuladores()
+
+            initSelectCategoriaTipoAntecipadoAcumuladores()
+
+
+        })
+
+        $(document).ready(function () {
+            
+            initSelectCategoria()
+            
+            initSelectCfop()
+            
+            initSelectTipoAntecipado()
+            
+            initSelectCategoriaAcumuladores()
+            initSelectCategoriaRelacionamento()
+
+            initSelectCategoriaTipoAntecipadoAcumuladores()
+
+            /* inicia select de acumuladores multiplos */
+            initSelectCategoriaAcumuladores_multiplos()
+
+            initSelectCategoriaTipoAntecipadoAcumuladores_multiplos()
+
+
+            //Oculta primeiro options do select
+            $('#select_categoria').on('change', function () {
+                //console.log('this.value--> ', this.value) //string
+                //console.log('$(this).val() -->', $(this).val()) //array 
+                //executar no change do selet de cima
+                $.ajax({
+                    url: "/gerenciar/filter-acumuladores",
+                    type: "POST",
+                    data: {
+                        "categoria": this.value,
+                        "cnpj_cliente": globalCNPJ
+                    }
+                }).done(function (response) {
+                    response = JSON.parse(response)
+                    selectRefreshOptions('cfop', response.cfop)
+                    selectRefreshOptions('tipo_antecipado', response.tipo_antecipado)
+
+                })
+
+            })
+
+
+
+            /* função para CFOP e Acumuladores */
+            $('#select_cfop').on('change', function () {
+
+                var select_categoria_VALUE = $('#select_categoria').val()
+                var select_cfop_VALUE = $(this).val()
+                var select_tipo_antecipado_VALUE = $('#select_tipo_antecipado').val()
+                const cnpj = globalCNPJ
+                if (select_categoria_VALUE.length > 0 && select_cfop_VALUE.length > 0 &&
+                    select_tipo_antecipado_VALUE.length > 0) {
+                    $.ajax({
+                        url: "/gerenciar/data-acumuladores",
+                        type: "POST",
+                        data: {
+                            "categoria": select_categoria_VALUE,
+                            "cfop": select_cfop_VALUE,
+                            "antecipado": select_tipo_antecipado_VALUE,
+                            'cnpj': cnpj
+                        }
+                    }).done(function (response) {
+                        response = JSON.parse(response)
+                        if (response.length > 0) {
+                            makeTable(response)
+                        } else {
+                            if (tabelaAcumulador) {
+                                tabelaAcumulador.destroy()
+                            }
+                        }
+
+                    })
+                } else {
+                    if (tabelaAcumulador) {
+                        tabelaAcumulador.destroy()
+                    }
+                }
+            })
+
+            $('#select_tipo_antecipado').on('change', function () {
+
+                var select_categoria_VALUE = $('#select_categoria').val()
+                var select_cfop_VALUE = $('#select_cfop').val()
+                var select_tipo_antecipado_VALUE = $(this).val()
+                const cnpj = globalCNPJ
+                if (select_categoria_VALUE.length > 0 && select_cfop_VALUE.length > 0 &&
+                    select_tipo_antecipado_VALUE.length > 0) {
+                    $.ajax({
+                        url: "/gerenciar/data-acumuladores",
+                        type: "POST",
+                        data: {
+                            "categoria": select_categoria_VALUE,
+                            "cfop": select_cfop_VALUE,
+                            "antecipado": select_tipo_antecipado_VALUE,
+                            'cnpj': cnpj
+                        }
+                    }).done(function (response) {
+                        response = JSON.parse(response)
+                        if (response.length > 0) {
+                            makeTable(response)
+                        } else {
+                            if (tabelaAcumulador) {
+                                tabelaAcumulador.destroy()
+                            }
+                        }
+
+
+                    })
+                } else {
+                    if (tabelaAcumulador) {
+                        tabelaAcumulador.destroy()
+                    }
+                }
+            })
+
+        })
+
+
+        selectRefreshOptions = async (selectID, optionsArray) => {
+            var optionsHTML = `<option value="" disabled>Selecione</option>`
+            await $(optionsArray).each((index, element) => {
+
+                if (element) {
+                    if (selectID == 'tipo_antecipado') {
+                        optionsHTML +=
+                            `<option value="${element[1]}!${element[2]}">${element[0]}</option>`
+                    }
+                    if (selectID == 'cfop') {
+                        optionsHTML += `<option value="${element[0]}">${element[0]}</option>`
+                    }
+                }
+            })
+
+            $(`#select_${selectID}`).empty().append(optionsHTML).materialSelect()
+
+            //Hide first option "Selecione"
+            setTimeout(() => {
+                $(`#area_${selectID} ul :first-child`).next('li').addClass('hideElement')
+            }, 100)
+
+        }
+
+    </script>
+
+    <link rel="stylesheet" href="../local/plugins/tabulator/dist/css/tabulator-mezz.css">
+    <script src="../local/plugins/tabulator/dist/js/tabulator.js"></script>
+
+
+
+
+    <script>
+        var tabelaAcumulador
+
+
+        makeTable = async (dataRows) => {
+
+            var headerTable = [{
+                title: " ",
+                field: "leftheader",
+                rowHandle: true,
+                headerSort: false,
+                frozen: true,
+                width: 300,
+                minWidth: 30
+            }]
+            var rowsTable = []
+            var objetoTD = []
+
+            await dataRows.forEach((row, row_index) => {
+                if (row.mva) {
+                    let aux = row.mva.split(",").join(".") //ex: "1,5432" -> "1,5432"
+                    let porcentagem =
+                        `${(parseFloat(aux) * 100).toFixed(2)}%` //ex: "1,5432" -> "154.32%"
+                    row.leftheader = row.tipo_antecipado + ' ' + porcentagem
+                }
+
+                var dataField = ''
+                dataField = `${row.cfop}!${row.resumo}`
+                dataField = dataField.split(' ').join('').split('/').join('').split('_').join('').split(
+                    '%').join('').split('.').join('')
+
+
+                //TABLE HEADER------------------------------------------------------------------------------------------------------------------------------------------------
+                if (headerTable.length > 0) {
+                    var countSame = 0
+                    headerTable.forEach((header_el, header_index) => {
+                        if (header_el.title == `${row.cfop} ${row.resumo}`) {
+                            countSame++
+                        }
+                    })
+                    if (!countSame) {
+                        headerTable.push({
+                            'title': `${row.cfop} ${row.resumo}`,
+                            'field': `${dataField}`,
+                            'editor': "input",
+                            'width': `${row.resumo.length + 300}`,
+                            'minWidth': 50
+                        })
+                        //editor:"input", editor:true,
+                    }
+                }
+                //------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+                //TABLE BODY---------------------------------------------------------------------------------------------------------------------------------------------------
+                if (row.leftheader) {
+                    var json = {
+                        [row.leftheader]: row.leftheader
+                    }
+                    var flag = 0
+                    rowsTable.forEach(function (rowsTable_element, rowsTable_index) {
+                        if (rowsTable_element.hasOwnProperty(row.leftheader)) {
+                            flag++
+                        }
+                    })
+                    //Só faz o push se o flag continuar false ou seja, não há elemento igual no rowsTable
+                    if (flag == 0) {
+                        rowsTable.push(json)
+                    }
+                }
+                Object.entries(row).forEach(([row_title, row_value]) => {
+                    rowsTable.forEach(function (rowsTable_element, rowsTable_index) {
+                        //console.log('obj final', rowsTable_element)
+                        if (rowsTable_element.hasOwnProperty(row.leftheader)) {
+                            //adicionando novo elemento ao objeto
+                            if (row_title.length > 0) {
+                                if (row_title == 'acumulador') {
+                                    rowsTable[rowsTable_index][dataField] = row_value
+                                } else {
+                                    rowsTable[rowsTable_index][row_title] = row_value
+                                }
+                            }
+                        }
+                    })
+                })
+                //------------------------------------------------------------------------------------------------------------------------------------------------------------
+                if (rowsTable.length == 0) {
+                    if (tabelaAcumulador) {
+                        tabelaAcumulador.destroy()
+                    }
+                } else {
+                    var tableheight = (rowsTable.length * 30) + 160
+                    //Build Tabulator
+                    tabelaAcumulador = new Tabulator("#table-acumuladores", {
+                        height: `${tableheight}px`,
+                        data: rowsTable,
+                        columns: headerTable,
+                        cellEdited: function (cell) {
+                            //To Update
+                            var new_acumulador = cell._cell.value
+                            var initialValue = cell._cell.initialValue
+
+                            var rowData = cell._cell.row.data
+
+                            var whereInCfops = []
+                            var cnpj = rowData.cnpj
+                            var mva = rowData.mva
+                            var tipo_antecipado = rowData.tipo_antecipado
+
+                            if (new_acumulador != initialValue) {
+
+                                Object.entries(rowData).forEach(([title, value]) => {
+                                    if (value == new_acumulador) {
+                                        var splitedCFOP = title.split('!')
+                                        if (splitedCFOP[0]) {
+                                            whereInCfops.push(splitedCFOP[0])
+                                        }
+                                    }
+
+                                })
+                                var categoria = $('#select_categoria').val()
+
+                                if (cnpj && mva && whereInCfops.length > 0) {
+                                    showLoading();
+                                    $.ajax({
+                                        url: "/gerenciar/update-acumulador",
+                                        type: "POST",
+                                        data: {
+                                            "cnpj": cnpj,
+                                            "mva": mva,
+                                            "cfops": whereInCfops,
+                                            "tipo_antecipado": tipo_antecipado,
+                                            "new_acumulador": new_acumulador,
+                                            "categoria": categoria
+                                        }
+                                    }).done(function (response) {
+                                        hideLoading()
+                                    })
+                                }
+                            }
+                        }
+                    });
+                }
+            })
+
+
+        }
+    </script>
+
+    <script>
+        function downloadXLSX() {
+
+            $.ajax({
+                url: '/gerenciar/download-xlsx-clientes',
+                type: 'get',
+                xhr: function () {
+                    var xhr = new XMLHttpRequest();
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState == 2) {
+                            if (xhr.status == 200) {
+                                xhr.responseType = "blob";
+                            } else {
+                                xhr.responseType = "text";
+                            }
+                        }
+                    };
+                    return xhr;
+                },
+            }).done(function (data) {
+
+                if (data == "Arquivo não encontrado") {
+                    //sweetalert aqui
+                } else {
+                    //Convert the Byte Data to BLOB object.
+                    var blob = new Blob([data], {
+                        type: "application/xlsx"
+                    });
+                    //Check the Browser type and download the File.
+                    var isIE = false || !!document.documentMode;
+                    if (isIE) {
+                        window.navigator.msSaveBlob(blob, `Mezz InserirClientes.xlsx`);
+                    } else {
+                        var url = window.URL || window.webkitURL;
+                        var link = url.createObjectURL(blob);
+                        var a = $("<a />");
+                        a.attr("download", `Mezz InserirClientes.xlsx`);
+                        a.attr("href", link);
+                        $("body").append(a);
+                        a[0].click();
+                        $("body").remove(a);
+                    }
+                }
+            })
+        }
+    </script>
+
+<script>
+    function downloadXLSXAcumuladores() {
+
+        $.ajax({
+            url: '/gerenciar/download-xlsx-acumuladores',
+            type: 'get',
+            xhr: function () {
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 2) {
+                        if (xhr.status == 200) {
+                            xhr.responseType = "blob";
+                        } else {
+                            xhr.responseType = "text";
+                        }
+                    }
+                };
+                return xhr;
+            },
+        }).done(function (data) {
+
+            if (data == "Arquivo não encontrado") {
+                //sweetalert aqui
+            } else {
+                //Convert the Byte Data to BLOB object.
+                var blob = new Blob([data], {
+                    type: "application/xlsx"
+                });
+                //Check the Browser type and download the File.
+                var isIE = false || !!document.documentMode;
+                if (isIE) {
+                    window.navigator.msSaveBlob(blob, `Mezz InserirAcumuladores.xlsx`);
+                } else {
+                    var url = window.URL || window.webkitURL;
+                    var link = url.createObjectURL(blob);
+                    var a = $("<a />");
+                    a.attr("download", `Mezz InserirAcumuladores.xlsx`);
+                    a.attr("href", link);
+                    $("body").append(a);
+                    a[0].click();
+                    $("body").remove(a);
+                }
+            }
+        })
+    }
+</script>
+
+
+    <script>
+        var tooltips = document.querySelectorAll('.tooltip-acumuladores span');
+
+        window.onmousemove = function (e) {
+            var x = (e.clientX - 250) + 'px',
+                y = (e.clientY + 10) + 'px';
+            for (var i = 0; i < tooltips.length; i++) {
+                tooltips[i].style.top = y;
+                tooltips[i].style.left = x;
+            }
+        };
+    </script>
+
+
+    <script src="../local/plugins/read-xlsx/read-excel-file.min.js"></script>
+
+    <!--ClientesXLSX -->
+    <script>
+
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success col-lg-3',
+                cancelButton: 'btn btn-danger col-lg-3'
+            },
+            buttonsStyling: false
+        })
+
+
+
+        var arrayClientesXLSX = []
+
+        function readXLXSClientes(file) {
+
+            if (file) {
+
+                readXlsxFile(file).then(function (res) {
+
+                    var response = res
+
+                    delete response[0]
+                    delete response[1]
+                    delete response[2]
+
+                    response.forEach(function (element, indice) {
+
+                        arrayUsuariosXLSX = []
+
+                        var objeto_clientes = {}
+
+                        element.forEach(function (element_attrs, element_index) {
+
+                            if (element_index > 0 && element_index < 5) {
+                                if (element_index == 1 && element_attrs) {
+                                    objeto_clientes.nome = element_attrs
+                                }
+                                if (element_index == 2 && element_attrs) {
+                                    objeto_clientes.cnpj = element_attrs
+                                }
+                                if (element_index == 3 && element_attrs) {
+                                    objeto_clientes.tributacao = element_attrs
+                                }
+                                if (element_index == 4 && element_attrs) {
+                                    objeto_clientes.unidade = element_attrs
+                                }
+                            }
+                        })
+
+                        if (Object.entries(objeto_clientes).length == 4) {
+                            arrayClientesXLSX.push(objeto_clientes)
+                        }
+
+                        
+                    });
+                    /* habilitar botão ao final do processamento */
+                    $("#sendClientesXLSX").prop("disabled", false)
+
+                })
+
+            } else {
+                $("#InputUploaderXLSX_usuarios").val(null);
+            }
+
+        }
+
+        function clientesSendXLSX() {
+
+            if (arrayClientesXLSX.length > 0) {
+                //showLoading();
+                $.ajax({
+                    url: '/gerenciar/insert-xlsx-clientes',
+                    type: 'POST',
+                    data: {
+                        "clientesXLSX": arrayClientesXLSX
+                    },
+                }).done(function (response) {
+                    //hideLoading();
+                    if (response) {
+
+                        if (response.msg != "Ocorreu algum erro, tente novamente.") {
+                            var gif = "success";
+                            if (response.clientes_inseridos && response.clientes_inseridos.length == 0) {
+                                response.clientes_inseridos = 0
+                            }
+                            var textUsuarios = `<div><h3 style="font-weight:600">Clientes(s) inserido(s)</h3>
+                                                    <h4>${response.clientes_inseridos}</h4></div><hr>`
+
+                            if (response.clientes_nao_inseridos && response.clientes_nao_inseridos.length ==
+                                0) {
+                                response.clientes_nao_inseridos = 0
+                            }
+                            var textUsuariosExistem =
+                                `<div>
+                                    <h3 style="font-weight:600">Usuários não inseridos</h3><h4>${response.clientes_nao_inseridos}</h4></div>`
+
+                            response = `${textUsuarios}${textUsuariosExistem}`
+                        } else {
+                            gif = "warning";
+                            response = response.msg
+                        }
+
+                    }
+
+                    Swal.fire({
+                        customClass: {
+                            confirmButton: 'btn btn-black col-lg-3',
+                        },
+                        heightAuto: false,
+                        buttonsStyling: false,
+                        position: 'center',
+                        icon: gif,
+                        title: response,
+                        showConfirmButton: true,
+                        timer: 0
+                    });
+
+                })
+
+            }
+
+        }
+
+
+        function fileInputXLSXUsuarios(ThisArea) {
+            var PreviewArea = ThisArea
+            var uploader = $(ThisArea).next('input')
+            $(uploader).trigger('click')
+        }
+
+
+        $('#InputUploaderXLSX_usuarios').on('change', function () {
+            var filePlace = $('#fileTypeMsg_usuarios')
+            var clickAqui = $('#clickMsg_usuarios')
+            //console.log("input file mudou")
+            var File = $('#InputUploaderXLSX_usuarios')[0].files[0]
+            if (File) {
+                $(filePlace).empty().prepend('<div class="IconXlsx"></div><span class="spanFileName">' + $(
+                        '#InputUploaderXLSX_usuarios')[0].files[0].name +
+                    '</span><br><span class="spanAlterar">ALTERAR</span>')
+                $(clickAqui).empty()
+                readXLXSClientes(File)
+            } else {
+                $("#sendUsuariosXLSX").prop("disabled", true)
+                $(filePlace).empty().prepend('Inserir o formulário em excel')
+                $(clickAqui).empty().prepend('(Clique para Inserir)')
+            }
+        })
+
+    var arrayAcumuladoresXLSX = []
+    var aux_linha = 0
+
+    readXLXSAcumuladores = async(file)=>{
+
+        if (file) {
+
+            await readXlsxFile(file, { getSheets: true }).then(async (sheets) => {
+                showLoading()
+                await sheets.forEach(async(element, index) => {
+                    index++
+                   await readXlsxFile(file, { sheet: index }).then(async (sheet) => {
+                        //console.log("página da vez: ", sheet)
+                        var objeto_acumuladores = { 'tabela' : element.name, data: []}
+                        await sheet.forEach(async (linha_da_vez, indice) => {
+                           
+                            var objrows = {}
+                            if(indice > 3){
+
+                                aux_linha++
+                                await linha_da_vez.forEach(async (element_attrs, element_index) => {
+                                     
+                                     if (element_index > 0 && element_index < 7) {
+                                         if (element_index == 1 && element_attrs) {
+                                             objrows.nome_pj = element_attrs
+                                         }
+                                         if (element_index == 2 && element_attrs) {
+
+                                            var cnpj = element_attrs.toString()
+                                            var tam = 14 - parseInt(cnpj.length)
+
+                                            for(var i = 0; i < tam; i++) {
+                                                cnpj = '0' + cnpj
+                                            }
+
+                                            objrows.cnpj = cnpj
+                                         }
+                                         if (element_index == 3 && element_attrs) {
+                                             objrows.antecipado = element_attrs
+                                         }
+                                         if (element_index == 4 && element_attrs) {
+                                             objrows.mva = element_attrs.toString().replace(/\./g, ",")
+                                         }
+                                         if (element_index == 5 && element_attrs) {
+                                             objrows.cfop = element_attrs.toString()
+                                         }
+                                         if (element_index == 6 && element_attrs) {
+                                             objrows.acumulador = element_attrs
+                                         }
+                                     }
+                                 })
+                                 if (Object.entries(objrows).length == 6) {
+                                    await objeto_acumuladores.data.push(objrows)
+                                }
+                            }
+
+                            //console.log('tamanho do auxiliar:', aux_linha)
+                            if (indice == aux_linha-1) {
+                                await arrayAcumuladoresXLSX.push(objeto_acumuladores)
+                                aux_linha = 0
+                            }
+                        });
+                    })
+                    
+                //console.log('tamanho: ', arrayAcumuladoresXLSX.length)
+                //console.log('objeto: ', arrayAcumuladoresXLSX)
+                if(arrayAcumuladoresXLSX.length == 4) {
+                    //console.log('dados: ', arrayAcumuladoresXLSX)
+                    hideLoading()
+                    /* habilitar botão ao final do processamento */
+                    $("#sendAcumuladoresXLSX").prop("disabled", false)
+                    }
+                })
+
+            })
+
+            
+            
+        } else {
+            $("#InputUploaderXLSX_usuarios").val(null);
+        }
+
+    }
+
+    
+
+
+    function acumuladoresSendXLSX() {
+
+        if (arrayAcumuladoresXLSX.length > 0) {
+
+            showLoading()
+
+            arrayAcumuladoresXLSX = JSON.stringify(arrayAcumuladoresXLSX)
+
+            //console.log('acumulador data: ', arrayAcumuladoresXLSX)
+            //showLoading();
+            $.ajax({
+                url: '/gerenciar/insert-xlsx-acumuladores',
+                type: 'POST',
+                data: {
+                    "acumuladoresXLSX": arrayAcumuladoresXLSX
+                },
+            }).done(function (response) {
+                //hideLoading();
+                if (response) {
+
+                    hideLoading()
+                    //console.log("voltou ", response)
+
+                    if(response.msg == "As empresas com os seguintes CNPJs, não foram inseridas pois não estão cadastradas") {
+
+                                                 
+                        var acumuladores = response.nao_inseridos
+                        var td_acumuladores_nao_inseridos = ""
+
+                        acumuladores.forEach(function(acumulador_response,index) {
+                            td_acumuladores_nao_inseridos += 
+                                `<tr class="row-acumulador-new">
+                                <td id="categoria-sweet-modal-old">${acumulador_response.cnpj}</td>
+                                <td id="acumulador-sweet-modal-new">${acumulador_response.cfop}</td>
+                                <td id="mva-sweet-modal-new">${acumulador_response.mva}</td>
+                                <td id="cfop-sweet-modal-new">${acumulador_response.acumulador}</td>
+                                </tr>
+                                `
+                        })
+
+                       
+                        swalWithBootstrapButtons.fire({
+
+                                text: ``,
+                                icon: 'warning',
+                                showCancelButton: false,
+                                confirmButtonText: 'Ok',
+                                //cancelButtonText: 'Cancelar',
+                                //reverseButtons: false,
+                                html:  
+                                    `
+                                    <h3>Total de acumuladores inseridos sem erros: ${response.inseridos}</h3>
+
+                                    <h3>${response.msg}</h3>
+                                    <table>
+                                    <thead>
+                                            <tr>
+                                                <th>CNPJ</th>
+                                                <th>CFOP</th>
+                                                <th>MVA</th>
+                                                <th>ACUMULADOR</th>
+                                            </tr>
+                                    </thead>
+                                        <tbody>
+                                            ${td_acumuladores_nao_inseridos}
+                                        </tbody>
+                                    </table>`
+                                    }).then((result) => {
+            
+                                        if (result.isConfirmed) {
+
+                                            $('#EditModal_InserirAcumuladoresExcel').modal('hide')
+
+                                            $("#sendAcumuladoresXLSX").prop("disabled", true)
+                                            $("#fileTypeMsg_acumuladores").empty().prepend('Inserir o formulário em excel')
+                                            $("#clickMsg_acumuladores").empty().prepend('(Clique para Inserir)')
+
+                                            
+                                        }               
+                    
+                                     })
+                                     
+                        } else if (response.msg == "Acumuladores inseridos com sucesso!") {
+
+                            swalWithBootstrapButtons.fire(
+                                response.msg,
+                                '✔️',
+                                'success'
+                            )
+
+                        } else {
+                            swalWithBootstrapButtons.fire(
+                                'Ops!',
+                                'Tivemos um problema, tente novamente.',
+                                'info'
+                            )
+
+
+                        }
+
+                    }
+        
+                })
+            }
+        
+
+        }
+
+
+    function fileInputXLSXAcumuladores(ThisArea) {
+        var PreviewArea = ThisArea
+        var uploader = $(ThisArea).next('input')
+        $(uploader).trigger('click')
+    }
+
+
+        $('#InputUploaderXLSX_acumuladores').on('change', function () {
+            console.log("file changed ")
+            var filePlace = $('#fileTypeMsg_acumuladores')
+            var clickAqui = $('#clickMsg_acumuladores')
+            //console.log("input file mudou")
+            var File = $('#InputUploaderXLSX_acumuladores')[0].files[0]
+            console.log(File)
+            if (File) {
+                $(filePlace).empty().prepend('<div class="IconXlsx"></div><span class="spanFileName">' + $(
+                        '#InputUploaderXLSX_acumuladores')[0].files[0].name +
+                    '</span><br><span class="spanAlterar">ALTERAR</span>')
+                $(clickAqui).empty()
+                readXLXSAcumuladores(File)
+            } else {
+                $("#sendUsuariosXLSX").prop("disabled", true)
+                $(filePlace).empty().prepend('Inserir o formulário em excel')
+                $(clickAqui).empty().prepend('(Clique para Inserir)')
+            }
+        })
+
+
+</script>
+
+
+
+
+
+
+    <script>
+        $("#showr").click(function () {
+            var btnCreateAcumulador = $("#showr")
+            btnCreateAcumulador.html("Criar")
+
+            $(".addAcumuladorInput").first().show("fast", function showNext() {
+                $(this).next(".addAcumuladorInput").show("fast", showNext);
+            });
+            btnCreateAcumulador.addClass("submitNewAcumulador")
+        });
+
+        $("#showr_multiplo").click(function () {
+            var btnCreateAcumulador = $("#showr_multiplo")
+            btnCreateAcumulador.html("Criar")
+
+            $(".addAcumuladorInput_multiplos").first().show("fast", function showNext() {
+                $(this).next(".addAcumuladorInput_multiplos").show("fast", showNext);
+            });
+
+            btnCreateAcumulador.addClass("submitNewAcumuladorMultiplo")
+        });
+
+        
+
+
+        submitFormAcumuladores = async (btn) => {
+
+            $('#cnpj_novo_acumulador').val(globalCNPJ)
+
+            var categoria = $('#select_new_categoria_acumulador').val()
+
+            if ($(btn).hasClass("submitNewAcumulador") && categoria.length > 0) {
+
+                var form = $(btn).closest('form')
+                var request_url = form.attr("action");
+                var request_method = form.attr("method");
+                const form_data = form.serialize();
+
+
+                $.ajax({
+                    url: request_url,
+                    type: request_method,
+                    data: form_data,
+                }).done(function (response) {
+                    if (response) {
+
+                        if (response.msg == 'Acumulador inserido com sucesso!') {
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'success',
+                                title: response.msg,
+                                showConfirmButton: false,
+                                timer: 2000
+                            });
+
+                            $('#new_acumulador_mva').val('')
+
+                            $('#new_acumulador_cfop').val('')
+
+                            $('#new_acumulador_acumulador').val('')
+
+                        }
+
+                        //Update Confirmation
+                        if (response.data && response.msg ==
+                            "Acumulador existente, deseja atualizar?") {
+
+                            if (Object.entries(response.data).length > 0) {
+                                
+                                var objUpdateValues = {
+                                    'cnpj_novo_acumulador': $('#cnpj_novo_acumulador').val(),
+                                    'select_new_categoria_acumulador': response.data[0].categoria,
+                                    'select_new_antecipado_acumulador': response.data[0]
+                                        .tipo_antecipado,
+                                    'mva': response.data[0].mva,
+                                    'mva_porcentagem': response.data[0].mva_porcentagem,
+                                    'cfop': response.data[0].cfop,
+                                    'acumulador': $('#new_acumulador_acumulador').val()
+                                }
+
+                                swalWithBootstrapButtons.fire({
+                                    title: response.msg,
+                                    text: `${response.data.cliente} - ${response.data.cnpj}`,
+                                    icon: 'warning',
+                                    showCancelButton: true,
+                                    confirmButtonText: 'Atualizar',
+                                    cancelButtonText: 'Cancelar',
+                                    reverseButtons: false,
+                                    html: `<table id="table">
+                                            <thead>
+                                                 <tr>
+                                                     <th></th>
+                                                     <th>Categoria</th>
+                                                     <th>Tipo Antecipado</th>
+                                                     <th>MVA</th>
+                                                     <th>CFOP</th>
+                                                     <th>Acumulador</th>
+                                                 </tr>
+                                            </thead>
+                                                <tbody>
+                                                    <tr class="row-acumulador-old">
+                                                    <td class="font-bold">Atual</td>
+                                                        <td id="categoria-sweet-modal-old">${response.data[0].categoria}</td>
+                                                        <td id="antecipado-sweet-modal-old">${response.data[0].antecipado}</td>
+                                                        <td id="mva-sweet-modal-old">${response.data[0].mva_porcentagem}</td>
+                                                        <td id="cfop-sweet-modal-old">${response.data[0].cfop}</td>
+                                                        <td id="acumulador-sweet-modal-old">${response.data[0].acumulador}</td>
+                                                    </tr>
+                                                    <tr class="row-acumulador-new">
+                                                     <td class="font-bold">Novo</td>
+                                                        <td id="categoria-sweet-modal-new">${objUpdateValues.select_new_categoria_acumulador }</td>
+                                                        <td id="antecipado-sweet-modal-new">${objUpdateValues.select_new_antecipado_acumulador}</td>
+                                                        <td id="mva-sweet-modal-new">${objUpdateValues.mva_porcentagem}</td>
+                                                        <td id="cfop-sweet-modal-new">${objUpdateValues.cfop}</td>
+                                                        <td id="acumulador-sweet-modal-new">${objUpdateValues.acumulador}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>`
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+
+
+                                        $.ajax({
+                                            url: '/gerenciar/update-new-acumulador',
+                                            type: 'POST',
+                                            data: objUpdateValues,
+                                        }).done(function (response) {
+                                            if (response) {
+                                                var gif = ''
+                                                var auxText = ''
+                                                if (response ==
+                                                    'Acumulador Atualizado!') {
+                                                    gif = 'success'
+                                                    auxText =
+                                                        'Modificamos seu acumulador ✔️'
+                                                } else {
+                                                    gif = 'warning'
+                                                    auxText =
+                                                        'Erro ao atualizar acumulador ❌'
+                                                }
+                                                swalWithBootstrapButtons.fire(
+                                                    response,
+                                                    auxText,
+                                                    gif
+                                                )
+                                            } else {
+                                                swalWithBootstrapButtons.fire(
+                                                    'Ops!',
+                                                    'Tivemos um problema, tente novamente.',
+                                                    'info'
+                                                )
+                                            }
+                                        })
+
+
+                                    } else if (
+                                        /* Read more about handling dismissals below */
+                                        result.dismiss === Swal.DismissReason.cancel
+                                    ) {
+                                        swalWithBootstrapButtons.fire(
+                                            'Alteração Cancelada',
+                                            'Mantivemos o acumulador orginal',
+                                            'error'
+                                        )
+                                    }
+                                })
+
+                            }
+
+                        }
+                    }
+
+                })
+            }
+
+        }
+
+
+
+        submitFormAcumuladoresMultiplos = async (btn) => {
+
+            var cnpjs = itens_selecionados_cnpj
+
+            var categoria = $('#select_new_categoria_acumulador_multiplo').val()
+
+            if ($(btn).hasClass("submitNewAcumuladorMultiplo") && categoria.length > 0) {
+
+                var form = $(btn).closest('form')
+                var request_url = form.attr("action");
+                var request_method = form.attr("method");
+
+                var mva = $("#new_acumulador_mva_multiplo").val()
+                var cfop =  $("#new_acumulador_cfop_multiplo").val()
+                var acumulador = $("#new_acumulador_acumulador_multiplo").val()
+
+                var tipo_antecipado = $("#select_new_antecipado_acumulador_multiplo").val()
+                var categoria = $("#select_new_categoria_acumulador_multiplo").val()
+                
+                $.ajax({
+                    url: request_url,
+                    type: request_method,
+                    data: {  
+                        'mva_multiplo' : mva,
+                        'cfop_multiplo' : cfop,
+                        'acumulador_multiplo': acumulador ,
+                        'select_new_antecipado_acumulador_multiplo' : tipo_antecipado,
+                        'select_new_categoria_acumulador_multiplo' : categoria,
+                        cnpjs: cnpjs },
+                }).done(function (response) {
+
+                   
+                    if (response) {
+
+
+                        if(response.msg == "Cfop(s) já existentente(s), deseja atualizar?") {
+
+                                                 
+                            var clientes = response.nao_inseridos
+                            var options = ""
+
+                            clientes.forEach(function(cliente_response,index) {
+                                options += 
+                                    `<tr class="row-acumulador-new">
+                                    <td class="font-bold">Atual</td>
+                                    <td id="categoria-sweet-modal-old">${cliente_response.cnpj}</td>
+                                    <td id="acumulador-sweet-modal-new">${cliente_response.cliente}</td>
+                                    <td id="mva-sweet-modal-new">${cliente_response.cfop}</td>
+                                    <td id="cfop-sweet-modal-new">${cliente_response.acumulador}</td>
+                                    </tr>
+                                    `
+                            })
+
+                            mva = parseFloat(mva / 100).toFixed(4).toString().replace(/\./g, ",")
+
+                            //parseFloat(mva_multiplo / 100).toFixed(4).toString().replace(/\./g, ",")
+
+                            var objUpdateValues = {
+                                    'cnpj_novo_acumulador': cnpjs,
+                                    'select_new_categoria_acumulador': categoria,
+                                    'select_new_antecipado_acumulador': tipo_antecipado,
+                                    'mva': mva,
+                                    'mva_porcentagem': clientes[0].mva_porcentagem,
+                                    'cfop': cfop,
+                                    'acumulador': acumulador
+                                }
+
+
+                            swalWithBootstrapButtons.fire({
+                                    title: response.msg,
+                                    text: ``,
+                                    icon: 'warning',
+                                    showCancelButton: true,
+                                    confirmButtonText: 'Atualizar',
+                                    cancelButtonText: 'Cancelar',
+                                    reverseButtons: false,
+                                    html:  
+                                        `<table>
+                                        <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>CNPJ</th>
+                                                    <th>Cliente</th>
+                                                    <th>CFOP</th>
+                                                    <th>Acumulador</th>
+                                                </tr>
+                                        </thead>
+                                            <tbody>
+                                                ${options}
+                                                <tr class="row-acumulador-old">
+                                                    <td class="font-bold">Novo</td>
+                                                    <td id="categoria-sweet-modal-old">*</td>
+                                                    <td id="mva-sweet-modal-old">*</td>
+                                                    <td id="cfop-sweet-modal-old">${cfop}</td>
+                                                    <td id="acumulador-sweet-modal-old">${acumulador}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>`
+                                        }).then((result) => {
+                                        
+                                                if (result.isConfirmed) {
+                                                    $.ajax({
+                                                        url: '/gerenciar/update-new-acumulador',
+                                                        type: 'POST',
+                                                        data: objUpdateValues,
+                                                    }).done(function (response) {
+                                                        if (response) {
+                                                            var gif = ''
+                                                            var auxText = ''
+                                                            if (response == 'Acumulador Atualizado!' || response == "Acumuladores Atualizados!") {
+                                                                gif = 'success'
+                                                                auxText = 'Modificamos seu acumulador ✔️'
+                                                            } else {
+                                                                gif = 'warning'
+                                                                auxText = 'Erro ao atualizar acumulador ❌'
+                                                            }
+                                                            swalWithBootstrapButtons.fire(
+                                                                response,
+                                                                auxText,
+                                                                gif
+                                                            )
+                                                        } else {
+                                                            swalWithBootstrapButtons.fire(
+                                                                'Ops!',
+                                                                'Tivemos um problema, tente novamente.',
+                                                                'info'
+                                                            )
+                                                        }
+
+                                                    })
+
+                                                }
+                                        })
+
+                        } else if (response.msg == "Ocorreu algum erro, tente novamente") {
+                            swalWithBootstrapButtons.fire(
+                                'Ocorreu algum erro, tente novamente',
+                                '❌',
+                                'warning'
+                            )
+                        } else {
+                            swalWithBootstrapButtons.fire(
+                                'Acumulador adicionado com sucesso',
+                                '✔️',
+                                'success'
+                            )
+                        }
+                  
+                    }
+
+                })
+            }
+
+        }
+
+    </script>
+
+
+
+    <!--HTML partials-->
+    {{> escritorio/modal_chamados}} {{> escritorio/modal_adquirir}}
+
+</body>
+
+</html>
+
+</html>

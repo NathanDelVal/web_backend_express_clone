@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="../images/icon/apple-icon-mezzomo.png">
+    <link rel="icon" type="image/png" href="../images/icon/favicon_mezzomo3.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>
+        Robotax: Classificar Itens
+    </title>
+    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css"
+        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link href="../assets/css/material-dashboard.min.css?v=2.1.2" rel="stylesheet" />
+    <!--local CSS -->
+    <link rel="stylesheet" type="text/css" href="../local/aprovar-itens.css">
+
+    <script src="../assets/js/core/jquery-3.5.1.js"></script>
+
+</head>
+
+<body class="off-canvas-sidebar">
+    <div class="wrapper ">
+        <!-- Navbar -->
+        <div class="sidebar" data-color="yellow" data-background-color="black"
+            data-image="../assets/img/contabeisbw.jpg">
+            <!--
+        Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
+
+        Tip 2: you can also add an image using data-image tag
+    -->
+            <div class="sidebar-wrapper">
+                <ul class="nav">
+                    <!--CARD NO SIDE BAR - LOGO DO USÚARIO E NOME -->
+                    {{> escritorio/navbar_gerenciar}}
+
+
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="main-panel">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-transparent">
+                <div class="container-fluid">
+                    <div class="navbar-wrapper">
+                        <div class="navbar-minimize">
+                            <button id="minimizeSidebar" class="btn btn-just-icon btn-white btn-fab btn-round">
+                                <i class="material-icons text_align-center visible-on-sidebar-regular">more_vert</i>
+                                <i class="material-icons design_bullet-list-67 visible-on-sidebar-mini">view_list</i>
+                            </button>
+                        </div>
+                        <a class="navbar-brand" href="/gerenciar/classificar-itens">Classificar Itens</a>
+                    </div>
+
+                    {{> escritorio/menu_apps_back}} {{> escritorio/help_btn}}
+                    <!--{{> escritorio/help_btn}}-->
+
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="navbar-toggler-icon icon-bar"></span>
+                        <span class="navbar-toggler-icon icon-bar"></span>
+                        <span class="navbar-toggler-icon icon-bar"></span>
+                    </button>
+
+                </div>
+            </nav>
+            <!-- End Navbar -->
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header card-header-info2">
+                                    <h4 class="card-title">Tabela de Classificação Itens</h4>
+                                    <p class="card-category">Busque e classifique os itens desejados utilizando a coluna
+                                        "AÇÕES"</p>
+                                </div>
+                                <div class="card-body">
+
+                                    <!-- NNEWWWWWWWWWWWWWWWWWWWWWWWWW -->
+
+                                    <br>
+
+                                    <!--FOMULARIO-->
+                                    <form id="form_buscaclassificar" role="form" method="post"
+                                        action="/gerenciar/busca-classificar-itens">
+                                        <div class="row justify-content-center">
+                                            <!--NOMEPJ-->
+                                            <div class="col-sm-11 col-md-8 col-lg-8"
+                                                style="box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.100); border-radius: 5px; padding: 20px;">
+                                                <div class="row">
+                                                    <div class="col-md-8">
+                                                        <div class="input-group form-group card-body-input"
+                                                            style="padding:4px; margin-bottom:15px;">
+                                                            <label class="bmd-label-floating">Buscar por
+                                                                Descrição</label>
+                                                            <input id="input_buscaclassificar"
+                                                                name="buscadoclassificaritens" type="text"
+                                                                class="form-control" required autocomplete="off"
+                                                                value="">
+                                                        </div>
+                                                        <div class="form-check form-check-radio">
+                                                            <label class="form-check-label radio-label">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="classificarRadios" id="classificarRadios1"
+                                                                    value="contem" onclick="radioBold(this)" checked>
+                                                                Contém com termo buscado
+                                                                <span class="circle">
+                                                                    <span class="check"></span>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check form-check-radio">
+                                                            <label class="form-check-label radio-label">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="classificarRadios" id="classificarRadios2"
+                                                                    value="inicia" onclick="radioBold(this)">
+                                                                Inicia com termo buscado
+                                                                <span class="circle">
+                                                                    <span class="check"></span>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 text-center">
+                                                        <div class="col-md-12">
+                                                            <div class="input-group form-group card-body-input"
+                                                                style="padding:4px; margin-bottom:15px;">
+                                                                <label class="bmd-label-floating">NCM</label>
+                                                                <input id="input_ncm" name="ncmclassificaritens"
+                                                                    type="text" class="form-control" autocomplete="off"
+                                                                    value="">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-12">
+                                                            <div class="input-group form-group card-body-input"
+                                                                style="padding:4px; margin-bottom:15px;">
+                                                                <label class="bmd-label-floating">EAN</label>
+                                                                <input id="input_ean" name="eanclassificaritens"
+                                                                    type="text" class="form-control" autocomplete="off"
+                                                                    value="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <!--Botão BUSCAR-->
+                                                <div class="card-body-button">
+                                                    <button type="submit" class="btn pull-right"
+                                                        name="btn_buscaclassificar"
+                                                        id="btn_buscaclassificar">Buscar</button>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </form>
+                                    <br>
+
+                                    <div class="table-responsive box drag">
+                                        <table id="tabela-classificar"
+                                            class="table display table-striped table-no-bordered table-hover hideObjectInit"
+                                            cellspacing="0" width="100%" style="width:100%">
+                                            <thead>
+                                                <tr class="table-header">
+
+
+                                                    <th>
+                                                        <div class="form-check">
+                                                            <label class="form-check-label">
+                                                                <input id="checkall" name="checkbox"
+                                                                    onchange="marcartodos()"
+                                                                    class="form-check-input thcheckbox checkinput"
+                                                                    type="checkbox" value="">
+                                                                <span class="form-check-sign">
+                                                                    <span class="check"></span>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                                    </th>
+
+                                                    <th>ID</th>
+                                                    <th>Descrição</th>
+                                                    <th>NCM</th>
+                                                    <th>EAN</th>
+                                                    <th>Grupo</th>
+                                                    <th>Sub-Grupo</th>
+                                                    <th class="text-right td-actions">
+                                                        <button id="editar_selecionados_tbl"
+                                                            name="editar_selecionados_tbl" type="button" rel="tooltip"
+                                                            class="btn btn-warning" disabled>
+                                                            <i class="material-icons">edit</i>
+                                                        </button>
+                                                    </th>
+
+
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--FOOTER-->
+            {{> escritorio/footer_internal}}
+        </div>
+    </div>
+    <!-- Edit classificar_Itens Modal-->
+    <form id="update_form_pendente" method="post" action="/update-grupo-pendente">
+        <div class="modal fade" id="EditModal_classificar" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Alterar selecionado(s) e classificar -
+                            Cuidado ao Preencheer
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+
+                            <input id="id_modal" name="id_item_modal" type="hidden">
+                            <input id="descricao_input" name="descricao" type="hidden">
+                            <div class="col-md-12">
+                                <h6 class="label-modal">Descrição</h6>
+                                <input id="descricao_modal" name="descricao" type="text" class="form-control" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <h6 class="label-modal">NCM</h6>
+                                <input id="ncm_linha_modal" name="ncm" type="text" class="form-control" disabled>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <h6 class="label-modal">Grupo</h6>
+                                <select title='SELECIONE UMA OPÇÃO' class="form-control selectpicker"
+                                    data-style="btn btn-link" id="grupo_modal" name="tipoantecipado" type="text"
+                                    required>
+                                    <option value="Confecções" required>Confecções</option>
+                                    <option value="Alimentos">Alimentos</option>
+                                    <option value="Limpeza">Limpeza</option>
+                                    <option value="Eletrônicos">Eletrônicos</option>
+                                    <option value="Contrução">Contrução</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <h6 class="label-modal">Sub-Grupos (Dependende do Grupo)</h6>
+                                <select title='SELECIONE UMA OPÇÃO' class="form-control selectpicker"
+                                    data-style="btn btn-link" id="subgrupo_modal" name="tipoantecipado" type="text"
+                                    required>
+                                    <option value="Camiseta" required>Camiseta</option>
+                                    <option value="Celular">Celular</option>
+                                    <option value="Batata">Batata</option>
+                                    <option value="Limpa-Vidro">Limpa-Vidro</option>
+                                    <option value="Tijolo">Tijolo</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn" id="salvardata">SALVAR</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- Edit classificar_Itens Modal - FIM-->
+
+    <!-- Edit classificar_Multiplos_Itens Modal-->
+    <form id="update_form_pendente_multiplos" method="post" action="/update-grupo-pendente-multiplos">
+        <div class="modal fade" id="EditModal_classificar_Multiplos" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Cuidado ao Preencher</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <h6 class="label-modal">Grupo</h6>
+                                <select title='SELECIONE UMA OPÇÃO' class="form-control selectpicker"
+                                    data-style="btn btn-link" id="grupo_modal_multiplos" name="tipoantecipado"
+                                    type="text" required>
+                                    <option required>Confecções</option>
+                                    <option>Alimentos</option>
+                                    <option>Limpeza</option>
+                                    <option>Eletrônicos</option>
+                                    <option>Contrução</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <h6 class="label-modal">Sub-Grupos (Dependende do Grupo)</h6>
+                                <select title='SELECIONE UMA OPÇÃO' class="form-control selectpicker"
+                                    data-style="btn btn-link" id="subgrupo_modal_multiplos" name="tipoantecipado"
+                                    type="text" required>
+                                    <option required>Camiseta</option>
+                                    <option>Celular</option>
+                                    <option>Batata</option>
+                                    <option>Limpa-Vidro</option>
+                                    <option>Tijolo</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn" id="salvardata_multiplos">SALVAR</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- Edit classificar_Multiplos_Itens Modal - FIM-->
+
+    {{> escritorio/modal_chamados}}
+    <!--Correção do Violation Scroll non-passive event-->
+    <script src=" ../local/plugins/fix-non-passive.js"></script>
+    <!--   Core JS Files   -->
+    <script src="../assets/js/core/popper.min.js"></script>
+    <script src="../assets/js/core/bootstrap-material-design.js"></script>
+    <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+    <!-- Plugin for the momentJs  -->
+    <script src="../assets/js/plugins/moment.min.js"></script>
+    <!-- Plugin for the momentJs TRADUÇÕES LOCAIS  -->
+    <script src="../assets/js/plugins/moment-with-locales.js"></script>
+    <!--  Plugin for Sweet Alert -->
+    <script src="../assets/js/plugins/sweetalert2.js"></script>
+    <!-- Forms Validations Plugin -->
+    <script src="../assets/js/plugins/jquery.validate.min.js"></script>
+    <!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
+    <script src="../assets/js/plugins/jquery.bootstrap-wizard.js"></script>
+    <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+    <script src="../assets/js/plugins/bootstrap-selectpicker.js"></script>
+    <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+    <script src="../assets/js/plugins/bootstrap-datetimepicker.min.js"></script>
+    <!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
+    <script src="../assets/js/plugins/jquery.dataTables.min.js"></script>
+    <!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
+    <script src="../assets/js/plugins/bootstrap-tagsinput.js"></script>
+    <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+    <script src="../assets/js/plugins/jasny-bootstrap.min.js"></script>
+    <!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
+    <script src="../assets/js/plugins/fullcalendar.min.js"></script>
+    <!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
+    <script src="../assets/js/plugins/jquery-jvectormap.js"></script>
+    <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+    <script src="../assets/js/plugins/nouislider.min.js"></script>
+    <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+    <!-- Library for adding dinamically elements -->
+    <script src="../assets/js/plugins/arrive.min.js"></script>
+    <!-- Chartist JS -->
+    <script src="../assets/js/plugins/chartist.min.js"></script>
+    <!--  Notifications Plugin    -->
+    <script src="../assets/js/plugins/bootstrap-notify.js"></script>
+
+    <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="../assets/js/material-dashboard.min.js?v=2.1.2" type="text/javascript"></script>
+    <!-- Material Dashboard DEMO methods, don't include it in your project!
+  <script src="../assets/demo/demo.js"></script>-->
+
+    <!--SWEET ALERT-->
+    <!--LOCAL-->
+    <script src="../local/plugins/sweetalert/js/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="../local/plugins/sweetalert/css/sweetalert2.min.css" id="theme-styles">
+
+
+    <!--local-->
+    <!-- AJAX JQUERY POST FORM
+  <script src="../local/metodos/post/update_modal_classificar_itens.js"></script> -->
+    <!-- AJAX JQUERY POST UPDATE update_form_pendente MODAL  <script src="../local/metodos/post/update_input_classificar_notas.js"></script> -->
+
+    <!--MASK FOR FORMS-->
+    <script src="../local/plugins/mask_input/jquery.maskedinput.js"></script>
+
+    <script src="../local/metodos/alert/loading.js"></script>
+
+    <!-- HANDLE SELECT BoxeS ON TABLE
+  <script src="../assets/js/plugins/datatables_select_rows.js"></script> -->
+
+    <!-- HANDLE CheckBoxes
+  <script src="../local/metodos/post/update_classificar_itens_selecionados.js" type="text/javascript"> </script>
+-->
+
+    <!-- HANDLE CheckBoxes
+  <script src="../local/metodos/post/update_classificar_itens_selecionados.js" type="text/javascript"> </script>
+-->
+
+    <script src="../local/plugins/drag/drag.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //ACTIVE NAV-ITEM
+            var navs = document.getElementsByClassName('nav-item');
+            for (var x = 0; x < navs.length; x++) {
+                if (navs[x].childNodes[1].attributes[1].nodeValue == location.pathname) {
+                    var nav = navs[x]
+                    $(nav).addClass('active')
+                }
+            }
+        });
+    </script>
+
+    <script>
+        function radioBold(thisRadio) {
+            //removendo classe radio-label de todos
+            var labelradios = $(".radio-label");
+            labelradios.map(function () {
+                $(this).removeClass('radio-bold');
+            })
+
+            //adicionando classe radio-label somente ao item clicado
+            var label = thisRadio.parentNode
+            $(label).addClass('radio-bold');
+        }
+    </script>
+
+    <script>
+        var Tabelaclassificar; //TABELA E SUAS CONFIGS
+        $("#form_buscaclassificar").submit(function (e) {
+            e.preventDefault();
+            var post_url = $(this).attr("action"); //get form action url
+            var request_method = $(this).attr("method"); //get form GET/POST method
+            var form_data = $(this).serialize(); //Encode form elements for submission
+            showLoading();
+            $.ajax({
+                async: true,
+                url: post_url,
+                type: request_method,
+                data: form_data
+            }).done(function (response) {
+                hideLoading();
+                dados = response.dataTable
+                var dadosTabelaNotas = JSON.parse(response.dataTable)
+
+                //Inicializando a tabela
+                Tabelaclassificar = $('#tabela-classificar').DataTable({
+                    destroy: true,
+                    deferRender: false,
+                    processing: true,
+                    data: dadosTabelaNotas,
+                    columns: [{
+                        defaultContent: '<div class="form-check">' +
+                            '<label class="form-check-label">' +
+                            '<input name="checkbox" class="form-check-input checkinput" type="checkbox" value=""' +
+                            'onchange="marcados(this.checkbox)">' +
+                            '<span class="form-check-sign">' +
+                            '<span class="check"></span>' +
+                            '</span>' +
+                            '</label>' +
+                            '</div>'
+                    }, //CHECKBOXES
+                    {
+                        data: "id_produto"
+                    }, //id (hidden)
+                    {
+                        data: "descricao_item"
+                    }, //Numero do Chamado
+                    {
+                        data: "ncm"
+                    }, //Status
+                    {
+                        data: "ean"
+                    }, //DATA DE ABERTURA - INSERIDO , type: "date-eu"
+                    {
+                        data: "grupo"
+                    }, {
+                        data: "subgrupo"
+                    }, {
+                        defaultContent: '<button id="editar_linha_tbl" name="editar_linha_tbl" type="button" rel="tooltip" class="btn btn-warning" > ' +
+                            '<i class="material-icons">edit</i>' +
+                            '</button >'
+                    }
+
+                    ],
+
+                    fixedHeader: {
+                        header: true,
+                        footer: true
+                    },
+                    dom: 'Blftip',
+                    buttons: [{
+                        extend: 'excel',
+                        text: 'Exportar'
+                    }],
+                    pagingType: "full_numbers",
+                    lengthMenu: [
+                        [50, 100, 500, -1],
+                        [50, 100, 500, "Todos"]
+                    ],
+                    responsive: false,
+                    language: {
+                        url: "../assets/js/plugins/dataTables.ptbr.lang",
+                        search: "_INPUT_",
+                        searchPlaceholder: "",
+                        processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Carregando...</span>'
+
+                    },
+                    columnDefs: [{
+                        orderable: false,
+                        targets: [0, 7]
+                    }, {
+                        targets: 7,
+                        className: 'td-actions'
+                    }, {
+                        targets: [0, 1, 2, 3, 4, 5, 6, 7],
+                        className: 'text-center'
+                    }],
+                    order: [
+                        [1, 'asc']
+                    ],
+                    rowCallback: function (row, data) {
+
+                        $("#tabela-classificar").removeClass('hideObjectInit') //DEIXAR A TABELA VISIVEL DEPOIS DA INICIALIZAÇÂO
+                        //$("#ContadorGeralItens").removeClass('hideObjectInit')
+
+
+                        //--------------------------------Habilita botão editar se algum check box estiver selecionado & desabilita os botões dos rows
+                        var element = $(row).find('.checkinput');
+                        element.on("change", function () {
+                            //Habilita o botão EDITAR MARCADOS (HEADER) se algum check box estiver selecionado - disabled = true
+                            $("button[name='editar_selecionados_tbl']").prop('disabled', !$("input[name='checkbox']:checked").length);
+                            //Desabilita os botões editar da linha se algum check box estiver selecionado - disabled = true
+                            $("button[name='editar_linha_tbl']").prop('disabled', $("input[name='checkbox']:checked").length);
+                        })
+                    }
+                });
+
+
+
+
+
+
+
+                Tabelaclassificar.clear().draw();
+                Tabelaclassificar.rows.add(dadosTabelaNotas); // Add new data
+                Tabelaclassificar.columns.adjust().draw(); // Redraw the DataTable
+            });
+        });
+
+        //--------------------------------------------------------------------MASK PARA FORMULÁRIOS
+        jQuery(function ($) {
+            $("#datamodal").mask("99/99/9999", {
+                placeholder: "DD/MM/AAAA"
+            });
+        });
+
+        //_________________________________________________________________________________________x
+
+
+
+
+        //___________________________________BOTÃO EDITAR_____________________________________________
+        //---------------------------------------------------------------OUVINTE DO BOTÃO EDITAR MODAL
+        $(document).on('click', '#editar_linha_tbl', function (e) {
+            e.preventDefault;
+            var currentRow = $(this).closest('tr').find('td')
+
+            const id_linha = currentRow[1].textContent
+            const descricao_item_linha = currentRow[2].textContent
+            const ncm_linha = currentRow[3].textContent
+            const mva_7_linha = currentRow[4].textContent
+            const mva_12_linha = currentRow[5].textContent
+            const tipo_antecipado_linha = currentRow[6].textContent
+
+            $('#id_modal').val(id_linha);
+            $('#descricao_modal').val(descricao_item_linha);
+            $('#descricao_input').val(descricao_item_linha);
+            $('#ncm_linha_modal').val(ncm_linha);
+            $('#mva_7_modal').val(mva_7_linha);
+            $('#mva_12_linha_modal').val(mva_12_linha);
+            //$('#tipo_antecipado_modal').val(tipo_antecipado_linha);
+            //$(this).attr("placeholder", "Type your answer here");
+            $('#EditModal_classificar').modal('show');
+        });
+
+
+
+        $(document).on('click', '#editar_selecionados_tbl', function (e) {
+            e.preventDefault;
+            const ids_linha = itens_selecionados
+
+            $('#ids_modal_multiplos').val(ids_linha);
+            //$(this).attr("placeholder", "Type your answer here");
+            $('#EditModal_classificar_Multiplos').modal('show');
+        });
+
+        //____________________________________BOTÃO SALVAR MODAL_______________________________________
+        //--------------------------------------------------------------AJAX POST DO BOTÃO SALVAR MODAL
+        $("#update_form_pendente").submit(function (ev) {
+            ev.preventDefault(); //prevent default action
+            var post_url = $(this).attr("action"); //get form action url
+            var request_method = $(this).attr("method"); //get form GET/POST method
+            var form_data = $(this).serialize(); //Encode form elements for submission
+            $.ajax({
+                async: "false",
+                url: post_url,
+                type: request_method,
+                data: form_data
+            }).done(function (response) { //
+                //$("#server-results").html(response);
+                var gif = "";
+                if (response == "Dados atualizados!") {
+                    gif = "success";
+                }
+                if (response == "Erro ao gravar novos dados!") {
+                    gif = "warning";
+                }
+                Swal.fire({
+                    position: 'center',
+                    icon: gif,
+                    title: response,
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+                setTimeout(function () {
+                    modal_hide();
+                    reloadPage();
+                }, 2000);
+            });
+        });
+        //----------------------------------------------------------------------------------------x
+
+
+        //--------------------------------------------------------------AJAX POST DO BOTÃO SALVAR MODAL MULTIPLOS
+        $("#update_form_pendente_multiplos").submit(function (evm) {
+            evm.preventDefault(); //prevent default action
+            var post_url = $(this).attr("action"); //get form action url
+            var request_method = $(this).attr("method"); //get form GET/POST method
+            var form_data = $(this).serialize(); //Encode form elements for submission
+            $.ajax({
+                async: "false",
+                url: post_url,
+                type: request_method,
+                data: form_data
+            }).done(function (response) { //
+                //$("#server-results").html(response);
+                var gif = "";
+                if (response == "Dados atualizados!") {
+                    gif = "success";
+                }
+                if (response == "Erro ao gravar novos dados!") {
+                    gif = "waning";
+                }
+                if (response == "Tipo Antecipado das linhas selecionadas foram atualizado!") {
+                    gif = "success";
+                }
+                if (response == "Erro ao atualizar Tipo Antecipado!") {
+                    gif = "waning";
+                }
+                Swal.fire({
+                    position: 'center',
+                    icon: gif,
+                    title: response,
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+                setTimeout(function () {
+                    modal_hide();
+                    reloadPage();
+                }, 2000);
+            });
+        });
+        //----------------------------------------------------------------------------------------x
+
+        //PEGA O ID DOS ITENS MARCADOS-----------------------------------------------
+        var itens_selecionados = [];
+
+        function marcados(temp) {
+            itens_selecionados = [];
+            $('#tabela-classificar :checkbox:checked').each(function (index) {
+                var currentRow = this.parentNode.parentNode.parentNode.parentNode;
+                var closestTr = currentRow.getElementsByTagName("td")[1];
+                //var a = closestTr.className.textContent;
+                if (typeof closestTr !== "undefined") {
+                    itens_selecionados.push(closestTr.textContent);
+                }
+            });
+        }
+
+        //SELECIONAR TODOS OS CHECK BOXs VISIVEIS
+        function marcartodos() {
+            $("#checkall").each(function () {
+                $(".checkinput:visible").prop("checked", $(this).prop("checked"))
+                if (checkall.checked == true) {
+                    marcados();
+                }
+            })
+        }
+        //___________________________________FUNÇÕES DIVERSAS______________________________________
+
+        //-------------------------------------------------------------------------------MODAL HIDE
+        function modal_hide() {
+            $('#EditModal').modal('hide')
+        }
+        //----------------------------------------------------------------------RECARREGA A PÁGINA
+        function reloadPage() {
+            location.reload(true);
+        }
+
+        //--------------------------------------------------------------DESMARCA TODOS OS CHECKBOXs
+        function desmarcartodos() {
+            //console.log("desmarcando");
+            $('input[type="checkbox"]:checked').prop('checked', false);
+            //Re-contar itens marcados
+            marcados();
+            //console.log("Itens marcado: ", itens_selecionados);
+        }
+
+        //-----------------------------QUANDO MUDAR A PAGINA DA TABELA DESMARCAR TODOS OS CHECKBOXES
+        $("#tabela-classificar").on("page.dt", function () {
+            desmarcartodos();
+            //console.log("1")
+        }).on('search.dt', function () {
+            desmarcartodos();
+            //console.log("2")
+        });
+        //________________________________________________________________________________________x
+
+        //--------------------------------Habilita botão editar se algum check box estiver selecionado & desabilita os botões dos rows
+        $("input[name='checkbox']").on('change', function () {
+            //Habilita o botão EDITAR MARCADOS (HEADER) se algum check box estiver selecionado - disabled = true
+            $("button[name='editar_selecionados_tbl']").prop('disabled', !$("input[name='checkbox']:checked").length);
+            //Desabilita os botões editar da linha se algum check box estiver selecionado - disabled = true
+            $("button[name='editar_linha_tbl']").prop('disabled', $("input[name='checkbox']:checked").length);
+        })
+    </script>
+
+
+
+
+</body>
+
+</html>

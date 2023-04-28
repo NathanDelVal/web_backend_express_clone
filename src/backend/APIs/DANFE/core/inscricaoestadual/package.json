@@ -1,0 +1,73 @@
+{
+  "_from": "inscricaoestadual@0.0.2",
+  "_id": "inscricaoestadual@0.0.2",
+  "_inBundle": false,
+  "_integrity": "sha1-leicYlgbyxvCuiMEyYsn9PPAplM=",
+  "_location": "/inscricaoestadual",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "inscricaoestadual@0.0.2",
+    "name": "inscricaoestadual",
+    "escapedName": "inscricaoestadual",
+    "rawSpec": "0.0.2",
+    "saveSpec": null,
+    "fetchSpec": "0.0.2"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/inscricaoestadual/-/inscricaoestadual-0.0.2.tgz",
+  "_shasum": "95e89c62581bcb1bc2ba2304c98b27f4f3c0a653",
+  "_spec": "inscricaoestadual@0.0.2",
+  "_where": "D:\\PROJETOS\\Mezzomo\\MEZZ_APP",
+  "author": {
+    "name": "Gammasoft Desenvolvimento de Software Ltda",
+    "email": "contato@gammasoft.com.br"
+  },
+  "bugs": {
+    "url": "https://github.com/gammasoft/ie/issues"
+  },
+  "bundleDependencies": false,
+  "contributors": [
+    {
+      "name": "Sérgio Vilar",
+      "email": "vilar@me.com",
+      "url": "https://github.com/sergiovilar"
+    },
+    {
+      "name": "Renato Gama",
+      "email": "renatoargh@gmail.com",
+      "url": "https://github.com/renatoargh"
+    }
+  ],
+  "deprecated": false,
+  "description": "Biblioteca de validação de inscrições estaduais",
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-jshint": "~0.7.1",
+    "grunt-contrib-nodeunit": "~0.2.2",
+    "grunt-contrib-uglify": "~0.3.2",
+    "nodeunit": "~0.8.0",
+    "underscore": "^1.6.0"
+  },
+  "homepage": "https://github.com/gammasoft/ie#readme",
+  "keywords": [
+    "inscrição",
+    "estadual",
+    "validação",
+    "brasil"
+  ],
+  "license": "MIT",
+  "main": "ie.js",
+  "name": "inscricaoestadual",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gammasoft/ie.git"
+  },
+  "scripts": {
+    "test": "grunt test --verbose"
+  },
+  "version": "0.0.2"
+}

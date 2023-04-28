@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="../images/icon/apple-icon-mezzomo.png">
+    <link rel="icon" type="image/png" href="../images/icon/favicon_mezzomo3.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>
+        Robotax: Aprovar Itens
+    </title>
+    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css"
+        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link href="../assets/css/material-dashboard.min.css" rel="stylesheet" />
+    <!--local CSS -->
+    <link rel="stylesheet" type="text/css" href="../local/aprovar-itens.css">
+    <!--MODAL webview xml CSS -->
+    <link rel="stelysheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css">
+    <script src="../assets/js/core/jquery-3.5.1.js"></script>
+</head>
+
+<body class="off-canvas-sidebar">
+    <div class="wrapper ">
+        <!-- Navbar -->
+        <div class="sidebar" data-color="yellow" data-background-color="black"
+            data-image="../assets/img/contabeisbw.jpg">
+            <!--
+            Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
+            Tip 2: you can also add an image using data-image tag
+            -->
+            <div class="sidebar-wrapper">
+                <ul class="nav">
+                    <!--CARD NO SIDE BAR - LOGO DO USÚARIO E NOME -->
+
+
+                    {{> escritorio/navbar_gerenciar}}
+
+
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="main-panel">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-transparent">
+                <div class="container-fluid">
+                    <div class="navbar-wrapper">
+                        <div class="navbar-minimize">
+                            <button id="minimizeSidebar" class="btn btn-just-icon btn-white btn-fab btn-round">
+                                <i class="material-icons text_align-center visible-on-sidebar-regular">more_vert</i>
+                                <i class="material-icons design_bullet-list-67 visible-on-sidebar-mini">view_list</i>
+                            </button>
+                        </div>
+                        <a class="navbar-brand" href="/gerenciar/aprovar-itens">Aprovar Itens</a>
+                    </div>
+
+                    {{> escritorio/menu_apps_back}} {{> escritorio/help_btn}}
+                    <!--{{> escritorio/help_btn}}-->
+
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="navbar-toggler-icon icon-bar"></span>
+                        <span class="navbar-toggler-icon icon-bar"></span>
+                        <span class="navbar-toggler-icon icon-bar"></span>
+                    </button>
+
+                </div>
+            </nav>
+            <!-- End Navbar -->
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header card-header-info2">
+                                    <h4 class="card-title">Tabela de aprovação de entradas</h4>
+                                    <p class="card-category">Edite ou Aprove as tributações utilizando a coluna "AÇÕES"
+                                    </p>
+                                </div>
+                                <div class="card-body">
+
+                                    <!-- NNEWWWWWWWWWWWWWWWWWWWWWWWWW -->
+
+                                    <br>
+
+                                    <!--FOMULARIO-->
+                                    <form id="form_buscaaprovar" role="form" method="post"
+                                        action="/gerenciar/busca-aprovar-itens">
+                                        <div class="row justify-content-center">
+                                            <!--NOMEPJ-->
+                                            <div class="col-sm-11 col-md-11 col-lg-11"
+                                                style="box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.100); border-radius: 5px; padding: 30px; padding-left: 120px; padding-right: 120px;">
+                                                <div class="input-group form-group card-body-input"
+                                                    style="padding:4px; margin-bottom:15px;">
+                                                    <label class="bmd-label-floating">Buscar por Descrição ou
+                                                        NCM</label>
+                                                    <input id="input_buscaaprovar" name="buscadoaprovaritens"
+                                                        type="text" class="form-control" required autocomplete="off"
+                                                        value="">
+                                                </div>
+
+                                                <div class="form-check form-check-radio">
+                                                    <label class="form-check-label radio-label">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="aprovarRadios" id="aprovarRadios1" value="contem"
+                                                            onclick="radioBold(this)" checked>
+                                                        Contém com termo buscado
+                                                        <span class="circle">
+                                                            <span class="check"></span>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check form-check-radio">
+                                                    <label class="form-check-label radio-label">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="aprovarRadios" id="aprovarRadios2" value="inicia"
+                                                            onclick="radioBold(this)">
+                                                        Inicia com termo buscado
+                                                        <span class="circle">
+                                                            <span class="check"></span>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                                <br>
+                                                <!--Do not remove-->
+                                                <div id="ContadorItemBuscado" class="hideElement">
+                                                    <label>Total de itens <b>NÃO</b> aprovados correspondentes com "<b
+                                                            id="TagB_nomeitem"></b>" no banco:
+                                                        <b id="TagB_faltamaprovaritem"></b>
+                                                    </label>
+                                                </div>
+                                                <!--Do not remove-->
+                                                <div id="ContadorItemBuscadoAntecipados"
+                                                    class="hideElement displaflexcolumn">
+                                                </div>
+
+                                                <!--Botão BUSCAR-->
+                                                <div class="card-body-button">
+                                                    <button type="submit" class="btn pull-right" name="btn_buscaaprovar"
+                                                        id="btn_buscaaprovar">Buscar</button>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </form>
+                                    <br>
+
+                                    <!-- DIV Sobre a Tabela -->
+                                    <div class="row">
+
+
+                                        <div class="col-md-4">
+
+                                            <div id="ContadorGeralItens">
+                                                <label>Aprovados: <b id="TagB_aprovados"></b> de
+                                                    <b id="TagB_totalitens"></b> </label>
+                                                <br>
+                                                <label>Restam: <b id="TagB_faltamaprovar"> </b> </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 ml-auto" style="text-align: end;">
+                                            <p>
+                                                <button class="btn btn-link btn-sm" type="button" data-toggle="collapse"
+                                                    data-target="#collapseColunas" aria-expanded="false"
+                                                    aria-controls="collapseColunas">
+                                                    Colunas<i class="material-icons">expand_more</i>
+                                                </button>
+                                            </p>
+                                            <div class="collapse" id="collapseColunas">
+                                                <div class="row">
+                                                    <div class="col-sm-12 col-md-12 col-lg-12 text-right">
+                                                        <button id="btn-antecipadoscol" onclick="hideColumns([3, 4, 5, 6])"
+                                                            name="btn-antecipadoscol" type="submit"
+                                                            class="btn btn-link btn-sm toggle-button">
+                                                            Antecipados
+                                                        </button>
+
+                                                        <button type="submit" name="btn-icmscol" id="btn-icmscol"
+                                                            onclick="hideColumns([7, 8])"
+                                                            class="btn btn-link btn-sm toggle-button">
+                                                            ICMS
+                                                        </button>
+
+                                                        <button type="submit" name="btn-piscofinscol"
+                                                            id="btn-piscofinscol" onclick="hideColumns([10, 11, 12, 13])"
+                                                            class="btn btn-link btn-sm toggle-button">
+                                                            PIS/Cofins
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <!-- DIV -->
+                                    <br>
+                                    <br>
+                                    <div class="table-responsive box drag">
+                                        <table id="tabelaAprovar"
+                                            class="table display table-striped table-no-bordered table-hover"
+                                            cellspacing="0" width="100%" style="width:100%">
+                                            <thead>
+                                                <tr class="table-header">
+                                                    <th>
+                                                        <div class="form-check">
+                                                            <label class="form-check-label">
+                                                                <input id="checkall" name="checkbox"
+                                                                    onChange="marcartodos()"
+                                                                    class="form-check-input thcheckbox checkinput"
+                                                                    type="checkbox" value="">
+                                                                <span class="form-check-sign">
+                                                                    <span class="check"></span>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                                    </th>
+                                                    <th class="text-right td-actions">
+                                                        <button id="editar_selecionados_tbl"
+                                                            name="editar_selecionados_tbl" type="button" 
+                                                            class="btn btn-warning" title="Editar" disabled>
+                                                            <i class="material-icons">edit</i>
+                                                        </button>
+                                                        <button id="validar_selecionados_tbl"
+                                                            name="validar_selecionados_tbl" type="button" 
+                                                            class="btn btn-success" title="Aprovar" disabled>
+                                                            <i class="material-icons">check</i>
+                                                        </button>
+                                                    </th>
+                                                    <th>Descrição</th>
+                                                    <th>CEST</th>
+                                                    <th>NCM</th>
+                                                    <th>MVA4</th>
+                                                    <th>MVA7</th>
+                                                    <th>MVA12</th>
+                                                    <th>Tipo Antecipado</th>
+                                                    <th>CST-ICMS</th>
+                                                    <th>CSOSN-ICMS</th>
+                                                    <th>CST PIS/COF ENT</th>
+                                                    <th>CST PIS/COF SAI</th>
+                                                    <th>Redução Base PA</th>
+                                                    <th>Redução Base Fora PA</th>
+                                                    <th>NATUREZA</th>
+                                                    <th>ID</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--FOOTER-->
+            <footer style="margin-top: 4%; margin-bottom: 0px;" class="footer">
+                <div class="container">
+                    <nav class="float-left">
+                        <ul>
+                            <li>
+                                <a href="https://www.google.com/">
+            
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.google.com/presentation">
+            
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="copyright float-right">
+                        <span id="anoFooter"></span>
+                        &copy;
+                        <script>
+                            //document.write(new Date().getFullYear())
+                            document.getElementById('anoFooter').innerHTML = new Date().getFullYear()
+                        </script>,
+                        <a style="color: #fff;" href="/quemSomos">lab41</a>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+
+    <!-- Edit Aprovar_Itens Modal-->
+    <form id="update_form_pendente" method="post" action="/gerenciar/update-pendente">
+        <div class="modal fade" id="EditModal_Aprovar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title " id="exampleModalLabel">Alterar Atributos do Item
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-row">
+                            <!-- id_item -->
+                            <!--<input id="id_item_modal" name="id_item_selecionados[]" type="hidden">-->
+                            <!-- id_item -->
+                            <div class="form-group col-md-9">
+                                <h6 class="label-modal">Descrição</h6>
+                                <input id="descricao_modal_disabled" name="descricao" type="text" class="form-control"
+                                    disabled>
+                                <!--<input id="descricao_modal" name="desc_item" type="hidden">-->
+                            </div>
+                            <div class="form-group col-md-3">
+                                <h6 class="label-modal">NCM</h6>
+                                <input id="ncm_linha_modal" name="ncm" type="text" class="form-control " disabled>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <h6 class="label-modal">Redução Base PA</h6>
+                                <input id="nt_saida_reducao_base_pa_modal" name="nt_saida_reducao_base_pa" type="text" class="form-control" autocomplete="off" onkeypress="$(this).mask('9,9999', {reverse: true});" >
+                            </div>
+                            <div class="form-group col-md-4">
+                                <h6 class="label-modal">Redução Base Fora Pa</h6>
+                                <input id="nt_saida_reducao_base_fora_pa_modal" name="nt_saida_reducao_base_fora_pa" type="text" class="form-control" autocomplete="off" onkeypress="$(this).mask('9,9999', {reverse: true});" >
+                            </div>
+                        </div>
+
+                        <br>
+                        <h5 class="text-justify">Antecipados</h5>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <h6 class="label-modal">MVA 7</h6>
+                                <input id="mva_7_modal" name="mva7" type="text" class="form-control" autocomplete="off" onkeypress="$(this).mask('9,9999', {reverse: true});" required>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <h6 class="label-modal">MVA 4</h6>
+                                <input id="mva_4_modal" name="mva4" type="text" class="form-control" autocomplete="off" onkeypress="$(this).mask('9,9999', {reverse: true});" required>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <h6 class="label-modal">MVA 12</h6>
+                                <input id="mva_12_linha_modal" name="mva12" type="text" class="form-control"
+                                    autocomplete="off" onkeypress="$(this).mask('9,9999', {reverse: true});" required>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <h6 class="label-modal">Tipo Antecipado</h6>
+                                <select title='SELECIONE UMA OPÇÃO' class="form-control selectpicker"
+                                    data-style="btn btn-link btn-md" id="tipo_antecipado_modal" name="tipoantecipado"
+                                    type="text" required>
+                                    <option value="ANTECIPADO_DE_ENTRADAS" required>ANTECIPADO_DE_ENTRADAS</option>
+                                    <option value="ANTECIPADO_ESPECIAL">ANTECIPADO_ESPECIAL</option>
+                                    <option value="CESTA_BASICA">CESTA_BASICA</option>
+                                    <option value="ISENTO">ISENTO</option>
+                                    <option value="MEDICAMENTOS">MEDICAMENTOS</option>
+                                    <option value="CREDITO_PRESUMIDO">CREDITO_PRESUMIDO</option>
+                                </select>
+                            </div>
+                        </div>
+                        <hr>
+                        <br>
+                        <h5 class="text-justify">ICMS</h5>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <h6 class="label-modal">CST-ICMS</h6>
+                                <input id="cst_icms" name="cst_icms" type="text" class="form-control"  required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <h6 class="label-modal">CSOSN-ICMS</h6>
+                                <input id="csosn_icms" name="csosn" type="text" class="form-control" autocomplete="off"
+                                    required>
+                            </div>
+                        </div>
+                        <hr>
+                        <br>
+                        <h5 class="text-justify">PIS/COFINS</h5>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <h6 class="label-modal">CST PIS/COFINS ENTRADA</h6>
+                                <input id="cst_piscofins_entrada" name="cst_piscofins_entrada" type="text"
+                                    class="form-control " autocomplete="off" required>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <h6 class="label-modal">CST PIS/COFINS SAÍDA</h6>
+                                <input id="cst_piscofins_saida" name="cst_piscofins_saida" type="text"
+                                    class="form-control " autocomplete="off" required>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <h6 class="label-modal">NATUREZA RECEITA MONOFÁSICO/ALIQ ZERO</h6>
+                                <input id="natureza_receita" name="natureza" type="text" class="form-control "
+                                    autocomplete="off" required>
+                                <label>Adicione "X" para remover natureza</label>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn">SALVAR</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- Edit Aprovar_Itens Modal - FIM-->
+
+    <!-- Edit Aprovar_Multiplos_Itens Modal-->
+    <form id="update_form_pendente_multiplos" method="post" action="/gerenciar/update-pendente">
+
+        <div class="modal fade" id="EditModal_Aprovar_Multiplos" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Editar Itens Selecionados</h5>
+                        <p>Somente os campos preenchidos serão atualizados no banco</p>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <h6 class="label-modal">Redução Base PA</h6>
+                                <input id="nt_saida_reducao_base_pa_modal_multiplos" name="nt_saida_reducao_base_pa" type="text" class="form-control" autocomplete="off" onkeypress="$(this).mask('9,9999', {reverse: true});" >
+                            </div>
+                            <div class="form-group col-md-4">
+                                <h6 class="label-modal">Redução Base Fora Pa</h6>
+                                <input id="nt_saida_reducao_base_fora_pa_modal_multiplos" name="nt_saida_reducao_base_fora_pa" type="text" class="form-control" autocomplete="off" onkeypress="$(this).mask('9,9999', {reverse: true});" >
+                            </div>
+                        </div>
+
+                        <h5 class="text-justify"><b>Antecipados</b></h5>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <h6 class="label-modal">MVA 7</h6>
+                                <input id="mva_7_modal_multiplos" name="mva7" type="text" class="form-control"
+                                    autocomplete="off" onkeypress="$(this).mask('9,9999', {reverse: true});">
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <h6 class="label-modal">MVA 4</h6>
+                                <input id="mva_4_modal_multiplos" name="mva4" type="text" class="form-control"
+                                    autocomplete="off" onkeypress="$(this).mask('9,9999', {reverse: true});">
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <h6 class="label-modal">MVA 12</h6>
+                                <input id="mva_12_linha_modal_multiplos" name="mva12" type="text"
+                                    class="form-control" autocomplete="off" onkeypress="$(this).mask('9,9999', {reverse: true});">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <h6 class="label-modal">Tipo Antecipado</h6>
+                                <select title='SELECIONE UMA OPÇÃO' class="form-control selectpicker"
+                                    data-style="btn btn-link btn-md" id="tipo_antecipado_modal_multiplos"
+                                    name="tipoantecipado" type="text">
+                                    <option value="ANTECIPADO_DE_ENTRADAS" required>ANTECIPADO_DE_ENTRADAS</option>
+                                    <option value="ANTECIPADO_ESPECIAL">ANTECIPADO_ESPECIAL</option>
+                                    <option value="CESTA_BASICA">CESTA_BASICA</option>
+                                    <option value="ISENTO">ISENTO</option>
+                                    <option value="MEDICAMENTOS">MEDICAMENTOS</option>
+                                    <option value="CREDITO_PRESUMIDO">CREDITO_PRESUMIDO</option>
+                                </select>
+                            </div>
+                        </div>
+                        <hr>
+                        <br>
+                        <h5 class="text-justify"><b>ICMS</b></h5>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <h6 class="label-modal">CST-ICMS</h6>
+                                <input id="cst_icms_multiplos" name="cst_icms" type="text"
+                                    class="form-control" autocomplete="off">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <h6 class="label-modal">CSOSN-ICMS</h6>
+                                <input id="csosn_icms_multiplos" name="csosn" type="text" class="form-control"
+                                    autocomplete="off">
+                            </div>
+                        </div>
+                        <hr>
+                        <br>
+                        <h5 class="text-justify"><b>PIS/COFINS</b></h5>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <h6 class="label-modal">CST PIS/COFINS ENTRADA</h6>
+                                <input id="cst_piscofins_entrada_multiplos" name="cst_piscofins_entrada"
+                                    type="text" class="form-control" autocomplete="off">
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <h6 class="label-modal">CST PIS/COFINS SAIDA</h6>
+                                <input id="cst_piscofins_saida_multiplos" name="cst_piscofins_saida"
+                                    type="text" class="form-control" autocomplete="off">
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <h6 class="label-modal">NATUREZA RECEITA MONOFÁSICO/ALIQ ZERO</h6>
+                                <input id="natureza_receita_multiplos" name="natureza" type="text"
+                                    class="form-control" autocomplete="off">
+                                <label>Adicione "X" para remover natureza</label>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="modal-footer">
+                            <button type="button" class="btn" data-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn">SALVAR</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- Edit Aprovar_Multiplos_Itens Modal - FIM-->
+
+    {{> escritorio/modal_chamados}}
+    
+    <!--   Core JS Files   -->
+    <script src="../assets/js/core/jquery-3.5.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+    <script src="../assets/js/core/popper.min.js"></script>
+    <script src="../assets/js/core/bootstrap-material-design.js"></script>
+    <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+    <!-- Plugin for the momentJs  -->
+    <script src="../assets/js/plugins/moment.min.js"></script>
+    <!-- Plugin for the momentJs TRADUÇÕES LOCAIS  -->
+    <script src="../assets/js/plugins/moment-with-locales.js"></script>
+    <!--  Plugin for Sweet Alert -->
+    <script src="../assets/js/plugins/sweetalert2.js"></script>
+    <!-- Forms Validations Plugin -->
+    <script src="../assets/js/plugins/jquery.validate.min.js"></script>
+    <!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
+    <script src="../assets/js/plugins/jquery.bootstrap-wizard.js"></script>
+    <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+    <script src="../assets/js/plugins/bootstrap-selectpicker.js"></script>
+    <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+    <script src="../assets/js/plugins/bootstrap-datetimepicker.min.js"></script>
+    <!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
+    <script src="../assets/js/plugins/bootstrap-tagsinput.js"></script>
+    <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+    <script src="../assets/js/plugins/jasny-bootstrap.min.js"></script>
+    <!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
+    <script src="../assets/js/plugins/fullcalendar.min.js"></script>
+    <!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
+    <script src="../assets/js/plugins/jquery-jvectormap.js"></script>
+    <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+    <script src="../assets/js/plugins/nouislider.min.js"></script>
+    <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+    <!-- Library for adding dinamically elements -->
+    <script src="../assets/js/plugins/arrive.min.js"></script>
+    <!-- Chartist JS -->
+    <script src="../assets/js/plugins/chartist.min.js"></script>
+    <!--  Notifications Plugin    -->
+    <script src="../assets/js/plugins/bootstrap-notify.js"></script>
+
+    <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="../assets/js/material-dashboard.min.js?v=2.1.2" type="text/javascript"></script>
+    <!-- Material Dashboard DEMO methods, don't include it in your project!
+  <script src="../assets/demo/demo.js"></script>-->
+
+    <!--SWEET ALERT-->
+    <!--LOCAL-->
+    
+    <script src="../local/plugins/sweetalert/js/sweetalert2.min.js"></script>
+    <script src="../local/metodos/alert/loading.js"></script>
+    <link rel="stylesheet" href="../local/plugins/sweetalert/css/sweetalert2.min.css" id="theme-styles">
+    <script src="../local/plugins/drag/drag.js"></script>
+    <!-- DATATABLE() -->
+    <!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
+    <script src="../local/plugins/dataTables/dataTables.min.js"></script>
+    <!--SORTING DATE EU-->
+    <script src="https://cdn.datatables.net/plug-ins/1.10.12/sorting/date-eu.js"></script>
+    <!--ROWGROUP-->
+    <script src="https://cdn.datatables.net/rowgroup/1.0.2/js/dataTables.rowGroup.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.colVis.min.js"></script>
+    <!--local-->
+    <!-- AJAX JQUERY POST FORM
+  <script src="../local/metodos/post/update_modal_aprovar_itens.js"></script> -->
+    <!-- AJAX JQUERY POST UPDATE update_form_pendente MODAL  <script src="../local/metodos/post/update_input_aprovar_notas.js"></script> -->
+
+    <!--MASK FOR FORMS
+    <script src="../local/plugins/mask_input/jquery.maskedinput.js"></script>-->
+
+    <!-- HANDLE SELECT BoxeS ON TABLE
+  <script src="../assets/js/plugins/datatables_select_rows.js"></script> -->
+
+    <!-- HANDLE CheckBoxes
+  <script src="../local/metodos/post/update_aprovar_desc_itens_selecionados.js" type="text/javascript"> </script>
+-->
+
+    <!-- HANDLE CheckBoxes
+  <script src="../local/metodos/post/update_aprovar_desc_itens_selecionados.js" type="text/javascript"> </script>
+-->
+
+    <script src="../local/plugins/dataTables/selected2clipboard.js"></script>
+
+    <script type="text/javascript">
+        var tabelaAprovar;
+        var faltamaprovar;
+        var aprovados;
+        var totalitens;
+        var bAprovados = document.getElementById('TagB_aprovados');
+        var bFaltamAprovar = document.getElementById('TagB_faltamaprovar');
+        var bTotalItens = document.getElementById('TagB_totalitens');
+        bAprovados.textContent = 'Carregando...';
+        bFaltamAprovar.textContent = 'Carregando...';
+        bTotalItens.textContent = 'Carregando...';
+        var id_item_selecionados = [];
+
+
+        //FUNÇÃO PARA MOSTRAR O CONTADOR DE ITENS
+        function showContadorGeralItens(aprovados, faltamaprovar, totalitens) {
+            bAprovados.textContent = (aprovados);
+            bFaltamAprovar.textContent = (faltamaprovar);
+            bTotalItens.textContent = (totalitens);
+            //console.log("CONTADOR : ", aprovados, faltamaprovar, totalitens)
+        }
+
+        function showContadorItemBuscado(NomeItemBuscado, CountFaltamAprovarItem) {
+            let bNomeItem = document.getElementById('TagB_nomeitem');
+            let bFaltamAprovarItem = document.getElementById('TagB_faltamaprovaritem');
+            bNomeItem.textContent = NomeItemBuscado;
+            bFaltamAprovarItem.textContent = CountFaltamAprovarItem;
+            $("#ContadorItemBuscado").removeClass('hideElement')
+        }
+
+        //FUNÇÃO PARA MOSTRAR A QUANTIDADE DE CADA TIPOS ANTECIPADO EM RELAÇÃO AO ITEM BUSCADO
+        function showAntecipados(antecipados) {
+            var targetElement = document.getElementById('ContadorItemBuscadoAntecipados');
+            $(targetElement).empty()
+            antecipados.forEach((element, index) => {
+                let sweetName = element.tipo_antecipado.replaceAll('_', " ").toLowerCase()
+                let elementID = `qtd_${element.tipo_antecipado}`
+                //Se o elemento não existir, o append será feito, se existir os valores serão atualizados
+                if ($(`#${elementID}`).length != 0) {
+                    $(`#${elementID}`).html('').html(`${sweetName}: <b>${element.qtd}</b>`)
+                } else {
+                    //class 'textCapitalize' in css will do text capitalize
+                    $(targetElement).append(`<label id="${elementID}" class="textCapitalize" >${sweetName}: <b>${element.qtd}</b></label>`)
+                }
+            });
+            $("#ContadorItemBuscadoAntecipados").removeClass('hideElement')
+        }
+
+
+
+
+        //CARREGA JUNTO COM A PÁGINA
+        $(document).ready(function () {
+            //ACTIVE NAV-ITEM
+            const navs = document.getElementsByClassName('nav-item');
+            if (navs.length > 0) {
+                for (var x = 0; x < navs.length; x++) {
+                    if (navs[x].childNodes[1].attributes[1].nodeValue) {
+                        if (navs[x].childNodes[1].attributes[1].nodeValue == location.pathname) {
+                            $(navs[x]).addClass('active')
+                        }
+                    }
+                }
+            }
+            //MASK PARA FORMULÁRIOS
+            jQuery(function ($) {
+                $("#datamodal").mask("99/99/9999", {
+                    placeholder: "DD/MM/AAAA"
+                });
+            });
+            //_________________________________________________________________x
+
+
+
+
+            //Inicializando a tabela
+            tabelaAprovar = $('#tabelaAprovar').DataTable({
+            
+                ajax: {
+                    url: '/gerenciar/get-aprovar-itens',
+                    type: 'GET',
+                    dataSrc: function (data) {
+                        showContadorGeralItens(data.aprovados, data.faltamaprovar, data.totalitens)
+                        return JSON.parse(data.dataTable)
+                    }                    
+                },
+                //scrollX: true,
+                destroy: true,
+                deferRender: true,
+                columns: [
+                    {
+                    defaultContent: '<div class="form-check">' +
+                        '<label class="form-check-label">' +
+                        '<input name="checkbox" class="form-check-input checkinput" type="checkbox" value=""' +
+                        'onchange="marcados(this.checkbox)">' +
+                        '<span class="form-check-sign">' +
+                        '<span class="check"></span>' +
+                        '</span>' +
+                        '</label>' +
+                        '</div>'
+                }, //CHECKBOX
+                {
+                    data: '',
+                    render: function (data, type, row) {
+                        return `<button id="editar_linha_tbl" name="editar_linha_tbl" type="button" rel="tooltip" class="btn btn-warning" title="Editar" >
+                        <i class="material-icons">edit</i>
+                        </button>
+                        <button id="validar_linha_tbl" name="validar_linha_tbl"  type="button" rel="tooltip" class="btn btn-success" title="Aprovar" disabled>
+                        <i class="material-icons">check</i>
+                        </button>`
+                    }
+                },
+                { 
+                    data: "descricao_item",
+                    className:"td-descricao_item"
+                },
+                { 
+                    data: "cest",
+                    className:"td-cest" 
+                },
+                { 
+                    data: "ncm",
+                    className:"td-ncm" 
+                },
+                { 
+                    data: "mva_4",
+                    className:"td-mva_4"
+                },
+                { 
+                    data: "mva_7",
+                    className:"td-mva_7"
+                },
+                { 
+                    data: "mva_12",
+                    className:"td-mva_12"
+                },
+                { 
+                    data: "tipo_antecipado",
+                    className:"td-tipo_antecipado" 
+                },
+                { 
+                    data: "cst_icms",
+                    className:"td-cst_icms" 
+                },
+                { 
+                    data: "csosn_icms",
+                    className:"td-csosn_icms"
+                },
+                { 
+                    data: "cst_piscofins_entrada",
+                    className:"td-cst_piscofins_entrada"
+                },
+                { 
+                    data: "cst_piscofins_saida",
+                    className:"td-cst_piscofins_saida"
+                },
+                { 
+                    data: "red_bc_icms_sai_pa",
+                    className:"td-red_bc_icms_sai_pa"
+                },
+                { 
+                    data: "red_bc_icms_sai_fora_pa",
+                    className:"td-red_bc_icms_sai_fora_pa"
+                },
+                { 
+                    data: "natureza_receita_monofasico_aliqzero",
+                    className:"td-natureza_receita_monofasico_aliqzero"
+                },
+                { data: "id_item",
+                    className:"td-id_item hideElement"
+                }
+                ],
+                processing: true,
+                fixedHeader: {
+                    header: false,
+                    footer: false
+                },
+                select: {
+                    style: 'os',
+                    items: 'cell'
+                },
+
+                dom: 'Blftip',
+                buttons: [{
+                    extend: 'excel',
+                    text: 'Exportar'
+                }],
+
+                pagingType: "full_numbers",
+                lengthMenu: [
+                    [50, 100],
+                    [50, 100]
+                ],
+                responsive: false,
+                language: {
+                    url: "../assets/js/plugins/dataTables.ptbr.lang",
+                    search: "_INPUT_",
+                    searchPlaceholder: "",
+                    //processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Carregando...</span>'
+                },/*
+                fixedColumns: {
+                    leftColumns: -1,
+                    rightColumns: 1
+                },*/
+                columnDefs: [{
+                    orderable: false,
+                    targets: [0, 1]
+                }, {
+                    className: 'td-actions',
+                    targets: 1
+                },
+                {
+                    className: 'hideElement',
+                    targets: 16
+                },
+                {
+                    targets: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+                    className: 'text-center'
+                }],
+
+                order: [
+                    [2, 'asc']
+                ],
+                rowCallback: function (row, data) {
+                    //Inicializa os botões dos rows como ativos - disabled = false
+                    var validar_linha_tbl = $(row).find("button[name='validar_linha_tbl']");
+                    validar_linha_tbl.prop('disabled', false);
+                    $("#tabelaAprovar").removeClass('hideElement') //DEIXAR A TABELA VISIVEL DEPOIS DA INICIALIZAÇÂO
+                    //$("#ContadorGeralItens").removeClass('hideElement')
+                    //--------------------------------Habilita botão editar se algum check box estiver selecionado & desabilita os botões dos rows
+                    var element = $(row).find('.checkinput');
+                    element.on("change", function () {
+                        //Habilita o botão EDITAR MARCADOS (HEADER) se algum check box estiver selecionado - disabled = true
+                        $("button[name='editar_selecionados_tbl']").prop('disabled', !$("input[name='checkbox']:checked").length);
+                        //Habilita o botão VALIDAR marcados (HEADER) se algum check box estiver selecionado - disabled = true
+                        $("button[name='validar_selecionados_tbl']").prop('disabled', !$("input[name='checkbox']:checked").length);
+                        //Desabilita os botões validar linha se algum check box estiver selecionado - disabled = true
+                        $("button[name='validar_linha_tbl']").prop('disabled', $("input[name='checkbox']:checked").length);
+                        //Desabilita os botões editar da linha se algum check box estiver selecionado - disabled = true
+                        $("button[name='editar_linha_tbl']").prop('disabled', $("input[name='checkbox']:checked").length);
+                    })
+                },
+                initComplete: function (settings, json) {
+                    $('table').removeClass('hideObjectInit');
+                    // Enable TFOOT scoll bars
+                    $('.dataTables_scrollFoot').css('overflow', 'auto');
+
+                    $('.dataTables_scrollHead').css('overflow', 'auto');
+
+                    // Sync TFOOT scrolling with TBODY
+                            $('.dataTables_scrollFoot').on('scroll', function () {
+                                $('.dataTables_scrollBody').scrollLeft($(this)
+                            .scrollLeft());
+                    });
+
+                    $('.dataTables_scrollHead').on('scroll', function () {
+                        $('.dataTables_scrollBody').scrollLeft($(this)
+                            .scrollLeft());
+                    });
+
+
+                     /* multi-search table header */
+                     this.api().columns().every( function () {
+                        var that = this;
+        
+                        $('input', this.header()).on( 'keyup change clear', function () {
+                            if (that.search() !== this.value ) {
+                                that.search(this.value).draw();
+                            }
+                        });
+                    });
+
+
+                }
+            });
+
+
+            //let cardTitleNode = document.getElementById('cardTitle');  //Atribui o titulo do card 2 (CARD DA TABELA)
+            //cardTitleNode.textContent = (response.nomepjemitente);
+
+
+
+            //___________________________________BOTÃO EDITAR_____________________________________________
+            //---------------------------------------------------------------OUVINTE DO BOTÃO EDITAR MODAL
+
+            $(document).on('click', '#editar_linha_tbl', function (e) {
+                e.preventDefault;
+                id_item_selecionados = [];
+                var id_item = $(this).closest('tr').find('.td-id_item').text()
+                var descricao_item = $(this).closest('tr').find('.td-descricao_item').text()
+                id_item_selecionados.push(id_item);
+
+                $('#descricao_modal_disabled').val($(this).closest('tr').find('.td-descricao_item').text()); //just to show because form don't send disabled inputs
+                $('#ncm_linha_modal').val($(this).closest('tr').find('.td-ncm').text());
+                $('#mva_4_modal').val($(this).closest('tr').find('.td-mva_4').text());
+                $('#mva_7_modal').val($(this).closest('tr').find('.td-mva_7').text());
+                $('#mva_12_linha_modal').val($(this).closest('tr').find('.td-mva_12').text());
+                $('#tipo_antecipado_modal').val($(this).closest('tr').find('.td-tipo_antecipado').text());
+                $('#cst_icms').val($(this).closest('tr').find('.td-cst_icms').text())
+                $('#csosn_icms').val($(this).closest('tr').find('.td-csosn_icms').text())
+                $('#cst_piscofins_entrada').val($(this).closest('tr').find('.td-cst_piscofins_entrada').text())
+                $('#cst_piscofins_saida').val($(this).closest('tr').find('.td-cst_piscofins_saida').text())
+                $('#nt_saida_reducao_base_pa_modal').val($(this).closest('tr').find('.td-red_bc_icms_sai_pa').text())
+                $('#nt_saida_reducao_base_fora_pa_modal').val($(this).closest('tr').find('.td-red_bc_icms_sai_fora_pa').text())
+                $('#natureza_receita').val($(this).closest('tr').find('.td-natureza_receita_monofasico_aliqzero').text())
+                $('#EditModal_Aprovar').modal('show');
+                $('.selectpicker').selectpicker('refresh') //to show selected option on selectpicker
+            });
+            //____________________________________BOTÃO VALIDAR_______________________________________
+            //--------------------------------------------------------------OUVINTE DO BOTÃO EDITAR MODAL
+            $(document).on('click', '#validar_linha_tbl', function (e) {
+                e.preventDefault;
+
+                //console.log("validando... esse: ", descricao_produtos)
+                /*var id_item = $(this).attr('data-id_item')
+                console.log("id_item ", id_item) 
+                ?victor hoje
+                */
+               var id_item = $(this).closest('tr').find('.td-id_item').text()
+
+                if(id_item){
+                    if(id_item.length > 0){
+                        showLoading()
+                        $.ajax({
+                            async: "false",
+                            url: "/gerenciar/aprovar-pendente",
+                            type: "post",
+                            data: {
+                                'id_item_selecionados': id_item,
+                                'validar_pendente': true
+                            }
+                        }).done(function (response) { //
+                            //hideLoading();
+                            var gif = "";
+                            if (response == "Linha Validada!") {
+                                gif = "success";
+                            }
+                            if (response == "Erro ao validar!") {
+                                gif = "warning";
+                            }
+                            Swal.fire({
+                                position: 'center',
+                                icon: gif,
+                                title: response,
+                                showConfirmButton: true,
+                                //timer: 2000
+                            });
+                            setTimeout(function () {
+                                //modal_hide();
+                                //reloadPage();
+                            }, 2000);
+                        });
+            }else{
+                Swal.fire({
+                        position: 'center',
+                        icon: gif,
+                        title: 'id_item length 0',
+                        showConfirmButton: true
+                    });   
+            }
+            }else{
+                Swal.fire({
+                        position: 'center',
+                        icon: gif,
+                        title: 'id_item undefined',
+                        showConfirmButton: true
+                    });
+            }
+            });
+            //-----------------------------------------------------------------OUVINTE DO BOTÃO VALIDAR
+
+            //____________________________________BOTÃO VALIDAR TABLE HEADER_______________________________________
+            //--------------------------------------------------------AJAX POST DO BOTÃO VALIDAR TODOS SELECIONADOS
+            $(document).on('click', '#validar_selecionados_tbl', function (e) {
+                e.preventDefault;
+                if(id_item_selecionados) {
+                    showLoading();
+                    $.ajax({
+                        async: "false",
+                        url: "/gerenciar/aprovar-pendente",
+                        type: "post",
+                        data: {
+                            'id_item_selecionados': id_item_selecionados,
+                            'validar_pendente': true
+                        }
+                    }).done(function (response) {
+                        console.log("response ===>", response)
+
+                        var gif = "";
+                        if (response == "Linhas Validadas!") {
+                            gif = "success";
+                        }
+                        if (response == "Erro ao validar!") {
+                            gif = "warning";
+                        }
+                        if (response == "Erro ao obter dados atualizados no SQLServer para enviar ao Postgre!") {
+                            gif = "warning";
+                        }
+                        if (response == "Erro ao validar dados no Postgre!") {
+                            gif = "warning";
+                        }
+
+                        if (response == "Erro ao validar dados no SQLServer!") {
+                            gif = "warning";
+                        }
+                        Swal.fire({
+                            position: 'center',
+                            icon: gif,
+                            title: response,
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
+                        setTimeout(function () {
+                            reloadPage();
+                        }, 2000);
+                    });
+                }else{
+                    Swal.fire({
+                            position: 'center',
+                            icon: gif,
+                            title: 'Erro',
+                            text: 'Nenhum item selecionado id_item_selecionados = []',
+                            showConfirmButton: true
+                        });
+                }
+            });
+
+            $(document).on('click', '#editar_selecionados_tbl', function (e) {
+                e.preventDefault;
+                
+                //const descs_linha = id_item_selecionados
+                //$('#desc_modal_multiplos').val(descs_linha);
+                //$(this).attr("placeholder", "Type your answer here");
+                $('#EditModal_Aprovar_Multiplos').modal('show');
+            });
+
+            //____________________________________BOTÃO SALVAR MODAL_______________________________________
+            //--------------------------------------------------------------AJAX POST DO BOTÃO SALVAR MODAL
+            $("#update_form_pendente").submit(function (e) {
+                e.preventDefault(); //prevent default action
+                var post_url = $(this).attr("action"); //get form action url
+                var request_method = $(this).attr("method"); //get form GET/POST method
+                var form_data = $(this).serializeArray(); //Encode form elements for submission
+                form_data.push({name: "id_item_selecionados", value: id_item_selecionados});
+                
+                showLoading();
+                $.ajax({
+                    async: "false",
+                    url: post_url,
+                    type: request_method,
+                    data: $.param(form_data)
+                }).done(function (response) { //
+                    hideLoading();
+                    var gif = "";
+                    if (response == "Dados atualizados!") {
+                        gif = "success";
+                    }
+                    if (response == "Erro ao gravar dados!") {
+                        gif = "warning";
+                    }
+                    Swal.fire({
+                        position: 'center',
+                        icon: gif,
+                        title: response,
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                    setTimeout(function () {
+                        modal_hide();
+                        reloadPage();
+                    }, 2000);
+                });
+            });
+            //----------------------------------------------------------------------------------------x
+
+            //--------------------------------------------------------------AJAX POST DO BOTÃO SALVAR MODAL MULTIPLOS
+            $("#update_form_pendente_multiplos").submit(function (evm) {
+                console.log('click no submit')
+                evm.preventDefault(); //prevent default action
+
+                var post_url = $(this).attr("action"); //get form action url
+                var request_method = $(this).attr("method"); //get form GET/POST method
+                //var sendData = new FormData($("#update_form_pendente_multiplos")[0])
+                //var form_data = $(this).serialize(); //Encode form elements for submission
+
+                var formData = {
+                    'id_item_selecionados': id_item_selecionados,
+                    'tipoantecipado': $('#tipo_antecipado_modal_multiplos').val()
+                }
+                $(this).find("input[name]").each(function (index, node) {
+                    formData[node.name] = node.value
+                });
+
+                showLoading()
+                $.ajax({
+                    url: post_url,
+                    type: request_method,
+                    data: formData
+                }).done(function (response) { //
+                    
+                    //limpa selects do modal
+                    $('#EditModal_Aprovar_Multiplos').find("select").each(function (index, select) {
+                        select.value = ''
+                        $(select).change()
+                    });
+                    //limpa inputs modal
+                    $('#update_form_pendente_multiplos')[0].reset();
+                    //oculta modal
+                    $('#EditModal_Aprovar_Multiplos').modal('hide');
+                                       
+                    hideLoading()
+
+                    if (response) {
+                        var gif = 'warning'
+                        if(response == "Dados atualizados!") {
+                            gif = 'success'
+                        }else if(response == 'Nenhum dos itens puderam ser atualizados!'){
+                            gif = 'warning'
+                        }
+
+                        /* código antigo | antes de adicionar queue
+
+                        var gif = "success";
+                        var aviso = `O Postgre afeta itens únicos`
+                        var txtSql = `<div class="col-sm-12 col-md-12 col-lg-12"><div class="col-sm-12 col-md-12 col-lg-12"><div><h3 style="font-weight:600">SQL</h3><h4>Msg: ${response.sql.msg}</h4><h4> Alterou: ${response.sql.affectedRows}</h4><h4>Erros: ${response.sql.erros}</h4></div></div><hr>`
+                        var txtPg = `<div class="col-sm-12 col-md-12 col-lg-12"><div><h3 style="font-weight:600">POSTGRE</h3><h4>Msg: ${response.pg.msg}</h4><h4>Alterou: ${response.pg.affectedRows}</h4><h4>Erros: ${response.pg.erros}</h4><br><h6 style="font-weight:600"><b>${aviso}</b></h6></div></div></div>`
+
+                        //<h6 style="font-weight:600"><b>O Postgre afeta itens únicos</b></h6>
+                        response = `${txtSql}${txtPg}`
+
+                        */
+                        
+                        //victor 18:25
+                        Swal.fire({
+                            position: 'center',
+                            icon: gif,
+                            title: response,
+                            //confirmButtonText:"OK",
+                            showConfirmButton: false,
+                            timer: 1000
+                            }).then((result) => {
+                                  Swal.fire({
+                                    customClass: {confirmButton: 'btn btn-black btn-login col-lg-3'},
+                                    buttonsStyling: false, /*default style off*/
+                                    position: 'center',
+                                    title: 'Aprovações adicionadas a fila de execução!',
+                                    html:'<b>As alterações podem levar um tempo, aguarde</b><br>(Você pode aprovar outros itens por enquanto)',
+                                    icon:'success',
+                                    confirmButtonText:"OK",
+                                    showConfirmButton: true,
+                                    }).then((result) => {
+                                        if(result.isConfirmed){
+                                                setTimeout(function(){
+                                                    location.reload();
+                                                }, 5000)
+                                        }
+                            });                       
+                        });
+                    }
+
+                });
+            });
+            //----------------------------------------------------------------------------------------x
+
+
+
+
+            //________________________________________________________________________________________x
+
+            //--------------------------------Habilita botão editar se algum check box estiver selecionado & desabilita os botões dos rows
+            $("input[name='checkbox']").on('change', function () {
+                //Habilita o botão EDITAR MARCADOS (HEADER) se algum check box estiver selecionado - disabled = true
+                $("button[name='editar_selecionados_tbl']").prop('disabled', !$("input[name='checkbox']:checked").length);
+                //Habilita o botão VALIDAR marcados (HEADER) se algum check box estiver selecionado - disabled = true
+                $("button[name='validar_selecionados_tbl']").prop('disabled', !$("input[name='checkbox']:checked").length);
+                //Desabilita os botões validar linha se algum check box estiver selecionado - disabled = true
+                $("button[name='validar_linha_tbl']").prop('disabled', $("input[name='checkbox']:checked").length);
+                //Desabilita os botões editar da linha se algum check box estiver selecionado - disabled = true
+                $("button[name='editar_linha_tbl']").prop('disabled', $("input[name='checkbox']:checked").length);
+            })
+
+        });
+
+        $('button.toggle-button').on('click', function (e) {
+            $(this).toggleClass('btnpressed');
+        });
+
+
+        //----------- FUNÇÃO PARA ESCONDER COLUNAS -------------------------------
+        function hideColumns(colunas) {
+            var table = $('#tabelaAprovar').DataTable();
+
+            //console.log("tabela", table)
+
+            for (i = 0; i < colunas.length; i++) {
+                var table = $('#tabelaAprovar').DataTable();
+                //console.log("table ====> ", table)
+                //console.log("table column ====> ", table.column)
+                table.column(colunas[i]).visible(!table.column(colunas[i]).visible());
+            }
+        }
+
+
+
+        //---------------------------[FUNÇÕES]---------------------------------
+
+        //PEGA O ID E DESCRICAO DOS ITENS MARCADOS-----------------------------------------------
+        function marcados() {
+            id_item_selecionados = [];
+            $('#tabelaAprovar :checkbox:checked').each(function (index) {
+                var currentRow = $(this).closest('tr');
+                var id_item  = $(currentRow).find('.td-id_item').text()
+                if(id_item){
+                    if(typeof id_item != "undefined"){
+                        if(id_item.length >0){
+                            id_item_selecionados.push(id_item)
+                        }
+                    }
+                }
+                });
+        }
+
+        function desmarcartodos() {
+            $('input[type="checkbox"]:checked').prop('checked', false);
+            //Re-contar itens marcados
+            marcados();
+        }
+
+        function modal_hide() {
+            $('#EditModal').modal('hide')
+        }
+
+        function reloadPage() {
+            location.reload(true);
+        }
+        //---------------------------[SUBMIT FORMS]---------------------------------
+        $("#form_buscaaprovar").submit(function (e) {
+            e.preventDefault();
+            var post_url = $(this).attr("action"); //get form action url
+            var request_method = $(this).attr("method"); //get form GET/POST method
+            var form_data = $(this).serialize(); //Encode form elements for submission
+            showLoading();
+            $.ajax({
+                async: true,
+                url: post_url,
+                type: request_method,
+                data: form_data
+            }).done(function (response) {
+                //dados = response.dataTable
+                var dadosTabelaNotas = JSON.parse(response.dataTable)
+                showContadorItemBuscado(response.itembuscado, response.quantositens)
+                showAntecipados(response.countTiposAntecipados)
+
+                tabelaAprovar.clear().draw();
+                tabelaAprovar.rows.add(dadosTabelaNotas); // Add new data
+                tabelaAprovar.columns.adjust().draw(); // Redraw the DataTable
+                hideLoading();
+            });
+        });
+
+        //-------QUANDO MUDAR A PAGINA DA TABELA DESMARCAR TODOS OS CHECKBOXES------
+        $("#tabelaAprovar").on("page.dt", function () {
+            desmarcartodos();
+            //console.log("1")
+        }).on('search.dt', function () {
+            desmarcartodos();
+            //console.log("2")
+        });
+
+         /* multi-search table header - item */
+         $('#tabelaAprovar thead th').each( function (index, element) {
+            //excluir primeiro e último
+            if(index != 0 && index != 1) {
+                var title = $(this).text();
+                $(this).html( '<input class="filtercolumnhead" type="text" placeholder="'+title+'" />' );
+            }
+        });
+
+
+
+        //--------------SELECIONAR TODOS OS CHECK BOXs VISIVEIS-----------------------
+        function marcartodos() {
+            $("#checkall").each(function () {
+                $(".checkinput:visible").prop("checked", $(this).prop("checked"))
+                if (this.checked == true) {
+                    marcados();
+                }
+            })
+        }
+    </script>
+
+    <script>
+        function radioBold(thisRadio) {
+            //removendo classe radio-label de todos
+            var labelradios = $(".radio-label");
+            labelradios.map(function () {
+                $(this).removeClass('radio-bold');
+            })
+
+            //adicionando classe radio-label somente ao item clicado
+            var label = thisRadio.parentNode
+            $(label).addClass('radio-bold');
+        }
+    </script>
+
+</body>
+
+</html>

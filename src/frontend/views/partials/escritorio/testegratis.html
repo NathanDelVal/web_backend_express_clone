@@ -1,0 +1,13 @@
+{{#ifCond plano '==' "FREE"}}
+<div class="alert-testegratis alert alert-info alert-with-icon ml-auto mr-auto" data-notify="container">
+    <i class="material-icons" data-notify="icon">notifications</i>
+    <span data-notify="icon" class="now-ui-icons ui-1_bell-53"></span>
+    <span data-notify="message" style="font-weight: 600; align-items: center;">
+        Você está usando a versão gratuita limitada <br><a>(<h7 id="displaytimeleft"></h7> Restantes)</a> <br>
+        {{#ifCond administrador '==' "SIM"}}
+        <a id="modal_adquirir_open" href="#">clique <u>aqui</u> para adiquirir a versão completa</a>
+        {{/ifCond}}
+    </span>
+</div>
+<script src='../local/metodos/expirationtimer.js'> </script>
+{{/ifCond}}

@@ -1,0 +1,577 @@
+<form id="update-planos" method="post" action="/suporte/update-planos">
+    <div class="modal fade" id="modal_adquirir" tabindex="-1" role="modal-dialog" aria-labelledby="ModalLabelSuporte" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalLabelSuporte">Selecione o plano que deseja adquirir
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body wizard-card" id="wizard">
+                    <div class="row align-items-top">
+                        <div class="col-lg-5">
+                            <h4 class="info-title text-center">Total</h4>
+                            <div class="card">
+                                <div class="card-body">
+                                    <table id="tabela-price" style="width: 100%;">
+                                        <thead>
+                                            <tr>
+                                                <th>Item</th>
+                                                <th class="text-right">Preço</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="cart-pre-checkout">
+
+                                            <tr>
+                                                <td>Nenhum Item</td>
+                                                <td class="text-right">0,00</td>
+                                            </tr>
+
+                                        </tbody>
+                                        <tfoot style="border-top: 3px dotted #c4bfbf">
+                                            <hr>
+                                            <tr>
+                                                <td>TOTAL</td>
+                                                <td id="checkout-total" class="text-right">
+                                                    0,00<br>
+                                                    <strong style="font-size: 0.7rem; font-weight: bold;">mensal</strong>
+                                                </td>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                            <div id="card-forma-pagamento" class="card">
+                                <div class="card-header" style="background-image: none!important;">
+                                    <h5 style="font-weight: 500;">Selecione a forma de pagamento
+                                    </h5>
+                                </div>
+                                <div class="card-body" style="text-align: center;">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="form-check form-check-radio btn-section-operation">
+                                                <label class="form-check-label radio-label" style="padding-left: 0!important;">
+                                                    <input class="form-check-input" type="radio" id="formaPagamento1" name="formaPagamento">
+                                                    <span class="circle">
+                                                        <span class="check"></span>
+                                                    </span>
+                                                </label>
+                                            </div>
+                                            <img style="width: 30px; margin-top: 1rem;" src="../images/bar-code.svg">
+                                            <h6>Boleto</h6>
+                                        </div>
+                                        <div class="col-lg-4" style="filter: blur(1px);">
+                                            <div class="form-check form-check-radio btn-section-operation">
+                                                <label class="form-check-label radio-label" rel="tooltip" data-original-title="Ainda não disponivel" style="padding-left: 0!important;">
+                                                    <input class="form-check-input disabled" type="radio"
+                                                        id="formaPagamento2" name="formaPagamento" disabled>
+                                                    <span class="circle">
+                                                        <span class="check"></span>
+                                                    </span>
+                                                </label>
+                                            </div>
+                                            <img style="width: 30px; margin-top: 1rem;" src="../images/credit-card.svg">
+                                            <h6>Crédito</h6>
+                                        </div>
+                                        <div class="col-lg-4" style="filter: blur(1px);">
+                                            <div class="form-check form-check-radio btn-section-operation">
+                                                <label class="form-check-label radio-label" rel="tooltip" data-original-title="Ainda não disponivel" style="padding-left: 0!important;">
+                                                    <input class="form-check-input disabled" type="radio"
+                                                        id="formaPagamento3" name="formaPagamento" disabled>
+                                                    <span class="circle">
+                                                        <span class="check"></span>
+                                                    </span>
+                                                </label>
+                                            </div>
+                                            <img style="width: 30px; margin-top: 1rem;" src="../images/debit-card.svg">
+                                            <h6>Débito</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="card-dia-venimento" class="card hideElement">
+                                <div class="card-body">
+                                    <div class="card-header" style="padding: 0!important; background-image: 
+                                    none!important;">
+                                        <h5 style="font-weight: 500;">Selecione a data de vencimento do boleto:</h5>
+                                    </div>
+                                    <div class="container">
+                                        <div class="form-check form-check-radio btn-section-operation">
+                                            <label class="form-check-label radio-label" style="padding-left: 25px;">
+                                                <input class="form-check-input" type="radio" name="diaBoleto">
+                                                Dia 01 do mês corrente
+                                                <span class="circle">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="form-check form-check-radio btn-section-operation">
+                                            <label class="form-check-label radio-label" style="padding-left: 25px;">
+                                                <input class="form-check-input" type="radio" name="diaBoleto">
+                                                Dia 05 do mês corrente
+                                                <span class="circle">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="form-check form-check-radio btn-section-operation">
+                                            <label class="form-check-label radio-label" style="padding-left: 25px;">
+                                                <input class="form-check-input" type="radio" name="diaBoleto">
+                                                Dia 10 do mês corrente
+                                                <span class="circle">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-7">
+                            <div class="container">
+                                <div class="row">
+
+                                    <div id="divGOLD" class="col-lg-6">
+                                        <div class="choice" data-toggle="wizard-radio" rel="tooltip" data-original-title="Antecipados completo com download automático de notas (até 500 notas mensais valor: R$ 250,00, a partir desse limite será cobrado R$ 400,00)">
+                                            <input type="radio" class="form-check-input form-check-input-circle" name="Plano" value="GOLD">
+                                            <div class="icon">
+                                                <img class="img img-cadastro circle_off" src="../images/svg_apps/antecipados.svg " />
+                                            </div>
+                                            <h5 class="card-title card-prod-cadastro">
+                                                Plano Gold</h5>
+                                        </div>
+                                    </div>
+
+                                    <div id="divPLATINUM" class="col-lg-6">
+                                        <div class="choice" data-toggle="wizard-radio" rel="tooltip" data-original-title="Antecipados completo com download automático de notas (até 500 notas mensais valor: R$ 250,00, a partir desse limite será cobrado R$ 400,00) + Robô fiscal para inserção em seu ERP">
+                                            <input type="radio" class="form-check-input form-check-input-circle" name="Plano" value="PLATINUM">
+                                            <div class="icon">
+                                                <img class="img img-cadastro circle_off" src="../images/svg_apps/robo-fiscal.svg " />
+                                            </div>
+                                            <h5 class="card-title card-prod-cadastro">
+                                                Plano Platinum
+                                            </h5>
+                                        </div>
+                                    </div>
+
+                                    <div id="divBLACK" class="col-lg-6">
+                                        <div class="choice" data-toggle="wizard-radio" rel="tooltip" data-original-title="Antecipados completo com download automático de notas (até 500 notas mensais valor: R$ 250,00, a partir desse limite será cobrado R$ 400,00) + Robô fiscal para inserção em seu ERP + Robô contabil + GED">
+                                            <input type="radio" class="form-check-input form-check-input-circle" name="Plano" value="BLACK">
+                                            <div class="icon">
+                                                <img class="img img-cadastro circle_off" src="../images/svg_apps/ged.svg " />
+                                            </div>
+
+                                            <h5 class="card-title card-prod-cadastro">
+                                                Plano Black
+                                            </h5>
+                                        </div>
+                                    </div>
+
+                                    <div id="divCANCEL" class="col-lg-6">
+                                        <div class="choice" data-toggle="wizard-radio" rel="tooltip" data-original-title="Desejo cancelar o meu plano e com isso não ter mais acesso a ferramenta">
+                                            <input type="radio" class="form-check-input form-check-input-circle" name="Plano" value="CANCEL">
+                                            <div class="icon">
+                                                <img class="img img-cadastro circle_off" src="../images/svg_apps/cancel.svg " />
+                                            </div>
+
+                                            <h5 class="card-title card-prod-cadastro">
+                                                Cancelar
+                                            </h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                            <button id="atualizarplanos" class="btn">Atualizar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Confirmar Atualização -->
+
+
+    <div class="modal fade" id="ModalConfirmarUpdatePlanos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Confirmar Atualização</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h6 class="label-modal">Você deseja confirmar a atualização de plano?</h6>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <h4 class="info-title text-center font-weight-bold">Contrato</h4>
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="contrato" style="overflow-y: scroll; height: 15rem;">Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer
+                                        um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado.
+                                    </h6>
+                                </div>
+                            </div>
+                            <div class="form-check" style="display: flex;">
+                                <label class="form-check-label align-items-center mr-3" style="padding: 0;">
+                                    <input id="checkboxContrato" name="Contrato"
+                                        class="form-check-input form-check-input-blank " type="checkbox" value="1">
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                                <label class="form-check-label" for="defaultCheck1" style="padding: 0; margin-left: 8px;">
+                                    Aceitar os termos do contrato
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn" id="confirmarupdate">CONFIRMAR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<form id="form_cancelar_plano" method="POST" action="/administrativo/cancelar-plano">
+    <div class="modal fade" id="ModalCancelarPlano" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title font-weight-bold text-left" id="exampleModalLabel">Você deseja realmente cancelar seu plano?</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="text-center">
+                            <h5 class="info-title text-left font-weight-normal">Nos informe o motivo do cancelamento.</h5>
+                            <form>
+                                <div class="form-group">
+                                    <textarea class="form-control" id="textArea" name="msg_cancelamento_plano" rows="3" placeholder="Informe aqui"></textarea>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn" id="cancelarPlano">CONFIRMAR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+    
+
+{{!-- Confirmar Atualização --}}
+
+<script>
+    var planocliente = '';
+    $.ajax({
+        url: "/meu-plano",
+        type: 'GET',
+    }).done(function (response) {
+        var planocliente = response
+        if(!planocliente) return;
+        $(`#div${planocliente}`).addClass('hideElement');
+    })
+</script>
+
+
+<script>
+    $('[data-toggle="wizard-radio"]').click(function() {
+        wizard = $(this).closest('.wizard-card');
+        wizard.find('[data-toggle="wizard-radio"]').removeClass('active');
+        $(this).addClass('active');
+        $(wizard).find('[type="radio"]').removeAttr('checked');
+        $(this).find('[type="radio"]').attr('checked', 'true');
+    });
+
+    $('[data-toggle="wizard-checkbox"]').click(function() {
+        if ($(this).hasClass('active')) {
+            $(this).removeClass('active');
+            $(this).find('[type="checkbox"]').removeAttr('checked');
+        } else {
+            $(this).addClass('active');
+            $(this).find('[type="checkbox"]').attr('checked', 'true');
+        }
+    });
+</script>
+
+<script>
+    var Produtos = document.getElementsByClassName("form-check-input-circle")
+
+    //vitão
+    //alert($('input[name=formaPagamento]:checked')); 
+    $('input[name=formaPagamento]').on('change', function() {
+        var isChecked = $(this).prop('checked')
+        //console.log("o que é ischeckd", isChecked)
+        //console.log("this", $(this))
+        if (isChecked) {
+            $("#card-dia-venimento").removeClass('hideElement')
+        } else {
+            //console.log("")
+            $("#card-dia-venimento").addClass('hideElement')
+        }
+        //$(this).prop('checked', !$(this).prop('checked'))  
+    });
+
+    var aux_Produtos
+
+    function refreshCheckoutItens() {
+
+        $("#cart-pre-checkout").empty()
+        for (var i = 0; i < Produtos.length; i++) {
+
+            if (Produtos[i].checked == true) {
+                //console.log("Radio atual ", Produtos[i].checked, "Posição: ", i, "valor: ", Produtos[i].value)
+                if (Produtos[i].value == "GOLD") {
+
+                    aux_Produtos = Produtos[i].value
+                    $("#cart-pre-checkout").append('<tr style="border-bottom: 3px dotted #c4bfbf">' +
+                        '<td  style="padding-right: 5%;">Antecipados</td>' +
+                        '<td class="text-right">200,00</td>' +
+                        '</tr>')
+                    $("#checkout-total").text('200,00')
+                    $("#card-forma-pagamento").removeClass('hideElement')
+                }
+                if (Produtos[i].value == "PLATINUM") {
+                    aux_Produtos = Produtos[i].value
+                    $("#cart-pre-checkout").append('<tr>' +
+                        '<td style="padding-right: 5%;">Antecipados</td>' +
+                        '<td class="text-right">500,00</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td style="padding-right: 5%;">+ Robo Fiscal</td>' +
+                        '</tr>')
+                    $("#checkout-total").text('500,00')
+                    $("#card-forma-pagamento").removeClass('hideElement')
+                }
+                if (Produtos[i].value == "BLACK") {
+                    aux_Produtos = Produtos[i].value
+                    $("#cart-pre-checkout").append(
+                        '<tr>' +
+                        '<td style="padding-right: 5%;">Antecipados</td>' +
+                        '<td class="text-right">1000,00</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td style="padding-right: 5%;">+ Robo Fiscal</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td style="padding-right: 5%;">+ Robo Contábil</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td style="padding-right: 5%;">+ GED</td>' +
+                        '</tr>')
+                    $("#checkout-total").text('1000,00')
+                    $("#card-forma-pagamento").removeClass('hideElement')
+                }
+                if (Produtos[i].value == "CANCEL") {
+                    aux_Produtos = Produtos[i].value
+                    $("#cart-pre-checkout").append('<tr>' +
+                        '<td style="padding-right: 5%;">Quero cancelar meu plano</td>' +
+                        '<td class="text-right">0,00</td>' +
+                        '</tr>'
+                    )
+                    $("#formaPagamento").prop('checked', false)
+                    $("#card-dia-venimento").addClass('hideElement')
+                    $("#card-forma-pagamento").addClass('hideElement')
+
+                    $("#checkout-total").text('0,00')
+
+                }
+                $('#atualizarplanos').removeClass('disabled')
+            }
+        }
+    }
+
+
+    //Exibir modal_suporte
+    $('#modal_adquirir_open').on('click', function() {
+        $('#modal_adquirir').modal('show');
+    });
+
+    //Exibir atualizar plano
+    $('#atualizarplanos').on('click', function() {
+        if (aux_Produtos === Produtos[3].value) {
+            $('#ModalCancelarPlano').modal('show');
+        } else {
+            $('#ModalConfirmarUpdatePlanos').modal('show');
+        }
+    });
+</script>
+
+<script>
+    $('#atualizarplanos').addClass('disabled')
+
+
+    $(document).ready(function() {
+        $('div .choice').click(function() {
+            //Adicina cicle_off em todos os itens (Isso deixa a imagem descolorida)
+            $('div .choice').find('.icon>.img-cadastro').addClass('circle_off');
+            //Remove cicle_off apenas do item clicado (Reativa a cor do item selecionado)
+            if ($('input:radio[name="Plano"]').is(':checked')) {
+                $(this).find('.icon>.img-cadastro').removeClass('circle_off');
+                refreshCheckoutItens()
+            }
+        })
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+
+        $('#confirmarupdate').addClass('disabled')
+
+        $("#checkboxContrato").on('change', function() {
+            //console.log("checkbox mudou")
+            var status = $("#checkboxContrato").prop('checked')
+            if (status) {
+                $('#confirmarupdate').removeClass('disabled')
+            } else {
+                $('#confirmarupdate').addClass('disabled')
+            }
+        })
+
+
+
+        function criaToast(icon, response) {
+            Swal.fire({
+                title: response,
+                icon: icon,
+                showCloseButton: true,
+                focusConfirm: false,
+                confirmButtonText: '<a style="text-decoration:none; color: white;" href="http://mailto:suporte@gmail.com?subject=Suporte Mezzomo&amp;body=Bem-vindo ao suporte! %0AInforme os seguintes dados...%0A%0ANome Completo:%0ANúmero para contato:%0A%0A%0ADescreva seu problema aqui:%0ASugestões:%0AElogios:%0A%0A%0A%0A">Entrar em contato com o Suporte</a>'
+            })
+
+        }
+
+    })
+
+    $("#update-planos").submit(function(e) {
+        e.preventDefault(); //prevent default action
+    })
+
+    $("#confirmarupdate").on('click', function() {
+        //e.preventDefault(); //prevent default action
+        //console.log("ajakjbyuibnx atingido")
+
+        var post_url = $('#update-planos').attr("action"); //get form action url
+        var request_method = $('#update-planos').attr("method"); //get form GET/POST method
+        var form_data = $('#update-planos').serialize(); //Encode form elements for submission
+
+        $.ajax({
+            async: "false",
+            url: post_url,
+            type: request_method,
+            data: form_data
+        }).done(function(response) {
+            //alert(response)
+            var gif = ""
+            let url = ""
+            var hidein = 2000;
+            var tempURL = window.location.origin;
+
+            if (response) {
+
+                if (response == "O plano foi atualizado com sucesso, faça login novamente!") {
+                    gif = 'success'
+                    url = `${tempURL + '/sair'}`;
+                    redirectURL(url, hidein)
+
+                }if (response == "O plano não foi atualizado, para realizar a atualização aceite o contrato.") {
+                    gif = 'warning'
+                }  
+                else if (response == "Erro ao atualizar plano, tente novamente.") {
+                    gif = "warning"
+                }
+
+                Swal.fire({
+                    position: 'center',
+                    icon: gif,
+                    title: response,
+                    showConfirmButton: false,
+                    timer: 4000
+                })
+
+            }
+
+        });
+
+        const redirectURL = async(url, time) => {
+            setTimeout(function() {
+                window.location.replace(url);
+            }, time)
+        }
+
+    });
+
+
+    //cancelarPlano
+    $("#form_cancelar_plano").submit(function(e) {
+        e.preventDefault(); //prevent default action do form
+    })
+
+    
+    $("#cancelarPlano").on('click', function() {
+        //e.preventDefault(); //prevent default action
+        //console.log("ajax cancelar plano atingido")
+
+        var post_url = $('#form_cancelar_plano').attr("action"); //get form action url
+        var request_method = $('#form_cancelar_plano').attr("method"); //get form GET/POST method
+        var form_data = $('#form_cancelar_plano').serialize(); //Encode form elements for submission
+
+        $.ajax({
+            async: "false",
+            url: post_url,
+            type: request_method,
+            data: form_data
+        }).done(function(response) {
+            //console.log("resposta", response)
+            var gif = ''
+            
+            if(response) {
+                if(response == "A sua conta foi cancelada com sucesso") {
+                    gif = 'success'
+                } else if (response == "Erro ao cancelar conta") {
+                    gif = 'warning'
+                }
+                
+            } else {
+                gif = 'info'
+            }
+
+            Swal.fire({
+                customClass: {
+                    confirmButton: 'btn btn-black btn-login',
+                },
+                buttonsStyling: false,
+                position: 'center',
+                icon: gif,
+                title: response,
+                showConfirmButton: true,
+                timer: 0
+            });
+
+        })
+    
+    })
+            //alert(response)
+
+</script>

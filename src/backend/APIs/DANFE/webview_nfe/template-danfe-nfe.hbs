@@ -1,0 +1,1041 @@
+<style>
+.td-danfe .jumbotron {
+	background: #6b7381;
+	color: #bdc1c8;
+}
+.td-danfe .example {
+	margin: 4rem auto;
+}
+.td-danfe .example > .row {
+	margin-top: 2rem;
+	height: 5rem;
+	vertical-align: middle;
+	text-align: center;
+	border: 1px solid rgba(189, 193, 200, 0.5);
+}
+.td-danfe .example > .row:first-of-type {
+	border: none;
+	height: auto;
+	text-align: left;
+}
+
+.td-danfe .btn-toggle.btn-xs:before,
+.btn-toggle.btn-xs:after {
+	display: none;
+}
+.td-danfe .btn-toggle.btn-xs {
+	margin: 0 0!important;
+	padding: 0;
+	position: relative;
+	border: none;
+	height: 1rem;
+	width: 2rem;
+	border-radius: 1rem;
+}
+.td-danfe .btn-toggle.btn-xs:focus,
+.td-danfe .btn-toggle.btn-xs.focus,
+.td-danfe .btn-toggle.btn-xs:focus.active,
+.td-danfe .btn-toggle.btn-xs.focus.active {
+	outline: none;
+}
+.td-danfe .btn-toggle.btn-xs:before,
+.td-danfe .btn-toggle.btn-xs:after {
+	line-height: 1rem;
+	width: 0;
+	text-align: center;
+	font-weight: 600;
+	font-size: 0.75rem;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	position: absolute;
+	bottom: 0;
+	transition: opacity 0.25s;
+}
+.td-danfe .btn-toggle.btn-xs:before {
+	content: 'Off';
+	left: 0;
+}
+.td-danfe .btn-toggle.btn-xs:after {
+	content: 'On';
+	right: 0;
+	opacity: 0.5;
+}
+.td-danfe .btn-toggle.btn-xs > .handle {
+	position: absolute;
+	top: 0.125rem;
+	left: 0.125rem;
+	width: 0.75rem;
+	height: 0.75rem;
+	border-radius: 0.75rem;
+	background: #fff;
+	transition: left 0.25s;
+}
+.td-danfe .btn-toggle.btn-xs.active {
+	transition: background-color 0.25s;
+}
+.td-danfe .btn-toggle.btn-xs.active > .handle {
+	left: 1.125rem;
+	transition: left 0.25s;
+}
+.td-danfe .btn-toggle.btn-xs.active:before {
+	opacity: 0.5;
+}
+.td-danfe .btn-toggle.btn-xs.active:after {
+	opacity: 1;
+}
+.td-danfe .btn-toggle.btn-xs.btn-sm:before,
+.td-danfe .btn-toggle.btn-xs.btn-sm:after {
+	line-height: -1rem;
+	color: #fff;
+	letter-spacing: 0.75px;
+	left: 0.275rem;
+	width: 1.55rem;
+}
+.td-danfe .btn-toggle.btn-xs.btn-sm:before {
+	text-align: right;
+}
+.td-danfe .btn-toggle.btn-xs.btn-sm:after {
+	text-align: left;
+	opacity: 0;
+}
+.td-danfe .btn-toggle.btn-xs.btn-sm.active:before {
+	opacity: 0;
+}
+.td-danfe .btn-toggle.btn-xs.btn-sm.active:after {
+	opacity: 1;
+}
+.td-danfe .btn-toggle.btn-xs.btn-xs:before,
+.td-danfe .btn-toggle.btn-xs.btn-xs:after {
+	display: none;
+}
+.td-danfe .btn-toggle.btn-secondary {
+	color: #6b7381;
+	background: #bdc1c8;
+}
+.td-danfe .btn-toggle.btn-secondary:before,
+.td-danfe .btn-toggle.btn-secondary:after {
+	color: #6b7381;
+}
+.td-danfe .btn-toggle.btn-secondary.active {
+	background-color: #edcd00;
+}
+.input-danfe {
+	width: 4rem;
+	border: none;
+}
+/*
+.input-danfe:active, .input-danfe:focus{
+background-color: #fff;
+}*/
+
+td .bmd-form-group {
+	display: flex;
+	justify-content: center;
+}
+
+.xmltexto {
+	font-size: .9rem;
+	color: #edcd00; 
+	padding-bottom: 5px;
+	text-shadow: 1px 1px 3px #000;
+}
+
+.xmlcodigo_barra {
+	display: flex;
+}
+
+#coddebarras_chavedeacesso {
+	margin-left: auto;
+	margin-right: auto;
+}
+</style>
+
+	<div class="xmlbody">
+		<div class="xmlcontainer xmlarea" style="display: inline;">
+			<!-- Canhoto  -->
+			<div class="xmlcolumns xmlgrupo">
+				<div class="xmlcolumn ">
+					<div class="xmlquadro">
+						<div class="xmlcolumns">
+							<div class="xmlcolumn ">
+							</div>
+						</div>
+						<!--
+						<div class="xmlcolumns xmllinha">
+							<div class="xmlcolumn xmlcampo">
+							<div class="xmltexto_recibo xmlconteudo_campo">
+								RECEBEMOS DE '{{emitente.nome}}' OS PRODUTOS E/OU SERVIÇOS CONSTANTES DA NOTA FISCAL ELETRÔNICA INDICADA
+								ABAIXO. EMISSÃO: {{data_emissao}} - VALOR TOTAL: {{total_nota}} - DESTINATÁRIO: {{destinatario.nome}} -
+								ENDEREÇO: {{destinatario.endereco}}, {{destinatario.numero}}, {{destinatario.bairro}} -
+								{{destinatario.municipio}}/{{destinatario.uf}}
+							</div>
+							</div>
+						</div>
+						<div class="xmlcolumns xmllinha">
+							<div class="xmlcolumn padding-5 border-top border-bottom">
+							<div class="xmltcampo">DATA DE RECEBIMENTO</div>
+							</div>
+							<div class="xmlcolumn xmlcanhoto_assinatura padding-5 border-top border-bottom">
+							<div class="xmltcampo">IDENTIFICAÇÃO E ASSINATURA DO RECEBEDOR</div>
+							</div>
+						</div>-->
+						<div class="xmlcolumns xmllinha">
+							<div class="xmlcolumn xmlcampo">
+								<div class="xmltexto_recibo xmlconteudo_campo">
+									RECEBEMOS DE '{{emitente.nome}}' OS PRODUTOS E/OU SERVIÇOS CONSTANTES DA NOTA FISCAL ELETRÔNICA INDICADA
+									ABAIXO. EMISSÃO: {{data_emissao}} - VALOR TOTAL: {{total_nota}} - DESTINATÁRIO: {{destinatario.nome}} -
+									ENDEREÇO: {{destinatario.endereco}}, {{destinatario.numero}}, {{destinatario.bairro}} -
+									{{destinatario.municipio}}/{{destinatario.uf}}
+								</div>
+
+								<div class="xmllinhas">
+									<div class="padding-5" style="border-right: 1px solid #000; flex: 0 0 400px;">
+										<div class="xmltcampo">DATA DE RECEBIMENTO</div>
+									</div>
+									<div class="xmlcanhoto_assinatura padding-5">
+										<div class="xmltcampo">IDENTIFICAÇÃO E ASSINATURA DO RECEBEDOR</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="xmlcolumn xmlarea_canhoto_nr">
+								<div class="xmlcenter">NF-e</div>
+								<div class="">Nº {{numero}}</div>
+								<div class="">SÉRIE: {{serie}}</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--
+				<div class="xmlcolumn xmlcanhoto_nr">
+					<div class="xmlquadro">
+					<div class="xmlcolumns">
+						<div class="xmlcolumn ">
+						</div>
+					</div>
+					<div class="xmlcolumns  xmllinha">
+						<div class="xmlcolumn  xmlarea_canhoto_nr">
+						<div class="xmlcenter">NF-e</div>
+						<div class="">Nº {{numero}}</div>
+						<div class="">SÉRIE: {{serie}}</div>
+						</div>
+					</div>
+					</div>
+				</div>-->
+			</div>
+
+			<!-- Cabeçalho  -->
+			{{!-- <div class="xmlcolumns xmlgrupo">
+				<div class="xmlcolumn ">
+					<div class="xmlquadro">
+						<div class="xmlcolumns">
+							<div class="xmlcolumn ">
+							</div>
+						</div>
+						<div class="xmlcolumns xmllinha xmlquadro_cabecalho">
+							<div class="xmlcolumn ">
+								<div class="xmlconteudo_campo xmlquadro_identificacao">{{emitente.nome}}</div>
+								<div class="xmlconteudo_campo">{{emitente.fantasia}}</div>
+								<div class="xmlconteudo_campo">{{emitente.endereco}}, {{emitente.numero}}</div>
+								<div class="xmlconteudo_campo">{{emitente.complemento}}</div>
+								<div class="xmlconteudo_campo">{{emitente.bairro}} - {{emitente.municipio}} / {{emitente.uf}}</div>
+								<div class="xmlconteudo_campo">CEP:{{emitente.cep}} - Fone: {{emitente.telefone}}</div>
+							</div>
+
+							<div class="xmlcolumn xmlquadro_danfe border-left">
+								<div class="xmlcenter xmldanfe">DANFE</div>
+								<div class="xmlcenter">DOCUMENTO AUXILIAR DA NOTA FISCAL ELETRÔNICA</div>
+								<br>
+								<span class=" xmlspan xmlnumero xmlcenter">
+									<div class="xmlcenter xmlis-pulled-right xmloperacao">{{operacao}}</div>
+									<div class="padding-1">0-ENTRADA</div>
+									<div class="padding-1" style="line-height: 1rem;">1-SAÍDA</div>
+									<div class="padding-1">Nº {{numero}}</div>
+									<div class="padding-1">SÉRIE {{serie}}</div>
+									<div class="padding-1">FOLHA 1/1</div>
+								</span>
+							</div>
+
+							<div class="xmlcolumn xmlquadro_codigo_barra">
+								<div class="xmlcodigo_barra border-left">Código de Barras
+									<canvas id="coddebarras_chavedeacesso">
+									</canvas>
+								</div>
+
+								<div class="xmlchave border-left border-right">
+									<div class="xmltcampo">CHAVE DE ACESSO</div>
+									<div id="chave_de_acesso_nota_modal">{{chave}}</div>
+								</div>
+								<div class="xmlconsulta" style="height: 3.4rem; border-radius: 5px">
+									<div class="xmlcampo"> Consulta de autenticidade no portal nacional da NF-e
+										<span style="xmlspan text-decoration: underline">www.nfe.fazenda.gov.br/portal</span> ou no site da
+										Sefaz
+										Autorizadora
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div> --}}
+
+			<div class="xmlcolumns xmlgrupo">
+				<div class="xmlcolumn ">
+					<div class="xmlquadro">
+						<div class="xmlcolumns">
+							<div class="xmlcolumn ">
+							</div>
+						</div>
+						<div class="xmlcolumns xmllinha xmlquadro_cabecalho">
+							<div class="xmlcolumn ">
+								<div class="xmlconteudo_campo xmlquadro_identificacao">{{emitente.nome}}</div>
+								<div class="xmlconteudo_campo">{{emitente.fantasia}}</div>
+								<div class="xmlconteudo_campo">{{emitente.endereco}}, {{emitente.numero}}</div>
+								<div class="xmlconteudo_campo">{{emitente.complemento}}</div>
+								<div class="xmlconteudo_campo">{{emitente.bairro}} - {{emitente.municipio}} / {{emitente.uf}}</div>
+								<div class="xmlconteudo_campo">CEP:{{emitente.cep}} - Fone: {{emitente.telefone}}</div>
+							</div>
+
+							<div class="xmlcolumn xmlquadro_danfe border-left">
+								<div class="xmlcenter xmldanfe">DANFE</div>
+								<div class="xmlcenter">DOCUMENTO AUXILIAR DA NOTA FISCAL ELETRÔNICA</div>
+								<br>
+								<span class=" xmlspan xmlnumero xmlcenter">
+									<div class="xmlcenter xmlis-pulled-right xmloperacao">{{operacao}}</div>
+									<div class="padding-1">0-ENTRADA</div>
+									<div class="padding-1" style="line-height: 1rem;">1-SAÍDA</div>
+									<div class="padding-1">Nº {{numero}}</div>
+									<div class="padding-1">SÉRIE {{serie}}</div>
+									<div class="padding-1">FOLHA 1/1</div>
+								</span>
+							</div>
+
+							<div class="xmlcolumn xmlquadro_codigo_barra">
+								<div class="xmlcodigo_barra border-left">Código de Barras
+									<svg id="coddebarras_chavedeacesso">
+									</svg>
+								</div>
+
+								<div class="xmlchave border-left border-right">
+									<div class="xmltcampo">CHAVE DE ACESSO</div>
+									<div id="chave_de_acesso_nota_modal">{{chave}}</div>
+								</div>
+								<div class="xmlconsulta" style="height: 3.4rem; border-radius: 5px">
+									<div class="xmlcampo"> Consulta de autenticidade no portal nacional da NF-e
+										<span style="xmlspan text-decoration: underline">www.nfe.fazenda.gov.br/portal</span> ou no site da
+										Sefaz
+										Autorizadora
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="xmlcolumns xmlgrupo">
+			<div class="xmlcolumn ">
+				<div class="xmlquadro">
+				<div class="xmlcolumns">
+					<div class="xmlcolumn ">
+					</div>
+				</div>
+				<div class="xmlcolumns xmllinha">
+					<div class="xmlcolumn xmlcampo padding-5">
+					<div class="xmltcampo">NATUREZA DA OPERAÇÃO</div>
+					<span class="xmlspan xmlconteudo_campo">{{natureza}}</span>
+					</div>
+					<div class="xmlcolumn xmlprotocolo xmlcenter border-left">
+					<div class="xmltcampo">PROTOCOLO DE AUTORIZACAO DE USO </div>
+					<span class="xmlspan xmlconteudo_campo">{{protocolo}} - {{data_protocolo}}</span>
+					</div>
+				</div>
+				<div class="xmlcolumns xmllinha">
+					<div class="xmlcolumn padding-5">
+					<div class="xmltcampo">INSCRIÇÃO ESTADUAL</div>
+					<span class="xmlspan xmlconteudo_campo">{{emitente.ie}}</span>
+					</div>
+					<div class="xmlcolumn padding-5 border-left">
+					<div class="xmltcampo">INSCRIÇÃO ESTADUAL DO SUBST. TRIB.</div>
+					<span class="xmlspan xmlconteudo_campo">{{emitente.ie_st}}</span>
+					</div>
+					<div class="xmlcolumn padding-5 border-left">
+					<div class="xmltcampo">C.N.P.J./C.P.F.</div>
+					<span class="xmlspan xmlconteudo_campo">{{emitente.inscricao_nacional}}</span>
+					</div>
+				</div>
+				</div>
+			</div>
+			</div>
+
+			<!-- DEstinatário / remetente -->
+			<div class="xmlcolumns xmlgrupo">
+			<div class="xmlcolumn ">
+				<div class="xmlquadro">
+				<div class="xmlcolumns">
+					<div class="xmlcolumn xmlbold xmltexto">
+					DESTINATÁRIO/REMETENTE
+					</div>
+				</div>
+				<div class="xmlcolumns xmllinha">
+					<div class="xmlcolumn padding-5">
+					<div class="xmltcampo">NOME/RAZÃO SOCIAL</div>
+					<span class="xmlspan xmlconteudo_campo">{{destinatario.nome}}</span>
+					</div>
+					<div class="xmlcolumn padding-5 border-left">
+					<div class="xmltcampo">C.N.P.J./C.P.F.</div>
+					<span class="xmlspan xmlconteudo_campo">{{destinatario.inscricao_nacional}}</span>
+					</div>
+					<div class="xmlcolumn xmldata padding-5 border-left" style="flex: 0 0 11%;">
+					<div class="xmltcampo">DATA DA EMISSÃO</div>
+					<span class="xmlspan xmlconteudo_campo">{{data_emissao}}</span>
+					</div>
+				</div>
+				<div class="xmlcolumns xmllinha ">
+					<div class="xmlcolumn padding-5">
+					<div class="xmltcampo">ENDEREÇO</div>
+					<span class="xmlspan xmlconteudo_campo">{{destinatario.endereco}}, {{destinatario.numero}}</span>
+					</div>
+					<div class="xmlcolumn padding-5 border-left">
+					<div class="xmltcampo ">BAIRRO/DISTRITO</div>
+					<span class="xmlspan xmlconteudo_campo">{{destinatario.bairro}}</span>
+					</div>
+					<div class="xmlcolumn padding-5 border-left">
+					<div class="xmltcampo">CEP</div>
+					<span class="xmlspan xmlconteudo_campo">{{destinatario.cep}}</span>
+					</div>
+					<div class="xmlcolumn xmldata padding-5 border-left" style="flex: 0 0 11%;">
+					<div class="xmltcampo">DATA SAÍDA/ENTRADA</div>
+					<span class="xmlspan xmlconteudo_campo">{{data_saida}}</span>
+					</div>
+				</div>
+				<div class="xmlcolumns xmllinha">
+					<div class="xmlcolumn padding-5">
+					<div class="xmltcampo">MUNICÍPIO</div>
+					<span class="xmlspan xmlconteudo_campo">{{destinatario.municipio}}</span>
+					</div>
+					<div class="xmlcolumn padding-5 border-left">
+					<div class="xmltcampo">FONE/FAX</div>
+					<span class="xmlspan xmlconteudo_campo">{{destinatario.telefone}}</span>
+					</div>
+					<div class="xmlcolumn xmluf padding-5 border-left">
+					<div class="xmltcampo">UF</div>
+					<span class="xmlspan xmlconteudo_campo">{{destinatario.uf}}</span>
+					</div>
+					<div class="xmlcolumn padding-5 border-left">
+					<div class="xmltcampo">INSCRIÇÃO ESTADUAL</div>
+					<span class="xmlspan xmlconteudo_campo">{{destinatario.ie}}</span>
+					</div>
+					<div class="xmlcolumn xmldata padding-5 border-left" style="flex: 0 0 11%;">
+					<div class="xmltcampo">HORA DA SAÍDA</div>
+					<span class="xmlspan xmlconteudo_campo">{{hora_saida}}</span>
+					</div>
+				</div>
+				</div>
+			</div>
+			</div>
+
+			<!-- Faturas  -->
+			{{#if duplicatas}}
+			<div class="xmlcolumns xmlgrupo">
+			<div class="xmlcolumn ">
+				<div class="xmlquadro xmlduplicatas">
+				<div class="xmlcolumns">
+					<div class="xmlcolumn xmlbold xmltexto">
+					FATURA/DUPLICATAS
+					</div>
+				</div>
+				<div class="xmlcolumns xmllinha">
+					<div class="xmlcolumn xmlis-1 " style="flex: 0 0 30%;">
+					<div class="xmltcampo">NÚMERO</div>
+					<div class="xmltcampo">VENCIMENTO</div>
+					<div class="xmltcampo">VALOR</div>
+					</div>
+					<div class="xmlcolumn border-left">
+					{{#each duplicatas}}
+					<div class="xmlduplicata xmlis-pulled-left">
+						<div style="font-size: 10px!important;">{{this.numero}}</div>
+						<div style="font-size: 10px!important;">{{this.vencimento}}</div>
+						<div style="font-size: 10px!important;">{{this.valor}}</div>
+					</div>
+					{{/each}}
+					</div>
+				</div>
+				</div>
+			</div>
+			</div>
+			{{/if}}
+
+			<!-- Impostos  -->
+			<div class="xmlcolumns xmlgrupo">
+			<div class="xmlcolumn">
+				<div class="xmlquadro xmlimposto">
+				<div class="xmlcolumns">
+					<div class="xmlcolumn xmlbold xmltexto">
+					CÁLCULO DO IMPOSTO
+					</div>
+				</div>
+				<div class="xmlcolumns xmllinha">
+					<div class="xmlcolumn padding-5">
+					<div class="xmltcampo">BASE DE CÁLCULO DO ICMS</div>
+					<div class="text-end">{{base_calculo_icms}}</div>
+					</div>
+					<div class="xmlcolumn padding-5 border-left">
+					<div class="xmltcampo">VALOR DO ICMS</div>
+					<div class="text-end">{{imposto_icms}}</div>
+					</div>
+					<div class="xmlcolumn padding-5 border-left">
+					<div class="xmltcampo">BASE DE CÁLCULO DO ICMS ST</div>
+					<div class="text-end">{{base_calculo_icms_st}}</div>
+					</div>
+					<div class="xmlcolumn padding-5 border-left">
+					<div class="xmltcampo">VALOR DO ICMS ST</div>
+					<div class="text-end">{{imposto_icms_st}}</div>
+					</div>
+					<div class="xmlcolumn padding-5 border-left">
+					<div class="xmltcampo">VALOR TOTAL APROX. TRIB.</div>
+					<div class="text-end">{{imposto_tributos}}</div>
+					</div>
+					<div class="xmlcolumn padding-5 border-left">
+					<div class="xmltcampo">VALOR TOTAL DOS PRODUTOS</div>
+					<div class="text-end">{{total_produtos}}</div>
+					</div>
+				</div>
+				<div class="xmlcolumns xmllinha">
+					<div class="xmlcolumn padding-5">
+					<div class="xmltcampo">VALOR DO FRETE</div>
+					<div class="text-end">{{total_frete}}</div>
+					</div>
+					<div class="xmlcolumn padding-5 border-left">
+					<div class="xmltcampo">VALOR DO SEGURO</div>
+					<div class="text-end">{{total_seguro}}</div>
+					</div>
+					<div class="xmlcolumn padding-5 border-left">
+					<div class="xmltcampo">DESCONTO</div>
+					<div class="text-end">{{total_desconto}}</div>
+					</div>
+					<div class="xmlcolumn padding-5 border-left">
+					<div class="xmltcampo">OUTRAS DESPESAS ACESSÓRIAS</div>
+					<div class="text-end">{{total_despesas}}</div>
+					</div>
+					<div class="xmlcolumn padding-5 border-left">
+					<div class="xmltcampo">VALOR DO IPI</div>
+					<div class="text-end">{{total_ipi}}</div>
+					</div>
+					<div class="xmlcolumn padding-5 border-left">
+					<div class="xmltcampo">VALOR TOTAL DA NOTA</div>
+					<div class="text-end">{{total_nota}}</div>
+					</div>
+				</div>
+				</div>
+			</div>
+			</div>
+
+			<!-- transportadora -->
+			<div class="xmlcolumns xmlgrupo">
+			<div class="xmlcolumn ">
+				<div class="xmlquadro">
+				<div class="xmlcolumns">
+					<div class="xmlcolumn xmlbold xmltexto">
+					TRANSPORTADOR/VOLUMES TRANSPORTADOS
+					</div>
+				</div>
+				<div class="xmlcolumns xmllinha">
+					<div class="xmlcolumn xmlnome padding-5" style="flex: 0 0 30%;">
+					<div class="xmltcampo">RAZÃO SOCIAL</div>
+					<span class="xmlspan xmlconteudo_campo">{{transportador.nome}}</span>
+					</div>
+					<div class="xmlcolumn padding-5 border-left" style="flex: 0 0 18%;">
+					<div class="xmltcampo">FRETE POR CONTA DO</div>
+					<span class="xmlspan xmlconteudo_campo" style="margin-left: 50%;">{{modalidade_frete}} -
+						{{modalidade_frete_texto}}</span>
+					</div>
+					<div class="xmlcolumn padding-5 border-left" style="flex: 0 0 18%;">
+					<div class="xmltcampo">CÓDIGO ANTT</div>
+					<span class="xmlspan xmlconteudo_campo">{{veiculo_antt}}</span>
+					</div>
+					<div class="xmlcolumn xmlplaca padding-5 border-left" style="flex: 0 0 10%;">
+					<div class="xmltcampo">PLACA DO VEÍCULO</div>
+					<span class="xmlspan xmlconteudo_campo">{{veiculo_placa}}</span>
+					</div>
+					<div class="xmlcolumn xmluf padding-5 border-left" style="flex: 0 0 4%;">
+					<div class="xmltcampo">UF</div>
+					<span class="xmlspan xmlconteudo_campo">{{veiculo_placa_uf}}</span>
+					</div>
+					<div class="xmlcolumn padding-5 border-left">
+					<div class="xmltcampo">C.N.P.J./C.P.F.</div>
+					<span class="xmlspan xmlconteudo_campo">{{transportador.inscricao_nacional}}</span>
+					</div>
+				</div>
+				<div class="xmlcolumns xmllinha">
+					<div class="xmlcolumn padding-5 border-top">
+					<div class="xmltcampo">ENDEREÇO</div>
+					<span class="xmlspan xmlconteudo_campo">{{#if transportador.endereco}} {{transportador.endereco}},{{/if}}
+						{{#if transportador.numero}} {{transportador.numero}}{{/if}} </span>
+					</div>
+					<div class="xmlcolumn padding-5 border-left border-top">
+					<div class="xmltcampo">MUNICÍPIO</div>
+					<span class="xmlspan xmlconteudo_campo">{{transportador.municipio}}</span>
+					</div>
+					<div class="xmlcolumn xmluf padding-5 border-left border-top">
+					<div class="xmltcampo">UF</div>
+					<span class="xmlspan xmlconteudo_campo">{{transportador.uf}}</span>
+					</div>
+					<div class="xmlcolumn padding-5 border-left border-top">
+					<div class="xmltcampo">INSCRIÇÃO ESTADUAL</div>
+					<span class="xmlspan xmlconteudo_campo">{{transportador.ie}}</span>
+					</div>
+				</div>
+				<div class="xmlcolumns xmllinha">
+					<div class="xmlcolumn xmldireita padding-5 border-top">
+					<div class="xmltcampo">QUANTIDADE</div>
+					<span class="xmlspan xmlconteudo_campo">{{volume_quantidade}}</span>
+					</div>
+					<div class="xmlcolumn padding-5 border-left border-top">
+					<div class="xmltcampo">ESPÉCIE</div>
+					<span class="xmlspan xmlconteudo_campo">{{volume_especie}}</span>
+					</div>
+					<div class="xmlcolumn padding-5 border-left border-top">
+					<div class="xmltcampo">MARCA</div>
+					<span class="xmlspan xmlconteudo_campo">{{volume_marca}}</span>
+					</div>
+					<div class="xmlcolumn padding-5 border-left border-top">
+					<div class="xmltcampo">NUMERAÇÃO</div>
+					<span class="xmlspan xmlconteudo_campo">{{volume_numeracao}}</span>
+					</div>
+					<div class="xmlcolumn xmldireita padding-5 border-left border-top">
+					<div class="xmltcampo">PESO BRUTO</div>
+					<span class="xmlspan xmlconteudo_campo">{{volume_pesoBruto}}</span>
+					</div>
+					<div class="xmlcolumn xmldireita padding-5 border-left border-top">
+					<div class="xmltcampo">PESO LÍQUIDO</div>
+					<span class="xmlspan xmlconteudo_campo">{{volume_pesoLiquido}}</span>
+					</div>
+				</div>
+				</div>
+			</div>
+			</div>
+
+			<!-- Itens  -->
+			<div class="xmlcolumns xmlgrupo">
+			<div class="xmlcolumn ">
+				<div class="xmlquadro">
+				<div class="xmlcolumns">
+					<div class="xmlcolumn xmlbold xmltexto">
+					DADOS DOS PRODUTOS/SERVIÇOS
+					</div>
+				</div>
+				<div class="xmlcolumns">
+					<table class="xmltable xmlis-bordered xmlitens">
+					<thead>
+						<tr>
+						<th class="text-center">DIF. ALIQ.</th>
+						<th class="text-center">CÓDIGO</th>
+						<th class="text-center">DESCRIÇÃO</th>
+						<th class="text-center">NCM/SH</th>
+						<th class="text-center">CST</th>
+						<th class="text-center">CFOP</th>
+						<th class="text-center bg-yellow">CFOP Ent</th>
+						<th class="text-center">UN.</th>
+						<th class="text-center">QUANT.</th>
+						<th class="text-center">V.UNIT.</th>
+						<th class="text-center">V.DESC.</th>
+						<th class="text-center">V.TOTAL</th>
+						<th class="text-center">BC.ICMS</th>
+						<th class="text-center">V.ICMS</th>
+						<th class="text-center">V.IPI</th>
+						<th class="text-center">%ICMS</th>
+						<th class="text-center">%IPI</th>
+						<th class="text-center bg-yellow">T. Ant</th>
+						<th class="text-center bg-yellow">V. Ant</th>
+						<th class="text-center bg-yellow">MVA</th>
+						<th class="text-center bg-yellow">Custo</th>
+						<th class="text-center bg-yellow">Acumulador</th>
+						</tr>
+					</thead>
+					<tbody>
+						{{#each itens}}
+						<tr>
+						<td class="td-danfe">
+							<button type="button" class="btn btn-xs btn-secondary btn-toggle {{#if this.dif_aliquota}}active{{/if}}" title="Clique para marcar o item como diferencial de alíquota" onClick="atualizarDiferencialAliquota(this, '{{this.chave_de_acesso}}', '{{this.descricao}}')" data-toggle="button" aria-pressed="{{#if this.dif_aliquota}}true{{else}}false{{/if}}" autocomplete="off">
+							<div class="handle"></div>
+							</button>
+						</td>
+						<td class="text-center">{{this.codigo}}</td>
+						<td class="text-center">{{this.descricao}}</td>
+						<td class="text-center">{{this.ncm}}</td>
+						<td class="text-center">{{this.cst}}</td>
+						<td class="text-center">{{this.cfop}}</td>
+						<td style="padding: 0!important;"><input type="text" class="input-cfopentrada-bg input-danfe text-center" value="{{this.cfop_entrada}}" onChange="updateCfopEntrada(this, {{this.cfop}})"></td>
+						<td class="text-center">{{this.unidade}}</td>
+						<td class="text-center">{{this.quantidade}}</td>
+						<td class="text-center">{{this.valor}}</td>
+						<td class="text-center">{{this.desconto}}</td>
+						<td class="text-center">{{this.total}}</td>
+						<td class="text-center">{{this.base_calculo}}</td>
+						<td class="text-center">{{this.icms}}</td>
+						<td class="text-center">{{this.ipi}}</td>
+						<td class="text-center">{{this.porcentagem_icms}}</td>
+						<td class="text-center">{{this.porcentagem_ipi}}</td>
+						<td class="erroinserir text-center">{{this.tipo_antecipado}}</td>
+						<td class="erroinserir text-center">{{this.valor_ant}}</td>
+						<td class="erroinserir text-center">{{this.mva}}</td>
+						<td class="text-center">{{this.custo}}</td>
+						<td style="padding: 0!important;"><input type="text" class="input-acumulador-bg input-danfe text-center" value="{{this.acumulador}}" onChange="updateAcumulador(this, {{this.cfop_entrada}}, '{{this.tipo_antecipado_raw}}', {{this.mva_raw}})"></td>
+						</tr>
+						{{/each}}
+
+					</tbody>
+					</table>
+				</div>
+				</div>
+			</div>
+			</div>
+
+			<!-- Serviço  -->
+			{{#if total_servico}}
+			<div class="xmlcolumns xmlgrupo">
+			<div class="xmlcolumn ">
+				<div class="xmlquadro">
+				<div class="xmlcolumns">
+					<div class="xmlcolumn xmlbold">
+					CÁLCULO DO ISSQN
+					</div>
+				</div>
+				<div class="xmlcolumns xmllinha">
+					<div class="xmlcolumn">
+					<div class="xmltcampo">INSCRIÇÃO MUNICIPAL</div>
+					<span class="xmlspan xmlconteudo_campo">{{inscricao_municipal}}</span>
+					</div>
+					<div class="xmlcolumn">
+					<div class="xmltcampo">VALOR TOTAL DOS SERVIÇOS</div>
+					<div class="xmlconteudo_campo xmldireita">{{total_servico}}</div>
+					</div>
+					<div class="xmlcolumn">
+					<div class="xmltcampo">BASE DE CÁLCULO DO ISSQN</div>
+					<div class="xmlconteudo_campo xmldireita">{{base_calculo_issqn}}</div>
+					</div>
+					<div class="xmlcolumn">
+					<div class="xmltcampo">VALOR DO ISSQN</div>
+					<div class="xmlconteudo_campo xmldireita">{{total_issqn}}</div>
+					</div>
+				</div>
+				</div>
+			</div>
+			</div>
+			{{/if}}
+
+			<!-- Dados adicionais  -->
+			<div class="xmlcolumns xmlgrupo">
+			<div class="xmlcolumn ">
+				<div class="xmlquadro">
+				<div class="xmlcolumns">
+					<div class="xmlcolumn xmlbold xmltexto">
+					DADOS ADICIONAIS
+					</div>
+				</div>
+				<div class="xmlcolumns xmllinha xmlcomplemento">
+					<div class="xmlcolumn padding-5 min-height-112 fill-content">
+					<div class="xmltcampo" style="padding-bottom: 4px!important">INFORMAÇÕES COMPLEMENTARES</div>
+					<span class="xmlspan xmlconteudo_campo">{{informacoes_fisco}}</span>
+					<span
+						class="xmlspan xmlconteudo_campo xmlconteudo_campo_complemento">{{informacoes_complementares}}</span>
+					<span class="xmlspan xmlconteudo_campo">{{observacao}}</span>
+					</div>
+					<div class="xmlcolumn xmlfisco  padding-5 border-left min-height-112 fill-content">
+					<div class="xmltcampo">RESERVADO AO FISCO</div>
+					</div>
+				</div>
+				</div>
+			</div>
+			</div>
+		</div>
+
+		<!--
+		<script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+
+		<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"></script>
+		<script src="../local/plugins/JsBarCode/JsBarcode.code128.min.js"></script>
+		-->
+		<script>
+			$(document).ready(function(){
+			setTimeout(alertPendente, 500)
+
+			})
+			function alertPendente(){
+			var InputTextCfopEntrada = $('.input-cfopentrada-bg').val()
+			if (InputTextCfopEntrada.length != 4) {
+				$('.input-cfopentrada-bg').css("background-color", "#ff000042", "important");
+			} else {
+				$('.input-cfopentrada-bg').css("background-color", "#fff");
+			}
+
+
+			var InputTextAcumulador = $('.input-acumulador-bg').val()
+			if (InputTextAcumulador.length < 2 || InputTextAcumulador.length > 3){
+				$('.input-acumulador-bg').css("background-color", "#ff000042", "important");
+			} else {
+				$('.input-acumulador-bg').css("background-color", "#fff");
+			}
+
+
+			var msgDeErro = $(".msg-erro").text()
+
+			if(msgDeErro.length > 0) {
+				//console.log("entrei aqui")
+				$('.input-cfopentrada-bg').css("background-color", "#ff000042", "important");
+				$('.input-acumulador-bg').css("background-color", "#ff000042", "important");
+				$('.erroinserir').css("background-color", "#ff000042", "important");
+
+			}
+			}
+
+
+			async function convert(total) {
+				var x = await abreviaNumero(total);
+				return x
+			}
+
+			async function initAntecipados() {
+
+			var antecipadosData = {{#if resultado_ant}}{{{resultado_ant}}}{{else}}''{{/if}};
+			var options = ""
+			var total = ""
+
+			Object.entries(antecipadosData).forEach(async function([antecipado, valor]) {
+				if (antecipado == "total") {
+				total = valor
+				} else {
+				options += `<h6>${antecipado}: R$ ${valor}</h6>`
+				}
+				});
+
+			var total_formatado = await convert(total)
+
+			$("#valores_antecipados").empty().append(`
+			<div class="header-hide">
+				<h5 style="font-weight: bold;">Tributações</h5>
+				<h6 style="font-weight: bold;">Antecipados:</h6>
+				${options}
+				<h6 class="text-center" style="font-weight: bold;">Total: R$ ${total_formatado}</h6>
+				</div>
+			`)
+
+			}
+
+			initAntecipados()
+
+
+		</script>
+
+		<script>
+			function updateCfopEntrada(input, cfop) {
+				var cnpj = localStorage.getItem('cnpj_destinatario');
+				var cfop_entrada = input.value ;
+				var cfop_input = cfop;
+
+				showLoading();
+
+				$.ajax({
+					type: "POST",
+					url: '/notas/update-cfop-entrada',
+					data: { 'cnpj' : cnpj , 'cfop_input' : cfop, 'cfop_entrada' : input.value},
+				}).done(function(response) {
+					//response aqui
+					console.log("response -> ", response)
+					hideLoading()
+
+					var gif = "";
+					if (response == "Dados atualizados!") {
+						gif = "success";
+					}
+
+					if (response == "Erro ao gravar dados, tente novamente.") {
+						gif = "warning";
+					}
+					Swal.fire({
+						position: 'center',
+						icon: gif,
+						title: response,
+						showConfirmButton: false,
+						timer: 2000
+					});
+
+					setTimeout(()=>{
+						getDataPreviewXML()
+						setTimeout(alertPendente, 200)
+						}, 2000)
+				})
+			}
+
+			function updateAcumulador(input, cfop_input, tipo_antecipado, mva) {
+				var cnpj = localStorage.getItem('cnpj_destinatario')
+				var acumulador_input = input.value
+				var cfop = cfop_input
+				if(acumulador_input.length > 1 && acumulador_input.length < 4) {
+					$.ajax({
+					type: "POST",
+					url: '/notas/update-acumulador-danfe-nfe',
+					data: { 'cnpj' : cnpj , 'acumulador_input' : acumulador_input, 'cfop' : cfop , 'tipo_antecipado' : tipo_antecipado, 'mva' : mva}
+					}).done(function(response) {
+					//response aqui
+					hideLoading()
+							var gif = "";
+							if (response == "Dados atualizados!") {
+								gif = "success";
+							}
+
+							if (response == "Erro ao gravar dados, tente novamente.") {
+								gif = "warning";
+							}
+							Swal.fire({
+								position: 'center',
+								icon: gif,
+								title: response,
+								showConfirmButton: false,
+								timer: 2000
+							});
+
+					setTimeout(()=>{
+						getDataPreviewXML()
+						setTimeout(alertPendente, 200)
+						}, 2000)
+					
+					})
+				
+				}else{
+					Swal.fire({
+								position: 'center',
+								icon: 'info',
+								title: "O acumulador deve ter <br> de 2 à 3 digitos!",
+								showConfirmButton: false,
+								timer: 2000
+							});
+				}
+			}
+
+
+			{{!--  //HBS code comment
+				function updateMva4(input, descricao_item, id_item, mva_4_raw) {
+				var cnpj = localStorage.getItem('cnpj_destinatario');
+				var mva_4_input = input.value
+				
+				if(id_item && mva4raw){
+
+					if(mva_4_input.length > 1 && mva_4_input.length < 4) {
+					$.ajax({
+						type: "POST",
+						url: '/notas/update-mv4-danfe-nfe',
+						data: {'id_item' : id_item, 'cnpj' : cnpj , 'mva_4_input' : mva_4_input, 'mva_4_raw' : mva_4_raw }
+					}).done(function(response) {
+						//response aqui
+						hideLoading()
+							var gif = "";
+							if (response == "Dados atualizados!") {
+								gif = "success";
+							}
+
+							if (response == "Erro ao gravar dados, tente novamente.") {
+								gif = "warning";
+							}
+							Swal.fire({
+								position: 'center',
+								icon: gif,
+								title: response,
+								showConfirmButton: false,
+								timer: 2000
+							});
+
+						setTimeout(()=>{
+						getDataPreviewXML()
+						setTimeout(alertPendente, 200)
+						}, 2000)
+					})
+					}else{
+					Swal.fire({
+								position: 'center',
+								icon: 'info',
+								title: "O acumulador deve ter <br> de 2 à 3 digitos!",
+								showConfirmButton: false,
+								timer: 2000
+							});
+					}
+				}else{
+					Swal.fire({
+								position: 'center',
+								icon: 'info',
+								title: "Erro atualize a página",
+								showConfirmButton: false,
+								timer: 2000
+							});
+				}
+			}
+
+			--}}
+
+
+			{{!-- //HBS code comment
+			function updateReducaobase(input, descricao_item, id_item, red_bc_icms_sai_pa_raw) {
+				
+				var cnpj = localStorage.getItem('cnpj_destinatario');
+				var red_bc_icms_sai_pa_input = input.value
+				
+				if(id_item && red_bc_icms_sai_pa_raw){
+
+					if(red_bc_icms_sai_pa_input.length > 1 && red_bc_icms_sai_pa_input.length < 4) {
+					$.ajax({
+						type: "POST",
+						url: '/notas/update-reducaoBaseIcmsSaida-danfe-nfe',
+						data: {'id_item' : id_item, 'cnpj' : cnpj , 'red_bc_icms_sai_pa_input' : red_bc_icms_sai_pa_input, 'red_bc_icms_sai_pa_raw' : red_bc_icms_sai_pa_raw}
+					}).done(function(response) {
+						//response aqui
+						hideLoading()
+							var gif = "";
+							if (response == "Dados atualizados!") {
+								gif = "success";
+							}
+							if (response == "Erro ao gravar dados, tente novamente.") {
+								gif = "warning";
+							}
+							Swal.fire({
+								position: 'center',
+								icon: gif,
+								title: response,
+								showConfirmButton: false,
+								timer: 2000
+							});
+						setTimeout(()=>{
+						getDataPreviewXML()
+						setTimeout(alertPendente, 200)
+						}, 2000)
+					})
+					
+					}else{
+					Swal.fire({
+								position: 'center',
+								icon: 'info',
+								title: "O acumulador deve ter <br> de 2 à 3 digitos!",
+								showConfirmButton: false,
+								timer: 2000
+							});
+					}
+
+				}else{
+					Swal.fire({
+								position: 'center',
+								icon: 'info',
+								title: "Erro atualize a página",
+								showConfirmButton: false,
+								timer: 2000
+							});
+				}
+			}
+
+			--}}
+		</script>
+
+
+</div>
+

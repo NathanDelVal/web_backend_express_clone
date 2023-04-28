@@ -1,0 +1,79 @@
+<div class="card" style="padding:20px; box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.157);">
+    <div class="row">
+        <!--12colunas CARD-->
+        <div class="col-lg-12">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="row">
+                    <!--10COLUNAS-->
+                    <div class="col-sm-9 col-md-9 col-lg-9 ">
+                        <div class="row">
+                            <div class="col-sm-4 col-md-4 col-lg-4 ">
+                                <h6 class="label-modal">Cliente (Razão Social)</h6>
+                                <input id="name_cliente[0]" name="cliente" type="text" class="form-control "
+                                    autocomplete="off"
+                                    onkeyup="var start = this.selectionStart; var end = this.selectionEnd; this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);"
+                                    required>
+                            </div>
+                            <div class=" col-sm-4 col-md-4 col-lg-4 ">
+                                <h6 class=" label-modal">CNPJ</h6>
+                                <input id="name_cnpj[0]" name="cnpj" type="number" step="any" class="form-control "
+                                    autocomplete="off" required>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 ">
+                                <h6 class="label-modal">Senha do Certificado Digital</h6>
+                                <input id="name_senha" name="senha" type="text" class="form-control " autocomplete="off"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4 col-md-4 col-lg-4 ">
+                                <h6 class="label-modal">Unidade (Cidade)</h6>
+                                <input id="name_unidade[0]" name="unidade" type="text" class="form-control "
+                                    autocomplete="off" onkeyup="var start = this.selectionStart; var end = this.selectionEnd; this.value = this.value.toUpperCase(); this.setSelectionRange(start, end); required>
+                </div>
+                <div class=" col-sm-4 col-md-4 col-lg-4">
+                                <h6 class="label-modal">Regime Tributário</h6>
+                                <select id="name_regime[0]" title="SELECIONE" class="form-control  selectpicker"
+                                    data-style="btn btn-link" name="regime" type="text" required>
+                                    <option required>Simples-Nacional</option>
+                                    <option>Lucro Presumido</option>
+                                    <option>Lucro Real</option>
+                                    <option>CEI</option>
+                                    <option>Imune/Isentas</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3">
+                                <h6 class="label-modal">Situação <em>(obrigatório)</em></h6>
+                                <div class="form-check form-check-radio">
+                                    <label class="form-check-label">
+                                        <input id="name_situacao_ativa[0]" class="form-check-input " type="radio"
+                                            name="situacao[0]" value="Ativa" autocomplete="off" required>Ativa<span
+                                            class="circle">
+                                            <span class="check"></span>
+                                        </span>
+                                    </label>
+                                    <label class="form-check-label">
+                                        <input id="name_situacao_inativa[0]" class="form-check-input " type="radio"
+                                            name="situacao[0]" value="Inativa" autocomplete="off">Inativa<span
+                                            class="circle">
+                                            <span class="check"></span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--10COLUNAS-->
+                    <div class="col-sm-3 col-md-3 col-lg-3 ">
+                        <div class="row" onclick="certificado(this)">
+                            <div class="CERTmsg areaClick"> Insira Seu Certificado </div>
+                        </div>
+                        <input id="arquivoInput" class="InputUploader" type="file" name="file[0]"
+                            accept="application/x-pkcs12">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--12colunas CARD-->
+    </div>
+</div>

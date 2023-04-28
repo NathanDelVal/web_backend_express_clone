@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<!--HEADER-->
+
+<head>
+	<meta charset="utf-8" />
+	<link rel="apple-touch-icon" sizes="76x76" href="../images/icon/apple-icon-mezzomo.png">
+	<link rel="icon" type="image/png" href="../images/icon/favicon_mezzomo3.png">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>Robotax: Domínio Sistemas X App Mezzomo</title>
+	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+	<!-- Fonts and icons -->
+	<link rel="stylesheet" type="text/css"
+		href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+	<link src="../local/plugins/printjs/printjs.css">
+	</link>
+
+	<!-- CSS Files -->
+	<link href="../assets/css/material-dashboard.min.css" rel="stylesheet" />
+
+	<!--SWEET ALERT-->
+	<link rel="stylesheet" href="/local/plugins/sweetalert/css/sweetalert2.min.css" id="theme-styles">
+
+	<!--local CSS -->
+	<link rel="stylesheet" type="text/css" href="../local/notasfiscais.css">
+	<link href="../local/plugins/select2/select2.min.css" rel="stylesheet" />
+	<script src="../assets/js/core/jquery-3.5.1.js"></script>
+
+	<!-- IMPORTAÇÕES SKALACODE -->
+	<link href="../assets_relatorios/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
+        
+    <!-- preloader css -->
+    <link rel="stylesheet" href="../assets_relatorios/css/preloader.min.css" type="text/css" />
+    <link href="../assets_relatorios/css/styles.css" rel="stylesheet" type="text/css" />
+    
+    <!-- Bootstrap Css -->
+    <link href="../assets_relatorios/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="../assets_relatorios/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="../assets_relatorios/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+    
+    <!-- Chosen -->
+    <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet"/>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+    <link href="../assets_relatorios/css/styles.css" rel="stylesheet" type="text/css" />
+    
+    <!-- DataTables -->
+    <link href="../assets_relatorios/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets_relatorios/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Responsive datatable examples -->
+    <link href="../assets_relatorios/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Responsive datatable examples -->
+    <link href="../assets_relatorios/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    
+    <!-- Sweet Alert-->
+    <link href="../assets_relatorios/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+    
+    <!-- treetable -->
+    <link href="../assets_relatorios/libs/jquery-treetable-master/css/jquery.treetable.css" rel="stylesheet" type="text/css" />
+    <link href="../assets_relatorios/libs/jquery-treetable-master/css/jquery.treetable.theme.default.css" rel="stylesheet" type="text/css" />
+    <link href="../assets_relatorios/libs/jquery-treetable-master/css/screen.css" rel="stylesheet" type="text/css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    
+    <style>
+        table.treetable {
+            border: 1px solid #888;
+            border-collapse: collapse;
+            font-size: .75rem;
+            line-height: 2;
+            margin: 0.6em 0 0.8em 0;
+            width: 100%;
+        }
+        
+        table.treetable th {
+            font-size: .75rem;
+            line-height: 3;
+            text-align: left;
+        }
+    </style>
+	<!-- END IMPORTAÇÕES SKALACODE -->
+</head>
+
+<body class="">
+	<div class="wrapper">
+		<!-- SIDEBAR -->
+		<div class="sidebar" data-color="yellow" data-background-color="black"
+			data-image="../assets/img/contabeisbw.jpg">
+			<div class="sidebar-wrapper">
+				<ul class="nav">
+					{{> empresa/navbar_nf}}
+				</ul>
+			</div>
+		</div>
+
+		<!-- Plugin for the momentJs -->
+		<script src="../assets/js/plugins/moment.min.js"></script>
+		<!-- Plugin for the momentJs TRADUÇÕES LOCAIS -->
+		<script src="../assets/js/plugins/moment-with-locales.js"></script>
+
+		<!-- MAIN PANEL -->
+		<div class="main-panel">
+			<nav class="navbar navbar-expand-lg navbar-transparent">
+				<div class="container-fluid">
+					<div class="navbar-wrapper">
+						<div class="navbar-minimize">
+							<button id="minimizeSidebar" class="btn btn-just-icon btn-white btn-fab btn-round">
+								<i class="material-icons text_align-center visible-on-sidebar-regular">more_vert</i>
+								<i class="material-icons design_bullet-list-67 visible-on-sidebar-mini">view_list</i>
+							</button>
+						</div>
+						<a class="navbar-brand" href="/notas">Notas Fiscais Empresa</a>
+					</div>
+					{{> empresa/menu_apps_back}} {{> empresa/help_btn}}
+					<button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
+						aria-expanded="false" aria-label="Toggle navigation">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="navbar-toggler-icon icon-bar"></span>
+						<span class="navbar-toggler-icon icon-bar"></span>
+						<span class="navbar-toggler-icon icon-bar"></span>
+					</button>
+				</div>
+			</nav>
+			<!-- End Navbar -->
+
+			<div class="content" style="margin-top: 70px;">
+				<div class="container-fluid mb-3">
+					<!-- IMPORTAÇÕES SKALACODE -->
+					<div class="row mb-5">
+                        <div class="col-12">
+                            <div class="card mb-0 bg-black text-white rounded-0 rounded-top">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h1 id="title" class="text-uppercase fw-bold text-white font-size-24 mb-0 text-center text-md-start">Domínio Sistemas X App Mezzomo</h1>
+                                        </div>
+                                        <div class="col-md-6 d-flex justify-content-center align-items-center my-3 my-md-0">
+                                            <select id="mounth" class="form-select form-select-sm">
+                                                <option value="1">Jan</option>
+                                                <option value="2">Fev</option>
+                                                <option value="3">Mar</option>
+                                                <option value="4">Abr</option>
+                                                <option value="5">Maio</option>
+                                                <option value="6">Jun</option>
+                                                <option value="7">Jul</option>
+                                                <option value="8">Ago</option>
+                                                <option value="9">Set</option>
+                                                <option value="10">Out</option>
+                                                <option value="11">Nov</option>
+                                                <option value="12">Dez</option>
+                                            </select>
+                                            
+                                            <select id="year" class="form-select form-select-sm">
+                                                <option value="2021">2021</option>
+                                                <option value="2022">2022</option>
+                                                <option value="2023">2023</option>
+                                            </select>
+                                        </div>
+                                    </div>
+    
+                                    <div class="row my-5">
+                                        <div class="col-md-4">
+                                            <div class="card mb-0 bg-black">
+                                                <div class="card-body">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="text-center flex-grow-1">
+                                                            <p class="text-white mb-3">
+                                                                 R$<span id="total_notas_entrada_dominio" class="counter-value font-size-22 ms-1" data-target="0" style="font-weight: 600">0</span>
+                                                            </p>
+                                                            <h4 class="text-truncate font-size-16 fw-bold d-block mb-3 lh-1" style="color: #edcd00;">NOTAS ENTRADA DOMINIO</h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card mb-0 bg-black">
+                                                <div class="card-body">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="text-center flex-grow-1">
+                                                            <p class="text-white mb-3">
+                                                                R$<span id="total_notas_entrada_app" class="counter-value font-size-22 ms-1" data-target="0" style="font-weight: 600">0</span>
+                                                            </p>
+                                                            <h4 class="text-truncate font-size-16 fw-bold d-block mb-3 lh-1" style="color: #edcd00;">NOTAS ENTRADA APP</h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card mb-0 bg-black">
+                                                <div class="card-body">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="text-center flex-grow-1">
+                                                            <p class="text-white mb-3">
+                                                                R$<span id="total_diff_dom_app" class="counter-value text-white font-size-22 ms-1" data-target="0" style="font-weight: 600">0</span>
+                                                            </p>
+                                                            <h4 class="text-truncate font-size-16 fw-bold d-block mb-3 lh-1" style="color: #edcd00;">DIFERENÇA DOM. - APP</h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- card -->
+                            <div class="card">
+                                <!-- card header -->
+                                <div class="card-header card-header-yellow">
+                                    <h4 class="card-title text-white">Análise de dados</h4>
+                                </div>
+                                
+                                <!-- card body -->
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-8 col-lg-10">
+                                            
+                                        </div>
+                                        
+                                        <div class="col-md-4 col-lg-2">
+                                            <input id="search" type="text" class="form-control form-control-sm" placeholder="Pesquisar...">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="table-responsive">
+                                                <table id="myTable" class="table">
+                                                    <thead>
+                                                        <tr class="bg-black text-white py-3">
+                                                            <th class="fw-bold border-0">EMPRESA</th>
+                                                            <th class="fw-bold border-0">NOTAS ENTRADAS DOMINIO</th>
+                                                            <th class="fw-bold border-0">NOTAS ENTRADAS APP</th>
+                                                            <th class="fw-bold border-0">DIFERENÇA DOM. - APP</th>
+                                                        </tr>
+                                                    </thead>
+                                                    
+                                                    <tbody id="data_wrapper">
+                                                        
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <ul class="pagination pagination-rounded justify-content-center mt-3 mb-4 pb-1">
+                                                <li class="page-item prev disabled">
+                                                    <a href="javascript: void(0);" class="page-link"><i class="mdi mdi-chevron-left"></i></a>
+                                                </li>
+                                                <li class="page-item active">
+                                                    <a href="javascript: void(0);" class="page-link">1</a>
+                                                </li>
+                                                <li class="page-item">
+                                                    <a href="javascript: void(0);" class="page-link">2</a>
+                                                </li>
+                                                <li class="page-item">
+                                                    <a href="javascript: void(0);" class="page-link">3</a>
+                                                </li>
+                                                <li class="page-item">
+                                                    <a href="javascript: void(0);" class="page-link">4</a>
+                                                </li>
+                                                <li class="page-item">
+                                                    <a href="javascript: void(0);" class="page-link">5</a>
+                                                </li>
+                                                <li class="page-item next">
+                                                    <a href="javascript: void(0);" class="page-link"><i class="mdi mdi-chevron-right"></i></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end card-body -->
+                            </div>
+                            <!-- end card -->
+                        </div>
+                        <!-- end col-->
+                    </div>
+                    <!-- end row-->
+					<!-- END IMPORTAÇÕES SKALACODE -->
+				</div>
+			</div>
+			{{> empresa/footer_internal}}
+		</div>
+
+	</div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+	<!--Correção do Violation Scroll non-passive event-->
+	<script src=" ../local/plugins/fix-non-passive.js"></script>
+	<!-- Core JS Files -->
+
+	<script src="../assets/js/core/popper.min.js"></script>
+	<script src="../assets/js/core/bootstrap-material-design.js"></script>
+	<script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+	<!-- Plugin for Sweet Alert -->
+	<!-- Forms Validations Plugin -->
+	<script src="../assets/js/plugins/jquery.validate.min.js"></script>
+	<!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
+	<script src="../assets/js/plugins/jquery.bootstrap-wizard.js"></script>
+	<!-- Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+	<script src="../assets/js/plugins/bootstrap-selectpicker.js"></script>
+	<!-- Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+	<script src="../assets/js/plugins/bootstrap-datetimepicker.min.js"></script>
+	<!-- Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs -->
+	<script src="../assets/js/plugins/bootstrap-tagsinput.js"></script>
+	<!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+	<script src="../assets/js/plugins/jasny-bootstrap.min.js"></script>
+	<!-- Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar -->
+	<script src="../assets/js/plugins/fullcalendar.min.js"></script>
+	<!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
+	<script src="../assets/js/plugins/jquery-jvectormap.js"></script>
+	<!-- Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+	<script src="../assets/js/plugins/nouislider.min.js"></script>
+	<!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+	<!-- Library for adding dinamically elements -->
+	<script src="../assets/js/plugins/arrive.min.js"></script>
+	<!-- Chartist JS -->
+	<script src="../assets/js/plugins/chartist.min.js"></script>
+	<!-- Notifications Plugin -->
+	<script src="../assets/js/plugins/bootstrap-notify.js"></script>
+	<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+	<script src="../assets/js/material-dashboard.min.js?v=2.1.2" type="text/javascript"></script>
+	<!--_______________________________________________LOCAL________________________________________________-->
+	<!-- DataTables.net Plugin, full documentation here: https://datatables.net/ -->
+	<script src="../local/plugins/dataTables/dataTables.min.js"></script>
+	<!--SORTING DATE EU-->
+	<script src="https://cdn.datatables.net/plug-ins/1.10.12/sorting/date-eu.js"></script>
+	<!--ROWGROUP-->
+	<script src="https://cdn.datatables.net/rowgroup/1.0.2/js/dataTables.rowGroup.min.js"></script>
+	<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.colVis.min.js"></script>
+	<!--DRAG MOUSE-->
+	<script src="../local/plugins/drag/drag.js"></script>
+
+	<!--MASK FOR FORMS
+	<script src="../local/plugins/mask_input/jquery.maskedinput.js" type="text/javascript"></script>-->
+	<!-- SELECTED2 CLIPBOARD -->
+	<script src="../local/plugins/dataTables/selected2clipboard.js"></script>
+	{{> empresa/modal_chamados}}
+	<script src="../local/page_document_ready/script_notas_fiscais.js" type="text/javascript"></script>
+	<!--______________________________________________LOCAL________________________________________________--->
+	<!-- <script src="../local/metodos/post/import_notas_fiscais.js"></script> -->
+
+	<!-- AJAX JQUERY POST FORM DATA MODAL -->
+	<script src="../local/metodos/post/update_modal_data.js"></script>
+	<script src="../local/plugins/printjs/print.min.js"></script>
+	<script src="../local/plugins/mascara/abreviaNumero.js"></script>
+
+	<script src=" ../local/plugins/select2/select2.min.js"></script>
+
+	<!--SWEET ALERT-->
+	<script src="../local/plugins/sweetalert/js/sweetalert2.min.js"></script>
+	<link rel="stylesheet" href="../local/plugins/sweetalert/css/sweetalert2.min.css" id="theme-styles">
+
+	<!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
+	<script src="../assets/js/plugins/bootstrap-tagsinput.js"></script>
+
+	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>-->
+
+	<script src="../local/plugins/autocomplete/suggest-autocomplete.js"></script>
+
+	<script src="../local/metodos/alert/loading.js"></script>
+
+	<script src="../local/plugins/JsBarCode/JsBarcode.code128.min.js"></script>
+
+	<!-- IMPORTAÇÕES SKALACODE -->
+	<!-- apexcharts -->
+    <script src="../assets_relatorios/libs/apexcharts/apexcharts.min.js"></script>
+        
+    <script>
+        /* SEARCH */
+        function search() {
+            // Declare variables
+            var input, filter, table, tr, td, i, txtValue;
+            input = $("#search");
+            filter = $.trim(input.val().toUpperCase());
+            table = $("#myTable");
+            tr = $("#myTable tr");
+        
+            $.each(tr,
+            function(i, val) {
+                tr.each(function() {
+                    td = $("td:first", this);
+                    if (td) {
+                        txtValue = td.text() || td.attr("data-text");
+                        if (txtValue !== undefined) {
+                            txtValue = txtValue.toString().toUpperCase();
+                            if (txtValue.indexOf(filter) > -1 && !$(this).attr("data-tt-parent-id")) {
+                                $(this).show();
+                            } else {
+                                $(this).hide();
+                            }
+                        }
+                    }
+                });
+            });
+        }
+        
+        function getData(mounth, year, currentPage) {
+            $.ajax({
+                url: 'api/get_data_dominio.php',
+                type: 'POST',
+                dataType: 'JSON',
+                data: {
+                    mounth: mounth,
+                    year: year,
+                    currentPage: currentPage
+                },
+                success: function(data) {
+                    // Preenche a tabela com os dados retornados
+                    // console.log(data);
+                    
+                    $('#data_wrapper').empty();
+                    // destruir a tabela anterior, se existir
+                    if ($('#myTable').treetable('destroy')) {
+                        // console.log('Tabela destruída');
+                    }
+                        
+                    let sum_notas_entrada_dominio = 0;
+                    let sum_notas_entrada_app = 0;
+                    let sum_diff_dom_app = 0;
+                    
+                    let count = 1;
+                    $.each(data, function(i, val) {
+                        // console.log(val);
+                        
+                        let count_father = count;
+                        
+                        let empresa = val.empresa;
+                        let total_notas_entrada_dominio = val.total_notas_entrada_dominio.toLocaleString('pt-br', 2);
+                        let total_notas_entrada_app = val.total_notas_entrada_app.toLocaleString('pt-br', 2);
+                        let total_diff_dom_app = val.total_diff_dom_app.toLocaleString('pt-br', 2);
+                        let notas = val.notas;
+                        
+                        sum_notas_entrada_dominio += val.total_notas_entrada_dominio;
+                        sum_notas_entrada_app += val.total_notas_entrada_app;
+                        sum_diff_dom_app += val.total_diff_dom_app;
+                        
+                        
+                        $('#data_wrapper').append(`<tr data-tt-id="${count}">
+                                                    <td>${empresa}</td>
+                                                    <td>${total_notas_entrada_dominio}</td>
+                                                    <td>${total_notas_entrada_app}</td>
+                                                    <td>${total_diff_dom_app}</td>
+                                                </tr>`);
+                                                
+                        count++;
+                        
+                        let count_tt_parent_id = 1;
+                        $.each(notas, function(i, nota) {
+                            let numero_nota = nota.numero_nota;
+                            let notas_entrada_dominio = nota.notas_entrada_dominio;
+                            let notas_entrada_app = nota.notas_entrada_app;
+                            let diff_dom_app = nota.diff_dom_app;
+                            
+                            $('#myTable').append(`<tr data-tt-id="${count}" data-tt-parent-id="${count_father}">
+                                                        <td>${numero_nota}</td>
+                                                        <td>${notas_entrada_dominio}</td>
+                                                        <td>${notas_entrada_app}</td>
+                                                        <td>${diff_dom_app}</td>
+                                                    </tr>`);
+                            count_tt_parent_id++;
+                            count++;
+                        });
+                        
+                        $('#total_notas_entrada_dominio').text(sum_notas_entrada_dominio.toLocaleString('pt-br', 2));
+                        $('#total_notas_entrada_app').text(sum_notas_entrada_app.toLocaleString('pt-br', 2));
+                        $('#total_diff_dom_app').text(sum_diff_dom_app.toLocaleString('pt-br', 2));
+                    });
+                    
+                    // inserir novos dados na tabela
+                    // ...
+                    
+                    // chamar o plugin novamente
+                    $('#myTable').treetable({
+                        expandable: true,
+                        searchable: true,
+                        searchField: 'empresa',
+                        pagination: true,
+                        perPage: 10,
+                        onNodeExpand: function() {
+                            // console.log('Node expanded');
+                        },
+                        onNodeCollapse: function() {
+                            // console.log('Node collapsed');
+                        }
+                    });
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error('Erro na requisição AJAX: ' + textStatus + ' - ' + errorThrown);
+                }
+            });
+        }
+            
+        $(function() {
+            var currentPage = 1;
+
+            // Faz uma requisição AJAX para buscar os dados da tabela
+            getData(0, 0);
+            
+            $('#mounth, #year').on('change', function() {
+                let mounth = $('#mounth').val();
+                let year = $('#mounth').val();
+                
+                getData(mounth, year, currentPage);
+            });
+            
+            $('#search').on('keyup', search);
+
+            /* PAGINAÇÃO */
+            
+            // Configuração inicial
+            var totalPages = $('.pagination .page-item:not(.prev, .next)').length;
+            $('.pagination .page-item:eq(1)').addClass('active');
+            
+            // Verifica a página atual e desabilita o botão "previous" se estiver na primeira página
+            if (currentPage === 1) {
+                $('.page-item.prev').addClass('disabled');
+            }
+            
+            // Verifica a página atual e desabilita o botão "next" se estiver na última página
+            if (currentPage === totalPages) {
+                $('.page-item.next').addClass('disabled');
+            }
+            
+            // Botão "previous"
+            $('.page-item.prev').click(function() {
+                if (currentPage > 1) {
+                    currentPage--;
+                    $('.pagination .page-item.active').removeClass('active');
+                    $('.pagination .page-item:eq(' + (currentPage) + ')').addClass('active');
+                }
+                // Desabilita o botão "previous" se estiver na primeira página
+                if (currentPage === 1) {
+                    $('.page-item.prev').addClass('disabled');
+                }
+                // Habilita o botão "next" se não estiver na última página
+                if (currentPage !== totalPages) {
+                    $('.page-item.next').removeClass('disabled');
+                }
+                
+                let mounth = $('#mounth').val();
+                let year = $('#mounth').val();
+                
+                getData(mounth, year, currentPage);
+            });
+            
+            // Botão "next"
+            $('.page-item.next').click(function() {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    $('.pagination .page-item.active').removeClass('active');
+                    $('.pagination .page-item:eq(' + (currentPage) + ')').addClass('active');
+                }
+                // Desabilita o botão "next" se estiver na última página
+                if (currentPage === totalPages) {
+                    $('.page-item.next').addClass('disabled');
+                }
+                // Habilita o botão "previous" se não estiver na primeira página
+                if (currentPage !== 1) {
+                    $('.page-item.prev').removeClass('disabled');
+                }
+                
+                let mounth = $('#mounth').val();
+                let year = $('#mounth').val();
+                
+                getData(mounth, year, currentPage);
+            });
+            
+            // Botões de navegação
+            $('.pagination .page-item:not(.prev, .next)').click(function() {
+                var targetPage = parseInt($(this).find('.page-link').text());
+            
+                if (!isNaN(targetPage) && targetPage !== currentPage) {
+                    if (targetPage < 1) {
+                        targetPage = 1;
+                    } else if (targetPage > totalPages) {
+                        targetPage = totalPages;
+                    }
+            
+                    $('.pagination .page-item.active').removeClass('active');
+                    $('.pagination .page-item:eq(' + targetPage + ')').addClass('active');
+                    currentPage = targetPage;
+            
+                    // Habilita o botão "previous" se não estiver na primeira página
+                    if (currentPage !== 1) {
+                        $('.page-item.prev').removeClass('disabled');
+                    }
+            
+                    // Habilita o botão "next" se não estiver na última página
+                    if (currentPage !== totalPages) {
+                        $('.page-item.next').removeClass('disabled');
+                    }
+                }
+                
+                let mounth = $('#mounth').val();
+                let year = $('#mounth').val();
+                
+                getData(mounth, year, currentPage);
+            });
+        });
+    </script>
+    
+    <script>
+        async function getEmpresas() {
+            return new Promise((resolve, reject) => {
+                $.ajax({
+                    type: 'GET',
+                    url: 'api/get_empresas.php',
+                    dataType: 'JSON',
+                    success: function(empresas) {
+                        resolve(empresas.sort(function(a, b) {
+                            return a.cliente - b.cliente
+                        }));
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr.responseJSON);
+                        reject(error);
+                    }
+                });
+            });
+        }
+        
+        $(document).ready(async function() {
+            try {
+                const empresas = await getEmpresas();
+                
+                $.each(empresas, function(i, empresa) {
+                    // console.log(empresa);
+                });
+            } catch(error) {
+                console.error(error);
+            }
+        });
+    </script>
+    
+    <!-- VENDOR-SCRIPTS -->
+    <script src="../assets_relatorios/libs/jquery/jquery.min.js"></script>
+
+    <!-- Chosen -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
+
+    <script>
+        $(".chosen-select").chosen({
+            no_results_text: "Não houveram resultados, tente novamente"
+        })
+    </script>
+
+    <script src="../assets_relatorios/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets_relatorios/libs/metismenu/metisMenu.min.js"></script>
+    <script src="../assets_relatorios/libs/simplebar/simplebar.min.js"></script>
+    <script src="../assets_relatorios/libs/node-waves/waves.min.js"></script>
+    <script src="../assets_relatorios/libs/feather-icons/feather.min.js"></script>
+    <!-- pace js -->
+    <script src="../assets_relatorios/libs/pace-js/pace.min.js"></script>
+
+    <script src="../assets_relatorios/js/app.js"></script>
+    <!-- END VENDOR-SCRIPTS -->
+    
+    <!-- Plugins js-->
+    <script src="../assets_relatorios/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js"></script>
+    <script src="../assets_relatorios/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js"></script>
+    
+    <!-- Required datatable js -->
+    <script src="../assets_relatorios/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="../assets_relatorios/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    
+    <!-- Buttons examples -->
+    <script src="../assets_relatorios/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="../assets_relatorios/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+    <script src="../assets_relatorios/libs/jszip/jszip.min.js"></script>
+    <script src="../assets_relatorios/libs/pdfmake/build/pdfmake.min.js"></script>
+    <script src="../assets_relatorios/libs/pdfmake/build/vfs_fonts.js"></script>
+    <script src="../assets_relatorios/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="../assets_relatorios/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="../assets_relatorios/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+    
+    <!-- Responsive examples -->
+    <script src="../assets_relatorios/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="../assets_relatorios/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+    
+    <!-- Sweet Alerts js -->
+    <script src="../assets_relatorios/libs/sweetalert2/sweetalert2.min.js"></script>
+    
+    <!-- treetable -->
+    <script src="../assets_relatorios/libs/jquery-treetable-master/jquery.treetable.js"></script>
+	<!-- END IMPORTAÇÕES SKALACODE -->
+</body>
+</html>

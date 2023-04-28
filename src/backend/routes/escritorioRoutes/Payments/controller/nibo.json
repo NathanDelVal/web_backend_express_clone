@@ -1,0 +1,182 @@
+{
+  "consultar_clientes": {
+    "name": "C2",
+    "method": "GET",
+    "url": "https://api.nibo.com.br/empresas/v1/customers",
+    "params": {
+      "optional": "Organization",
+      "required": {}
+    }
+  },
+
+  "criar_cliente": {
+    "name": "C1",
+    "method": "POST",
+    "url": "https://api.nibo.com.br/empresas/v1/customers",
+    "params": {
+      "optional": "Organization",
+      "required": {
+        "name": "string",
+        "email": "string",
+        "phone": "string",
+        "document": {
+          "number": "string"
+        },
+        "communication": {
+          "contactName": "string",
+          "email": "string",
+          "phone": "string",
+          "cellPhone": "string",
+          "webSite": "string"
+        },
+        "address": {
+          "line1": "string",
+          "line2": "string",
+          "number": 0,
+          "district": "string",
+          "city": "string",
+          "state": "string",
+          "zipCode": "string",
+          "country": "string",
+          "ibgeCode": "string"
+        },
+        "bankAccountInformation": {
+          "bank": "string",
+          "agency": "string",
+          "accountNumber": "string"
+        },
+        "companyInformation": {
+          "companyName": "string",
+          "municipalInscription": "string"
+        }
+      }
+    }
+  },
+
+  "agendar_recebimento": {
+    "name": "E1",
+    "method": "POST",
+    "url": "https://api.nibo.com.br/empresas/v1/schedules/credit",
+    "params": {
+      "optional": "Organization",
+      "required": {
+        "stakeholderId": "string",
+        "description": "string",
+        "reference": "string",
+        "value": 0.0,
+        "scheduleDate": "string",
+        "dueDate": "string",
+        "categoryId": "string",
+        "costCenterId": "string",
+        "isFlagged": true,
+        "recurrence": {
+          "intervalType": "string",
+          "interval": 0,
+          "type": "Undefined",
+          "occurrences": 0,
+          "endDate": "string"
+        },
+        "instalment": [
+          {
+            "value": 0.0,
+            "dueDate": "string",
+            "description": "string"
+          }
+        ]
+      }
+    }
+  },
+
+  "criar_boleto_agendado": {
+    "name": "G1",
+    "method": "POST",
+    "url": "https://api.nibo.com.br/empresas/v1/schedules/credit/{ScheduleId}/promise",
+    "params": {
+      "optional": "Organization",
+      "required": {
+        "accountId": "string",
+        "scheduleId": "string",
+        "value": 0.0,
+        "dueDate": "string",
+        "bankSlipInstructions": "string",
+        "stakeholderInfo": {
+          "document": "string",
+          "name": "string",
+          "email": "string",
+          "street": "string",
+          "number": "string",
+          "state": "string",
+          "city": "string",
+          "zipCode": "string"
+        },
+        "items": [
+          {
+            "description": "string",
+            "quantity": 0,
+            "value": 0.0
+          }
+        ]
+      }
+    }
+  },
+
+  "consulta_boleto_de_recebimento_agendado": {
+    "name": "G4",
+    "method": "GET",
+    "url": "https://api.nibo.com.br/empresas/v1/schedules/credit/{ScheduleId}/promise",
+    "params": {
+      "optional": "Organization",
+      "required": { "ScheduleId": "string" }
+    }
+  },
+
+  "receber_lancamento_agendado": {
+    "name": "E3",
+    "method": "POST",
+    "url": "https://api.nibo.com.br/empresas/v1/schedules/credit/{ScheduleId}/receipts",
+    "params": {
+      "optional": "Organization",
+      "required": {
+        "scheduleId": "string",
+        "accountId": "string",
+        "date": "string",
+        "identifier": "string",
+        "value": 0.0,
+        "payingType": "string"
+      }
+    }
+  },
+
+  "atualiza_recebimento_agendado": {
+    "name": "H",
+    "method": "PUT",
+    "url": "https://api.nibo.com.br/empresas/v1/costcenters/{CostCenterId}",
+    "params": {
+      "optional": "Organization",
+      "required": {
+        "scheduleId": "string",
+        "stakeholderId": "string",
+        "description": "string",
+        "reference": "string",
+        "value": 0.0,
+        "scheduleDate": "string",
+        "dueDate": "string",
+        "categoryId": "string",
+        "costCenterId": "string",
+        "isFlagged": true
+      }
+    }
+  },
+
+  "atualiza_recebimento_agendado_para_cancelado": {
+    "name": "H",
+    "method": "PUT",
+    "url": "https://api.nibo.com.br/empresas/v1/schedules/credit/{ScheduleId}/promise/{ReceiptId}/cancel",
+    "params": {
+      "optional": "Organization",
+      "required": {
+        "ScheduleId": "string"
+      }
+    }
+  }
+}

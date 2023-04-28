@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<!--HEADER-->
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="../images/icon/apple-icon-mezzomo.png">
+    <link rel="icon" type="image/png" href="../images/icon/favicon_mezzomo3.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Robotax : Notas Fiscais</title>
+    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+    <!-- Fonts and icons -->
+    <link rel="stylesheet" type="text/css"
+        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <!-- CSS Files -->
+    <link href="../assets/css/material-dashboard.min.css" rel="stylesheet" />
+    <!--sweetalert2 -->
+    <link rel="stylesheet" href="../local/plugins/sweetalert/css/sweetalert2.min.css" id="theme-styles">
+    <!--local CSS -->
+    <link rel="stylesheet" type="text/css" href="../local/stylenotasmezzomo.css">
+    <script src="../assets/js/core/jquery-3.5.1.js"></script>
+</head>
+<!--HEADER_X-->
+
+<body class="">
+
+    <div>
+
+        <form method="POST" action="" id="aculumadores" class="form-acumulador">
+            <div class="modal-body table-responsive" style="background-color: #ffffff;">
+                <h4 class="text-center mb-5 mt-5" style="font-weight: bold;">Operações Fora do Estado -
+                    Definidas pelo TIPO ANTECIPADO</h4>
+                <table id="tabelaAcumuladores" class="table display table-striped table-no-bordered table-hover"
+                    cellspacing="0" width="100%">
+
+
+                </table>
+
+                <h4 class="text-center mb-5 mt-5" style="font-weight: bold;">Operações Dentro do Estado -
+                    Definidas pelo TIPO ANTECIPADO</h4>
+                <table id="tabelaAcumuladores" class="table display table-striped table-no-bordered table-hover"
+                    cellspacing="0" width="100%">
+                    <thead>
+                        <tr class="table-header">
+                            <th>CFOPs</th>
+                            <th>1101</th>
+                            <th>1102</th>
+                            <th>1910</th>
+                            <th>1152</th>
+                            <th>1202</th>
+                        </tr>
+                        <tr style="word-break: break-word; text-align: center;">
+                            <td>Tipo Antecipado</td>
+                            <td>Compra para Industrialização</td>
+                            <td>Compra para Comercialização</td>
+                            <td>Bonificação</td>
+                            <td>Transferência de Mercadorias</td>
+                            <td>Devolução de Mercadorias</td>
+                        </tr>
+
+                        <tr>
+                            <td>Cesta Básica</td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                        </tr>
+
+                        <tr>
+                            <td>Ant Especial</td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                        </tr>
+
+                        <tr>
+                            <td>Isento</td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                        </tr>
+
+                        <tr>
+                            <td>Crédito Presumido</td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                        </tr>
+
+                        <tr>
+                            <td>Ant. Entrada - 0,2</td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                        </tr>
+
+                    </thead>
+                </table>
+
+                <h4 class="text-center mb-5 mt-5" style="font-weight: bold;">Operações com substituição
+                    Tributária-ST </h4>
+                <table id="tabelaAcumuladores" class="table display table-striped table-no-bordered table-hover"
+                    cellspacing="0" width="100%">
+                    <thead>
+                        <tr class="table-header">
+                            <th>CFOPs</th>
+                            <th>1401</th>
+                            <th>1403</th>
+                            <th>2403</th>
+                            <th>2409</th>
+                            <th>1409</th>
+                            <th>1411</th>
+                            <th>2411</th>
+                        </tr>
+                        <tr style="word-break: break-word; text-align: center;">
+                            <td>Tipo Antecipado</td>
+                            <td>Compra para Industrialização-ST</td>
+                            <td>Compra para Comercialização-ST</td>
+                            <td>Compra para Comercialização-ST</td>
+                            <td>Transferência de Mercadorias-ST</td>
+                            <td>Transferência de Mercadorias-ST</td>
+                            <td>Devolução de Mercadorias-ST</td>
+                            <td>Devolução de Mercadorias-ST</td>
+                        </tr>
+
+                        <tr>
+                            <td>TODAS</td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                        </tr>
+                </table>
+
+                <h4 class="text-center mb-5 mt-5" style="font-weight: bold;">Operações com CFOP específico -
+                    Importados pelo XML</h4>
+                <table id="tabelaAcumuladores" class="table display table-striped table-no-bordered table-hover"
+                    cellspacing="0" width="100%">
+                    <thead>
+                        <tr class="table-header">
+                            <th>CFOPs</th>
+                            <th>1353</th>
+                            <th>2353</th>
+                            <th>5656</th>
+                            <th>6656</th>
+                            <th>1914</th>
+                            <th>1911</th>
+                        </tr>
+                        <tr
+                            style="word-break: break-word; text-align: center; background-color: #ffffff !important; color: #282728 !important;">
+                            <td>Tipo Antecipado</td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                        </tr>
+
+                        <tr>
+                            <td>TODAS</td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                        </tr>
+                </table>
+            </div>
+            <div class="modal-footer mt-4">
+                <div class="row">
+                    <div class="col-lg-4 text-right">
+                        <button type="submit" class="btn btn-black">Atualizar</button>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+
+    <!-- Core JS Files -->
+    <script src="../assets/js/core/popper.min.js"></script>
+    <script src="../assets/js/core/bootstrap-material-design.js"></script>
+    <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+    <!-- Plugin for Sweet Alert -->
+    <!--<script src="../assets/js/plugins/sweetalert2.js"></script>-->
+    <script src="../local/plugins/sweetalert/js/sweetalert2.min.js"></script>
+    <!--<link rel="stylesheet" href="../local/plugins/sweetalert/css/sweetalert2.min.css" id="theme-styles"> TRANSPORTADO PARA O HEADER-->
+    <!-- Forms Validations Plugin -->
+    <script src="../assets/js/plugins/jquery.validate.min.js"></script>
+    <!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
+    <script src="../assets/js/plugins/jquery.bootstrap-wizard.js"></script>
+    <!-- Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+    <script src="../assets/js/plugins/bootstrap-selectpicker.js"></script>
+
+    <!-- Plugin for Tags, full documentation here: https://github.co/bootstrap-tagsinput/bootstrap-tagsinputs -->
+    <script src="../assets/js/plugins/bootstrap-tagsinput.js"></script>
+    <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+    <script src="../assets/js/plugins/jasny-bootstrap.min.js"></script>
+    <!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
+    <script src="../assets/js/plugins/jquery-jvectormap.js"></script>
+    <!-- Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+    <script src="../assets/js/plugins/nouislider.min.js"></script>
+    <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+    <!-- Library for adding dinamically elements -->
+    <script src="../assets/js/plugins/arrive.min.js"></script>
+    <!-- Chartist JS -->
+    <script src="../assets/js/plugins/chartist.min.js"></script>
+    <!-- Notifications Plugin -->
+    <script src="../assets/js/plugins/bootstrap-notify.js"></script>
+    <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="../assets/js/material-dashboard.min.js?v=2.1.2" type="text/javascript"></script>
+    <!--_______________________________________________LOCAL________________________________________________-->
+
+
+
+
+
+
+    <script>
+        //Make Table
+        var table = document.getElementById("tabelaAcumuladores")
+        var tableID = $(table).attr('id')
+        var thead = table.createTHead()
+        var theadID = thead.id = `${tableID}_thead`
+        var tbody = document.createElement('tbody');
+        tbody.id = `${tableID}_tbody`
+        var tbodyID = tbody.id
+        table.appendChild(tbody);
+
+        //var tbody= table.createElement("TBODY")
+        //table.append(`<tbody id="${tableID}_tbody"></tbody`)
+        //table = document.createElement('tbody');
+        //$('#tabelaAcumuladores_tbody').empty()
+        //var tc = tr.insertCell();
+
+
+        (initTable = () => {
+
+            /*
+                <thead>
+                    <tr class="table-header">
+                    </tr>
+                </thead>
+                <tbody id="tbodyteste">
+                </tbody>
+
+                // tbody
+                var tr = tbl.insertRow();
+                var tc = tr.insertCell();
+                var tt = document.createTextNode("tbody");
+                tc.appendChild(tt);
+            */
+
+            //var tbody = document.getElementById("tbodyteste")
+
+            // firstCell.innerHTML = 
+            //  $('#tabelaAcumuladores').append(`<thead><tr class="table-header"></tr></thead>`)
+
+        })();
+
+
+        (makeTableHeader = () => {
+            var cfopsnames = ['CFOPs', 'Compra para Industrialização', 'Compra para Comercialização', 'Bonificação', 'Transferência de Mercadorias', 'Devolução de Mercadorias', 'Devolução de Compra Ind']
+            var cfopsvalues = ['', '2101', 2102, 2910, 2152, 2202, 2201]
+            /*
+            <tr style="word-break: break-word; text-align: center;">
+                Compra para Industrialização
+                Compra para Comercialização
+                Bonificação
+                Transferência de Mercadorias
+                Devolução de Mercadorias
+                Devolução de Compra Ind
+            </tr>
+            */
+
+            var firstRow = thead.insertRow()
+            $(firstRow).addClass('table-header')
+            var firstCell = ''
+            cfopsnames.map((item, index) => {
+                //$('#tabelaAcumuladores thead tr:first-child').append(`<th>${item}<br>${cfopsvalues[index]}</th>`)
+                var th_cell = document.createElement("th");
+                th_cell.innerHTML = `${item}<br>${cfopsvalues[index]}`
+                firstRow.appendChild(th_cell);
+            })
+
+            /*
+            
+            // create row for table head
+  var row = document.createElement("tr")
+  // append it to table
+  table.appendChild(row);
+  // get kesys from first object and iterate
+  Object.keys(obj[0]).forEach(function(v) {
+    // create th
+    var cell = document.createElement("th");
+    // append to tr
+    row.appendChild(cell);
+    // update th content as key value
+    cell.innerHTML = v;
+            
+            */
+        })();
+
+        /*
+        <tr>
+            <td>Cesta Básica</td>
+            <td><input type="text"></td>
+            <td><input type="text"></td>
+            <td><input type="text"></td>
+            <td><input type="text"></td>
+            <td><input type="text"></td>
+            <td><input type="text"></td>
+        </tr>
+        
+        */
+
+
+        (makeTableRows = () => {
+            var antecipadonames = [
+                ['Ant. Entrada', '03', '05', '04', '07', '08', '09'],
+                ['Ant. Entrada', '80', '87', '76', '32', '42', '41'],
+                ['Ant. Entrada', '22', '33', '44', '55', '66', '99']
+            ]
+
+            antecipadonames.forEach((element, index) => {
+
+                var row = tbody.insertRow()
+                element.map((item, index) => {
+                    if (index > 0) {
+                        var cell = row.insertCell()
+                        cell.innerHTML = `<input value='${item}' type="text">`
+                    } else {
+                        var cell = row.insertCell()
+                        cell.innerHTML = `${item}`
+                    }
+                })
+            });
+
+        })();
+
+
+    </script>
+
+
+</body>
+
+</html>

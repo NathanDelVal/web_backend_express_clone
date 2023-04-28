@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<!--HEADER-->
+
+<head>
+	<meta charset="utf-8" />
+	<link rel="apple-touch-icon" sizes="76x76" href="../images/icon/apple-icon-mezzomo.png">
+	<link rel="icon" type="image/png" href="../images/icon/favicon_mezzomo3.png">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>Robotax: Antecipados</title>
+	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+	<!-- Fonts and icons -->
+	<link rel="stylesheet" type="text/css"
+		href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+	<link src="../local/plugins/printjs/printjs.css">
+	</link>
+
+	<!-- CSS Files -->
+	<link href="../assets/css/material-dashboard.min.css" rel="stylesheet" />
+
+	<!--SWEET ALERT-->
+	<link rel="stylesheet" href="/local/plugins/sweetalert/css/sweetalert2.min.css" id="theme-styles">
+
+	<!--local CSS -->
+	<link rel="stylesheet" type="text/css" href="../local/notasfiscais.css">
+	<link href="../local/plugins/select2/select2.min.css" rel="stylesheet" />
+	<script src="../assets/js/core/jquery-3.5.1.js"></script>
+
+	<!-- IMPORTAÇÕES SKALACODE -->
+	<link href="../assets_relatorios/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
+        
+    <!-- preloader css -->
+    <link rel="stylesheet" href="../assets_relatorios/css/preloader.min.css" type="text/css" />
+    <link href="../assets_relatorios/css/styles.css" rel="stylesheet" type="text/css" />
+    
+    <!-- Bootstrap Css -->
+    <link href="../assets_relatorios/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="../assets_relatorios/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="../assets_relatorios/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+    
+    <!-- Chosen -->
+    <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet"/>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+    <link href="../assets_relatorios/css/styles.css" rel="stylesheet" type="text/css" />
+    
+    <!-- DataTables -->
+    <link href="../assets_relatorios/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets_relatorios/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Responsive datatable examples -->
+    <link href="../assets_relatorios/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Responsive datatable examples -->
+    <link href="../assets_relatorios/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    
+    <!-- Sweet Alert-->
+    <link href="../assets_relatorios/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+    
+    <!-- treetable -->
+    <link href="../assets_relatorios/libs/jquery-treetable-master/css/jquery.treetable.css" rel="stylesheet" type="text/css" />
+    <link href="../assets_relatorios/libs/jquery-treetable-master/css/jquery.treetable.theme.default.css" rel="stylesheet" type="text/css" />
+    <link href="../assets_relatorios/libs/jquery-treetable-master/css/screen.css" rel="stylesheet" type="text/css" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    
+    <style>
+        table.treetable {
+            border: 1px solid #888;
+            border-collapse: collapse;
+            font-size: .75rem;
+            line-height: 2;
+            margin: 0.6em 0 0.8em 0;
+            width: 100%;
+        }
+        
+        table.treetable th {
+            font-size: .75rem;
+            line-height: 3;
+            text-align: left;
+        }
+    </style>
+	<!-- END IMPORTAÇÕES SKALACODE -->
+</head>
+
+<body class="">
+	<div class="wrapper">
+		<!-- SIDEBAR -->
+		<div class="sidebar" data-color="yellow" data-background-color="black"
+			data-image="../assets/img/contabeisbw.jpg">
+			<div class="sidebar-wrapper">
+				<ul class="nav">
+					{{> empresa/navbar_nf}}
+				</ul>
+			</div>
+		</div>
+
+		<!-- Plugin for the momentJs -->
+		<script src="../assets/js/plugins/moment.min.js"></script>
+		<!-- Plugin for the momentJs TRADUÇÕES LOCAIS -->
+		<script src="../assets/js/plugins/moment-with-locales.js"></script>
+
+		<!-- MAIN PANEL -->
+		<div class="main-panel">
+			<nav class="navbar navbar-expand-lg navbar-transparent">
+				<div class="container-fluid">
+					<div class="navbar-wrapper">
+						<div class="navbar-minimize">
+							<button id="minimizeSidebar" class="btn btn-just-icon btn-white btn-fab btn-round">
+								<i class="material-icons text_align-center visible-on-sidebar-regular">more_vert</i>
+								<i class="material-icons design_bullet-list-67 visible-on-sidebar-mini">view_list</i>
+							</button>
+						</div>
+						<a class="navbar-brand" href="/notas">Notas Fiscais Empresa</a>
+					</div>
+					{{> empresa/menu_apps_back}} {{> empresa/help_btn}}
+					<button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
+						aria-expanded="false" aria-label="Toggle navigation">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="navbar-toggler-icon icon-bar"></span>
+						<span class="navbar-toggler-icon icon-bar"></span>
+						<span class="navbar-toggler-icon icon-bar"></span>
+					</button>
+				</div>
+			</nav>
+			<!-- End Navbar -->
+
+			<div class="content" style="margin-top: 70px;">
+				<div class="container-fluid mb-3">
+					<!-- IMPORTAÇÕES SKALACODE -->
+                    <div class="row mb-5">
+                        <div class="col-12">
+                            <div class="card mb-0 bg-black text-white rounded-0 rounded-top">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h1 id="title" class="text-uppercase fw-bold text-white font-size-24 mb-0 text-center text-md-start">ANTECIPAÇÃO POR FORNECEDOR</h1>
+                                        </div>
+                                        <div class="col-md-3 d-flex justify-content-center align-items-center my-3 my-md-0">
+                                            <label for="select_empresas" class="m-0">
+                                                <i class="fas fa-building text-white me-2"></i>
+                                            </label>
+                                            <form class="mb-0 w-100" action="" method="post">
+                                                <select id="select_empresas" data-placeholder="Busque aqui" multiple class=" chosen1-select form-control form-select-sm w-100">
+                                                    <!-- EMPRESAS -->
+                                                </select>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-3 d-flex justify-content-center align-items-center my-3 my-md-0">
+                                            <label class="form-label m-0" for="date_inicio" title="Visualizar de:">
+                                                <i class="fas fa-calendar-day text-white me-2"></i>
+                                            </label>
+                                            <input id="date_inicio" class="form-control form-select-sm d-flex align-items-center justify-content-center" type="date" title="Visualizar de:" name="date_inicio" />
+    
+                                            <label class="form-label m-0" for="date_fim" title="Visualizar até:">
+                                                <i class="fas fa-calendar-week text-white ms-5 me-2"></i>
+                                            </label>
+                                            <input id="date_fim" class="form-control form-select-sm d-flex align-items-center justify-content-center" type="date" title="Visualizar até" name="date_fim" />
+                                        </div>
+                                    </div>
+    
+                                    <div class="row my-5">
+                                        <div class="col-md-6 col-xl-3">
+                                            <div class="card mb-0 bg-black">
+                                                <div class="card-body">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="text-center flex-grow-1">
+                                                            <h4 class="text-truncate fw-bold d-block mb-3 lh-1" style="color: #edcd00;">Total de Produtos</h4>
+                                                            <p class="text-white mb-3">
+                                                                 R$<span class="counter-value font-size-22 ms-1" id='total_produtos' style="font-weight: 600">0.00</span>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-xl-3">
+                                            <div class="card mb-0 bg-black">
+                                                <div class="card-body">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="text-center flex-grow-1">
+                                                            <h4 class="text-truncate fw-bold d-block mb-3 lh-1" style="color: #edcd00;">Total Impostos</h4>
+                                                            <p class="text-white mb-3">
+                                                                R$<span class="counter-value font-size-22 ms-1" id='total_impostos' style="font-weight: 600">0.00</span>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-xl-3">
+                                            <div class="card mb-0 bg-black">
+                                                <div class="card-body">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="text-center flex-grow-1">
+                                                            <h4 class="text-truncate fw-bold d-block mb-3 lh-1" style="color: #edcd00;">Crédito ICMS</h4>
+                                                            <p class="text-white mb-3">
+                                                                R$<span class="counter-value text-white font-size-22 ms-1" id='total_credito' style="font-weight: 600">0</span>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-xl-3">
+                                            <div class="card mb-0 bg-black">
+                                                <div class="card-body">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="text-center flex-grow-1">
+                                                            <h4 class="text-truncate fw-bold d-block mb-3 lh-1" style="color: #edcd00;">Impostos %</h4>
+                                                            <p class="text-white mb-3">
+                                                                <span class="counter-value font-size-22" id='proce_impostos'style="font-weight: 600;">18.34</span>% 
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+    
+                                    <div class="row d-flex justify-content-between align-items-center">
+                                        <div class="col-6 d-flex flex-row align-items-center">
+                                            <div id="dot_4" title="RESUMO DA APURAÇÃO DO ICMS ANTECEDIDO" class="dot-indicator rounded-1 me-2"></div>
+                                            <div id="dot_1" title="ANTECIPAÇÃO POR FORNECEDOR" class="dot-indicator active"></div>
+                                            <div id="dot_2" title="ANTECIPAÇÃO POR TIPO DE IMPOSTO" class="dot-indicator mx-2"></div>
+                                            <div id="dot_3" title="ANTECIPAÇÃO POR NOTA" class="dot-indicator"></div>
+                                        </div>
+    
+                                        <div id="nav_btns" class="col-6 d-flex justify-content-end align-items-center">
+                                            <button id="nav_to_back" type="button" title="VOLTAR À PÁGINA INICIAL" class="btn btn-warning bg-transparent text-warning" style="border-color: #edcd00; display: none;"><i class="fas fa-undo"></i></button>
+    
+                                            <div class="btn-group" role="group" aria-label="Basic example">
+                                                <button id="nav_to_left" class="btn btn-yellow btn-warning border-dark" type="button" title="ANTECIPAÇÃO POR NOTA">
+                                                    <i class="fas fa-angle-double-left"></i>
+                                                </button>
+    
+                                                <button id="nav_to_chart" class="btn btn-yellow btn-warning border-dark" type="button" title="RESUMO DA APURAÇÃO DO ICMS ANTECIPADO">
+                                                    <i class="fas fa-chart-bar"></i>
+                                                </button>
+                                                
+                                                <button id="nav_to_right" class="btn btn-yellow btn-warning border-dark" type="button" title="ANTECIPAÇÃO POR TIPO DE IMPOSTO">
+                                                    <i class="fas fa-angle-double-right"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- card -->
+                            <div class="card">
+                                <!-- card header -->
+                                <div class="card-header card-header-yellow">
+                                    <h4 class="card-title text-white">Análise de dados</h4>
+                                </div>
+                                
+                                <!-- card body -->
+                                <div id="ant_por_fornecedor" class="card-body nav-card">
+                                    <div class="row">
+                                        <div class="col-md-8 col-lg-10">
+                                            
+                                        </div>
+                                        
+                                        <div class="col-md-4 col-lg-2">
+                                            <input type="text" data-table="#table_ant_por_fornecedor" class="form-control form-control-sm search" placeholder="Pesquisar...">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="table-responsive">
+                                                <table id="table_ant_por_fornecedor" class="table table-striped">
+                                                    <thead>
+                                                        <tr class="bg-black text-white">
+                                                            <th class="fw-bold">FORNECEDOR</th>
+                                                            <th class="fw-bold">NCM</th>
+                                                            <th class="fw-bold">[ITEM] VALOR BRUTO</th>
+                                                            <th class="fw-bold">[ITEM] CRÉTIDO</th>
+                                                            <th class="fw-bold">[ITEM] IMPOSTO</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="table_ant_por_fornecedor_wrapper">
+                                                        
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="ant_por_tipo_de_imposto" class="card-body nav-card" style="display: none;">
+                                    <div class="row">
+                                        <div class="col-md-8 col-lg-10">
+                                            
+                                        </div>
+                                        
+                                        <div class="col-md-4 col-lg-2">
+                                            <input type="text" data-table="#table_ant_por_tipo_de_imposto" class="form-control form-control-sm search" placeholder="Pesquisar...">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="table-responsive">
+                                                <table id="table_ant_por_tipo_de_imposto" class="table table-striped dt-responsive">
+                                                    <thead>
+                                                        <tr class="bg-black text-white">
+                                                            <th class="text-center fw-bold">Tipo de Antecipação</th>
+                                                            <th class="text-center fw-bold">NCM</th>
+                                                            <th class="text-center fw-bold">Nº Nota</th>
+                                                            <th class="text-center fw-bold">[ITEM] VALOR BRUTO</th>
+                                                            <th class="text-center fw-bold">[ITEM] CRÉTIDO</th>
+                                                            <th class="text-center fw-bold">[ITEM] IMPOSTO</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="table_ant_por_tipo_de_imposto_wrapper">
+                                                        
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div id="ant_por_nota" class="card-body nav-card" style="display: none;">
+                                    <div class="row">
+                                        <div class="col-md-8 col-lg-10">
+                                            
+                                        </div>
+                                        
+                                        <div class="col-md-4 col-lg-2">
+                                            <input type="text" data-table="#table_ant_por_nota" class="form-control form-control-sm search" placeholder="Pesquisar...">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="table-responsive">
+                                                <table id="table_ant_por_nota" class="table table-striped dt-responsive">
+                                                    <thead>
+                                                        <tr class="bg-black text-white">
+                                                            <th class="fw-bold">FORNECEDOR</th>
+                                                            <th class="fw-bold">NCM</th>
+                                                            <th class="fw-bold">[ITEM] VALOR BRUTO</th>
+                                                            <th class="fw-bold">[ITEM] CRÉTIDO</th>
+                                                            <th class="fw-bold">[ITEM] IMPOSTO</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="table_ant_por_nota_wrapper">
+                                                        
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div id="resumo_icms_antecipado" class="card-body nav-card" style="display: none;">
+                                    <div class="row">
+                                        <div class="col-md-8 col-lg-10">
+                                            
+                                        </div>
+                                        
+                                        <div class="col-md-4 col-lg-2">
+                                            <input type="text" data-table="#table_resumo_icms_antecipado" class="form-control form-control-sm search" placeholder="Pesquisar...">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row mb-3">
+                                        <div class="col-12">
+                                            <div class="table-responsive" style="max-height: 500px">
+                                                <table id="table_resumo_icms_antecipado" class="table table-striped">
+                                                    <thead>
+                                                        <tr class="bg-black text-white">
+                                                            <th class="text-center fw-bold">TIPO ANTECIPADO</th>
+                                                            <th class="text-center fw-bold">VALOR BRUTO</th>
+                                                            <th class="text-center fw-bold">CRÉTIDO</th>
+                                                            <th class="text-center fw-bold">IMPOSTO</th>
+                                                            <th class="text-center fw-bold">IMPOSTOS %</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="table_resumo_icms_antecipado_wrapper">
+                                                        
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="box-shadow">
+                                                <div class="w-100 bg-black text-center text-white fw-bold text-uppercase">Detalhamento dos impostos</div>
+                                                <div class="">
+                                                    <div id="rel_resumo_det_impostos_chart" data-colors='["#edcd00"]' class="apex-charts" dir="ltr"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="box-shadow">
+                                                <div class="w-100 bg-black text-center text-white fw-bold text-uppercase">Valor imposto/mês</div>
+                                                <div class="">
+                                                    <div id="rel_resumo_imposto_mes_chart" data-colors='["#edcd00", "#6E5F00"]' class="apex-charts" dir="ltr"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="box-shadow">
+                                                <div class="w-100 bg-black text-center text-white fw-bold text-uppercase">Diferença % mês atual/anterior</div>
+                                                <div class="d-flex align-items-center justify-content-center" style="height: 350px;">
+                                                    <div id="rel_resumo_dif_mes_chart" data-colors='["#edcd00"]' class="apex-charts" dir="ltr"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end card -->
+                            </div>
+                            <!-- end col -->
+                        </div>
+                        <!-- end row-->
+                    </div>
+                    <!-- end row-->
+                
+					<!-- END IMPORTAÇÕES SKALACODE -->
+				</div>
+			</div>
+			{{> empresa/footer_internal}}
+		</div>
+
+	</div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+	<!--Correção do Violation Scroll non-passive event-->
+	<script src=" ../local/plugins/fix-non-passive.js"></script>
+	<!-- Core JS Files -->
+
+	<script src="../assets/js/core/popper.min.js"></script>
+	<script src="../assets/js/core/bootstrap-material-design.js"></script>
+	<script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+	<!-- Plugin for Sweet Alert -->
+	<!-- Forms Validations Plugin -->
+	<script src="../assets/js/plugins/jquery.validate.min.js"></script>
+	<!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
+	<script src="../assets/js/plugins/jquery.bootstrap-wizard.js"></script>
+	<!-- Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+	<script src="../assets/js/plugins/bootstrap-selectpicker.js"></script>
+	<!-- Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+	<script src="../assets/js/plugins/bootstrap-datetimepicker.min.js"></script>
+	<!-- Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs -->
+	<script src="../assets/js/plugins/bootstrap-tagsinput.js"></script>
+	<!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+	<script src="../assets/js/plugins/jasny-bootstrap.min.js"></script>
+	<!-- Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar -->
+	<script src="../assets/js/plugins/fullcalendar.min.js"></script>
+	<!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
+	<script src="../assets/js/plugins/jquery-jvectormap.js"></script>
+	<!-- Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+	<script src="../assets/js/plugins/nouislider.min.js"></script>
+	<!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+	<!-- Library for adding dinamically elements -->
+	<script src="../assets/js/plugins/arrive.min.js"></script>
+	<!-- Chartist JS -->
+	<script src="../assets/js/plugins/chartist.min.js"></script>
+	<!-- Notifications Plugin -->
+	<script src="../assets/js/plugins/bootstrap-notify.js"></script>
+	<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+	<script src="../assets/js/material-dashboard.min.js?v=2.1.2" type="text/javascript"></script>
+	<!--_______________________________________________LOCAL________________________________________________-->
+	<!-- DataTables.net Plugin, full documentation here: https://datatables.net/ -->
+	<script src="../local/plugins/dataTables/dataTables.min.js"></script>
+	<!--SORTING DATE EU-->
+	<script src="https://cdn.datatables.net/plug-ins/1.10.12/sorting/date-eu.js"></script>
+	<!--ROWGROUP-->
+	<script src="https://cdn.datatables.net/rowgroup/1.0.2/js/dataTables.rowGroup.min.js"></script>
+	<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.colVis.min.js"></script>
+	<!--DRAG MOUSE-->
+	<script src="../local/plugins/drag/drag.js"></script>
+
+	<!--MASK FOR FORMS
+	<script src="../local/plugins/mask_input/jquery.maskedinput.js" type="text/javascript"></script>-->
+	<!-- SELECTED2 CLIPBOARD -->
+	<script src="../local/plugins/dataTables/selected2clipboard.js"></script>
+	{{> empresa/modal_chamados}}
+	<script src="../local/page_document_ready/script_notas_fiscais.js" type="text/javascript"></script>
+	<!--______________________________________________LOCAL________________________________________________--->
+	<!-- <script src="../local/metodos/post/import_notas_fiscais.js"></script> -->
+
+	<!-- AJAX JQUERY POST FORM DATA MODAL -->
+	<script src="../local/metodos/post/update_modal_data.js"></script>
+	<script src="../local/plugins/printjs/print.min.js"></script>
+	<script src="../local/plugins/mascara/abreviaNumero.js"></script>
+
+	<script src=" ../local/plugins/select2/select2.min.js"></script>
+
+	<!--SWEET ALERT-->
+	<script src="../local/plugins/sweetalert/js/sweetalert2.min.js"></script>
+	<link rel="stylesheet" href="../local/plugins/sweetalert/css/sweetalert2.min.css" id="theme-styles">
+
+	<!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
+	<script src="../assets/js/plugins/bootstrap-tagsinput.js"></script>
+
+	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>-->
+
+	<script src="../local/plugins/autocomplete/suggest-autocomplete.js"></script>
+
+	<script src="../local/metodos/alert/loading.js"></script>
+
+	<script src="../local/plugins/JsBarCode/JsBarcode.code128.min.js"></script>
+
+	<!-- IMPORTAÇÕES SKALACODE -->
+	<!-- apexcharts -->
+    <script src="../assets_relatorios/libs/apexcharts/apexcharts.min.js"></script>
+        
+    <script>
+        // Variaveis para os gráficos:
+    
+        // Página  Extra (RESUMO DA APURAÇÃO DO ICMS ANTECEDIDO)
+    
+        // Detalhamentos dos Impostos
+        //#rel_resumo_det_impostos_chart
+        var rel_resumo_det_impostos_values = [0, 0, 0, 0, 0];
+    
+        // Valor Imposto/Mês
+        //#rel_resumo_imposto_mes_chart
+        var rel_resumo_imposto_mes_passado = [0];
+        var rel_resumo_imposto_mes_atual = [0];
+    
+        // Diferença % Mes Atual/Anterior
+        //#rel_resumo_dif_mes_chart
+        var rel_resumo_dif_mes_values= [0];
+        
+        /**
+         * APEXCHARTS
+        */
+        // get colors array from the string
+        function getChartColorsArray(chartId) {
+            var colors = $(chartId).attr('data-colors');
+            var colors = JSON.parse(colors);
+            return colors.map(function(value){
+                var newValue = value.replace(' ', '');
+                if(newValue.indexOf('--') != -1) {
+                    var color = getComputedStyle(document.documentElement).getPropertyValue(newValue);
+                    if(color) return color;
+                } else {
+                    return newValue;
+                }
+            })
+        }
+        
+        // Detalhamentos dos Impostos
+        var barColors = getChartColorsArray("#rel_resumo_det_impostos_chart");
+        var options = {
+            chart: {
+                height: 350,
+                type: 'bar',
+                toolbar: {
+                    show: false,
+                }
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: true,
+                }
+            },
+            dataLabels: {
+                enabled: false
+            },
+            series: [{
+                data: rel_resumo_det_impostos_values
+            }],
+            colors: barColors,
+            grid: {
+                borderColor: '#f1f1f1',
+            },
+            yaxis: {
+                title: {
+                    text: 'TIPO ANTECIPADO',
+                    style: {
+                        fontWeight:  '500',
+                    },
+                }
+            },
+            xaxis: {
+                categories: ['ANTECIPADO_ESPECIAL', 'ANTECIPADO_DE_ENTRADAS', 'CEST_BASICA', 'MEDICAMENTOS', 'DIFERENCIAL DE ALÍQUOTA'],
+            },
+            tooltip: {
+                y: {
+                    formatter: function (val) {
+                        return "R$ " + val
+                    }
+                }
+            }
+        }
+        
+        var rel_resumo_det_impostos_chart = new ApexCharts(
+            document.querySelector("#rel_resumo_det_impostos_chart"),
+            options
+        );
+        rel_resumo_det_impostos_chart.render();
+        
+        // Valor Imposto/Mês
+        var columnColors = getChartColorsArray("#rel_resumo_imposto_mes_chart");
+        var options = {
+            chart: {
+                height: 350,
+                type: 'bar',
+                toolbar: {
+                    show: false,
+                }
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: false,
+                    columnWidth: '45%',
+                },
+            },
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                show: true,
+                width: 2,
+                colors: ['transparent']
+            },
+            series: [{
+                name: 'Mês anterior',
+                data: rel_resumo_imposto_mes_passado
+            },
+            {
+                name: 'Mês atual',
+                data: rel_resumo_imposto_mes_atual
+            }],
+            colors: columnColors,
+            xaxis: {
+                categories: ['Mes'],
+            },
+            yaxis: {
+                title: {
+                    text: 'VALOR',
+                    style: {
+                        fontWeight:  '500',
+                      },
+                }
+            },
+            grid: {
+                borderColor: '#f1f1f1',
+            },
+            fill: {
+                opacity: 1
+        
+            },
+            tooltip: {
+                y: {
+                    formatter: function (val) {
+                        return "R$ " + val
+                    }
+                }
+            }
+        }
+        
+        var rel_resumo_imposto_mes_chart = new ApexCharts(
+            document.querySelector("#rel_resumo_imposto_mes_chart"),
+            options
+        );
+        rel_resumo_imposto_mes_chart.render();
+        
+        // Diferença % Mes Atual/Anterior
+        var radialColors = getChartColorsArray("#rel_resumo_dif_mes_chart");
+        var options = {
+            series: rel_resumo_dif_mes_values,
+            chart: {
+                height: 350,
+                type: 'radialBar',
+                offsetY: -20,
+                sparkline: {
+                    enabled: true
+                }
+            },
+            plotOptions: {
+                radialBar: {
+                    startAngle: -90,
+                    endAngle: 90,
+                    track: {
+                        background: "#e7e7e7",
+                        strokeWidth: '97%',
+                        margin: 5,
+                        // margin is in pixels
+                        dropShadow: {
+                            enabled: true,
+                            top: 2,
+                            left: 0,
+                            color: '#999',
+                            opacity: 1,
+                            blur: 2
+                        }
+                    },
+                    dataLabels: {
+                        name: {
+                            show: false
+                        },
+                        value: {
+                            offsetY: -2,
+                            fontSize: '22px'
+                        }
+                    }
+                }
+            },
+            grid: {
+                padding: {
+                    top: -10
+                }
+            },
+            fill: {
+                type: 'gradient',
+                gradient: {
+                    shade: 'light',
+                    shadeIntensity: 0.4,
+                    inverseColors: false,
+                    opacityFrom: 1,
+                    opacityTo: 1,
+                    stops: [0, 50, 53, 91, 100],
+                    colorStops: [{
+                        color: '#edcd00',
+                        offset: 100
+                    }]
+                },
+            },
+            labels: ['Average Results'],
+        };
+    
+        var rel_resumo_dif_mes_chart = new ApexCharts(
+            document.querySelector("#rel_resumo_dif_mes_chart"),
+            options
+        );
+        rel_resumo_dif_mes_chart.render();
+        
+        function getData(startDate, endDate, empresas) {
+            $.ajax({
+                url: 'api/get_data_antecipados.php',
+                type: 'POST',
+                dataType: 'JSON',
+                data: {
+                    startDate: startDate,
+                    endDate: endDate,
+                    empresas: empresas
+                },
+                success: function(data) {
+                    // console.log(data);
+                    
+                    $('#table_ant_por_fornecedor_wrapper').empty();
+                    $('#table_ant_por_tipo_de_imposto_wrapper').empty();
+                    $('#table_ant_por_nota_wrapper').empty();
+                    $('#table_resumo_icms_antecipado_wrapper').empty();
+                    
+                    // destruir a tabela anterior, se existir
+                    if ($('#table_ant_por_fornecedor').treetable('destroy')) {
+                        // console.log('Tabela destruída');
+                    }
+                    
+                    // destruir a tabela anterior, se existir
+                    if ($('#table_ant_por_tipo_de_imposto').treetable('destroy')) {
+                        // console.log('Tabela destruída');
+                    }
+                    
+                    // destruir a tabela anterior, se existir
+                    if ($('#table_ant_por_nota').treetable('destroy')) {
+                        // console.log('Tabela destruída');
+                    }
+                    
+                    // destruir a tabela anterior, se existir
+                    if ($('#table_resumo_icms_antecipado').treetable('destroy')) {
+                        // console.log('Tabela destruída');
+                    }
+
+                    const ant_por_fornecedor = data["ANT. POR FORNECEDOR"];
+                    const ant_por_tipo_de_imposto = data["ANT. POR TIPO DE IMPOSTO"];
+                    const ant_por_nota = data["ANT. POR NOTA"];
+                    const resumo_icms_antecipado = data["RESUMO DA APURAÇÃO DO ICMS ANTECEDIDO"];
+                    
+                    /* ANT. POR FORNECEDOR */
+                    let count = 1;
+                    $.each(ant_por_fornecedor, function(key, val) {
+                        let ant_por_fornecedor_ncm = '';
+                        let ant_por_fornecedor_item_valor_bruto = 0;
+                        let ant_por_fornecedor_item_credito = 0;
+                        let ant_por_fornecedor_valor_imposto = 0;
+                    
+                        let empresa = key;
+                        let count_father = count;
+                        $('#table_ant_por_fornecedor_wrapper').append(`<tr data-tt-id="${count}">
+                                                                        <td>${empresa}</td>
+                                                                        <td id="ant_por_fornecedor_ncm_${count_father}"></td>
+                                                                        <td id="ant_por_fornecedor_item_valor_bruto_${count_father}"></td>
+                                                                        <td id="ant_por_fornecedor_item_credito_${count_father}"></td>
+                                                                        <td id="ant_por_fornecedor_valor_imposto_${count_father}"></td>
+                                                                    </tr>`);
+                        count++;
+                        $.each(val, function(key, val) {
+                            let nota = key;
+                            count_father1 = count;
+                            $('#table_ant_por_fornecedor_wrapper').append(`<tr data-tt-id="${count}" data-tt-parent-id="${count_father}">
+                                                                            <td>${nota}</td>
+                                                                            <td></td>
+                                                                            <td></td>
+                                                                            <td></td>
+                                                                            <td></td>
+                                                                        </tr>`);
+                            count++;
+                            $.each(val, function(key, val) {
+                                $.each(val, function(key, val) {
+                                    let tipo_ant = key;
+                                    count_father2 = count;
+                                    $('#table_ant_por_fornecedor_wrapper').append(`<tr data-tt-id="${count}" data-tt-parent-id="${count_father1}">
+                                                                                    <td>${tipo_ant}</td>
+                                                                                    <td></td>
+                                                                                    <td></td>
+                                                                                    <td></td>
+                                                                                    <td></td>
+                                                                                </tr>`);
+                                    count++;
+                                    $.each(val, function(key, val) {
+                                        let item = key;
+                                        let ncm = val.ncm;
+                                        let item_valor_bruto = val.item_valor_bruto;
+                                        let item_credito = val.item_credito;
+                                        let valor_imposto = val.valor_imposto;
+                                        
+                                        $('#table_ant_por_fornecedor_wrapper').append(`<tr data-tt-id="${count}" data-tt-parent-id="${count_father2}">
+                                                                                        <td>${item}</td>
+                                                                                        <td>${ncm}</td>
+                                                                                        <td>${item_valor_bruto}</td>
+                                                                                        <td>${item_credito}</td>
+                                                                                        <td>${valor_imposto}</td>
+                                                                                    </tr>`);
+                                        count++;
+                                        
+                                        ant_por_fornecedor_ncm = ncm;
+                                        ant_por_fornecedor_item_valor_bruto += item_valor_bruto;
+                                        ant_por_fornecedor_item_credito += item_credito;
+                                        ant_por_fornecedor_valor_imposto += valor_imposto;
+                                    });
+                                });
+                            });
+                        });
+                        
+                        $(`#ant_por_fornecedor_ncm_${count_father}`).text(ant_por_fornecedor_ncm);
+                        $(`#ant_por_fornecedor_item_valor_bruto_${count_father}`).text(ant_por_fornecedor_item_valor_bruto);
+                        $(`#ant_por_fornecedor_item_credito_${count_father}`).text(ant_por_fornecedor_item_credito);
+                        $(`#ant_por_fornecedor_valor_imposto_${count_father}`).text(ant_por_fornecedor_valor_imposto);
+                    });
+                    
+                    // chamar o plugin novamente
+                    $('#table_ant_por_fornecedor').treetable({
+                        expandable: true,
+                        searchable: true,
+                        searchField: 'empresa',
+                        pagination: true,
+                        perPage: 10,
+                        onNodeExpand: function() {
+                            // console.log('Node expanded');
+                        },
+                        onNodeCollapse: function() {
+                            // console.log('Node collapsed');
+                        }
+                    });
+                    
+                    /* ANT. POR TIPO DE IMPOSTO */
+                    count = 1;
+                    $.each(ant_por_tipo_de_imposto, function(key, val) {
+                        // console.log(key, val);
+                        let ant_por_tipo_de_imposto_ncm = '';
+                        let ant_por_tipo_de_imposto_num_nota = '';
+                        let ant_por_tipo_de_imposto_item_valor_bruto = 0;
+                        let ant_por_tipo_de_imposto_item_credito = 0;
+                        let ant_por_tipo_de_imposto_valor_imposto = 0;
+                        
+                        let tipo_ant = key;
+                        count_father = count;
+                        $('#table_ant_por_tipo_de_imposto_wrapper').append(`<tr data-tt-id="${count}">
+                                                                        <td>${tipo_ant}</td>
+                                                                        <td id="ant_por_tipo_de_imposto_ncm_${count_father}"></td>
+                                                                        <td id="ant_por_tipo_de_imposto_num_nota_${count_father}"></td>
+                                                                        <td id="ant_por_tipo_de_imposto_item_valor_bruto_${count_father}"></td>
+                                                                        <td id="ant_por_tipo_de_imposto_item_credito_${count_father}"></td>
+                                                                        <td id="ant_por_tipo_de_imposto_valor_imposto_${count_father}"></td>
+                                                                    </tr>`);
+                        count++;
+                        $.each(val, function(key, val) {
+                            // console.log(key, val);
+                            let item = key;
+                            let ncm = val.ncm;
+                            let num_nota = val.num_nota;
+                            let item_valor_bruto = val.item_valor_bruto;
+                            let item_credito = val.item_credito;
+                            let valor_imposto = val.valor_imposto;
+                            
+                            $('#table_ant_por_tipo_de_imposto_wrapper').append(`<tr data-tt-id="${count}" data-tt-parent-id="${count_father}">
+                                                                            <td>${item}</td>
+                                                                            <td>${ncm}</td>
+                                                                            <td>${num_nota}</td>
+                                                                            <td>${item_valor_bruto}</td>
+                                                                            <td>${item_credito}</td>
+                                                                            <td>${valor_imposto}</td>
+                                                                        </tr>`);
+                            count++;
+                            
+                            ant_por_tipo_de_imposto_ncm = ncm;
+                            ant_por_tipo_de_imposto_num_nota = num_nota;
+                            ant_por_tipo_de_imposto_item_valor_bruto += item_valor_bruto;
+                            ant_por_tipo_de_imposto_item_credito += item_credito;
+                            ant_por_tipo_de_imposto_valor_imposto += valor_imposto;
+                        });
+                        
+                        $(`#ant_por_tipo_de_imposto_ncm_${count_father}`).text(ant_por_tipo_de_imposto_ncm);
+                        $(`#ant_por_tipo_de_imposto_num_nota_${count_father}`).text(ant_por_tipo_de_imposto_num_nota);
+                        $(`#ant_por_tipo_de_imposto_item_valor_bruto_${count_father}`).text(ant_por_tipo_de_imposto_item_valor_bruto);
+                        $(`#ant_por_tipo_de_imposto_item_credito_${count_father}`).text(ant_por_tipo_de_imposto_item_credito);
+                        $(`#ant_por_tipo_de_imposto_valor_imposto_${count_father}`).text(ant_por_tipo_de_imposto_valor_imposto);
+                    });
+                    
+                    $('#table_ant_por_tipo_de_imposto').treetable({
+                        expandable: true,
+                        searchable: true,
+                        searchField: 'empresa',
+                        pagination: true,
+                        perPage: 10,
+                        onNodeExpand: function() {
+                            // console.log('Node expanded');
+                        },
+                        onNodeCollapse: function() {
+                            // console.log('Node collapsed');
+                        }
+                    });
+                    
+                    /* ANT. POR NOTA */
+                    $.each(ant_por_nota, function(key, val) {
+                        // console.log(key, val);
+                        let ant_por_nota_ncm = '';
+                        let ant_por_nota_item_valor_bruto = 0;
+                        let ant_por_nota_item_credito = 0;
+                        let ant_por_nota_valor_imposto = 0;
+                        
+                        let nota_num = key;
+                        let count_father = count;
+                        $('#table_ant_por_nota_wrapper').append(`<tr data-tt-id="${count}">
+                                                                    <td>${nota_num}</td>
+                                                                    <td id="ant_por_nota_ncm_${count}"></td>
+                                                                    <td id="ant_por_nota_item_valor_bruto_${count}"></td>
+                                                                    <td id="ant_por_nota_item_credito_${count}"></td>
+                                                                    <td id="ant_por_nota_valor_imposto_${count}"></td>
+                                                                </tr>`);
+                        count++;
+                        $.each(val, function(key, val) {
+                            // console.log(key, val);
+                            let tipo_ant = key;
+                            let count_father2 = count;
+
+                            $('#table_ant_por_nota_wrapper').append(`<tr data-tt-id="${count}" data-tt-parent-id="${count_father}">
+                                                                        <td>${tipo_ant}</td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                    </tr>`);
+                            count++;
+                            $.each(val, function(key, val) {
+                                // console.log(key, val);
+                                let item = key;
+                                let ncm = val.ncm;
+                                let item_valor_bruto = val.item_valor_bruto;
+                                let item_credito = val.item_credito;
+                                let valor_imposto = val.valor_imposto;
+
+                                $('#table_ant_por_nota_wrapper').append(`<tr data-tt-id="${count}" data-tt-parent-id="${count_father2}">
+                                                                            <td>${item}</td>
+                                                                            <td>${ncm}</td>
+                                                                            <td>${item_valor_bruto}</td>
+                                                                            <td>${item_credito}</td>
+                                                                            <td>${valor_imposto}</td>
+                                                                        </tr>`);
+                                count++;
+                                
+                                ant_por_nota_ncm = ncm;
+                                ant_por_nota_item_valor_bruto += item_valor_bruto;
+                                ant_por_nota_item_credito += item_credito;
+                                ant_por_nota_valor_imposto += valor_imposto;
+                            });
+                        });
+                        
+                        $(`#ant_por_nota_ncm_${count_father}`).text(ant_por_nota_ncm);
+                        $(`#ant_por_nota_item_valor_bruto_${count_father}`).text(ant_por_nota_item_valor_bruto);
+                        $(`#ant_por_nota_item_credito_${count_father}`).text(ant_por_nota_item_credito);
+                        $(`#ant_por_nota_valor_imposto_${count_father}`).text(ant_por_nota_valor_imposto);
+                    });
+                    
+                    // chamar o plugin novamente
+                    $('#table_ant_por_nota').treetable({
+                        expandable: true,
+                        searchable: true,
+                        searchField: 'empresa',
+                        pagination: true,
+                        perPage: 10,
+                        onNodeExpand: function() {
+                            // console.log('Node expanded');
+                        },
+                        onNodeCollapse: function() {
+                            // console.log('Node collapsed');
+                        }
+                    });
+                    
+                    /* RESUMO DA APURAÇÃO DO ICMS ANTECEDIDO */
+                    $.each(resumo_icms_antecipado, function(key, val) {
+                        // console.log(key, val);
+                        let resumo_icms_antecipado_valor_bruto = 0;
+                        let resumo_icms_antecipado_credito = 0;
+                        let resumo_icms_antecipado_valor_imposto = 0;
+                        let resumo_icms_antecipado_impostos_porce = 0;
+                        
+                        let tipo_ant = key;
+                        let count_father = count;
+                        $('#table_resumo_icms_antecipado_wrapper').append(`<tr data-tt-id="${count}">
+                                                                    <td>${tipo_ant}</td>
+                                                                    <td id="resumo_icms_antecipado_valor_bruto_${count}"></td>
+                                                                    <td id="resumo_icms_antecipado_credito_${count}"></td>
+                                                                    <td id="resumo_icms_antecipado_valor_imposto_${count}"></td>
+                                                                    <td id="resumo_icms_antecipado_impostos_porce_${count}"></td>
+                                                                </tr>`);
+                        count++;
+                        $.each(val, function(key, val) {
+                            // console.log(key, val);
+                            let ncm = val.ncm;
+                            let valor_bruto = val.valor_bruto;
+                            let credito = val.credito;
+                            let valor_imposto = val.valor_imposto;
+                            let impostos_porce = val.impostos_porce;
+
+                            $('#table_resumo_icms_antecipado_wrapper').append(`<tr data-tt-id="${count}" data-tt-parent-id="${count_father}">
+                                                                        <td>${ncm}</td>
+                                                                        <td>${valor_bruto}</td>
+                                                                        <td>${credito}</td>
+                                                                        <td>${valor_imposto}</td>
+                                                                        <td>${impostos_porce}</td>
+                                                                    </tr>`);
+                            count++;
+                            
+                            resumo_icms_antecipado_valor_bruto += valor_bruto;
+                            resumo_icms_antecipado_credito += credito;
+                            resumo_icms_antecipado_valor_imposto += valor_imposto;
+                            resumo_icms_antecipado_impostos_porce += impostos_porce;
+                        });
+                        
+                        $(`#resumo_icms_antecipado_valor_bruto_${count_father}`).text(resumo_icms_antecipado_valor_bruto);
+                        $(`#resumo_icms_antecipado_credito_${count_father}`).text(resumo_icms_antecipado_credito);
+                        $(`#resumo_icms_antecipado_valor_imposto_${count_father}`).text(resumo_icms_antecipado_valor_imposto);
+                        $(`#resumo_icms_antecipado_impostos_porce_${count_father}`).text(resumo_icms_antecipado_impostos_porce);
+                    });
+                    
+                    // chamar o plugin novamente
+                    $('#table_resumo_icms_antecipado').treetable({
+                        expandable: true,
+                        searchable: true,
+                        searchField: 'empresa',
+                        pagination: true,
+                        perPage: 10,
+                        onNodeExpand: function() {
+                            // console.log('Node expanded');
+                        },
+                        onNodeCollapse: function() {
+                            // console.log('Node collapsed');
+                        }
+                    });
+                
+                    /* CHART */
+                    rel_resumo_det_impostos_chart.updateSeries(data.chart.rel_resumo_det_impostos_chart);
+                    rel_resumo_imposto_mes_chart.updateSeries(data.chart.rel_resumo_imposto_mes_chart);
+                    rel_resumo_dif_mes_chart.updateSeries(data.chart.rel_resumo_dif_mes_chart);
+
+                    /* TOTAL */
+                    $('#total_produtos').text(data.total.total_produtos.toLocaleString('pt-BR', 2));
+                    $('#total_impostos').text(data.total.total_impostos.toLocaleString('pt-BR', 2));
+                    $('#total_credito').text(data.total.credito_icms.toLocaleString('pt-BR', 2));
+                    $('#proce_impostos').text(data.total.impostos_porce.toFixed(2).replace('.', ','));
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error('Erro na requisição AJAX: ' + textStatus + ' - ' + errorThrown);
+                }
+            });
+        }
+        
+        function search(input, table) {
+            var filter = $.trim(input.val()).toUpperCase();
+            var tr = table.find('tbody tr');
+        
+            tr.each(function() {
+                var td = $("td:first", this);
+                if (td) {
+                    var txtValue = td.text() || td.attr("data-text");
+                    if (txtValue !== undefined) {
+                        txtValue = txtValue.toString().toUpperCase();
+                        if (txtValue.indexOf(filter) > -1 && !$(this).attr("data-tt-parent-id")) {
+                            $(this).show();
+                        } else {
+                            $(this).hide();
+                        }
+                    }
+                }
+            });
+        }
+        
+        $(document).ready(function() {
+            var startDate = '';
+            var endDate = '';
+            var empresas = [];
+            
+            // obter referência ao elemento select_empresas]
+            const selectEmpresas = document.getElementById('select_empresas');
+            
+            // fazer requisição AJAX para a URL
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', 'https://codeskala.com.br/robotax/api_empresas.php');
+            xhr.onload = function() {
+                // atribuir HTML da resposta ao elemento select_empresas
+                selectEmpresas.innerHTML = xhr.responseText;
+            };
+            xhr.send();
+            
+            // Puxa as informações do Banco de Dados
+            getData(startDate, endDate, empresas);
+            
+            $('#select_empresas').on('change', function() {
+                let empresas = $(this).val();
+                let startDate = $('#date_inicio').val();
+                let endDate = $('#date_fim').val();
+                
+                getData(startDate, endDate, empresas);
+            });
+            
+            $('.search').on('keyup', function() {
+                var input = $(this);
+                var table = $($(this).data('table'));
+                
+                console.log(table);
+                
+                search(input, table);
+            });
+            
+            // Navegação entre as tabs
+            $("#nav_to_right").click(function() {
+                var current = $(".nav-card:visible");
+                if (current.attr("id") === "ant_por_fornecedor") {
+                    $("#ant_por_fornecedor").hide();
+                    $("#ant_por_tipo_de_imposto").show();
+                    $("#nav_to_left").attr("title", "ANTECIPAÇÃO POR FORNECEDOR");
+                    $(this).attr("title", "ANTECIPAÇÃO POR NOTA");
+    
+                    $("#dot_2").addClass("active");
+                    $("#dot_3").removeClass("active");
+                    $("#dot_1").removeClass("active");
+                    $("#dot_4").removeClass("active");
+                    
+                    $("#title").text("ANTECIPAÇÃO POR TIPO DE IMPOSTO");
+                } else if (current.attr("id") === "ant_por_tipo_de_imposto") {
+                    $("#ant_por_tipo_de_imposto").hide();
+                    $("#ant_por_nota").show();
+                    $("#nav_to_left").attr("title", "ANTECIPAÇÃO POR TIPO DE IMPOSTO");
+                    $(this).attr("title", "ANTECIPAÇÃO POR FORNECEDOR");
+    
+                    $("#dot_3").addClass("active");
+                    $("#dot_1").removeClass("active");
+                    $("#dot_2").removeClass("active");
+                    $("#dot_4").removeClass("active");
+                    
+                    $("#title").text("ANTECIPAÇÃO POR NOTA");
+                } else if (current.attr("id") === "ant_por_nota") {
+                    $("#ant_por_nota").hide();
+                    $("#ant_por_fornecedor").show();
+                    $("#nav_to_left").attr("title", "ANTECIPAÇÃO POR NOTA");
+                    $(this).attr("title", "ANTECIPAÇÃO POR TIPO DE IMPOSTO");
+    
+                    $("#dot_1").addClass("active");
+                    $("#dot_2").removeClass("active");
+                    $("#dot_3").removeClass("active");
+                    $("#dot_4").removeClass("active");
+                    
+                    $("#title").text("ANTECIPAÇÃO POR FORNECEDOR");
+                }
+            });
+            $("#nav_to_left").click(function() {
+                var current = $(".nav-card:visible");
+                if (current.attr("id") === "ant_por_nota") {
+                    $("#ant_por_nota").hide();
+                    $("#ant_por_tipo_de_imposto").show();
+                    $(this).attr("title", "ANTECIPAÇÃO POR FORNECEDOR");
+                    $("#nav_to_right").attr("title", "ANTECIPAÇÃO POR NOTA");
+    
+                    $("#dot_2").addClass("active");
+                    $("#dot_3").removeClass("active");
+                    $("#dot_1").removeClass("active");
+                    $("#dot_4").removeClass("active");
+                    
+                    $("#title").text("ANTECIPAÇÃO POR TIPO DE IMPOSTO");
+                } else if (current.attr("id") === "ant_por_tipo_de_imposto") {
+                    $("#ant_por_tipo_de_imposto").hide();
+                    $("#ant_por_fornecedor").show();
+                    $(this).attr("title", "ANTECIPAÇÃO POR NOTA");
+                    $("#nav_to_right").attr("title", "ANTECIPAÇÃO POR TIPO DE IMPOSTO");
+    
+                    $("#dot_1").addClass("active");
+                    $("#dot_2").removeClass("active");
+                    $("#dot_3").removeClass("active");
+                    $("#dot_4").removeClass("active");
+                    
+                    $("#title").text("ANTECIPAÇÃO POR FORNECEDOR");
+                } else if (current.attr("id") === "ant_por_fornecedor") {
+                    $("#ant_por_fornecedor").hide();
+                    $("#ant_por_nota").show();
+                    $(this).attr("title", "ANTECIPAÇÃO POR TIPO DE IMPOSTO");
+                    $("#nav_to_right").attr("title", "ANTECIPAÇÃO POR FORNECEDOR");
+    
+                    $("#dot_3").addClass("active");
+                    $("#dot_1").removeClass("active");
+                    $("#dot_2").removeClass("active");
+                    $("#dot_4").removeClass("active");
+                    
+                    $("#title").text("ANTECIPAÇÃO POR NOTA");
+                }
+            });
+            $("#nav_to_chart").click(function() {
+                var current = $(".nav-card:visible");
+                current.hide();
+                $("#resumo_icms_antecipado").show();
+                $(".btn-group").hide();
+                $("#nav_to_back").show();
+    
+                $("#dot_4").addClass("active");
+                $("#dot_1").removeClass("active");
+                $("#dot_2").removeClass("active");
+                $("#dot_3").removeClass("active");
+                
+                $("#title").text("RESUMO DA APURAÇÃO DO ICMS ANTECEDIDO");
+            });
+            $("#nav_to_back").click(function() {
+                var current = $(".nav-card:visible");
+                current.hide();
+                $("#ant_por_fornecedor").show();
+                $("#nav_to_back").hide();
+                $(".btn-group").show();
+    
+                $("#dot_4").removeClass("active");
+                $("#dot_1").addClass("active");
+                
+                $("#title").text("ANTECIPAÇÃO POR FORNECEDOR");
+            });
+            
+            // Navegação entre as tabs pelas bolinhas
+            $("#dot_1").click(function() {
+                $(this).addClass("active");
+                $("#dot_2").removeClass("active");
+                $("#dot_3").removeClass("active");
+                $("#dot_4").removeClass("active");
+    
+                $("#ant_por_nota").hide();
+                $("#ant_por_tipo_de_imposto").hide();
+                $("#ant_por_fornecedor").show();
+                $("#resumo_icms_antecipado").hide();
+    
+                $(".btn-group").show();
+                $("#nav_to_back").hide();
+    
+                $("#nav_to_left").attr("title", "ANTECIPAÇÃO POR NOTA");
+                $("#nav_to_right").attr("title", "ANTECIPAÇÃO POR TIPO DE IMPOSTO");
+                
+                $("#title").text("ANTECIPAÇÃO POR FORNECEDOR");
+            });
+            $("#dot_2").click(function() {
+                $(this).addClass("active");
+                $("#dot_1").removeClass("active");
+                $("#dot_3").removeClass("active");
+                $("#dot_4").removeClass("active");
+    
+                $("#ant_por_nota").hide();
+                $("#ant_por_fornecedor").hide();
+                $("#ant_por_tipo_de_imposto").show();
+                $("#resumo_icms_antecipado").hide();
+    
+                $(".btn-group").show();
+                $("#nav_to_back").hide();
+    
+                $("#nav_to_left").attr("title", "ANTECIPAÇÃO POR FORNECEDOR");
+                $("#nav_to_right").attr("title", "ANTECIPAÇÃO POR NOTA");
+                
+                $("#title").text("ANTECIPAÇÃO POR TIPO DE IMPOSTO");
+            });
+            $("#dot_3").click(function() {
+                $(this).addClass("active");
+                $("#dot_1").removeClass("active");
+                $("#dot_2").removeClass("active");
+                $("#dot_4").removeClass("active");
+    
+                $("#ant_por_fornecedor").hide();
+                $("#ant_por_tipo_de_imposto").hide();
+                $("#ant_por_nota").show();
+                $("#resumo_icms_antecipado").hide();
+    
+                $(".btn-group").show();
+                $("#nav_to_back").hide();
+    
+                $("#nav_to_left").attr("title", "ANTECIPAÇÃO POR TIPO DE IMPOSTO");
+                $("#nav_to_right").attr("title", "ANTECIPAÇÃO POR FORNECEDOR");
+                
+                $("#title").text("ANTECIPAÇÃO POR NOTA");
+            });
+            $("#dot_4").click(function() {
+                var current = $(".nav-card:visible");
+                current.hide();
+                $("#resumo_icms_antecipado").show();
+    
+                $(".btn-group").hide();
+                $("#nav_to_back").show();
+    
+                $("#dot_4").addClass("active");
+                $("#dot_1").removeClass("active");
+                $("#dot_2").removeClass("active");
+                $("#dot_3").removeClass("active");
+                
+                $("#title").text("RESUMO DA APURAÇÃO DO ICMS ANTECEDIDO");
+            });
+        });
+    </script>
+
+    <!-- VENDOR-SCRIPTS -->
+    <script src="../assets_relatorios/libs/jquery/jquery.min.js"></script>
+
+    <!-- Chosen -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
+
+    <script>
+        $(".chosen-select").chosen({
+            no_results_text: "Não houveram resultados, tente novamente"
+        })
+    </script>
+
+    <script src="../assets_relatorios/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets_relatorios/libs/metismenu/metisMenu.min.js"></script>
+    <script src="../assets_relatorios/libs/simplebar/simplebar.min.js"></script>
+    <script src="../assets_relatorios/libs/node-waves/waves.min.js"></script>
+    <script src="../assets_relatorios/libs/feather-icons/feather.min.js"></script>
+    <!-- pace js -->
+    <script src="../assets_relatorios/libs/pace-js/pace.min.js"></script>
+
+    <script src="../assets_relatorios/js/app.js"></script>
+    <!-- END VENDOR-SCRIPTS -->
+    
+    <!-- Plugins js-->
+    <script src="../assets_relatorios/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js"></script>
+    <script src="../assets_relatorios/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js"></script>
+
+    <!-- Required datatable js -->
+    <script src="../assets_relatorios/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="../assets_relatorios/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    
+    <!-- Buttons examples -->
+    <script src="../assets_relatorios/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="../assets_relatorios/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+    <script src="../assets_relatorios/libs/jszip/jszip.min.js"></script>
+    <script src="../assets_relatorios/libs/pdfmake/build/pdfmake.min.js"></script>
+    <script src="../assets_relatorios/libs/pdfmake/build/vfs_fonts.js"></script>
+    <script src="../assets_relatorios/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="../assets_relatorios/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="../assets_relatorios/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+    
+    <!-- Responsive examples -->
+    <script src="../assets_relatorios/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="../assets_relatorios/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+    
+    <!-- Sweet Alerts js -->
+    <script src="../assets_relatorios/libs/sweetalert2/sweetalert2.min.js"></script>
+    
+    <!-- treetable -->
+    <script src="../assets_relatorios/libs/jquery-treetable-master/jquery.treetable.js"></script>
+	<!-- END IMPORTAÇÕES SKALACODE -->
+</body>
+</html>

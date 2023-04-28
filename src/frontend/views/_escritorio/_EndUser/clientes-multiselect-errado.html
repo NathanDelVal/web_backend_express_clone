@@ -1,0 +1,1717 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="../images/icon/apple-icon-mezzomo.png">
+    <link rel="icon" type="image/png" href="../images/icon/favicon_mezzomo3.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>
+        Robotax: Gerênciar Clientes
+    </title>
+    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css"
+        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <!-- CSS Files -->
+    <link href="../assets/css/material-dashboard.min.css?v=2.1.2" rel="stylesheet" />
+    <!--local CSS -->
+    <link rel="stylesheet" type="text/css" href="../local/clientes.css">
+    <!-- <link href="../../public/local/plugins/dropzone/css/style_clientes.css" rel="stylesheet">-->
+    <script src="../assets/js/core/jquery-3.5.1.js"></script>
+
+    <link rel="stylesheet" href="../local/plugins/checkbox_filter/filter_multi_select.css">
+
+    
+
+</head>
+
+<body class="off-canvas-sidebar">
+    <div class="wrapper">
+        <!-- Navbar -->
+        <div class="sidebar" data-color="yellow" data-background-color="black"
+            data-image="../assets/img/contabeisbw.jpg">
+            <!--        Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"   Tip 2: you can also add an image using data-image tag    -->
+            <div class="sidebar-wrapper">
+                <ul class="nav">
+                    <!--CARD NO SIDE BAR - LOGO DO USÚARIO E NOME -->
+                    {{> escritorio/navbar_gerenciar}}
+                </ul>
+            </div>
+        </div>
+        <!--MAIN PANEL-->
+        <div class="main-panel">
+
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-transparent">
+                <div class="container-fluid">
+                    <div class="navbar-wrapper">
+                        <div class="navbar-minimize">
+                            <button id="minimizeSidebar" class="btn btn-just-icon btn-white btn-fab btn-round">
+                                <i class="material-icons text_align-center visible-on-sidebar-regular">more_vert</i>
+                                <i class="material-icons design_bullet-list-67 visible-on-sidebar-mini">view_list</i>
+                            </button>
+                        </div>
+                        <a class="navbar-brand" href="/gerenciar/clientes">Gerênciar Clientes</a>
+                    </div>
+
+                    {{> escritorio/menu_apps_back}} {{> escritorio/help_btn}}
+
+
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="navbar-toggler-icon icon-bar"></span>
+                        <span class="navbar-toggler-icon icon-bar"></span>
+                        <span class="navbar-toggler-icon icon-bar"></span>
+                    </button>
+                </div>
+            </nav>
+
+            <!-- Plugin for the momentJs  -->
+            <script src="../assets/js/plugins/moment.min.js"></script>
+            <!-- Plugin for the momentJs TRADUÇÕES LOCAIS  -->
+            <script src="../assets/js/plugins/moment-with-locales.js"></script>
+            <div class="sticky-top navbar-absolute">
+                {{> escritorio/testegratis}}
+            </div>
+            <!-- End Navbar -->
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header card-header-info2">
+                                    <h4 class="card-title">Tabela de Clientes</h4>
+                                    <p class="card-category">Edite e adicione clientes através dos botões de ações</p>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <div class="table-responsive box drag">
+                                                <table id="tabela-clientes"
+                                                    class="table display table-striped table-no-bordered table-hover"
+                                                    cellspacing="0" width="100%" style="width:100%">
+                                                    <thead>
+                                                        <tr class="table-header">
+                                                            <th width="44px">
+                                                                <div class="form-check">
+                                                                    <label class="form-check-label">
+                                                                        <input id="checkall" name="checkbox"
+                                                                            onchange="marcartodos()"
+                                                                            class="form-check-input form-check-input-blank"
+                                                                            type="checkbox" value="">
+                                                                        <span class="form-check-sign">
+                                                                            <span class="check"></span>
+                                                                        </span>
+                                                                    </label>
+                                                                </div>
+                                                            </th>
+                                                            <th>ID</th>
+                                                            <th class="text-center  min-width-80">Cliente</th>
+                                                            <th class="text-center  min-width-80">CNPJ</th>
+                                                            <th class="text-center  min-width-80">Regime Tributário</th>
+                                                            <th class="text-center  min-width-80">Unidade</th>
+                                                            <th class="text-center  min-width-80">Vencimento do
+                                                                Certificado
+                                                            </th>
+                                                            <th class="text-center  min-width-80">Situação</th>
+                                                            <th class="text-right td-actions" width="90px">
+                                                                <button id="tbl_th_btn_acumuladores"
+                                                                    name="tbl_th_btn_acumuladores" type="button"
+                                                                    class="btn btn-black" disabled>
+                                                                    <i class="material-icons">rule</i>
+                                                                </button>
+                                                                <button id="tbl_th_btn_editarselecionados"
+                                                                    name="tbl_th_btn_editarselecionados" type="button"
+                                                                    rel="tooltip" class="btn btn-warning" disabled>
+                                                                    <i class="material-icons">edit</i>
+                                                                </button>
+                                                                <button id="tbl_th_btn_adicionar"
+                                                                    name="tbl_th_btn_adicionar" type="button"
+                                                                    class="btn btn-success">
+                                                                    <i class="material-icons">playlist_add</i>
+                                                                </button>
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--FOOTER-->
+            {{> escritorio/footer_internal}}
+
+            <!-- MODAL - Modal_Cliente-->
+            <form id="update_form_cliente" method="post" action="/gerenciar/update-cliente">
+                <div class="modal fade" id="EditModal_Cliente" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Atualizar dados do usuário</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form">
+                                    <div class="row align-items-center">
+                                        <div class="col-lg-6">
+                                            <input id="id_modal" name="id_item" type="hidden">
+
+                                            <div class="col-md-12">
+                                                <h6 class="label-modal">Cliente (Razão Social)</h6>
+                                                <input id="cliente_modal" name="cliente" type="text"
+                                                    class="form-control" required>
+                                            </div>
+
+                                            <!--<  div class="col-md-12 cols-modal-clientes-update">-->
+                                            <!-- Col Esquerda -->
+                                            <div class="col-md-12" name="col-left">
+                                                <div class="col-md-6">
+                                                    <h6 class="label-modal">CNPJ</h6>
+                                                    <input id="cnpj_linha_modal" type="text" class="form-control"
+                                                        disabled>
+                                                    <input id="cnpj_linha_modal_hidden" name="cnpj" type="hidden"
+                                                        class="form-control">
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <h6 class="label-modal">Regime Tributário</h6>
+                                                    <select title='SELECIONE UMA OPÇÃO'
+                                                        class="form-control selectpicker" data-style="btn btn-link"
+                                                        id="regime_linha_modal" name="regime" type="text" required>
+                                                        <option value="Simples-Nacional">Simples-Nacional</option>
+                                                        <option value="Lucro Presumido">Lucro Presumido</option>
+                                                        <option value="Lucro Real">Lucro Real</option>
+                                                        <option value="CEI">CEI</option>
+                                                        <option value="Imune/Isentas">Imune/Isentas</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <h6 class="label-modal">Unidade (Cidade)</h6>
+                                                    <input id="unidade_linha_modal" name="unidade" type="text"
+                                                        class="form-control" required>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <h6 class="label-modal">Situação <em> (obrigatório)</em></h6>
+                                                    <div class="form-check form-check-radio">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="radio" name="situacao"
+                                                                value="Ativa" id="situacao_ativa" required>
+                                                            Ativa
+                                                            <span class="circle">
+                                                                <span class="check"></span>
+                                                            </span>
+                                                        </label>
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="radio" name="situacao"
+                                                                value="Inativa" id="situacao_inativa">
+                                                            Inativa
+                                                            <span class="circle">
+                                                                <span class="check"></span>
+                                                            </span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <!-- Col Esquerda -->
+                                        <!-- Col Direita -->
+                                        <div class="col-lg-6">
+                                            <div class="col-lg-12">
+                                                <div class="row justify-content-center targetclear"
+                                                    onclick="certificado(this)" onchange="validarCertificado(this)">
+                                                    <div class="CERTmsg areaClick">
+                                                        <h5 class="clickAqui">Certificado Digital
+                                                        </h5>
+                                                        <label class="clickAqui"> (Clique para Inserir)
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <input class="InputUploader" type="file" name="file"
+                                                    accept=".pfx,application/x-pkcs12">
+                                            </div>
+                                            <div class="col-md-12">
+                                                <h6 class="label-modal">Senha Certificado</h6>
+                                                <input id="senha_cd_linha_modal" name="senhaCertificado" type="password"
+                                                    class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Col Direita -->
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn" data-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn" id="btn_salvar_modal">SALVAR</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- MODAL - Aprovar_Itens Modal - FIM-->
+
+
+    <!-- MODAL - UPDATE_Multiplos_Itens-->
+    <form id="update_form_cliente_multiplos" method="post" action="/gerenciar/update-cliente-multiplos">
+        <div class="modal fade" id="EditModal_Clientes_Multiplos" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Cuidado ao Preencher</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+
+                            <input id="ids_modal_multiplos" name="ids_multiplos" type="hidden">
+
+                            <div class="col-md-12">
+                                <h6 class="label-modal">Regime Tributário</h6>
+                                <select title='SELECIONE UMA OPÇÃO' class="form-control selectpicker"
+                                    data-style="btn btn-link" id="regime_linha_modal2" name="regime" type="text">
+                                    <option value="Simples-Nacional">Simples-Nacional</option>
+                                    <option value="Lucro Presumido">Lucro Presumido</option>
+                                    <option value="Lucro Real">Lucro Real</option>
+                                    <option value="CEI">CEI</option>
+                                    <option value="Imune/Isentas">Imune/Isentas</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-12">
+                                <h6 class="label-modal">Situação <em> (obrigatório)</em></h6>
+                                <div class="form-check form-check-radio">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" name="situacao" value="Ativa"
+                                            required>
+                                        Ativa
+                                        <span class="circle">
+                                            <span class="check"></span>
+                                        </span>
+                                    </label>
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" name="situacao" value="Inativa">
+                                        Inativa
+                                        <span class="circle">
+                                            <span class="check"></span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn" id="salvardata">SALVAR</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- MODAL - UPDATE_Multiplos_Itens Modal - FIM-->
+
+
+    <!-- MODAL - INSERIR_InserirClientes-->
+    <div class="modal fade" id="EditModal_InserirClientes" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <!-- style="width:80%!important; margin-left:auto!important; margin-right:auto!important; margin-top:5%;"> -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"><b>Inserir Cliente</b></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!--BOTAO ADICIONAR CAMPO-->
+                    <div class="row">
+                        <button type="button" id="cliente-excel" class="btn ml-auto mr-auto col-lg-2">Inserir via
+                            Excel</button>
+                    </div>
+                    <div class="padding-btn-left">
+                        <button id="addinputuser" name="tbl_th_btn_adicionar" type="button" rel="tooltip"
+                            class="btn btn-sm btn-success ">
+                            <i class="material-icons">add</i>
+                        </button>
+                    </div>
+                    <form id="form_inserir_empresas" method="POST" action="/cadastro-empresa/efetuar-cadastro-empresa"
+                        enctype="multipart/form-data" style="max-height:none!important;">
+                        <div id="dinamicAppend">
+                            <!--1º CARD-->
+                            <div id="card_InserirClientes" class="card"
+                                style="padding:20px; box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.157);">
+                                <!--12COLUNAS-->
+                                <!--<  div class="row">-->
+                                <!--12colunas CARD-->
+                                <!--<  div class="col-lg-12">-->
+                                <div class="row align-items-center">
+                                    <div class="col-sm-11 col-md-11 col-lg-11">1#
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <div class="row">
+
+                                            <div class="col-md-4">
+                                                <h6 class="label-modal">CNPJ</h6>
+                                                <input id="name_cnpj" name="cnpj" type="number" step="any"
+                                                    class="form-control" placeholder="Digite seu CNPJ"
+                                                    autocomplete="off" onchange="onChangeCNPJ(this)" required>
+                                                <!--onchange="getByCNPJ(this)"-->
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <h6 class="label-modal">Cliente (Razão Social)
+                                                </h6>
+                                                <input id="name_cliente" name="cliente" type="text" class="form-control"
+                                                    placeholder="Digite seu Nome" autocomplete="off"
+                                                    onkeyup='var start = this.selectionStart; var end = this.selectionEnd; this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);'
+                                                    required>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <h6 class="label-modal">Unidade (Cidade)</h6>
+                                                <input id="name_unidade" name="unidade" type="text" class="form-control"
+                                                    placeholder="Informe sua Cidade" autocomplete="off"
+                                                    onkeyup='var start = this.selectionStart; var end = this.selectionEnd; this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);'
+                                                    required>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <h6 class="label-modal">Regime Tributário</h6>
+                                                <select id="regime" title="SELECIONE" class="form-control  selectpicker"
+                                                    data-style="btn" name="regime" type="text" required>
+                                                    <option value='Simples-Nacional'>
+                                                        Simples-Nacional</option>
+                                                    <option value='Lucro Presumido'>Lucro
+                                                        Presumido</option>
+                                                    <option value='Lucro Real'>Lucro Real
+                                                    </option>
+                                                    <option value='CEI'>CEI</option>
+                                                    <option value='Imune/Isentas'>Imune/Isentas
+                                                    </option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <h6 class="label-modal">Situação
+                                                    <em>(obrigatório)</em>
+
+                                                </h6>
+                                                <div class="form-check form-check-radio">
+                                                    <label class="form-check-label">
+                                                        <input id="name_situacao_ativa" class="form-check-input "
+                                                            type="radio" name="situacao[0]" value="Ativa"
+                                                            autocomplete="off" required checked>
+                                                        Ativa
+                                                        <span class="circle">
+                                                            <span class="check"></span>
+                                                        </span>
+                                                    </label>
+                                                    <label class="form-check-label">
+                                                        <input id="name_situacao_inativa" class="form-check-input "
+                                                            type="radio" name="situacao[0]" value="Inativa"
+                                                            autocomplete="off">
+                                                        Inativa
+                                                        <span class="circle">
+                                                            <span class="check"></span>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <h6 class="label-modal">Senha do Certificado Digital
+                                                </h6>
+                                                <input id="name_senha" name="senhacert" type="password"
+                                                    class="form-control" placeholder="Digite sua senha"
+                                                    autocomplete="off" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3">
+                                        <div class="col-lg-12">
+                                            <div class="row justify-content-center targetclear"
+                                                onclick="certificado(this)" onchange="validarCertificado(this)">
+                                                <div class="CERTmsg areaClick">
+                                                    <h5 class="clickAqui">Certificado Digital
+                                                    </h5>
+                                                    <label class="clickAqui"> (Clique para Inserir)
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <input class="InputUploader" type="file" name="file"
+                                                accept=".pfx,application/x-pkcs12">
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--12colunas CARD-->
+                        <div class="modal-footer">
+                            <div id="actions" class="row">
+                                <div id="actions" class="col-lg-12 centralizar-h">
+                                    <button id="cancel" type="reset" class="btn cancel">LIMPAR FORMULÁRIO</button>
+                                    <button type="submit" id="start" class="btn start">SALVAR</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!--FIM DO 1º CARD-->
+        </div>
+    </div>
+
+    <div class="modal fade" id="EditModal_InserirClientesExcel" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel"><b>Inserir Clientes via Excel</b></h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-lg-12">
+                        <div class="row justify-content-center targetclear" onclick="certificado(this)"
+                            onchange="validarCertificado(this)">
+                            <div class="CERTmsg areaClick">
+                                <h5 class="clickAqui">Clique ou arraste para inserir o formulário em excel
+                                </h5>
+                                <label class="clickAqui"> (Clique para Inserir)
+                                </label>
+                            </div>
+                            <input class="InputUploader" type="file" name="file" accept=".pfx,application/x-pkcs12">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="col-lg-12 text-center">
+                        <button type="submit" class="btn" id="baixar_modelo">Baixar Modelo</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal_mobile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <form method="POST" action="" id="mobile">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title text-center" id="exampleModalLabel">Acesso ao Aplicativo
+                        </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <h5 class="text-center" style="font-weight: bold;">Enviar e-mail para cliente cadastrar
+                                acesso ao aplicativo Mobile?</h5>
+                        </div>
+
+                        <div class="input-group form-group input-card-border card-busca">
+                            <label class="bmd-label-floating">Informe o email do cliente</label>
+                            <input id="input_mobile" name="input_mobile" type="text" class="form-control"
+                                autocomplete="off" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn" id="enviar">Enviar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="modal fade" id="modal_acumuladores" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <form method="POST" action="" id="aculumadores" class="form-acumulador">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title text-center" id="exampleModalLabel">Acumuladores</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="container" method="GET" id="form">
+                            <div class="row justify-content-center">
+                                <div id="area_categoria" class="col-lg-3 selectblack">
+                                    <select multiple name="select_categoria" id="select_categoria" class="">
+
+                                    </select>
+                                </div>
+
+                                <div id="area_cfop" class="col-lg-3 selectblack">
+                                    <select multiple name="select_cfop" id="select_cfop" class="">
+                                    </select>
+                                </div>
+
+                                <div id="area_tipo_antecipado" class="col-lg-3 selectblack">
+                                    <select multiple name="select_tipo_antecipado" id="select_tipo_antecipado" class="">
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer mt-4">
+                        <div class="row">
+                            <div class="col-lg-4 text-right">
+                                <button type="submit" class="btn btn-black">Atualizar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!--Correção do Violation Scroll non-passive event-->
+    <script src=" ../local/plugins/fix-non-passive.js"></script>
+    <!--   Core JS Files   -->
+    <script src="../assets/js/core/popper.min.js"></script>
+    <script src="../assets/js/core/bootstrap-material-design.js"></script>
+    <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+    <!-- Forms Validations Plugin -->
+    <script src="../assets/js/plugins/jquery.validate.min.js"></script>
+    <!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
+    <script src="../assets/js/plugins/jquery.bootstrap-wizard.js"></script>
+    <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+    <script src="../assets/js/plugins/bootstrap-selectpicker.js"></script>
+    <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+    <script src="../assets/js/plugins/bootstrap-datetimepicker.min.js"></script>
+    <!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
+    <script src="../assets/js/plugins/jquery.dataTables.min.js"></script>
+
+    <!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
+    <script src="../assets/js/plugins/bootstrap-tagsinput.js"></script>
+    <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+    <script src="../assets/js/plugins/jasny-bootstrap.min.js"></script>
+    <!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
+    <script src="../assets/js/plugins/fullcalendar.min.js"></script>
+    <!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
+    <script src="../assets/js/plugins/jquery-jvectormap.js"></script>
+    <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+    <script src="../assets/js/plugins/nouislider.min.js"></script>
+    <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+    <!-- Library for adding dinamically elements -->
+    <script src="../assets/js/plugins/arrive.min.js"></script>
+    <!-- Chartist JS -->
+    <script src="../assets/js/plugins/chartist.min.js"></script>
+    <!--  Notifications Plugin    -->
+    <script src="../assets/js/plugins/bootstrap-notify.js"></script>
+
+    <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="../assets/js/material-dashboard.min.js?v=2.1.2" type="text/javascript"></script>
+
+
+    <!--SWEET ALERT-->
+    <!--LOCAL-->
+    <script src="../local/plugins/sweetalert/js/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="../local/plugins/sweetalert/css/sweetalert2.min.css" id="theme-styles">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <script src="../local/plugins/drag/drag.js"></script>
+    <!--local-->
+    <!-- AJAX JQUERY POST FORM  <script src="../local/metodos/post/update_modal_aprovar_itens.js"></script> -->
+    <!-- AJAX JQUERY POST UPDATE update_form_pendente MODAL  <script src="../local/metodos/post/update_input_aprovar_notas.js"></script> -->
+
+    <!--MASK FOR FORMS-->
+    <script src="../local/plugins/mask_input/jquery.maskedinput.js"></script>
+
+    <!--  SELECTED2 CLIPBOARD -->
+    <script src="../local/plugins/dataTables/selected2clipboard.js"></script>
+
+
+    <!-- HANDLE SELECT BoxeS ON TABLE  <script src="../assets/js/plugins/datatables_select_rows.js"></script> -->
+
+    <!-- HANDLE CheckBoxes  <script src="../local/metodos/post/update_aprovar_itens_selecionados.js" type="text/javascript"> </script>-->
+
+    <!-- HANDLE CheckBoxes  <script src="../local/metodos/post/update_aprovar_itens_selecionados.js" type="text/javascript"> </script>-->
+
+    <script src="../local/plugins/checkbox_filter/filter-multi-select-bundle.min.js"></script>
+
+
+    <!-- ACTIVE NAV-ITEM -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //ACTIVE NAV-ITEM
+            var navs = document.getElementsByClassName('nav-item');
+            for (var x = 1; x < navs.length; x++) {
+                if (navs[x].childNodes[1].attributes[1].nodeValue == location.pathname) {
+                    var nav = navs[x]
+                    $(nav).addClass('active')
+                }
+            }
+        });
+    </script>
+
+
+
+    <script>
+        /*
+ $('#addinputuser').click(function () {
+     $('.form').append(
+       '< div class="row">' +
+       '< div class="col-md-4">' +
+       ' <h6 class="label-modal">Nome do Usuário</h6>' +
+       '<input id="mva_7_modal_multiplos" name="cliente" type="text" class="form-control" autocomplete="off" required>' +
+       '<  /div>' +
+
+       '< div class="col-md-8">' +
+       '<h6 class="label-modal">Email</h6>' +
+       '<input id="mva_12_linha_modal_multiplos" name="email" type="email" class="form-control" autocomplete="off" required>' +
+       '< /div>' +
+       '< /div>'
+     );
+ });
+                                                                          */
+    </script>
+
+
+
+    <script>
+        var TabelaClientes = //TABELA E SUAS CONFIGS
+            //____________________________________DOCUMENT READY_________________________________________
+            $(document).ready(function () {
+                //-------------------------------------------------------------------DEFINIÇPÇÕES DA TABELA
+                TabelaClientes = $('#tabela-clientes').DataTable({
+                    destroy: true,
+                    deferRender: false,
+                    processing: true,
+                    ajax: {
+                        url: '/gerenciar/get-clientes',
+                        type: 'GET',
+                        dataSrc: function (data) {
+                            return JSON.parse(data.dataTable)
+                        }
+                    },
+                    columns: [{
+                        defaultContent: '<div class="form-check">' +
+                            '<label class= "form-check-label" >' +
+                            '<input name="checkbox" class="form-check-input checkinput" type="checkbox" value="" onchange="marcados(this.checkbox)">' +
+                            '<span class="form-check-sign">' +
+                            '<span class="check"></span>' +
+                            '</span>' +
+                            '</label> ' +
+                            '</div> '
+                    }, //CHECKBOXES
+                    {
+                        data: "id_empresa"
+                    }, //id (hidden)
+                    {
+                        data: "cliente"
+                    }, //Numero do Chamado
+                    {
+                        data: "cnpj"
+                    }, //Status
+                    {
+                        data: "regime_tributario"
+                    }, //DATA DE ABERTURA - INSERIDO , type: "date-eu"
+                    {
+                        data: "unidade"
+                    }, {
+                        data: "expiration_date"
+                    }, {
+                        data: "situacao"
+                    }, {
+                        data: 'erp',
+                        render: function (data, type, row) {
+                            var tdActions = ''
+                            if (data == 'Dominio' || data == 'Questor') {
+                                tdActions += '<button id="tbl_td_btn_acumuladores" name="tbl_td_btn_acumuladores" type="button" rel="tooltip" class= "btn btn-black" disabled> <i class="material-icons">rule</i> </button >'
+                            }
+                            tdActions += '<button id="tbl_td_btn_editarlinha" name="tbl_td_btn_editarlinha" type="button" rel="tooltip" class= "btn btn-warning" disabled>' +
+                                '<i class="material-icons">edit</i>' +
+                                '</button >' +
+                                '<button id="tbl_td_btn_mobile" name="tbl_td_btn_mobile" type="button" rel="tooltip" class= "btn btn-success">' +
+                                '<i class="material-icons">phone_iphone</i>' +
+                                '</button >'
+                            return tdActions
+                        }
+                    }
+                    ],
+                    fixedHeader: {
+                        header: true,
+                        footer: true
+                    },
+                    select: {
+                        style: 'os',
+                        items: 'cell'
+                    },
+                    dom: 'Blftip',
+                    buttons: [{
+                        extend: 'excel',
+                        text: 'Exportar'
+                    }],
+                    pagingType: "full_numbers",
+                    lengthMenu: [
+                        [20, 25, 50, -1],
+                        [20, 25, 50, "Todos"]
+                    ],
+                    responsive: false,
+                    language: {
+                        "url": "../assets/js/plugins/dataTables.ptbr.lang",
+                        search: "_INPUT_",
+                        searchPlaceholder: "",
+                    },
+                    columnDefs: [{
+                        sClass: "hideIdTable",
+                        "aTargets": 1
+                    }, //id visivelmente oculto (presente)
+                    {
+                        orderable: false,
+                        targets: [0, 8]
+                    }, {
+                        targets: 8,
+                        className: 'td-actions'
+                    }, {
+                        targets: [0, 1, 2, 3, 4, 5, 6, 7],
+                        className: 'text-center'
+                    }
+                    ],
+                    order: [
+                        [2, 'asc']
+                    ],
+                    rowCallback: function (row, data) {
+
+                        $(row).find("button[name='tbl_td_btn_editarlinha']").prop('disabled', false);
+                        $(row).find("button[name='tbl_td_btn_acumuladores']").prop('disabled', false);
+
+                        var elementCheckBoxBody = $(row).find("input[name='checkbox']");
+                        //--------------------------------Habilita botão alterar data se algum check box estiver selecionado & desabilita os botões dos rows
+                        elementCheckBoxBody.on("click", function () {
+                            //Habilita o botão EDITAR MARCADOS (HEADER) se algum check box estiver selecionado - disabled = true
+                            $("button[name='tbl_th_btn_editarselecionados']").prop('disabled', !$("input[name='checkbox']:checked").length);
+                            $("button[name='tbl_th_btn_acumuladores']").prop('disabled', !$("input[name='checkbox']:checked").length);
+
+                            //Desabilita os botões editar linha se algum check box estiver selecionado - disabled = true
+                            $("button[name='tbl_td_btn_editarlinha']").prop('disabled', $("input[name='checkbox']:checked").length);
+                            $("button[name='tbl_td_btn_acumuladores']").prop('disabled', $("input[name='checkbox']:checked").length);
+                            //Habilita o botão VALIDAR marcados (HEADER) se algum check box estiver selecionado - disabled = true
+                            // $("button[name='tbl_th_btn_adicionar']").prop('disabled', !$("input[name='checkbox']:checked").length);
+                        })
+
+
+
+                    }
+                });
+
+                //--------------------------------------------------------------------MASK PARA FORMULÁRIOS
+                jQuery(function ($) {
+                    $("#datamodal").mask("99/99/9999", {
+                        placeholder: "DD/MM/AAAA"
+                    });
+                });
+
+            });
+        //_________________________________________________________________________________________x
+
+        //_______________________________________BOTÕES DE AÇÕES_____________________________________________
+        //---------------------------------------------------------------OUVINTE DO BOTÃO EDITAR / ABRE MODAL
+        $(document).on('click', '#tbl_td_btn_editarlinha', function (e) {
+            e.preventDefault;
+            var currentRow = $(this).closest('tr').find('td');
+            const id_linha = currentRow[1].textContent
+            const cliente_item_linha = currentRow[2].textContent
+            const cnpj_linha = currentRow[3].textContent
+            const regime_linha = currentRow[4].textContent
+            const unidade_linha = currentRow[5].textContent
+            const situacao_linha = currentRow[6].textContent
+
+            $('#id_modal').val(id_linha);
+            $('#cliente_modal').val(cliente_item_linha);
+            $('#cnpj_linha_modal').val(cnpj_linha);
+            $('#cnpj_linha_modal_hidden').val(cnpj_linha);
+
+            $('#regime_linha_modal').val(regime_linha);
+
+            $('#regime_linha_modal').change();
+            $('#unidade_linha_modal').val(unidade_linha);
+
+            if (situacao_linha == 'Ativa') {
+                $('#situacao_ativa').prop('checked', true);
+            } else if (situacao_linha == 'Inativa') {
+                $('#situacao_inativa').prop('checked', true);
+            }
+
+            //$(this).attr("placeholder", "Type your answer here");
+            $('#EditModal_Cliente').modal('show');
+        });
+
+
+        //---------------------------------------------------------------OUVINTE DO BOTÃO EDITAR ITENS / ABRE MODAL
+        $(document).on('click', '#tbl_th_btn_editarselecionados', function (e) {
+            e.preventDefault;
+            const ids_linha = itens_selecionados
+
+            $('#ids_modal_multiplos').val(ids_linha);
+            //$(this).attr("placeholder", "Type your answer here");
+            $('#EditModal_Clientes_Multiplos').modal('show');
+        });
+
+        $(document).on('click', '#tbl_td_btn_mobile', function (e) {
+            e.preventDefault;
+            $('#modal_mobile').modal('show');
+        });
+
+        $(document).on('click', '#tbl_th_btn_acumuladores', function (e) {
+            e.preventDefault;
+            $('#modal_acumuladores').modal('show');
+        });
+        $(document).on('click', '#tbl_td_btn_acumuladores', function (e) {
+            e.preventDefault;
+            $('#modal_acumuladores').modal('show');
+        });
+
+
+
+        //---------------------------------------------------------------OUVINTE DO BOTÃO ADICIONAR USUÁRIOS / ABRE MODAL
+        $(document).on('click', '#tbl_th_btn_adicionar', function (e) {
+            e.preventDefault;
+
+            $('#EditModal_InserirClientes').modal('show');
+        });
+
+        $(document).on('click', '#cliente-excel', function (e) {
+            e.preventDefault;
+
+            $('#EditModal_InserirClientesExcel').modal('show');
+        });
+
+        //____________________________________BOTÃO SALVAR MODAL_______________________________________
+        //--------------------------------------------------------------AJAX POST DO BOTÃO SALVAR MODAL UPDATE CLIENTE
+        $("#update_form_cliente").submit(function (e) {
+            e.preventDefault(); //prevent default action
+            var form = $('#update_form_cliente')[0];
+            var data = new FormData(form)
+
+            var post_url = $(this).attr("action"); //get form action url
+            var request_method = $(this).attr("method"); //get form GET/POST method
+
+
+            //var form_data = $(this).serialize(); //Encode form elements for submission
+            //console.log("form_data AJAX")
+            //console.log(form_data);
+            $.ajax({
+                url: post_url,
+                type: request_method,
+                data: data,
+                enctype: 'multipart/form-data',
+
+                processData: false, // Important!
+                contentType: false,
+                cache: false
+            }).done(function (response) { //
+                //$("#server-results").html(response);
+                var gif = "";
+                if (response == "Dados atualizados!") {
+                    gif = "success";
+                }
+                if (response == "Erro ao gravar novos dados!") {
+                    gif = "warning";
+                }
+                Swal.fire({
+                    position: 'center',
+                    icon: gif,
+                    title: response,
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+                setTimeout(function () {
+                    modal_hide_Single();
+                    //reloadPage();
+                }, 2000);
+                window.reloadPage();
+            });
+        });
+        //----------------------------------------------------------------------------------------x
+
+
+        //--------------------------------------------------------------AJAX POST DO BOTÃO SALVAR MODAL UPDATE MULTIPLOS CLIENTES
+        $("#update_form_cliente_multiplos").submit(function (evm) {
+            evm.preventDefault(); //prevent default action
+            var post_url = $(this).attr("action"); //get form action url
+            var request_method = $(this).attr("method"); //get form GET/POST method
+            var form_data = $(this).serialize(); //Encode form elements for submission
+            //console.log("form_data AJAX")
+            //console.log(form_data);
+            $.ajax({
+                async: "false",
+                url: post_url,
+                type: request_method,
+                data: form_data
+            }).done(function (response) { //
+                //$("#server-results").html(response);
+                var gif = "";
+                if (response == "Dados atualizados!") {
+                    gif = "success";
+                }
+                if (response == "Erro ao gravar novos dados!") {
+                    gif = "waning";
+                }
+                if (response == "Tipo Antecipado das linhas selecionadas foram atualizado!") {
+                    gif = "success";
+                }
+                if (response == "Erro ao atualizar Tipo Antecipado!") {
+                    gif = "waning";
+                }
+                Swal.fire({
+                    position: 'center',
+                    icon: gif,
+                    title: response,
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+                setTimeout(function () {
+                    modal_hide_Multiplos();
+                    reloadPage();
+                }, 2000);
+            });
+        });
+        //----------------------------------------------------------------------------------------x
+
+
+
+        //--------------------------------------------------------------AJAX POST DO BOTÃO SALVAR MODAL INSERT MULTIPLOS CLIENTES
+        $("#form_inserir_empresas").submit(function (e) {
+            e.preventDefault(); //prevent default action
+
+            var form = $('#form_inserir_empresas')[0];
+            var data = new FormData(form);
+
+
+            var post_url = $(this).attr("action"); //get form action url
+            var request_method = $(this).attr("method"); //get form GET/POST method
+            //console.log("enctype AJAX ", $(this).attr("enctype"))
+
+            $.ajax({
+                url: post_url,
+                type: request_method,
+                data: data,
+                enctype: 'multipart/form-data',
+
+                processData: false, // Important!
+                contentType: false,
+                cache: false
+            }).done(function (response) { //
+                //console.log("resposta = ", response)
+                //$("#server-results").html(response);
+                var gif = "";
+                var Clientes = [];
+
+
+                //_______________________________________________________________________________Limpando formulario
+                //foreach para limpar form
+                $(".CERTmsg.areaClick").each(function (index, element) {
+                    $(element).empty().prepend('<h5 class="clickAqui">Certificado Digital</h5><label class="clickAqui"> (Clique para Inserir) </label>')
+                })
+                $('.targetclearx').each(function (index, element) {
+                    if (element) {
+                        $(element).click()
+                    }
+                })
+                $('#regime').change()
+                $('#cancel').click()
+                //_______________________________________________________________________________Limpando formulario
+
+                if (response.EmpresasExistentes) {
+                    if (response.EmpresasExistentes.length != 0) {
+                        gif = "warning";
+                        if (response.EmpresasExistentes.length > 1) {
+                            for (var i = 0; i < response.EmpresasExistentes.length; i++) {
+                                Clientes.push(`\n '${response.EmpresasExistentes[i]}`)
+                            }
+                            response = 'Os seguintes clientes ' + Clientes + ' \n não foram inseridos pois já haviam sido cadastrados anteriormente.'
+                        } else {
+                            response = "O cliente " + response.EmpresasExistentes + ' não foi inserido pois já estava cadastrado.';
+
+                        }
+                    }
+                }
+
+                if (response == "Cliente inserido com sucesso!") {
+                    gif = "success";
+                }
+                if (response == "Clientes inseridos com sucesso!") {
+                    gif = "success";
+                }
+                if (response == "Erro ao inserir novo cliente. Tente Novamente!") {
+                    gif = "warning";
+                }
+                if (response == "Erro ao inserir novos clientes. Tente Novamente!") {
+                    gif = "warning";
+                }
+                if (response == "Você não possui as permissões necessárias!") {
+                    gif = "warning";
+                }
+
+                //console.log("Clientes ", Clientes)
+
+                Swal.fire({
+                    position: 'center',
+                    icon: gif,
+                    title: response,
+                    showConfirmButton: false,
+                    timer: 0
+                });
+
+                setTimeout(function () {
+                    //modal_hide_Multiplos();
+                    //reloadPage();
+                }, 4000);
+
+            });
+        });
+        //----------------------------------------------------------------------------------------x
+
+
+
+
+        //PEGA O ID DOS ITENS MARCADOS-----------------------------------------------
+        var itens_selecionados = [];
+
+        function marcados(temp) {
+
+            //console.log("marcados?")
+            itens_selecionados = [];
+            $('#tabela-clientes :checkbox:checked').each(function (index) {
+                var currentRow = this.parentNode.parentNode.parentNode.parentNode;
+                var closestTr = currentRow.getElementsByTagName("td")[1];
+                //var a = closestTr.className.textContent;
+                if (typeof closestTr !== "undefined") {
+                    itens_selecionados.push(closestTr.textContent);
+                }
+                //console.log("marcados????")
+            });
+            //console.log("quais itens: ");
+            //console.log(itens_selecionados);
+        }
+
+        //SELECIONAR TODOS OS CHECK BOXs VISIVEIS
+        function marcartodos() {
+            $("#checkall").each(function () {
+                $(".form-check-input:visible").prop("checked", $(this).prop("checked"))
+                if (checkall.checked == true) {
+                    marcados();
+                }
+                //console.log("MARQUEI TODOS OS CHECK BOX: ", itens_selecionados);
+            })
+        }
+
+
+
+        //___________________________________FUNÇÕES DIVERSAS______________________________________
+
+        //-------------------------------------------------------------------------------MODAL HIDE
+        function modal_hide_Single() {
+            $('#EditModal_Cliente').modal('hide')
+        }
+
+        function modal_hide_Multiplos() {
+            $('#EditModal_Clientes_Multiplos').modal('hide')
+        }
+
+        function modal_hide_InserirClientes() {
+            $('#EditModal_InserirClientes').modal('hide')
+        }
+
+        function modal_hide_InserirClientes() {
+            $('#EditModal_InserirClientesExcel').modal('hide')
+        }
+        //----------------------------------------------------------------------RECARREGA A PÁGINA
+        function reloadPage() {
+            location.reload(true);
+        }
+
+        //--------------------------------------------------------------DESMARCA TODOS OS CHECKBOXs
+        function desmarcartodos() {
+            //console.log("desmarcando");
+            $('input[type="checkbox"]:checked').prop('checked', false);
+            //Re-contar itens marcados
+            marcados();
+            //console.log("Itens marcado: ", itens_selecionados);
+        }
+
+        //-----------------------------QUANDO MUDAR A PAGINA DA TABELA DESMARCAR TODOS OS CHECKBOXES
+        $("#tabela-clientes").on("page.dt", function () {
+            desmarcartodos();
+            //console.log("1")
+        }).on('search.dt', function () {
+            desmarcartodos();
+            //console.log("2")
+        });
+        //________________________________________________________________________________________x
+
+
+        //--------------------------------Habilita botão alterar data se algum check box estiver selecionado & desabilita os botões dos rows
+        $("input[name='checkbox']").on('change', function () {
+            //Habilita o botão EDITAR MARCADOS (HEADER) se algum check box estiver selecionado - disabled = true
+            $("button[name='tbl_th_btn_editarselecionados']").prop('disabled', !$("input[name='checkbox']:checked").length);
+            $("button[name='tbl_th_btn_acumuladores']").prop('disabled', !$("input[name='checkbox']:checked").length);
+            //Desabilita os botões editar linha se algum check box estiver selecionado - disabled = true
+            $("button[name='tbl_td_btn_editarlinha']").prop('disabled', $("input[name='checkbox']:checked").length);
+            $("button[name='tbl_td_btn_acumuladores']").prop('disabled', $("input[name='checkbox']:checked").length);
+        })
+    </script>
+
+
+
+    <script>
+        $(document).ready(function () {
+            var max_fields = 20; //maximum input boxes allowed
+            var wrapper = $('#dinamicAppend'); //Fields wrapper
+            var add_button = $('#addinputuser'); //Add button ID
+            var x = 0; //initlal text box count
+            var formCardNumber = 1;
+
+            $(add_button).click(function (e) { //on add input button click
+                e.preventDefault();
+                if (x < max_fields) { //max input box allowed
+                    x++; //text box increment
+                    formCardNumber++; //formCardNumber increment to append card initial 2 (++)
+                    $(wrapper).append('<!--' + formCardNumber + 'º CARD-->' +
+                        '<div class="card" style="padding:20px; box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.157);">' +
+                        '<!--12COLUNAS-->' +
+                        '<div class="row">' +
+                        '<!--12colunas CARD-->' +
+                        '<div class="col-lg-12">' +
+                        '<div class="row align-items-center">' +
+                        '<div class="col-sm-11 col-md-11 col-lg-11">' + formCardNumber + '#' +
+                        '</div>' +
+                        '<div class="col-sm-1 col-md-1 col-lg-1">' +
+                        '<button type="button" class="close remove_field targetclearx">' +
+                        '<span aria-hidden="true">&times;</span></button>' +
+                        '</div>' +
+                        '<!--10COLUNAS-->' +
+                        '<div class="col-lg-8">' +
+                        '<div class="row">' +
+
+                        '<div class="col-md-4">' +
+                        '<h6 class="label-modal">CNPJ</h6>' +
+                        '<input  id="name_cnpj' + x + '" name="cnpj" type="number" step="any" class="form-control " placeholder="Digite seu CNPJ" onchange="onChangeCNPJ(this)" autocomplete="off" required>' +
+                        '</div>' +
+
+                        '<div class="col-md-4">' +
+                        '<h6 class="label-modal">Cliente (Razão Social)</h6>' +
+                        '<input id="name_cliente' + x + '" name="cliente" type="text" class="form-control " placeholder="Digite seu Nome" autocomplete="off" onkeyup="var start = this.selectionStart; var end = this.selectionEnd; this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" required>' +
+                        '</div>' +
+
+                        '<div class="col-md-4">' +
+                        '<h6 class="label-modal">Unidade (Cidade)</h6>' +
+                        '<input id="name_unidade' + x + '" name="unidade" type="text" class="form-control " placeholder="Informe sua Cidade" autocomplete="off" onkeyup="var start = this.selectionStart; var end = this.selectionEnd; this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" required>' +
+                        '</div>' +
+
+                        '<div class="col-md-4">' +
+                        '<h6 class="label-modal">Regime Tributário</h6>' +
+                        '<select  title="SELECIONE" class="form-control  selectpicker" data-style="btn" name="regime" type="text" required>' +
+                        '<option required>Simples-Nacional</option>' +
+                        '<option>Lucro Presumido</option>' +
+                        '<option>Lucro Real</option>' +
+                        '<option>CEI</option>' +
+                        '<option>Imune/Isentas</option>' +
+                        '</select>' +
+                        '</div>' +
+
+                        '<div class="col-md-4">' +
+                        '<h6 class="label-modal">Situação <em>(obrigatório)</em></h6>' +
+                        '<div class="form-check form-check-radio">' +
+                        '<label class="form-check-label">' +
+                        '<input id="name_situacao_ativa[' + x + ']" class="form-check-input " type="radio" name="situacao[' + x + ']" value="Ativa" autocomplete="off" required>Ativa<span class="circle">' +
+                        '<span class="check"></span>' +
+                        '</span>' +
+                        '</label>' +
+                        '<label class="form-check-label">' +
+                        '<input id="name_situacao_inativa[' + x + ']" class="form-check-input " type="radio" name="situacao[' + x + ']" value="Inativa" autocomplete="off">Inativa<span class="circle">' +
+                        '<span class="check"></span>' +
+                        '</span>' +
+                        '</label>' +
+                        '</div>' +
+                        '</div>' +
+
+                        '<div class="col-md-4">' +
+                        '<h6 class="label-modal">Senha do Certificado Digital</h6>' +
+                        '<input name="senhacert" type="password" class="form-control " placeholder="Digite seu Senha" autocomplete="off" required>' +
+                        '</div>' +
+
+                        '</div>' +
+                        '</div>' +
+                        '<!--10COLUNAS-->' +
+                        '<div class="col-lg-3">' +
+                        '<div class="col-lg-12">' +
+                        '<div class="row justify-content-center targetclear" onclick="certificado(this)" onchange="validarCertificado(this)">' +
+                        '<div class="CERTmsg areaClick">' +
+                        '<h5 class="clickAqui">Certificado Digital</h5>' +
+                        '<label class="clickAqui"> (Clique para Inserir) </label>' +
+                        '</div>' +
+                        '</div>' +
+                        '<input  class="InputUploader" type="file" name="file" accept=".pfx,application/x-pkcs12">' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '<!--FIM DO' + x + 'º CARD-->');
+
+                    $('.selectpicker').selectpicker('refresh');
+                }
+            });
+
+            $(wrapper).on("click", ".remove_field", function (e) { //user click on remove text
+                e.preventDefault();
+                $(this).parent('div').parent('div').parent('div').parent('div').parent('div').remove();
+                x--;
+            })
+        });
+    </script>
+
+
+    <script>
+    </script>
+
+
+    <!--DROPZONE CSS  -->
+    <!-- <link href="../local/plugins/dropzone/css/dropzone.css" rel="stylesheet">
+  <link href="../local/plugins/dropzone/css/style_clientes.css" rel="stylesheet">-->
+
+
+
+
+    <!--CERTIFICADO DIGITAL INPUT FILE-->
+
+
+    <script>
+        //query
+        /*
+    $(document).ready(function () {
+      var button = $('.areaClick')
+      var uploader = $('.uploader')
+      var images = $('.arquivo')
+      var filePlace = $('.certificado')
+      var fileNameplace = document.getElementById('spanfilename')
+
+      button.on('click', function () {
+                      uploader.click()
+                    })
+      uploader.on('change', function () {
+        var reader = new FileReader()
+        reader.onload = function (event) {
+                      filePlace.empty().prepend('< div class="p12"><span class"alterar">Alterar</span>< /div>')
+          fileNameplace.textContent = uploader[0].files[0].name
+          console.log("files ?? ", event.target.result);
+        }
+      })
+    })
+*/
+    </script>
+
+
+    <script>
+        function certificado(ThisArea) {
+            var PreviewArea = ThisArea
+            var uploader = $($(PreviewArea)[0].parentNode)[0].children[1]
+            uploader.click()
+            var filePlace = $(ThisArea)[0].children[0]
+            var clickAqui = $(ThisArea)[0].children[1]
+            $(uploader).on('change', function () {
+                var FileName = $(uploader)[0].files[0]
+                if (FileName != undefined) {
+                    $(filePlace).empty().prepend('<div class="IconP12"></div><span class="spanFileName">' + $(uploader)[0].files[0].name + '</span><span class="spanAlterar">ALTERAR</span>')
+                    $(clickAqui).empty()
+                } else {
+                    $(filePlace).empty().prepend('Certificado Digital')
+                    $(clickAqui).empty().prepend('(Clique para Inserir)')
+
+                }
+            })
+        }
+    </script>
+
+
+    <script>
+        var indexID
+
+        function onChangeCNPJ(elemento) {
+            var cnpj
+            indexID = '';
+            indexID = $(elemento).attr('id')
+
+            if (indexID.length > 9) {
+                indexID = indexID.trim()
+                indexID = (indexID[indexID.length - 1])
+
+                cnpj = document.getElementById(`name_cnpj${indexID}`).value;
+            } else {
+                cnpj = document.getElementById('name_cnpj').value;
+            }
+
+
+            if (cnpj.length == 14) {
+                //console.log("esse é o cnpj = ", cnpj)
+                $.ajax({
+                    url: '/antecipados/get-cnpj',
+                    type: 'POST',
+                    data: {
+                        'cnpj': cnpj
+                    }
+                }).done(function (response) {
+                    //console.log("resposta ", response)
+                    //console.log("resposta length ", indexID.length)
+                    if (indexID.length === 1) {
+                        //console.log("entrei ", indexID)
+                        $(`#name_cliente${indexID}`).val(response.razao_social);
+                        $(`#name_unidade${indexID}`).val(response.municipio);
+                    } else if (indexID.length === 9) {
+                        $("#name_cliente").val(response.razao_social);
+                        $("#name_unidade").val(response.municipio);
+                    }
+                })
+            }
+
+        }
+    </script>
+
+
+
+    <!--20/05/2021-->
+    <script>
+
+
+        /*
+        <div id="area_categoria" class="col-lg-3">
+            <select multiple name="categoria" id="select_categoria">
+                <option value="Dentro do Estado">Dentro do Estado</option>
+                <option value="Fora do Estado">Fora do Estado</option>
+                <option value="Substituição Tributária">Substituição Tributária</option>
+                <option value="Específico">Específico</option>
+            </select>
+        </div>
+        
+        <div id="area_cfop" class="col-lg-3">
+            <select multiple name="cfop" id="select_cfop">
+            </select>
+        </div>
+        
+        <div id="area_tipo_antecipado" class="col-lg-3">
+            <select multiple name="antecipado" id="select_tipo_antecipado">
+            </select>
+        </div>
+        */
+
+        //-> area_categoria            select_categoria        options statico
+        //-> area_cfop                 select_cfop
+        //-> area_tipo_antecipado      select_tipo_antecipado
+
+
+
+        var dataCategoria = [["Fora do Estado", "Fora do Estado", false, false],
+        ["Dentro do Estado", "Dentro do Estado", false, false],
+        ["Substituição Tributária", "Substituição Tributária", false, false],
+        ["Específico", "Específico", false, false]]
+
+        var SelectCategoria = null
+
+        function initCatgegoria(optionsData) {
+            var id = '#select_categoria'
+            SelectCategoria = $(id).filterMultiSelect({
+                items: optionsData,
+                placeholderText: 'Categoria',
+                filterText: 'Buscar',
+                caseSensitive: true,
+            });
+            //Ocultando o select all
+            $(`${id} .dropdown-item`).find('.custom-control:first-child').addClass('hideElement')
+        }
+        initCatgegoria(dataCategoria)
+
+
+
+
+
+        var dataCfop = [["2201", "2201", false, false], ["2202", "2202", false, false], ["2910", "2910", false, false]]
+
+        //$('area_cfop').empty()
+    
+        function initCfop(optionsData) {
+            console.log('cfpo inicializado')
+            SelectCfop = $('#select_cfop').filterMultiSelect({
+                items: optionsData,
+                selectAllText: 'Todos',
+                placeholderText: 'CFOP',
+                filterText: 'Buscar',
+                caseSensitive: false,
+            });
+        }
+
+        //initCfop(dataCfop)
+
+
+        var dataAntecipados= [["antecipado de entradas 20.00%","antecipado de entradas 20.00%",false,false],["antecipado de entradas 30.00%","antecipado de entradas 30.00%",false,false],["antecipado de entradas 37.83%","antecipado de entradas 37.83%",false,false],["antecipado de entradas 39.95%","antecipado de entradas 39.95%",false,false],["antecipado de entradas 40.00%","antecipado de entradas 40.00%",false,false],["antecipado de entradas 45.66%","antecipado de entradas 45.66%",false,false],["antecipado de entradas 47.90%","antecipado de entradas 47.90%",false,false],["antecipado de entradas 48.43%","antecipado de entradas 48.43%",false,false],["antecipado de entradas 50.00%","antecipado de entradas 50.00%",false,false],["antecipado de entradas 50.55%","antecipado de entradas 50.55%",false,false],["antecipado de entradas 53.73%","antecipado de entradas 53.73%",false,false],["antecipado de entradas 54.80%","antecipado de entradas 54.80%",false,false],["antecipado de entradas 56.87%","antecipado de entradas 56.87%",false,false],["antecipado de entradas 59.11%","antecipado de entradas 59.11%",false,false],["antecipado de entradas 62.22%","antecipado de entradas 62.22%",false,false],["antecipado de entradas 62.35%","antecipado de entradas 62.35%",false,false],["antecipado de entradas 62.47%","antecipado de entradas 62.47%",false,false],["antecipado de entradas 63.50%","antecipado de entradas 63.50%",false,false],["antecipado de entradas 69.64%","antecipado de entradas 69.64%",false,false],["antecipado de entradas 69.67%","antecipado de entradas 69.67%",false,false],["antecipado de entradas 70.00%","antecipado de entradas 70.00%",false,false],["antecipado de entradas 71.58%","antecipado de entradas 71.58%",false,false],["antecipado de entradas 73.53%","antecipado de entradas 73.53%",false,false],["antecipado de entradas 79.28%","antecipado de entradas 79.28%",false,false],["antecipado de entradas 79.31%","antecipado de entradas 79.31%",false,false],["antecipado de entradas 82.13%","antecipado de entradas 82.13%",false,false],["antecipado de entradas 83.39%","antecipado de entradas 83.39%",false,false],["antecipado de entradas 90.48%","antecipado de entradas 90.48%",false,false],["antecipado de entradas 92.48%","antecipado de entradas 92.48%",false,false],["antecipado de entradas 100.00%","antecipado de entradas 100.00%",false,false],["antecipado de entradas 150.00%","antecipado de entradas 150.00%",false,false],["antecipado de entradas 353.78%","antecipado de entradas 353.78%",false,false],["antecipado de entradas 379.57%","antecipado de entradas 379.57%",false,false],["antecipado especial 0.00%","antecipado especial 0.00%",false,false],["cesta basica 20.00%","cesta basica 20.00%",false,false],["credito presumido 0.00%","credito presumido 0.00%",false,false],["isento 0.00%","isento 0.00%",false,false],["medicamentos 49.86%","medicamentos 49.86%",false,false],["medicamentos 58.37%","medicamentos 58.37%",false,false],["medicamentos 63.48%","medicamentos 63.48%",false,false]]
+
+        var SelectTipoAntecipado = null
+        function initTipoAntecipado(optionsData) {
+            console.log("recebi options tipo anteciopado")
+            $('#select_tipo_antecipado').empty()
+            SelectTipoAntecipado = $('#select_tipo_antecipado').filterMultiSelect({
+                items: optionsData,
+                selectAllText: 'Todos',
+                placeholderText: 'Tipo Antecipado',
+                filterText: 'Buscar',
+                caseSensitive: false,
+            });
+        }
+
+        //initTipoAntecipado(dataAntecipados)
+
+        function selectRefreshOptions(areaID, selectID) {
+            console.log("aqui aaaaaa ", areaID, selectID)
+            $("#area_cfop").empty().append(`<select multiple name="select_cfop"" id="select_cfop" class=""><option>AS</option></select>`)
+            
+            //initCfop(options)
+            //$('#select_categoria').append(options)
+        }
+
+
+        var lastSelected = null
+        function FilterMultiSelectChangeListener(e) {
+            //e = input selected
+            //console.log(e)
+            var obj = {}
+            var Categoria_selecionados = {}
+            var Cfop_selecionados = {}
+
+            //obtem os dados do select de Categoria
+            Categoria_selecionados = SelectCategoria.getSelectedOptionsAsJson()
+            //obtem os dados do select de CFOP
+            Cfop_selecionados = SelectCfop.getSelectedOptionsAsJson()
+
+            //insere os dados do select de Categoria no obj
+            Object.entries(JSON.parse(Categoria_selecionados)).forEach(([key, value]) => {
+                if (!lastSelected) {
+                    lastSelected = value[0]
+                } else {
+                    var aux = null
+                    value.forEach((element, index) => {
+                        console.log("aaaaa ", lastSelected, element)
+                        if (element != lastSelected) {
+                            aux = element
+                        }
+                    })
+                    lastSelected = aux
+                }
+                //categoria (2) ["Fora do Estado"]
+                if (value[0]) {
+                    obj[key] = value
+                    SelectCategoria.selectOption(value[0])
+
+                    dataCategoria.forEach((element, index) => {
+                        if (element[0] != lastSelected) {
+                            SelectCategoria.deselectOption(element[0])
+                        }
+                    })
+                }
+            });
+            //insere os dados do select de CFOP no obj
+            Object.entries(JSON.parse(Cfop_selecionados)).forEach(([key, value]) => {
+                obj[key] = value
+            });
+
+            $.ajax({
+                url: "/gerenciar/filter-acumuladores",
+                type: "POST",
+                data: obj
+            }).done(function (response) {
+                response = JSON.parse(response)
+
+                selectRefreshOptions('area_cfop', 'select_cfop')
+                setTimeout(function(){
+                    initCfop(response.cfop)
+                
+                },100)
+                
+                /*
+                selectRefreshOptions('area_tipo_antecipado', 'select_tipo_antecipado')
+                setTimeout(function(){
+                    initTipoAntecipado(response.tipo_antecipado)
+                },100)
+                */
+                //selectRefreshOptions()
+            })
+
+        }
+
+       
+
+
+
+        /*   $(SelectCategoria).on('change', function () {
+         $.ajax({
+             url: "/filter-acumuladores",
+             type: "POST",
+             data: $(this).value()
+         }).done(function (response) {
+             console.log("Recebi", response)
+          })
+     })
+     */
+
+    </script>
+
+
+
+
+
+
+
+    <script>
+
+
+
+        function criaDados() {
+            console.log("-> ", categoria)
+            console.log("--> ", $(categoria))
+            for (var i = 0; i < 5; i++) {
+                data1.push(["victor " + i, i, false, false])
+            }
+            //$(categoria).items(data1)
+            $(categoria).items = data1
+            //$(categoria).filterMultiSelect({items: data1})
+
+        }
+        $(document).ready(function () {
+            // Use the plugin once the DOM has been loaded.
+            $(function () {
+
+
+                /* categoria executa primeiro e chama o ajax com a categoria para CFOP e Tipo antecipado*/
+                /*
+                var data = []
+                                for (var i = 0; i < 5; i++) {
+                                    data.push(["teste " + i, i, false, false])
+                                }
+                
+                                // var animals = $('#animals').filterMultiSelect();
+                                categoria = $('#categoria').filterMultiSelect({
+                                    items: data,
+                                    selectAllText: 'Todos',
+                                    placeholderText: 'Categoria',
+                                    filterText: 'Buscar',
+                                    caseSensitive: true,
+                                });
+                */
+
+                /*
+                                var cars = $('#cars').filterMultiSelect();
+                                var pl1 = $('#programming_languages_1').filterMultiSelect();
+                                $('#b1').click((e) => {
+                                    pl1.enableOption("1");
+                                });
+                                $('#b2').click((e) => {
+                                    pl1.disableOption("1");
+                                });
+                                var pl2 = $('#programming_languages_2').filterMultiSelect();
+                                $('#b3').click((e) => {
+                                    pl2.enable();
+                                });
+                                $('#b4').click((e) => {
+                                    pl2.disable();
+                                });
+                                var pl3 = $('#programming_languages_3').filterMultiSelect({
+                                    allowEnablingAndDisabling: false,
+                                });
+                                $('#b5').click((e) => {
+                                    pl3.enableOption("1");
+                                });
+                                $('#b6').click((e) => {
+                                    pl3.disableOption("1");
+                                });
+                                $('#b7').click((e) => {
+                                    pl3.enable();
+                                });
+                                $('#b8').click((e) => {
+                                    pl3.disable();
+                                });
+                                var cities = $('#cities').filterMultiSelect({
+                                    items: [["San Francisco", "a"],
+                                    ["Milan", "b", false, true],
+                                    ["Singapore", "c", true],
+                                    ["Berlin", "d", true, true],
+                                    ],
+                                });
+                                $('#jsonbtn1').click((e) => {
+                                    var b = true;
+                                    $('#jsonresult1').text(JSON.stringify(getJson(b), null, "  "));
+                                });
+                                var getJson = function (b) {
+                                    var result = $.fn.filterMultiSelect.applied
+                                        .map((e) => JSON.parse(e.getSelectedOptionsAsJson(b)))
+                                        .reduce((prev, curr) => {
+                                            prev = {
+                                                ...prev,
+                                                ...curr,
+                                            };
+                                            return prev;
+                                        });
+                                    return result;
+                                }
+                                $('#jsonbtn2').click((e) => {
+                                    var b = false;
+                                    $('#jsonresult2').text(JSON.stringify(getJson(b), null, "  "));
+                                });
+                                $('#form').on('keypress keyup', function (e) {
+                                    var keyCode = e.keyCode || e.which;
+                                    if (keyCode === 13) {
+                                        e.preventDefault();
+                                        return false;
+                                    }
+                                });
+                                */
+            });
+        })
+
+
+
+    </script>
+
+
+
+
+
+
+    {{> escritorio/modal_chamados}} {{> escritorio/modal_adquirir}}
+
+</body>
+
+</html>
+
+</html>

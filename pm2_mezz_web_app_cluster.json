@@ -1,0 +1,20 @@
+{
+  "apps": [
+    {
+      "name": "pm2_web_backend_express",
+      "script": "./src/backend/server/index.js",
+      "error_file": "x_pm2_web_app_err.log",
+      "out_file": "x_pm2_web_app_out.log",
+      "time": true,
+      "instances" : "max",
+      "exec_mode" : "cluster",
+      "env":{
+        "NODE_ENV": "production"
+      }
+    }
+  ]
+}
+
+
+
+

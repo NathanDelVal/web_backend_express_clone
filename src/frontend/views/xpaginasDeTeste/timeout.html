@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h1 id='displaytimeleft'></h1>
+
+</body>
+
+<script src="../assets/js/core/jquery-3.5.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+    integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+    crossorigin="anonymous"></script>
+
+<!--SWEET ALERT-->
+<link rel="stylesheet" href="../local/plugins/sweetalert/css/sweetalert2.min.css" id="theme-styles">
+<script src="../local/plugins/sweetalert/js/sweetalert2.min.js"></script>
+
+<script>
+    $.ajax({
+        url: '/expiration-timer',
+        type: 'GET',
+
+    }).done(function (response) {
+        var expirationtime = response.expirationtime
+        var startTime = moment().valueOf()
+        var endTime = moment(expirationtime)
+        var timeLeft = moment.duration(endTime.diff(startTime));
+
+        localStorage.setItem('expiretime', expirationtime)
+        localStorage.setItem('timeleft', timeLeft.valueOf())
+        ShowTimer('#displaytimeleft')
+
+        //"81211288"
+    })
+    var flag_plano = 0;
+    function ShowTimer(display) {
+        const main = setInterval(function () {
+            const expireTime = localStorage.getItem('expiretime');
+            var deathClock = parseInt(localStorage.getItem('timeleft'))
+            var timeLeft = moment(deathClock);
+            //const durationTIMELEFT = moment.duration(moment(deathClock).subtract(3, 'hours').valueOf());
+            var days = parseInt(moment.duration(timeLeft.valueOf()).asDays())
+            const hours = timeLeft.hours()
+            const minutes = timeLeft.minutes()
+            const seconds = timeLeft.seconds()
+            if (days < 1) {
+                if (hours <= 0 && minutes <= 0 && seconds <= 0) {
+                    $(display).text(`${0}dias ${0}horas ${0}minutos ${0}segundos`);
+                    //pra zerar o horario => 21600374
+                    localStorage.setItem('timeleft', 21600374)
+                    deathClock = 21600374
+                }
+            }
+            //correção do valor de dias
+            days = parseInt(moment.duration(timeLeft.subtract(3, 'hours').valueOf()).asDays())
+
+            if (deathClock == 21600374) {
+                flag_plano++
+            }
+            if (flag_plano == 1) {
+                //do alert and redirect here
+                sweetAlertFreeAccountOver()
+                clearInterval(main) // kill setInterval
+
+            }
+            if (flag_plano == 0) {
+                $(display).text(`${days}dias ${hours}horas ${minutes}minutos ${seconds}segundos`);
+                deathClock = deathClock - 1000
+                localStorage.setItem('timeleft', deathClock)
+            }
+
+        }, 1000);
+    }
+
+    function sweetAlertFreeAccountOver() {
+        Swal.fire({
+            position: 'center',
+            icon: 'warning',
+            title: "O periodo de teste gratuito encerrou!",
+            showConfirmButton: true,
+        }).then(()=>{
+            redirect()
+        })
+    }
+
+    function redirect() {
+        window.location.replace(`${window.location.origin}/sair`)
+    }
+
+</script>
+
+</html>

@@ -1,0 +1,24 @@
+: RequestError: update [dbo].[produtos_tbl_view] set [pendente] = @p0, [usuario] = @p1, [modificado] = @p2, [mva_7] = @p3, [mva_12] = @p4, [tipo_antecipado] = @p5, [cst_icms] = @p6, [csosn_icms] = @p7, [cst_piscofins_entrada] = @p8, [cst_piscofins_saida] = @p9, [natureza_receita_monofasico_aliqzero] = @p10 where [descricao_item] in (@p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20, @p21, @p22, @p23, @p24, @p25, @p26, @p27, @p28, @p29, @p30, @p31, @p32, @p33, @p34, @p35, @p36, @p37, @p38, @p39, @p40, @p41, @p42, @p43, @p44, @p45, @p46, @p47, @p48, @p49, @p50, @p51, @p52, @p53, @p54, @p55, @p56, @p57, @p58, @p59, @p60, @p61, @p62, @p63, @p64, @p65, @p66, @p67, @p68, @p69, @p70, @p71, @p72, @p73, @p74, @p75, @p76, @p77, @p78, @p79, @p80, @p81, @p82, @p83, @p84, @p85, @p86, @p87, @p88, @p89, @p90, @p91, @p92, @p93, @p94, @p95, @p96, @p97, @p98, @p99, @p100, @p101, @p102, @p103, @p104, @p105, @p106, @p107, @p108, @p109, @p110, @p111, @p112, @p113, @p114, @p115, @p116, @p117, @p118, @p119, @p120, @p121, @p122, @p123, @p124, @p125, @p126, @p127, @p128, @p129, @p130, @p131, @p132, @p133, @p134, @p135, @p136, @p137, @p138, @p139, @p140, @p141, @p142, @p143, @p144, @p145, @p146, @p147, @p148, @p149, @p150, @p151, @p152, @p153, @p154, @p155, @p156, @p157, @p158, @p159, @p160, @p161, @p162, @p163, @p164, @p165, @p166, @p167, @p168, @p169, @p170, @p171, @p172, @p173, @p174, @p175, @p176, @p177, @p178, @p179, @p180, @p181, @p182, @p183, @p184, @p185, @p186, @p187, @p188, @p189, @p190, @p191, @p192, @p193, @p194, @p195, @p196, @p197, @p198, @p199, @p200, @p201, @p202, @p203, @p204, @p205, @p206, @p207, @p208, @p209, @p210, @p211, @p212, @p213, @p214, @p215, @p216, @p217, @p218, @p219, @p220, @p221, @p222, @p223, @p224, @p225, @p226, @p227, @p228, @p229, @p230, @p231, @p232, @p233, @p234, @p235, @p236, @p237, @p238, @p239, @p240, @p241, @p242, @p243, @p244, @p245, @p246, @p247, @p248, @p249, @p250, @p251, @p252, @p253, @p254, @p255, @p256, @p257, @p258, @p259, @p260, @p261, @p262, @p263, @p264, @p265, @p266, @p267, @p268, @p269, @p270, @p271, @p272, @p273) and [nome_fantasia] = @p274;select @@rowcount - Timeout: Request failed to complete in 15000ms
+2021-04-15T11:02:52:     at Request.userCallback (C:\domains\NotasMezzomo\www3\node_modules\mssql\lib\tedious\request.js:437:19)
+2021-04-15T11:02:52:     at Request.callback (C:\domains\NotasMezzomo\www3\node_modules\tedious\lib\request.js:56:14)
+2021-04-15T11:02:52:     at Connection.message (C:\domains\NotasMezzomo\www3\node_modules\tedious\lib\connection.js:2449:24)
+2021-04-15T11:02:52:     at Connection.dispatchEvent (C:\domains\NotasMezzomo\www3\node_modules\tedious\lib\connection.js:1279:15)
+2021-04-15T11:02:52:     at MessageIO.<anonymous> (C:\domains\NotasMezzomo\www3\node_modules\tedious\lib\connection.js:1139:14)
+2021-04-15T11:02:52:     at MessageIO.emit (events.js:315:20)
+2021-04-15T11:02:52:     at Message.<anonymous> (C:\domains\NotasMezzomo\www3\node_modules\tedious\lib\message-io.js:46:14)
+2021-04-15T11:02:52:     at Message.emit (events.js:327:22)
+2021-04-15T11:02:52:     at endReadableNT (C:\domains\NotasMezzomo\www3\node_modules\tedious\node_modules\readable-stream\lib\_stream_readable.js:1094:12)
+2021-04-15T11:02:52:     at processTicksAndRejections (internal/process/task_queues.js:80:21) {
+2021-04-15T11:02:52:   code: 'ETIMEOUT',
+2021-04-15T11:02:52:   originalError: RequestError: Timeout: Request failed to complete in 15000ms
+2021-04-15T11:02:52:       at RequestError (C:\domains\NotasMezzomo\www3\node_modules\tedious\lib\errors.js:32:12)
+2021-04-15T11:02:52:       at Connection.requestTimeout (C:\domains\NotasMezzomo\www3\node_modules\tedious\lib\connection.js:1212:46)
+2021-04-15T11:02:52:       at Timeout._onTimeout (C:\domains\NotasMezzomo\www3\node_modules\tedious\lib\connection.js:1180:14)
+2021-04-15T11:02:52:       at listOnTimeout (internal/timers.js:554:17)
+2021-04-15T11:02:52:       at processTimers (internal/timers.js:497:7) {
+2021-04-15T11:02:52:     code: 'ETIMEOUT'
+2021-04-15T11:02:52:   },
+2021-04-15T11:02:52:   number: 'ETIMEOUT',
+2021-04-15T11:02:52:   state: undefined,
+2021-04-15T11:02:52:   precedingErrors: []
+2021-04-15T11:02:52: }

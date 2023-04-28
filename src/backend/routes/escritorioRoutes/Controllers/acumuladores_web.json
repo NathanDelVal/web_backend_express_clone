@@ -1,0 +1,2454 @@
+[
+    {
+        "tabela": "Dentro do Estado",
+        "data": [
+            {
+                "nome_pj": "AAAAA DENTRO DO ESTADO",
+                "cnpj": 1,
+                "antecipado": "Antecipado de Entrada",
+                "mva": "0,01",
+                "cfop": 1111,
+                "acumulador": "001"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 2,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,02",
+                "cfop": 2222,
+                "acumulador": "002"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 3,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,03",
+                "cfop": 3333,
+                "acumulador": "003"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 4,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,04",
+                "cfop": 4444,
+                "acumulador": "004"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 5,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,05",
+                "cfop": 5555,
+                "acumulador": "005"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 6,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,06",
+                "cfop": 6666,
+                "acumulador": "006"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 7,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,07",
+                "cfop": 7777,
+                "acumulador": "007"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 8,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,08",
+                "cfop": 8888,
+                "acumulador": "008"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 9,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,09",
+                "cfop": 9999,
+                "acumulador": "009"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 10,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,1",
+                "cfop": 11110,
+                "acumulador": "010"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 11,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,11",
+                "cfop": 12221,
+                "acumulador": "011"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 12,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,12",
+                "cfop": 13332,
+                "acumulador": "012"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 13,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,13",
+                "cfop": 14443,
+                "acumulador": "013"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 14,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,14",
+                "cfop": 15554,
+                "acumulador": "014"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 15,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,15",
+                "cfop": 16665,
+                "acumulador": "015"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 16,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,16",
+                "cfop": 17776,
+                "acumulador": "016"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 17,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,17",
+                "cfop": 18887,
+                "acumulador": "017"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 18,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,18",
+                "cfop": 19998,
+                "acumulador": "018"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 19,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,19",
+                "cfop": 21109,
+                "acumulador": "019"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 20,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,2",
+                "cfop": 22220,
+                "acumulador": "020"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 21,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,21",
+                "cfop": 23331,
+                "acumulador": "021"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 22,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,22",
+                "cfop": 24442,
+                "acumulador": "022"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 23,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,23",
+                "cfop": 25553,
+                "acumulador": "023"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 24,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,24",
+                "cfop": 26664,
+                "acumulador": "024"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 25,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,25",
+                "cfop": 27775,
+                "acumulador": "025"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 26,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,26",
+                "cfop": 28886,
+                "acumulador": "026"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 27,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,27",
+                "cfop": 29997,
+                "acumulador": "027"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 28,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,28",
+                "cfop": 31108,
+                "acumulador": "028"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 29,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,29",
+                "cfop": 32219,
+                "acumulador": "029"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 30,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,3",
+                "cfop": 33330,
+                "acumulador": "030"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 31,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,31",
+                "cfop": 34441,
+                "acumulador": "031"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 32,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,32",
+                "cfop": 35552,
+                "acumulador": "032"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 33,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,33",
+                "cfop": 36663,
+                "acumulador": "033"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 34,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,34",
+                "cfop": 37774,
+                "acumulador": "034"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 35,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,35",
+                "cfop": 38885,
+                "acumulador": "035"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 36,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,36",
+                "cfop": 39996,
+                "acumulador": "036"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 37,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,37",
+                "cfop": 41107,
+                "acumulador": "037"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 38,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,38",
+                "cfop": 42218,
+                "acumulador": "038"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 39,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,39",
+                "cfop": 43329,
+                "acumulador": "039"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 40,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,4",
+                "cfop": 44440,
+                "acumulador": "040"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 41,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,41",
+                "cfop": 45551,
+                "acumulador": "041"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 42,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,42",
+                "cfop": 46662,
+                "acumulador": "042"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 43,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,43",
+                "cfop": 47773,
+                "acumulador": "043"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 44,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,44",
+                "cfop": 48884,
+                "acumulador": "044"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 45,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,45",
+                "cfop": 49995,
+                "acumulador": "045"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 46,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,46",
+                "cfop": 51106,
+                "acumulador": "046"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 47,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,47",
+                "cfop": 52217,
+                "acumulador": "047"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 48,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,48",
+                "cfop": 53328,
+                "acumulador": "048"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 49,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,49",
+                "cfop": 54439,
+                "acumulador": "049"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 50,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,5",
+                "cfop": 55550,
+                "acumulador": "050"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 51,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,51",
+                "cfop": 56661,
+                "acumulador": "051"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 52,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,52",
+                "cfop": 57772,
+                "acumulador": "052"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 53,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,53",
+                "cfop": 58883,
+                "acumulador": "053"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 54,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,54",
+                "cfop": 59994,
+                "acumulador": "054"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 55,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,55",
+                "cfop": 61105,
+                "acumulador": "055"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 56,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,56",
+                "cfop": 62216,
+                "acumulador": "056"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 57,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,57",
+                "cfop": 63327,
+                "acumulador": "057"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 58,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,58",
+                "cfop": 64438,
+                "acumulador": "058"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 59,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,59",
+                "cfop": 65549,
+                "acumulador": "059"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 60,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,6",
+                "cfop": 66660,
+                "acumulador": "060"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 61,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,61",
+                "cfop": 67771,
+                "acumulador": "061"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 62,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,62",
+                "cfop": 68882,
+                "acumulador": "062"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 63,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,63",
+                "cfop": 69993,
+                "acumulador": "063"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 64,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,64",
+                "cfop": 71104,
+                "acumulador": "064"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 65,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,65",
+                "cfop": 72215,
+                "acumulador": "065"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 66,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,66",
+                "cfop": 73326,
+                "acumulador": "066"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 67,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,67",
+                "cfop": 74437,
+                "acumulador": "067"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 68,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,68",
+                "cfop": 75548,
+                "acumulador": "068"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 69,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,69",
+                "cfop": 76659,
+                "acumulador": "069"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 70,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,7",
+                "cfop": 77770,
+                "acumulador": "070"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 71,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,71",
+                "cfop": 78881,
+                "acumulador": "071"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 72,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,72",
+                "cfop": 79992,
+                "acumulador": "072"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 73,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,73",
+                "cfop": 81103,
+                "acumulador": "073"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 74,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,74",
+                "cfop": 82214,
+                "acumulador": "074"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 75,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,75",
+                "cfop": 83325,
+                "acumulador": "075"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 76,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,76",
+                "cfop": 84436,
+                "acumulador": "076"
+            }
+        ]
+    },
+    {
+        "tabela": "Fora do Estado",
+        "data": [
+            {
+                "nome_pj": "AAAAA FORA DO ESTADO",
+                "cnpj": 1,
+                "antecipado": "Antecipado de Entrada",
+                "mva": "0,01",
+                "cfop": 1111,
+                "acumulador": "001"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 2,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,02",
+                "cfop": 2222,
+                "acumulador": "002"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 3,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,03",
+                "cfop": 3333,
+                "acumulador": "003"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 4,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,04",
+                "cfop": 4444,
+                "acumulador": "004"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 5,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,05",
+                "cfop": 5555,
+                "acumulador": "005"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 6,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,06",
+                "cfop": 6666,
+                "acumulador": "006"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 7,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,07",
+                "cfop": 7777,
+                "acumulador": "007"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 8,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,08",
+                "cfop": 8888,
+                "acumulador": "008"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 9,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,09",
+                "cfop": 9999,
+                "acumulador": "009"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 10,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,1",
+                "cfop": 11110,
+                "acumulador": "010"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 11,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,11",
+                "cfop": 12221,
+                "acumulador": "011"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 12,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,12",
+                "cfop": 13332,
+                "acumulador": "012"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 13,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,13",
+                "cfop": 14443,
+                "acumulador": "013"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 14,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,14",
+                "cfop": 15554,
+                "acumulador": "014"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 15,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,15",
+                "cfop": 16665,
+                "acumulador": "015"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 16,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,16",
+                "cfop": 17776,
+                "acumulador": "016"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 17,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,17",
+                "cfop": 18887,
+                "acumulador": "017"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 18,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,18",
+                "cfop": 19998,
+                "acumulador": "018"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 19,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,19",
+                "cfop": 21109,
+                "acumulador": "019"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 20,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,2",
+                "cfop": 22220,
+                "acumulador": "020"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 21,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,21",
+                "cfop": 23331,
+                "acumulador": "021"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 22,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,22",
+                "cfop": 24442,
+                "acumulador": "022"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 23,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,23",
+                "cfop": 25553,
+                "acumulador": "023"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 24,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,24",
+                "cfop": 26664,
+                "acumulador": "024"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 25,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,25",
+                "cfop": 27775,
+                "acumulador": "025"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 26,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,26",
+                "cfop": 28886,
+                "acumulador": "026"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 27,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,27",
+                "cfop": 29997,
+                "acumulador": "027"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 28,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,28",
+                "cfop": 31108,
+                "acumulador": "028"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 29,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,29",
+                "cfop": 32219,
+                "acumulador": "029"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 30,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,3",
+                "cfop": 33330,
+                "acumulador": "030"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 31,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,31",
+                "cfop": 34441,
+                "acumulador": "031"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 32,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,32",
+                "cfop": 35552,
+                "acumulador": "032"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 33,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,33",
+                "cfop": 36663,
+                "acumulador": "033"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 34,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,34",
+                "cfop": 37774,
+                "acumulador": "034"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 35,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,35",
+                "cfop": 38885,
+                "acumulador": "035"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 36,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,36",
+                "cfop": 39996,
+                "acumulador": "036"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 37,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,37",
+                "cfop": 41107,
+                "acumulador": "037"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 38,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,38",
+                "cfop": 42218,
+                "acumulador": "038"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 39,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,39",
+                "cfop": 43329,
+                "acumulador": "039"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 40,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,4",
+                "cfop": 44440,
+                "acumulador": "040"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 41,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,41",
+                "cfop": 45551,
+                "acumulador": "041"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 42,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,42",
+                "cfop": 46662,
+                "acumulador": "042"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 43,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,43",
+                "cfop": 47773,
+                "acumulador": "043"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 44,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,44",
+                "cfop": 48884,
+                "acumulador": "044"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 45,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,45",
+                "cfop": 49995,
+                "acumulador": "045"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 46,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,46",
+                "cfop": 51106,
+                "acumulador": "046"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 47,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,47",
+                "cfop": 52217,
+                "acumulador": "047"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 48,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,48",
+                "cfop": 53328,
+                "acumulador": "048"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 49,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,49",
+                "cfop": 54439,
+                "acumulador": "049"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 50,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,5",
+                "cfop": 55550,
+                "acumulador": "050"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 51,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,51",
+                "cfop": 56661,
+                "acumulador": "051"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 52,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,52",
+                "cfop": 57772,
+                "acumulador": "052"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 53,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,53",
+                "cfop": 58883,
+                "acumulador": "053"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 54,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,54",
+                "cfop": 59994,
+                "acumulador": "054"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 55,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,55",
+                "cfop": 61105,
+                "acumulador": "055"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 56,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,56",
+                "cfop": 62216,
+                "acumulador": "056"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 57,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,57",
+                "cfop": 63327,
+                "acumulador": "057"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 58,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,58",
+                "cfop": 64438,
+                "acumulador": "058"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 59,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,59",
+                "cfop": 65549,
+                "acumulador": "059"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 60,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,6",
+                "cfop": 66660,
+                "acumulador": "060"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 61,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,61",
+                "cfop": 67771,
+                "acumulador": "061"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 62,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,62",
+                "cfop": 68882,
+                "acumulador": "062"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 63,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,63",
+                "cfop": 69993,
+                "acumulador": "063"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 64,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,64",
+                "cfop": 71104,
+                "acumulador": "064"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 65,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,65",
+                "cfop": 72215,
+                "acumulador": "065"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 66,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,66",
+                "cfop": 73326,
+                "acumulador": "066"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 67,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,67",
+                "cfop": 74437,
+                "acumulador": "067"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 68,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,68",
+                "cfop": 75548,
+                "acumulador": "068"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 69,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,69",
+                "cfop": 76659,
+                "acumulador": "069"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 70,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,7",
+                "cfop": 77770,
+                "acumulador": "070"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 71,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,71",
+                "cfop": 78881,
+                "acumulador": "071"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 72,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,72",
+                "cfop": 79992,
+                "acumulador": "072"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 73,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,73",
+                "cfop": 81103,
+                "acumulador": "073"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 74,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,74",
+                "cfop": 82214,
+                "acumulador": "074"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 75,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,75",
+                "cfop": 83325,
+                "acumulador": "075"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 76,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,76",
+                "cfop": 84436,
+                "acumulador": "076"
+            }
+        ]
+    },
+    {
+        "tabela": "CFOP Específico",
+        "data": [
+            {
+                "nome_pj": "AAAAA CFOP ESPECIFICO",
+                "cnpj": 1,
+                "antecipado": "Antecipado de Entrada",
+                "mva": "0,01",
+                "cfop": 1111,
+                "acumulador": "001"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 2,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,02",
+                "cfop": 2222,
+                "acumulador": "002"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 3,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,03",
+                "cfop": 3333,
+                "acumulador": "003"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 4,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,04",
+                "cfop": 4444,
+                "acumulador": "004"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 5,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,05",
+                "cfop": 5555,
+                "acumulador": "005"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 6,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,06",
+                "cfop": 6666,
+                "acumulador": "006"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 7,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,07",
+                "cfop": 7777,
+                "acumulador": "007"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 8,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,08",
+                "cfop": 8888,
+                "acumulador": "008"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 9,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,09",
+                "cfop": 9999,
+                "acumulador": "009"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 10,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,1",
+                "cfop": 11110,
+                "acumulador": "010"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 11,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,11",
+                "cfop": 12221,
+                "acumulador": "011"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 12,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,12",
+                "cfop": 13332,
+                "acumulador": "012"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 13,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,13",
+                "cfop": 14443,
+                "acumulador": "013"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 14,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,14",
+                "cfop": 15554,
+                "acumulador": "014"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 15,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,15",
+                "cfop": 16665,
+                "acumulador": "015"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 16,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,16",
+                "cfop": 17776,
+                "acumulador": "016"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 17,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,17",
+                "cfop": 18887,
+                "acumulador": "017"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 18,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,18",
+                "cfop": 19998,
+                "acumulador": "018"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 19,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,19",
+                "cfop": 21109,
+                "acumulador": "019"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 20,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,2",
+                "cfop": 22220,
+                "acumulador": "020"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 21,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,21",
+                "cfop": 23331,
+                "acumulador": "021"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 22,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,22",
+                "cfop": 24442,
+                "acumulador": "022"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 23,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,23",
+                "cfop": 25553,
+                "acumulador": "023"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 24,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,24",
+                "cfop": 26664,
+                "acumulador": "024"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 25,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,25",
+                "cfop": 27775,
+                "acumulador": "025"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 26,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,26",
+                "cfop": 28886,
+                "acumulador": "026"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 27,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,27",
+                "cfop": 29997,
+                "acumulador": "027"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 28,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,28",
+                "cfop": 31108,
+                "acumulador": "028"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 29,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,29",
+                "cfop": 32219,
+                "acumulador": "029"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 30,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,3",
+                "cfop": 33330,
+                "acumulador": "030"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 31,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,31",
+                "cfop": 34441,
+                "acumulador": "031"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 32,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,32",
+                "cfop": 35552,
+                "acumulador": "032"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 33,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,33",
+                "cfop": 36663,
+                "acumulador": "033"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 34,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,34",
+                "cfop": 37774,
+                "acumulador": "034"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 35,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,35",
+                "cfop": 38885,
+                "acumulador": "035"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 36,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,36",
+                "cfop": 39996,
+                "acumulador": "036"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 37,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,37",
+                "cfop": 41107,
+                "acumulador": "037"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 38,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,38",
+                "cfop": 42218,
+                "acumulador": "038"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 39,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,39",
+                "cfop": 43329,
+                "acumulador": "039"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 40,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,4",
+                "cfop": 44440,
+                "acumulador": "040"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 41,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,41",
+                "cfop": 45551,
+                "acumulador": "041"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 42,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,42",
+                "cfop": 46662,
+                "acumulador": "042"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 43,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,43",
+                "cfop": 47773,
+                "acumulador": "043"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 44,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,44",
+                "cfop": 48884,
+                "acumulador": "044"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 45,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,45",
+                "cfop": 49995,
+                "acumulador": "045"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 46,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,46",
+                "cfop": 51106,
+                "acumulador": "046"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 47,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,47",
+                "cfop": 52217,
+                "acumulador": "047"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 48,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,48",
+                "cfop": 53328,
+                "acumulador": "048"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 49,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,49",
+                "cfop": 54439,
+                "acumulador": "049"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 50,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,5",
+                "cfop": 55550,
+                "acumulador": "050"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 51,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,51",
+                "cfop": 56661,
+                "acumulador": "051"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 52,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,52",
+                "cfop": 57772,
+                "acumulador": "052"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 53,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,53",
+                "cfop": 58883,
+                "acumulador": "053"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 54,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,54",
+                "cfop": 59994,
+                "acumulador": "054"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 55,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,55",
+                "cfop": 61105,
+                "acumulador": "055"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 56,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,56",
+                "cfop": 62216,
+                "acumulador": "056"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 57,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,57",
+                "cfop": 63327,
+                "acumulador": "057"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 58,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,58",
+                "cfop": 64438,
+                "acumulador": "058"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 59,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,59",
+                "cfop": 65549,
+                "acumulador": "059"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 60,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,6",
+                "cfop": 66660,
+                "acumulador": "060"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 61,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,61",
+                "cfop": 67771,
+                "acumulador": "061"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 62,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,62",
+                "cfop": 68882,
+                "acumulador": "062"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 63,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,63",
+                "cfop": 69993,
+                "acumulador": "063"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 64,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,64",
+                "cfop": 71104,
+                "acumulador": "064"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 65,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,65",
+                "cfop": 72215,
+                "acumulador": "065"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 66,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,66",
+                "cfop": 73326,
+                "acumulador": "066"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 67,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,67",
+                "cfop": 74437,
+                "acumulador": "067"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 68,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,68",
+                "cfop": 75548,
+                "acumulador": "068"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 69,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,69",
+                "cfop": 76659,
+                "acumulador": "069"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 70,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,7",
+                "cfop": 77770,
+                "acumulador": "070"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 71,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,71",
+                "cfop": 78881,
+                "acumulador": "071"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 72,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,72",
+                "cfop": 79992,
+                "acumulador": "072"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 73,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,73",
+                "cfop": 81103,
+                "acumulador": "073"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 74,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,74",
+                "cfop": 82214,
+                "acumulador": "074"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 75,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,75",
+                "cfop": 83325,
+                "acumulador": "075"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 76,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,76",
+                "cfop": 84436,
+                "acumulador": "076"
+            }
+        ]
+    },
+    {
+        "tabela": "Substituição Tributária",
+        "data": [
+            {
+                "nome_pj": "AAAAA SUBS TRIBUTARIA",
+                "cnpj": 1,
+                "antecipado": "Antecipado de Entrada",
+                "mva": "0,01",
+                "cfop": 1111,
+                "acumulador": "001"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 2,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,02",
+                "cfop": 2222,
+                "acumulador": "002"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 3,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,03",
+                "cfop": 3333,
+                "acumulador": "003"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 4,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,04",
+                "cfop": 4444,
+                "acumulador": "004"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 5,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,05",
+                "cfop": 5555,
+                "acumulador": "005"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 6,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,06",
+                "cfop": 6666,
+                "acumulador": "006"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 7,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,07",
+                "cfop": 7777,
+                "acumulador": "007"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 8,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,08",
+                "cfop": 8888,
+                "acumulador": "008"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 9,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,09",
+                "cfop": 9999,
+                "acumulador": "009"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 10,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,1",
+                "cfop": 11110,
+                "acumulador": "010"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 11,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,11",
+                "cfop": 12221,
+                "acumulador": "011"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 12,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,12",
+                "cfop": 13332,
+                "acumulador": "012"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 13,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,13",
+                "cfop": 14443,
+                "acumulador": "013"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 14,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,14",
+                "cfop": 15554,
+                "acumulador": "014"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 15,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,15",
+                "cfop": 16665,
+                "acumulador": "015"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 16,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,16",
+                "cfop": 17776,
+                "acumulador": "016"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 17,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,17",
+                "cfop": 18887,
+                "acumulador": "017"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 18,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,18",
+                "cfop": 19998,
+                "acumulador": "018"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 19,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,19",
+                "cfop": 21109,
+                "acumulador": "019"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 20,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,2",
+                "cfop": 22220,
+                "acumulador": "020"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 21,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,21",
+                "cfop": 23331,
+                "acumulador": "021"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 22,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,22",
+                "cfop": 24442,
+                "acumulador": "022"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 23,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,23",
+                "cfop": 25553,
+                "acumulador": "023"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 24,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,24",
+                "cfop": 26664,
+                "acumulador": "024"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 25,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,25",
+                "cfop": 27775,
+                "acumulador": "025"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 26,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,26",
+                "cfop": 28886,
+                "acumulador": "026"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 27,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,27",
+                "cfop": 29997,
+                "acumulador": "027"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 28,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,28",
+                "cfop": 31108,
+                "acumulador": "028"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 29,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,29",
+                "cfop": 32219,
+                "acumulador": "029"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 30,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,3",
+                "cfop": 33330,
+                "acumulador": "030"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 31,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,31",
+                "cfop": 34441,
+                "acumulador": "031"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 32,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,32",
+                "cfop": 35552,
+                "acumulador": "032"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 33,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,33",
+                "cfop": 36663,
+                "acumulador": "033"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 34,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,34",
+                "cfop": 37774,
+                "acumulador": "034"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 35,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,35",
+                "cfop": 38885,
+                "acumulador": "035"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 36,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,36",
+                "cfop": 39996,
+                "acumulador": "036"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 37,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,37",
+                "cfop": 41107,
+                "acumulador": "037"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 38,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,38",
+                "cfop": 42218,
+                "acumulador": "038"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 39,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,39",
+                "cfop": 43329,
+                "acumulador": "039"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 40,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,4",
+                "cfop": 44440,
+                "acumulador": "040"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 41,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,41",
+                "cfop": 45551,
+                "acumulador": "041"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 42,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,42",
+                "cfop": 46662,
+                "acumulador": "042"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 43,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,43",
+                "cfop": 47773,
+                "acumulador": "043"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 44,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,44",
+                "cfop": 48884,
+                "acumulador": "044"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 45,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,45",
+                "cfop": 49995,
+                "acumulador": "045"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 46,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,46",
+                "cfop": 51106,
+                "acumulador": "046"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 47,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,47",
+                "cfop": 52217,
+                "acumulador": "047"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 48,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,48",
+                "cfop": 53328,
+                "acumulador": "048"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 49,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,49",
+                "cfop": 54439,
+                "acumulador": "049"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 50,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,5",
+                "cfop": 55550,
+                "acumulador": "050"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 51,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,51",
+                "cfop": 56661,
+                "acumulador": "051"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 52,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,52",
+                "cfop": 57772,
+                "acumulador": "052"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 53,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,53",
+                "cfop": 58883,
+                "acumulador": "053"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 54,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,54",
+                "cfop": 59994,
+                "acumulador": "054"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 55,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,55",
+                "cfop": 61105,
+                "acumulador": "055"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 56,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,56",
+                "cfop": 62216,
+                "acumulador": "056"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 57,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,57",
+                "cfop": 63327,
+                "acumulador": "057"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 58,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,58",
+                "cfop": 64438,
+                "acumulador": "058"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 59,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,59",
+                "cfop": 65549,
+                "acumulador": "059"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 60,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,6",
+                "cfop": 66660,
+                "acumulador": "060"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 61,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,61",
+                "cfop": 67771,
+                "acumulador": "061"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 62,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,62",
+                "cfop": 68882,
+                "acumulador": "062"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 63,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,63",
+                "cfop": 69993,
+                "acumulador": "063"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 64,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,64",
+                "cfop": 71104,
+                "acumulador": "064"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 65,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,65",
+                "cfop": 72215,
+                "acumulador": "065"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 66,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,66",
+                "cfop": 73326,
+                "acumulador": "066"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 67,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,67",
+                "cfop": 74437,
+                "acumulador": "067"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 68,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,68",
+                "cfop": 75548,
+                "acumulador": "068"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 69,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,69",
+                "cfop": 76659,
+                "acumulador": "069"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 70,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,7",
+                "cfop": 77770,
+                "acumulador": "070"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 71,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,71",
+                "cfop": 78881,
+                "acumulador": "071"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 72,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,72",
+                "cfop": 79992,
+                "acumulador": "072"
+            },
+            {
+                "nome_pj": "CCCCC",
+                "cnpj": 73,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,73",
+                "cfop": 81103,
+                "acumulador": "073"
+            },
+            {
+                "nome_pj": "DDDDD",
+                "cnpj": 74,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,74",
+                "cfop": 82214,
+                "acumulador": "074"
+            },
+            {
+                "nome_pj": "AAAAA",
+                "cnpj": 75,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,75",
+                "cfop": 83325,
+                "acumulador": "075"
+            },
+            {
+                "nome_pj": "BBBBB",
+                "cnpj": 76,
+                "antecipado": "Antecipado Especial",
+                "mva": "0,76",
+                "cfop": 84436,
+                "acumulador": "076"
+            }
+        ]
+    }
+]

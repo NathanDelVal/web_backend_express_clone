@@ -1,0 +1,2499 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<!--HEADER-->
+
+<head>
+	<meta charset="utf-8" />
+	<link rel="apple-touch-icon" sizes="76x76" href="../images/icon/apple-icon-mezzomo.png">
+	<link rel="icon" type="image/png" href="../images/icon/favicon_mezzomo3.png">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>Robotax: Notas Fiscais Empresa</title>
+	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+	<!-- Fonts and icons -->
+	<link rel="stylesheet" type="text/css"
+		href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+	<link src="../local/plugins/printjs/printjs.css">
+	</link>
+
+	<!-- CSS Files -->
+	<link href="../assets/css/material-dashboard.min.css" rel="stylesheet" />
+
+	<!--SWEET ALERT-->
+	<link rel="stylesheet" href="/local/plugins/sweetalert/css/sweetalert2.min.css" id="theme-styles">
+
+	<!--local CSS -->
+	<link rel="stylesheet" type="text/css" href="../local/notasfiscais.css">
+	<link href="../local/plugins/select2/select2.min.css" rel="stylesheet" />
+	<script src="../assets/js/core/jquery-3.5.1.js"></script>
+
+
+</head>
+
+<body class="">
+	<div class="wrapper">
+		<!-- SIDEBAR -->
+		<div class="sidebar" data-color="yellow" data-background-color="black"
+			data-image="../assets/img/contabeisbw.jpg">
+			<div class="sidebar-wrapper">
+				<ul class="nav">
+					{{> empresa/navbar_nf}}
+				</ul>
+			</div>
+		</div>
+
+		<!-- Plugin for the momentJs -->
+		<script src="../assets/js/plugins/moment.min.js"></script>
+		<!-- Plugin for the momentJs TRADUÇÕES LOCAIS -->
+		<script src="../assets/js/plugins/moment-with-locales.js"></script>
+		<!-- MAIN PANEL -->
+		<div class="main-panel">
+			<nav class="navbar navbar-expand-lg navbar-transparent">
+				<div class="container-fluid">
+					<div class="navbar-wrapper">
+						<div class="navbar-minimize">
+							<button id="minimizeSidebar" class="btn btn-just-icon btn-white btn-fab btn-round">
+								<i class="material-icons text_align-center visible-on-sidebar-regular">more_vert</i>
+								<i class="material-icons design_bullet-list-67 visible-on-sidebar-mini">view_list</i>
+							</button>
+						</div>
+						<a class="navbar-brand" href="/notas">Notas Fiscais Empresa</a>
+					</div>
+					{{> empresa/menu_apps_back}} {{> empresa/help_btn}}
+					<button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
+						aria-expanded="false" aria-label="Toggle navigation">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="navbar-toggler-icon icon-bar"></span>
+						<span class="navbar-toggler-icon icon-bar"></span>
+						<span class="navbar-toggler-icon icon-bar"></span>
+					</button>
+				</div>
+			</nav>
+			<!-- End Navbar -->
+			<div class="content" style="margin-top: 70px;">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-header card-header-info2">
+									<h4 class="card-title">Buscar</h4>
+									<p class="card-category">Insira o nome da Pessoa Jurídica ou CNPJ</p>
+								</div>
+								<div class="card-body">
+
+									<div class="container">
+										<form id='form_search_by_chave_acesso' method="post">
+											<!-- ajax post on getDataPreviewXML() -->
+											<div class="col-lg-12">
+												<div class="row align-items-center d-flex justify-content-end ">
+													<div class="col-chave card-body-input card-input">
+														<div
+															class="input-group form-group input-card-border card-busca">
+															<label class="bmd-label-floating">Chave de
+																acesso da NF-e</label>
+															<input id="input_chave_acesso" name="chave_de_acesso"
+																type="text" class="form-control" autocomplete="off"
+																required>
+														</div>
+													</div>
+													<div class="col-lg-1 ml-3">
+														<button type="submit" id='btn_search_by_chave_acesso'
+															class="btn pull-right">
+															<i class="material-icons">visibility</i>
+														</button>
+													</div>
+												</div>
+											</div>
+										</form>
+
+										<form id="form_busca" role="form" method="post" action="/empresa/buscar-notas">
+											<div class="row">
+												<!--NOMEPJ-->
+												<div class="col-md-7 card-body-input">
+													<div class="input-group form-group input-card-border">
+														<label class="bmd-label-floating">Pessoa Jurídica, CNPJ ou
+															Número da
+															nota</label>
+														<input id="nomeBuscadoNotas" name="nomeBuscadoNotas" type="text"
+															class="form-control disabled" autocomplete="off"
+															value="{{cliente}}">
+													</div>
+												</div>
+
+												<!--DATA INICIAL-->
+												<div class="col-md-2 card-body-input">
+													<div class="form-group input-card-border" id="formdata1">
+														<label class="bmd-label-floating">Data Entrada Inicial</label>
+														<div class='input-group date'>
+															<input type='text' class="form-control" id='datainicial'
+																name="datainicial" autocomplete="off" value="" />
+															<span class="input-group-addon"><i
+																	class="material-icons">today</i></span>
+														</div>
+													</div>
+												</div>
+												<!--DATA FINAL-->
+												<div class="col-md-2 card-body-input">
+													<div class="form-group input-card-border" id="formdata2">
+														<label class="bmd-label-floating">Data Entrada Final</label>
+														<div class='input-group date'>
+															<input type='text' class="form-control" id='datafinal'
+																name="datafinal" autocomplete="off" value="" />
+															<span class="input-group-addon"><i
+																	class="material-icons">today</i></span>
+														</div>
+													</div>
+												</div>
+											</div>
+
+
+											<div class="form-check form-check-radio btn-section-operation">
+												<label class="form-check-label radio-label">
+													<input class="form-check-input" type="radio" name="radioNotas"
+														id="radioEntrada" value="entrada" onclick="radioBold(this)"
+														checked>
+													Notas de Entrada (NF-e)
+													<span class="circle">
+														<span class="check"></span>
+													</span>
+												</label>
+											</div>
+
+											<div class="form-check form-check-radio btn-section-operation">
+												<label class="form-check-label radio-label">
+													<input class="form-check-input" type="radio" name="radioNotas"
+														id="radioSaida" value="saida" onclick="radioBold(this)">
+													Notas de Saída (NF-e/NFC-e)
+													<span class="circle">
+														<span class="check"></span>
+													</span>
+												</label>
+											</div>
+
+											<div class="form-check form-check-radio btn-section-operation">
+												<label class="form-check-label radio-label">
+													<input class="form-check-input" type="radio" name="radioNotas"
+														id="radioServico" value="servico" onclick="radioBold(this)"
+														disabled>
+													Notas de Serviços (NS-e)
+													<span class="circle">
+														<span class="check"></span>
+													</span>
+												</label>
+											</div>
+
+											<div id="default_area_btn_buscar">
+												<button id="btn_buscar" type="submit" class="btn pull-right"
+													name="btnbusca">Buscar</button>
+											</div>
+
+											<div class="row">
+												<div class="col-md-12">
+
+													<div class="divtabela">
+														<h1 class="h1invisivel"> </h1>
+														<div class="row">
+															<div class="col-sm-12 col-md-12 col-lg-12">
+																<p>
+																	<button id="btn_filtrar"
+																		onClick="changeFilterStatus(this)"
+																		class="btn btn-link btn-sm" type="button"
+																		data-toggle="collapse"
+																		data-target="#collapseExample"
+																		aria-expanded="false"
+																		aria-controls="collapseExample">
+																		Filtrar<i class="material-icons">expand_more</i>
+																	</button>
+																</p>
+																<div class="collapse" id="collapseExample">
+																	<div class="col-sm-12 col-md-12 col-lg-12 mb-3">
+																		<div class="row align-items-center">
+
+																			<div class="col-lg-12 text-end">
+																				<a id="limpar_filtros" href=""
+																					style="color: #000; font-weight: 500;">Limpar
+																					Filtros</a>
+																			</div>
+
+																			<div class="col-sm-12 col-md-6 col-lg-4">
+																				<div class="form-group has-default">
+																					<div class="input-group">
+																						<label>
+																							<h6
+																								style="font-weight: bold;">
+																								Status</h6>
+																						</label>
+																						<select name="nf_status"
+																							title='Selecionar status'
+																							class="custom-select form-control selectpicker "
+																							data-style="btn-2 btn-link "
+																							type="text "
+																							oninput="this.className=''">
+																							<option value="">Limpar
+																								Filtro
+																							</option>
+																							<option value="Autorizada">
+																								Autorizadas
+																							</option>
+																							<option value="Cancelada">
+																								Canceladas
+																							</option>
+																							<option
+																								value="Não Autorizada">
+																								Não Autorizadas
+																							</option>
+																							<option value="Inutilizada">
+																								Inutilizadas
+																							</option>
+																						</select>
+																					</div>
+																				</div>
+																			</div>
+
+																			<div class="col-sm-12 col-md-6 col-lg-4">
+																				<!--<h5>Manifestação</h5>-->
+																				<div class="form-group has-default">
+																					<div class="input-group">
+																						<label>
+																							<h6
+																								style="font-weight: bold;">
+																								Manifestação</h6>
+																						</label>
+																						<select name="nf_manifestacao"
+																							title='Selecionar manifestação'
+																							class="custom-select form-control selectpicker "
+																							data-style="btn-2 btn-link "
+																							type="text "
+																							oninput="this.className=''">
+																							<option value="Ciente">
+																								Ciente
+																							</option>
+																							<option value="Confirmada">
+																								Confirmada </option>
+																							<option
+																								value="Não Realizada">
+																								Não Realizada </option>
+																							<option
+																								value="Desconhecida">
+																								Desconhecida </option>
+																							<option
+																								value="Sem Manifestação">
+																								Sem
+																								Manifestação </option>
+																						</select>
+																					</div>
+																				</div>
+																			</div>
+
+																			<div class="col-sm-12 col-md-6 col-lg-4">
+																				<div class="form-group has-default">
+																					<div class="input-group">
+																						<label>
+																							<h6
+																								style="font-weight: bold;">
+																								Origem</h6>
+																						</label>
+																						<select name="nf_origem"
+																							title='Selecionar origem'
+																							class="custom-select form-control selectpicker "
+																							data-style="btn-2 btn-link "
+																							type="text "
+																							oninput="this.className=''">
+																							<option value="1">SEFAZ
+																							</option>
+																							<option value="0">Upload XML
+																								Site</option>
+																						</select>
+																					</div>
+																				</div>
+																			</div>
+
+																		</div>
+																	</div>
+																	<div class="col-sm-12 col-md-12 col-lg-12">
+																		<div class="row align-items-center">
+
+																			<div class="col-sm-12 col-md-6 col-lg-2 card-body-input mr-0 ml-0"
+																				style="padding: 0 15px;">
+																				<label>
+																					<h6 style="font-weight: bold;">Valor
+																						Inicial
+																					</h6>
+																				</label>
+																				<div
+																					class="input-group form-group input-card-border p-0 m-0">
+																					<input name="nf_valor_inicial"
+																						type="text"
+																						class="form-control p-2"
+																						placeholder="0,00"
+																						autocomplete="off" value=""
+																						onkeypress="$(this).mask('R$ 999.990,00')">
+																					<span
+																						class="input-group-addon group-addon">
+																						<i
+																							class="material-icons">attach_money</i>
+																					</span>
+																				</div>
+																			</div>
+
+																			<div class="com-sm-12 col-md-6 col-lg-2 card-body-input mr-0 ml-0"
+																				style="padding: 0 15px;">
+																				<label>
+																					<h6 style="font-weight: bold;">Valor
+																						Final
+																					</h6>
+																				</label>
+																				<div
+																					class="input-group form-group input-card-border p-0 m-0">
+																					<input name="nf_valor_final"
+																						type="text"
+																						class="form-control p-2"
+																						placeholder="999.999,99"
+																						autocomplete="off" value=""
+																						onkeypress="$(this).mask('R$ 999.990,00')">
+																					<span
+																						class="input-group-addon group-addon">
+																						<i
+																							class="material-icons">attach_money</i>
+																					</span>
+																				</div>
+																			</div>
+
+																			<div class="col-sm-12 col-md-6 col-lg-4 card-body-input mr-0 ml-0"
+																				style="padding: 0 15px;">
+																				<label>
+																					<h6 style="font-weight: bold;">
+																						Data de Entrada</h6>
+																				</label>
+																				<div
+																					class="input-group form-group input-card-border p-0 m-0">
+																					<input name="nf_mes_referencia"
+																						id="datepickerDataDeEntrada"
+																						type="text"
+																						class="form-control p-2 monthPicker"
+																						placeholder="Selecionar Data de Entrada"
+																						autocomplete="off" value="">
+																					<span
+																						class="input-group-addon group-addon">
+																						<i
+																							class="material-icons">today</i>
+																					</span>
+																				</div>
+
+																			</div>
+
+																			<div class="col-sm-12 col-md-6 col-lg-4">
+																				<div class="form-group has-default">
+																					<div class="input-group">
+																						<label>
+																							<h6
+																								style="font-weight: bold;">
+																								Adesivos</h6>
+																						</label>
+																						<select name="nf_etiquetas"
+																							id="nf_etiquetas"
+																							title='Selecionar Etiqueta'
+																							class="custom-select form-control selectpicker nf-etiquetas-filtro"
+																							data-style="btn-2 btn-link "
+																							type="text "
+																							oninput="this.className=''">
+																							<option value="">Limpar
+																								Filtro
+																							</option>
+																						</select>
+																					</div>
+																				</div>
+																			</div>
+
+																		</div>
+																	</div>
+																	<div id="filter_area_btn_buscar">
+
+																	</div>
+																</div>
+																<div class="clearfix">
+
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div id="rowDataTable" class="row hideRowCard">
+						<div class="col-md-12">
+
+							<div class="card">
+								<div class="card-header card-header-info2">
+									<h4 id="cardTitle" class="card-title"></h4>
+									<!--<p class="card-category">Nenhum dado encontrado, tente mudar os parâmetros da sua busca</p>-->
+								</div>
+								<div class="card-body">
+
+									<label class="label-notas ">Valor total R$ <strong id='total_valor'
+											style="color: #edcd00!important; font-weight: 600!important;"></strong> .
+										Números
+										de notas:
+										<strong id='total_notas'
+											style="color: #edcd00!important; font-weight: 600!important;"></strong>
+									</label>
+
+									<br>
+
+									<div class="row">
+										<div class="col-sm-12 col-md-12 col-lg-12">
+											<div class="table-responsive box drag">
+
+												
+												<table id="mytable"
+													class="table display table-striped table-no-bordered table-hover"
+													cellspacing="0" width="100%" style="width:100%">
+													<thead class="thead-light">
+														<!--TABELA CABEÇALHO-->
+														<tr class="table-header">
+															<th>
+																<div class="form-check">
+																	<label class="form-check-label">
+																		<input id="checkall" name="checkbox"
+																			onchange="marcartodos()"
+																			class="form-check-input form-check-input"
+																			type="checkbox" value="">
+																		<span class="form-check-sign">
+																			<span class="check"></span>
+																		</span>
+																	</label>
+																</div>
+															</th>
+															<th>ID</th>
+															<th style="min-width: 105px;">Ações</th>
+															<th>Adesivos</th>
+															<th>Anotações</th>
+															<th>Numero Manifestação</th>
+															<th>Manifestação</th>
+															<th>Emitente</th>
+															<th>Número</th>
+															<th>Valor</th>
+															<th>Data de Emissao</th>
+															<th>Data de Entrada</th>
+															<th>Chave de Acesso</th>
+															<th>CNPJ</th>
+															<th>Inscrição Estadual</th>
+															<th>Status</th>
+															<th>Origem</th>
+															<th>Modelo</th>
+															<th>Série</th>
+															<th>UF Origem</th>
+															<th>UF Destino</th>
+															<th>Protocolada</th>
+															<th>Id_ChavedeAcesso</th>
+															<th>Destinatário</th>
+															<th>CNPJ Destinatário</th>
+														</tr>
+													</thead>
+
+													<tbody>
+													</tbody>
+
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			{{> empresa/footer_internal}}
+		</div>
+
+	</div>
+
+	{{!-- MODAL TO VIEW NOTA BY CHAVE DE ACESSO--}}
+	<div class="modal fade" id="modal_view_by_chave_acesso" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header" style="padding: 1.5rem;">
+					<!--<h5 class="modal-title text-center ml-4" id="exampleModalLabel">
+					</h5>-->
+					<button id="btn_closemodal" type="button" data-dismiss="modal" class="close" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div id="print_modal_view_by_chave_acesso" class="modal-body pt-0">
+					<div class="container-fluid border-header" style="margin-top: 2rem;">
+						<div class="row" style="align-items: baseline;">
+							<div class="col-lg-6" id="valores_antecipados">
+								<div class="header-hide">
+									<h5 style="font-weight: bold;">Tributações</h5>
+									<h6 style="font-weight: bold;">Antecipados:</h6>
+									<h6>Tipo Antecipado: R$ 0,00</h6>
+									<h6 class="text-center" style="font-weight: bold;">Total: R$ 0,00</h6>
+								</div>
+							</div>
+
+							<div class="col-lg-3">
+								<h6 class="text-justify msg-erro"></h6>
+							</div>
+
+							<div class="col-lg-3 text-end">
+								<button id="btn_imprimir_pdf" class="btn btn-sm buttons-excel buttons-html5"
+									tabindex="0" aria-controls="mytable" type="button"><span><i
+											class="material-icons">print</i>
+									</span>
+									<div class="ripple-container"></div>
+								</button>
+								<button id="btn_download_pdf" class="btn btn-sm buttons-excel buttons-html5"
+									tabindex="0" aria-controls="mytable" type="button">PDF<span>
+									</span>
+									<div class="ripple-container"></div>
+								</button>
+								<button id="btn_download_xml" class="btn btn-sm buttons-excel buttons-html5"
+									tabindex="0" aria-controls="mytable" type="button">XML<span>
+									</span>
+									<div class="ripple-container"></div>
+								</button>
+							</div>
+						</div>
+					</div>
+					<div id="viewer_by_chave_acesso">
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	{{!-- MODAL TO VIEW NFC-e NOTA BY CHAVE DE ACESSO--}}
+	<div class="modal fade" id="modal_view_by_chave_acesso_NFCe" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header" style="padding: 1.5rem;">
+					<!--<h5 class="modal-title text-center ml-4" id="exampleModalLabel">
+					</h5>-->
+					<button id="btn_closemodal" type="button" data-dismiss="modal" class="close" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div id="print_modal_view_by_chave_acesso_nfce" class="modal-body pt-0">
+
+					<div class="container-fluid border-header" style="margin-top: 2rem;">
+						<div class="row">
+							<!--
+							<div class="col-lg-6" id="valores_antecipados">
+								<h5 style="font-weight: bold;">Tributações</h5>
+								<h6 style="font-weight: bold;">Antecipados:</h6>
+								<h6>Tipo Antecipado: R$ 0,00</h6>
+								<h6 class="text-center" style="font-weight: bold;">Total: R$ 0,00</h6>
+							</div>
+
+							<div class="col-lg-3">
+								<h6 class="text-justify msg-erro"></h6>
+							</div>
+						-->
+
+							<div class="col-lg-3 text-end">
+								<button id="btn_imprimir_pdf_nfce" class="btn btn-sm buttons-excel buttons-html5"
+									tabindex="0" aria-controls="mytable" type="button"><span><i
+											class="material-icons">print</i>
+									</span>
+									<div class="ripple-container"></div>
+								</button>
+								<button id="btn_download_pdf_nfce" class="btn btn-sm buttons-excel buttons-html5"
+									tabindex="0" aria-controls="mytable" type="button">PDF<span>
+									</span>
+									<div class="ripple-container"></div>
+								</button>
+								<button id="btn_download_xml_nfce" class="btn btn-sm buttons-excel buttons-html5"
+									tabindex="0" aria-controls="mytable" type="button">XML<span>
+									</span>
+									<div class="ripple-container"></div>
+								</button>
+
+							</div>
+						</div>
+					</div>
+					<div id="viewer_by_chave_acesso_nfce">
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="modal_add_tag" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
+		<form method="POST" action="/notas/adicionarsuggestion" id="inserirSuggestionEtiqueta">
+			<div class="modal-dialog modal-sm" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title text-center" id="exampleModalLabel">Nova Etiqueta
+						</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="container p-0 mb-4">
+							<div class="form-group">
+								<label class="bmd-label-floating">Nome da Etiqueta</label>
+								<input class="form-control" id="nome_etiqueta" name="nome_etiqueta"
+									onkeyup="$(this).val($(this).val().substr(0, 1).toUpperCase() + $(this).val().substr(1));"
+									type="text" required autocomplete="off">
+							</div>
+						</div>
+						<div class="container p-0">
+							<!--
+							<label style="color: #292929;">Cor</label>
+							<div class="radio-toolbar">
+								<input name="cor_etiqueta" type="radio" id="tagyellow" name="radiotag" value="#edcd00">
+								<label style="background-color: #edcd00;" for="tagyellow"></label>
+
+								<input name="cor_etiqueta" type="radio" id="tagblack" name="radiotag" value="#b29000">
+								<label style="background-color: #b29000;" for="tagblack"></label>
+
+								<input name="cor_etiqueta" type="radio" id="taggrey" name="radiotag" value="#272727">
+								<label style="background-color: #272727;" for="taggrey"></label>
+
+								<input name="cor_etiqueta" type="radio" id="tagwhite" name="radiotag" value="#eeeeee">
+								<label style="background-color: #eeeeee;" for="tagwhite"></label>
+							</div>
+							-->
+							<label for="exampleColorInput" class="form-label">Clique e selecione a cor da
+								etiqueta</label>
+							<input type="color" id="cor_etiqueta" name="cor_etiqueta"
+								class="form-control form-control-color ml-auto mr-auto" value="#edcd00"
+								title="Selecionar a Cor">
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn" data-dismiss="modal">Cancelar</button>
+						<button type="submit" class="btn"> SALVAR</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<div class="modal fade" id="modal_delete_tag" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+		<div class="modal-dialog modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title text-center" id="exampleModalLabel">Deletar Etiqueta
+					</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div id="rowtag" class="modal-body text-center rowtag">
+
+				</div>
+
+				<div class="modal-footer">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Edit Data_Entrada Modal-->
+	<div class="modal fade" id="ModalalterarData" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
+		<form method="post" action="/notas/update-notas-dataentrada" id="form_update_notas_dataentrada">
+			<div class="modal-dialog modal-sm" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" aria-label="Close" data-dismiss="modal">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<div class="container">
+							<h4 class="modal-title mt-3" style="font-weight: bold; font-size: 1.4rem"
+								id="exampleModalLabel">Data de Entrada</h4>
+							<h6 class="modal-title" id="exampleModalLabel">Cuidado ao Preencher</h6>
+						</div>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<input type="text" id="nova_dataentrada" name="nova_dataentrada" class="form-control"
+								placeholder="Exemplo: 31/12/2020" onkeypress="$(this).mask('00/00/0000')" required>
+							<input type="hidden" id="chavedeacesso_alterar_data" name="chavedeacesso_alterar_data">
+							<input type="hidden" id="id_chavedeacesso_alterar_data"
+								name="id_chavedeacesso_alterar_data">
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn" data-dismiss="modal"
+							style="margin-right: .3rem;">Cancelar</button>
+						<button type="submit" class="btn">SALVAR</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+
+
+	<script>
+
+		$("#form_update_notas_dataentrada").submit(function (e) {
+			e.preventDefault();
+			var post_url = $(this).attr("action");
+			var request_method = $(this).attr("method");
+			var form_data = $(this).serialize();
+			$.ajax({
+				url: post_url,
+				type: request_method,
+				data: form_data
+			}).done(function (response) {
+
+				if (response.msg == "Data de Entrada atualizada!") {
+
+					document.getElementById("form_update_notas_dataentrada").reset(); //reset formulário
+					$('#ModalalterarData').modal('hide')
+
+					Swal.fire({
+						position: 'center',
+						icon: 'success',
+						title: "Sucesso!",
+						text: response.msg,
+						timer: 2000,
+						showConfirmButton: false
+					});
+
+					setTimeout(function () {
+						$("#btn_buscar").click()
+					}, 2000)
+
+
+				}
+
+				if (response.msg == "Erro ao gravar dados, tente novamente.") {
+					Swal.fire({
+						position: 'center',
+						icon: 'warning',
+						title: "Aviso!",
+						text: response.msg
+					});
+				}
+
+			})
+		})
+
+	</script>
+	<!-- Edit Data_Entrada Modal - FIM-->
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+	<!--Correção do Violation Scroll non-passive event-->
+	<script src=" ../local/plugins/fix-non-passive.js"></script>
+	<!-- Core JS Files -->
+
+	<script src="../assets/js/core/popper.min.js"></script>
+	<script src="../assets/js/core/bootstrap-material-design.js"></script>
+	<script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+	<!-- Plugin for Sweet Alert -->
+	<!-- Forms Validations Plugin -->
+	<script src="../assets/js/plugins/jquery.validate.min.js"></script>
+	<!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
+	<script src="../assets/js/plugins/jquery.bootstrap-wizard.js"></script>
+	<!-- Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+	<script src="../assets/js/plugins/bootstrap-selectpicker.js"></script>
+	<!-- Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+	<script src="../assets/js/plugins/bootstrap-datetimepicker.min.js"></script>
+	<!-- Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs -->
+	<script src="../assets/js/plugins/bootstrap-tagsinput.js"></script>
+	<!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+	<script src="../assets/js/plugins/jasny-bootstrap.min.js"></script>
+	<!-- Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar -->
+	<script src="../assets/js/plugins/fullcalendar.min.js"></script>
+	<!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
+	<script src="../assets/js/plugins/jquery-jvectormap.js"></script>
+	<!-- Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+	<script src="../assets/js/plugins/nouislider.min.js"></script>
+	<!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+	<!-- Library for adding dinamically elements -->
+	<script src="../assets/js/plugins/arrive.min.js"></script>
+	<!-- Chartist JS -->
+	<script src="../assets/js/plugins/chartist.min.js"></script>
+	<!-- Notifications Plugin -->
+	<script src="../assets/js/plugins/bootstrap-notify.js"></script>
+	<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+	<script src="../assets/js/material-dashboard.min.js?v=2.1.2" type="text/javascript"></script>
+	<!--_______________________________________________LOCAL________________________________________________-->
+	<!-- DataTables.net Plugin, full documentation here: https://datatables.net/ -->
+	<script src="../local/plugins/dataTables/dataTables.min.js"></script>
+	<!--SORTING DATE EU-->
+	<script src="https://cdn.datatables.net/plug-ins/1.10.12/sorting/date-eu.js"></script>
+	<!--ROWGROUP-->
+	<script src="https://cdn.datatables.net/rowgroup/1.0.2/js/dataTables.rowGroup.min.js"></script>
+	<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.colVis.min.js"></script>
+	<!--DRAG MOUSE-->
+	<script src="../local/plugins/drag/drag.js"></script>
+
+	<!--MASK FOR FORMS
+	<script src="../local/plugins/mask_input/jquery.maskedinput.js" type="text/javascript"></script>-->
+	<!-- SELECTED2 CLIPBOARD -->
+	<script src="../local/plugins/dataTables/selected2clipboard.js"></script>
+	{{> empresa/modal_chamados}}
+	<script src="../local/page_document_ready/script_notas_fiscais.js" type="text/javascript"></script>
+	<!--______________________________________________LOCAL________________________________________________--->
+	<!-- <script src="../local/metodos/post/import_notas_fiscais.js"></script> -->
+
+	<!-- AJAX JQUERY POST FORM DATA MODAL -->
+	<script src="../local/metodos/post/update_modal_data.js"></script>
+	<script src="../local/plugins/printjs/print.min.js"></script>
+	<script src="../local/plugins/mascara/abreviaNumero.js"></script>
+
+	<script src=" ../local/plugins/select2/select2.min.js"></script>
+
+	<!--SWEET ALERT-->
+	<script src="../local/plugins/sweetalert/js/sweetalert2.min.js"></script>
+	<link rel="stylesheet" href="../local/plugins/sweetalert/css/sweetalert2.min.css" id="theme-styles">
+
+	<!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
+	<script src="../assets/js/plugins/bootstrap-tagsinput.js"></script>
+
+	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>-->
+
+	<script src="../local/plugins/autocomplete/suggest-autocomplete.js"></script>
+
+	<script src="../local/metodos/alert/loading.js"></script>
+
+
+
+	<script>
+
+		function atualizarDiferencialAliquota(button, chave_de_acesso, descricao) {
+			//var chave_de_acesso = $('#chave_de_acesso_nota_modal').textContent
+			var status_switch_aliquota = $(button).attr("aria-pressed")
+			// status inversion fix
+			if (status_switch_aliquota == "false") {
+				status_switch_aliquota = 'SIM'
+			}
+			if (status_switch_aliquota == "true") {
+				status_switch_aliquota = 'NÃO'
+			}
+			//console.log( "status_switch_aliquota do botão : ", status_switch_aliquota, chave_de_acesso, descricao )
+
+			$.ajax({
+				async: "false",
+				url: '/notas/update-notas-difaliquota',
+				type: 'POST',
+				data: { chave_de_acesso, descricao, status_switch_aliquota }
+			}).done(function (response) { ///
+				//$("#server-results").html(response);
+				var gif = "";
+				if (response == "Diferêncial de Alíquota atualizado!") {
+					gif = "success"
+				}
+				else if (response == "Diferênciais de Alíquota atualizados!") {
+					gif = "success"
+				}
+				else if (response == "Erro ao gravar dados, tente novamente.") {
+					gif = "warning"
+				}
+				Swal.fire({
+					position: 'center',
+					icon: gif,
+					title: response,
+					showConfirmButton: false,
+					timer: 2000
+				});
+				setTimeout(function () {
+					modal_aliq_hide();
+					btnbusca_trigger();
+				}, 2000);
+
+			});
+
+
+
+		}
+
+		function radioBold(thisRadio) {
+			//removendo classe radio-label de todos
+			var labelradios = $(".radio-label");
+			labelradios.map(function () {
+				$(this).removeClass('radio-bold');
+			})
+			//adicionando classe radio-label somente ao item clicado
+			var label = thisRadio.parentNode
+			$(label).addClass('radio-bold');
+		}
+	</script>
+
+	<script>
+		//variável que contém a tabela
+		var tabelaNotasFiscais = null;
+		$(document).ready(function () {
+			//ACTIVE NAV-ITEM
+			var navs = document.getElementsByClassName('nav-item');
+			for (var x = 0; x < navs.length; x++) {
+				if (navs[x].childNodes[1].attributes[1].nodeValue == location.pathname) {
+					var nav = navs[x]
+					$(nav).addClass('active')
+				}
+			}
+		});
+	</script>
+
+
+	<script>
+		$(document).ready(function () {
+			$('button.toggle-button').on('click', function (e) {
+				console.log("button.toggle-button button.toggle-button !!!")
+				$(this).toggleClass('btnpressed');
+			});
+		});
+	</script>
+
+
+	<script>
+		function hideColumns(colunas) {
+			let table = $('#mytable').DataTable();
+			for (i = 0; i < colunas.length; i++) {
+				//var table = $('#mytable').DataTable();
+				table.column(colunas[i]).visible(!table.column(colunas[i]).visible());
+			}
+		}
+	</script>
+
+	<script src="../local/plugins/JsBarCode/JsBarcode.code128.min.js"></script>
+
+
+	<!--QRCODE-->
+	<script src="../local/plugins/qrcode/qrcode.js"></script>
+	<script>
+		var qr_code = null
+		function makeQrCode(link, id_place) {
+			var place = null
+			if (id_place) place = id_place
+			if (link && place) {
+				qr_code = new QRCode(document.getElementById(place), {
+					width: 300,
+					height: 300,
+					useSVG: false
+				});
+				qr_code.makeCode(link);
+				return;
+			} else {
+				qr_code.makeCode()
+			}
+		}
+	</script>
+
+	<script>
+
+		//falta fechar o modal através do botão | da segunda execução em diante não funciona | @Vitors
+		$('#modal_view_by_chave_acesso').on('hidden.bs.modal', function () {
+			$('#modal_view_by_chave_acesso').modal('hide');
+		})
+
+
+		$("#form_search_by_chave_acesso").submit(function (e) {
+			e.preventDefault();
+
+			var chavedeacessoString = $('#input_chave_acesso').val();
+			chavedeacessoString = chavedeacessoString.toString();
+			//localStorage.setItem('chave_de_acesso', chavedeacessoString)
+
+			const modelo_doc = chavedeacessoString.substr(20, 2);
+
+			if (modelo_doc == '55') {
+				localStorage.setItem('chave_de_acesso', chavedeacessoString.toString());
+				return getDataPreviewXML();
+			}
+			if (modelo_doc == '65') {
+				localStorage.setItem('chave_de_acesso', chavedeacessoString.toString());
+				return getDataPreviewXMLNFCe();
+			}
+
+			return Swal.fire({
+				customClass: {
+					confirmButton: 'btn btn-black btn-login',
+				},
+				buttonsStyling: false,
+				position: 'center',
+				icon: 'info',
+				title: 'Chave de acesso inválida!',
+				timer: 2000,
+				showConfirmButton: false,
+			});
+
+		})
+
+		$("#btn_imprimir_pdf").on('click', function () {
+			var modal_element = document.getElementById("print_modal_view_by_chave_acesso");
+			printElement(modal_element, false);
+
+			window.print()
+		})
+
+		$("#btn_download_pdf").on("click", function () {
+			downloadPDF()
+		})
+
+		$("#btn_download_xml").on("click", function () {
+			downloadXML()
+		})
+
+		$("#btn_imprimir_pdf_nfce").on('click', function () {
+			var modal_element = document.getElementById("print_modal_view_by_chave_acesso_nfce")
+			printElement(modal_element, false);
+			window.print();
+		})
+
+		$("#btn_download_pdf_nfce").on("click", function () {
+			downloadPDF()
+		})
+
+		$("#btn_download_xml_nfce").on("click", function () {
+			downloadXML()
+		})
+
+		var counterInitModal2 = 0
+
+		function getDataPreviewXML() {
+			let chave_de_acesso = localStorage.getItem('chave_de_acesso')
+			if (chave_de_acesso) {
+				showLoading()
+				$.ajax({
+					url: '/notas/nfe-by-chave-de-acesso',
+					type: 'post',
+					data: {
+						"chave_de_acesso": chave_de_acesso
+					},
+				}).done(function (result) {
+					console.log("!!!!result!!!! ", result)
+					hideLoading()
+					if (result.data) {
+
+						localStorage.setItem('cnpj_destinatario', `${result.cnpj_destinatario}`)
+
+						var confirmCNPJ = localStorage.getItem('cnpj_destinatario')
+						if (result.cnpj_destinatario == confirmCNPJ) {
+							if (result == "Nenhuma nota encontrada") {
+								gif = 'warning';
+								Swal.fire({
+									customClass: {
+										confirmButton: 'btn btn-black btn-login',
+									},
+									buttonsStyling: false,
+									position: 'center',
+									icon: gif,
+									title: result,
+									showConfirmButton: true,
+									timer: 0
+								});
+							} else {
+
+								$('#viewer_by_chave_acesso').empty().append(result.data)
+
+								$("#coddebarras_chavedeacesso").empty()
+
+								JsBarcode("#coddebarras_chavedeacesso", chave_de_acesso, {
+									displayValue: false,
+									height: 30,
+									width: 2,
+								});
+
+								$('#modal_view_by_chave_acesso').modal('show')
+
+							}
+						} else {
+							gif = 'warning';
+							Swal.fire({
+								customClass: {
+									confirmButton: 'btn btn-black btn-login',
+								},
+								buttonsStyling: false,
+								position: 'center',
+								icon: 'warning',
+								title: 'Erro interno Cnpj não confere!',
+								showConfirmButton: true,
+								timer: 0
+							});
+						}
+
+					} else {
+						gif = 'warning';
+						Swal.fire({
+							customClass: {
+								confirmButton: 'btn btn-black btn-login',
+							},
+							buttonsStyling: false,
+							position: 'center',
+							icon: gif,
+							title: result,
+							showConfirmButton: true,
+							timer: 0
+						});
+					}
+				})
+			}
+		}
+
+		function getDataPreviewXMLNFCe() {
+			let chave_de_acesso = localStorage.getItem('chave_de_acesso')
+
+			if (chave_de_acesso) {
+				showLoading()
+				$.ajax({
+					url: '/notas/nfce-by-chave-de-acesso',
+					type: 'post',
+					data: {
+						"chave_de_acesso": chave_de_acesso
+					},
+				}).done(function (result) {
+					hideLoading()
+					if (result.data) {
+
+						localStorage.setItem('cnpj_emitente', `${result.cnpj_emitente}`)
+
+						var confirmCNPJ = localStorage.getItem('cnpj_emitente')
+						if (result.cnpj_emitente == confirmCNPJ) {
+							if (result == "Nenhuma nota encontrada") {
+								gif = 'warning';
+								Swal.fire({
+									customClass: {
+										confirmButton: 'btn btn-black btn-login',
+									},
+									buttonsStyling: false,
+									position: 'center',
+									icon: gif,
+									title: result,
+									showConfirmButton: true,
+									timer: 0
+								});
+							} else {
+
+								$('#viewer_by_chave_acesso_nfce').empty().append(result.data)
+
+								$("#qrCode").empty();
+
+								makeQrCode(qrcode_raw, 'qrCode');
+								$('#modal_view_by_chave_acesso_NFCe').modal('show')
+
+								//var qrcode_raw = document.getElementById('qrcode_raw').textContent
+								//console.log("QRCODE RAW", qrcode_raw)
+
+
+							}
+						} else {
+							gif = 'warning';
+							Swal.fire({
+								customClass: {
+									confirmButton: 'btn btn-black btn-login',
+								},
+								buttonsStyling: false,
+								position: 'center',
+								icon: 'warning',
+								title: 'Erro interno Cnpj não confere!',
+								showConfirmButton: true,
+								timer: 0
+							});
+						}
+
+					} else {
+						gif = 'warning';
+						Swal.fire({
+							customClass: {
+								confirmButton: 'btn btn-black btn-login',
+							},
+							buttonsStyling: false,
+							position: 'center',
+							icon: gif,
+							title: result,
+							showConfirmButton: true,
+							timer: 0
+						});
+					}
+				})
+			}
+		}
+
+		function printPDF() {
+			let chave_de_acesso = localStorage.getItem('chave_de_acesso')
+			if (chave_de_acesso) {
+				$.ajax({
+					url: '/notas/download-pdf',
+					type: 'post',
+					data: {
+						"chave_de_acesso": chave_de_acesso
+					},
+					xhr: function () {
+						var xhr = new XMLHttpRequest();
+						xhr.onreadystatechange = function () {
+							if (xhr.readyState == 2) {
+								if (xhr.status == 200) {
+									xhr.responseType = "blob";
+								} else {
+									xhr.responseType = "text";
+								}
+							}
+						};
+						return xhr;
+					},
+				}).done(function (data) {
+					if (data == "Arquivo não encontrado") {
+						//sweetalert aqui
+					} else {
+						//Convert the Byte Data to BLOB object.
+						var blob = new Blob([data], {
+							type: "application/octet-stream"
+						});
+						//Check the Browser type and download the File.
+						var isIE = false || !!document.documentMode;
+						if (isIE) {
+							window.navigator.msSaveBlob(blob, `${chave_de_acesso}.pdf`);
+						} else {
+							var pdfFile = new Blob([data], {
+								type: "application/pdf"
+							});
+							var pdfUrl = URL.createObjectURL(pdfFile);
+							//window.open(pdfUrl);
+							printJS(pdfUrl);
+						}
+					}
+				})
+			}
+		}
+
+		function downloadPDF() {
+			let chave_de_acesso = localStorage.getItem('chave_de_acesso')
+			if (chave_de_acesso) {
+				$.ajax({
+					url: '/notas/download-pdf',
+					type: 'post',
+					data: {
+						"chave_de_acesso": chave_de_acesso
+					},
+
+				}).done(function (response) {
+					var { msg, status, data } = response;
+
+					if (!status) console.log("Arquivo não encontrado");
+					//sweetalert aqui
+					if (status) {
+
+						if (data) {
+							//Convert the Byte Data to BLOB object.
+							const byteArray = new Uint8Array(data.data);
+							var fileURL = URL.createObjectURL(
+								new Blob([byteArray], {
+									type: "application/pdf",
+								})
+							);
+
+							//Check the Browser type and download the File.
+							var isIE = false || !!document.documentMode;
+							if (isIE) {
+								window.navigator.msSaveBlob(fileURL, `${chave_de_acesso}.pdf`);
+							}
+
+							if (!isIE) {
+								var url = window.URL || window.webkitURL;
+								var link = fileURL;
+								var a = $("<a />");
+								a.attr("download", `${chave_de_acesso}.pdf`);
+								a.attr("href", link);
+								$("body").append(a);
+								a[0].click();
+								$("body").remove(a);
+							}
+						}
+						else {
+							console.log("Arquivo não encontrado")
+						}
+
+					}
+				})
+			}
+		}
+
+		function downloadXML() {
+			let chave_de_acesso = localStorage.getItem('chave_de_acesso')
+			if (chave_de_acesso) {
+				$.ajax({
+					url: '/notas/download-xml',
+					type: 'post',
+					data: {
+						"chave_de_acesso": chave_de_acesso
+					},
+
+				}).done(function (response) {
+					var { msg, status, data } = response;
+
+					if (!status) console.log("Arquivo não encontrado");
+					//sweetalert aqui
+					if (status) {
+
+						if (data) {
+							console.log(data)
+							//Conversão de binário Data para BLOB object.
+							//const byteArray = new Uint8Array(data);
+							//Não foi necessário converter, pq o XML é um arquivo string.
+
+							var fileURL = URL.createObjectURL(
+								new Blob([data], {
+									type: "application/xml",
+								})
+							);
+
+							//Check the Browser type and download the File.
+							var isIE = false || !!document.documentMode;
+							if (isIE) {
+								window.navigator.msSaveBlob(fileURL, `${chave_de_acesso}.xml`);
+							}
+
+							if (!isIE) {
+								var url = window.URL || window.webkitURL;
+								var link = fileURL;
+								var a = $("<a />");
+								a.attr("download", `${chave_de_acesso}.xml`);
+								a.attr("href", link);
+								$("body").append(a);
+								a[0].click();
+								$("body").remove(a);
+							}
+						}
+						else {
+							console.log("Arquivo não encontrado")
+						}
+
+					}
+				})
+			}
+		}
+
+		function downloadXMLbyKeyAccess(key) {
+			if (key) {
+				$.ajax({
+					url: '/notas/download-xml',
+					type: 'post',
+					data: {
+						"chave_de_acesso": key
+					},
+					xhr: function () {
+						var xhr = new XMLHttpRequest();
+						xhr.onreadystatechange = function () {
+							if (xhr.readyState == 2) {
+								if (xhr.status == 200) {
+									xhr.responseType = "blob";
+								} else {
+									xhr.responseType = "text";
+								}
+							}
+						};
+						return xhr;
+					},
+				}).done(function (data) {
+					if (data == "Arquivo não encontrado") {
+						//sweetalert aqui
+					} else {
+						//Convert the Byte Data to BLOB object.
+						var blob = new Blob([data], {
+							type: "application/xml"
+						});
+						//Check the Browser type and download the File.
+						var isIE = false || !!document.documentMode;
+						if (isIE) {
+							window.navigator.msSaveBlob(blob, `${key}.xml`);
+						} else {
+							var url = window.URL || window.webkitURL;
+							link = url.createObjectURL(blob);
+							var a = $("<a />");
+							a.attr("download", `${key}.xml`);
+							a.attr("href", link);
+							$("body").append(a);
+							a[0].click();
+							$("body").remove(a);
+						}
+					}
+				})
+			}
+		}
+
+		function downloadPDFbyKeyAccess(key) {
+			if (key) {
+				$.ajax({
+					url: '/notas/download-pdf',
+					type: 'post',
+					data: {
+						"chave_de_acesso": key
+					},
+					xhr: function () {
+						var xhr = new XMLHttpRequest();
+						xhr.onreadystatechange = function () {
+							if (xhr.readyState == 2) {
+								if (xhr.status == 200) {
+									xhr.responseType = "blob";
+								} else {
+									xhr.responseType = "text";
+								}
+							}
+						};
+						return xhr;
+					},
+				}).done(function (data) {
+					if (data == "Arquivo não encontrado") {
+						//sweetalert aqui
+					} else {
+						//Convert the Byte Data to BLOB object.
+						var blob = new Blob([data], {
+							type: "application/octet-stream"
+						});
+						//Check the Browser type and download the File.
+						var isIE = false || !!document.documentMode;
+						if (isIE) {
+							window.navigator.msSaveBlob(blob, `${key}.pdf`);
+						} else {
+							var url = window.URL || window.webkitURL;
+							var link = url.createObjectURL(blob);
+							var a = $("<a />");
+							a.attr("download", `${key}.pdf`);
+							a.attr("href", link);
+							$("body").append(a);
+							a[0].click();
+							$("body").remove(a);
+						}
+					}
+				})
+			}
+		}
+
+		function getByChavedeAcesso(row_chave_de_acesso, cnpj_emitente, cnpj_destinatario, tag, modelo_doc, uf_origem, uf_destino) {
+
+			if (modelo_doc == '55') {
+				localStorage.setItem('chave_de_acesso', row_chave_de_acesso.toString());
+				localStorage.setItem('cnpj_destinatario', cnpj_destinatario.toString());
+				getDataPreviewXML();
+
+				$('.msg-erro').empty();
+				if (tag.toLowerCase() == 'erro ao inserir na erp') {
+					$('.msg-erro').text("Não foi possivel gerar o layout para inserir a nota a seguir em sua ERP. Por favor revise os campos “CFOP Ent.”, “Tipo Ant.”, “MVA”, “Acumulador”. Após corrigir defina a etiqueta 'REPROCESSAR' para que essa nota seja enviada novamente.")
+
+				}
+			}
+			else if (modelo_doc == '65') {
+				localStorage.setItem('chave_de_acesso', row_chave_de_acesso.toString());
+				localStorage.setItem('cnpj_emitente', cnpj_emitente.toString());
+				getDataPreviewXMLNFCe();
+
+				$('.msg-erro').empty();
+				if (tag.toLowerCase() == 'erro ao inserir na erp') {
+					$('.msg-erro').text("Não foi possivel gerar o layout para inserir a nota a seguir em sua ERP. Por favor revise os campos “CFOP Ent.”, “Tipo Ant.”, “MVA”, “Acumulador”. Após corrigir defina a etiqueta 'REPROCESSAR' para que essa nota seja enviada novamente.")
+
+				}
+			}
+
+
+
+			if (uf_origem == 'PA' && uf_destino == 'PA') {
+				setTimeout(() => {
+					$(".header-hide").addClass('hideElement');
+				}, 500)
+			} else {
+				setTimeout(() => {
+					$(".header-hide").removeClass('hideElement');
+				}, 500)
+			}
+
+
+		}
+	</script>
+
+	<script>
+
+
+		//PEGA O ID DOS ITENS MARCADOS-----------------------------------------------
+		var checkedChaveDeAcesso = [];
+		var checkedIdChaveDeAcesso = [];
+		var checkedDataParaManifestacao = [];
+
+
+		function marcados(temp) {
+			checkedChaveDeAcesso = [];
+			checkedIdChaveDeAcesso = [];
+			checkedDataParaManifestacao = [];
+			$('#mytable :checkbox:checked').each(function (index) {
+				var currentRow = $(this).closest('tr');
+				var chavedeacesso = $(currentRow).closest('tr').find('.td-chavedeacesso').text();
+				var id_chavedeacesso = $(currentRow).closest('tr').find('.td-id_chavedeacesso').text();
+				var destinatario = $(currentRow).closest('tr').find('.td-destinatario').text();
+				var cnpj_destinatario = $(currentRow).closest('tr').find('.td-cnpj_destinatario').text();
+
+				//var a = chavedeacesso.className.textContent;
+				if (chavedeacesso) {
+					checkedChaveDeAcesso.push(chavedeacesso);
+				}
+				if (id_chavedeacesso) {
+					checkedIdChaveDeAcesso.push(id_chavedeacesso);
+				}
+				if (id_chavedeacesso && chavedeacesso && cnpj_destinatario && destinatario) {
+					checkedDataParaManifestacao.push([id_chavedeacesso, chavedeacesso, cnpj_destinatario, destinatario]);
+				}
+
+			});
+		}
+		//SELECIONAR TODOS OS CHECK BOXs VISIVEIS
+		function marcartodos() {
+			checkedChaveDeAcesso = [];
+			checkedIdChaveDeAcesso = [];
+
+			$("#checkall").each(function () {
+
+				$(".bodycheckbox").prop("checked", $(this).prop("checked"))
+				if (checkall.checked == true) {
+
+					$('#mytable :checkbox:checked').each(function (index) {
+						var currentRow = $(this).closest('tr');
+						var chavedeacesso = $(currentRow).closest('tr').find('.td-chavedeacesso').text();
+						var id_chavedeacesso = $(currentRow).closest('tr').find('.td-id_chavedeacesso').text();
+						var destinatario = $(currentRow).closest('tr').find('.td-destinatario').text();
+						var cnpj_destinatario = $(currentRow).closest('tr').find('.td-cnpj_destinatario').text();
+
+						$(".bodycheckbox").prop("checked", $(this).prop("checked"));
+
+						if (chavedeacesso) {
+							checkedChaveDeAcesso.push(chavedeacesso);
+						}
+						if (id_chavedeacesso) {
+							checkedIdChaveDeAcesso.push(id_chavedeacesso);
+						}
+						if (id_chavedeacesso && chavedeacesso && cnpj_destinatario && destinatario) {
+							checkedDataParaManifestacao.push([id_chavedeacesso, chavedeacesso, cnpj_destinatario, destinatario]);
+						}
+					});
+				}
+			})
+
+			//$('.td-notas button').attr('disabled', true).selectpicker('refresh');
+
+
+		}
+
+		//DESMARCA TODOS OS CHECKBOXs
+		function desmarcartodos() {
+			$('input[type="checkbox"]:checked').prop('checked', false);
+			marcados();
+		}
+		//QUANDO MUDAR A PAGINA DA TABELA DESMARCAR TODOS OS CHECKBOXES
+		$('#mytable').on('page.dt', function () {
+			desmarcartodos()
+		}).on('search.dt', function () {
+			desmarcartodos()
+		});
+
+		function downloadCheckedXML() {
+			var chaves = checkedChaveDeAcesso
+			if (chaves) {
+				for (var i = 0; i < chaves.length; i++) {
+					downloadXMLbyKeyAccess(chaves[i])
+				}
+			}
+		}
+
+		function adicionarTag() {
+			//console.log("adicionarTagadicionarTagadicionarTagadicionarTagadicionarTag")
+			$('#modal_add_tag').modal('show')
+		}
+
+
+
+		function downloadCheckedPDF() {
+			var chaves = checkedChaveDeAcesso
+			if (chaves) {
+				for (var i = 0; i < chaves.length; i++) {
+					downloadPDFbyKeyAccess(chaves[i])
+				}
+			}
+		}
+
+		async function staticsTableNF(data) {
+			var sum = 0
+			var num_notas = data.length
+			data.forEach(function (dataElement, index) {
+				sum += parseFloat(dataElement.valor_nf)
+			});
+			const sum_format = await abreviaNumero(sum)
+			//$("#total_notas").text(`Valor total R$ ${sum_format} . Números de notas: ${num_notas}`)
+
+			$("#total_valor").text(`${sum_format}`)
+
+			$("#total_notas").text(`${num_notas}`)
+		}
+
+		async function changeFilterStatus(btn) {
+			var filter_status = $(btn).attr("aria-expanded")
+			if (filter_status == 'true') {
+				$("#btn_buscar").remove()
+				$("#default_area_btn_buscar").append('<button id="btn_buscar" type="submit" class="btn pull-right" name="btnbusca">Buscar</button>')
+			} else {
+				$("#btn_buscar").remove()
+				$("#filter_area_btn_buscar").append('<button id="btn_buscar" type="submit" class="btn pull-right" name="btnbusca">Buscar</button>')
+			}
+		}
+	</script>
+
+	<script>
+		var dadosTabelaNotasFiscais = []
+		var userEtiquetas = {}
+		var optionsForSelect = ''
+		var selectOptions = ''
+
+	
+		//--------------- busca etiquetas no mongodb e salva em userEtiquetas no formato {'nome_etiqueta': '#hexa' } ------------------
+		async function getTickets() {
+			return $.ajax({
+				url: '/notas/get-suggestions-etiquetas',
+				type: 'GET',
+			}).done((response) => {
+				userEtiquetas = response;
+				//localStorage.setItem('userEtiquetas', response)
+				return response
+			})
+		}
+
+		
+
+
+		/* refresh options select */
+		async function refreshOptions(dataJSON) {
+			/* dataJSON ={Blue: "#006aff",Brown: "#5d3804", DARK BLUE: "#0d227d"}		*/
+			if (dataJSON) {
+				var { data } = dataJSON
+				if (data) {
+					optionsForSelect = '<option value="Selecionar">Selecionar</option>'
+					Object.entries(data).forEach(([nomeEt, corEt]) => {
+						optionsForSelect += `<option value="${nomeEt}" style="background-color:${corEt};">${nomeEt}</option>`
+					});
+					return optionsForSelect
+				}
+			}
+		}
+
+
+		/* adicionar uma nova tag */
+		async function addNewOption4Ticket(tag, cor) {
+			//Atualiza a variável local userEtiquetas
+			userEtiquetas[tag] = cor
+
+			populateTicketsFilter(await refreshOptions(userEtiquetas))
+			populateTicketsTableBody(await refreshOptions(userEtiquetas))
+
+			setTimeout(function () {
+				pickerSetSelected()
+			}, 200)
+		}
+
+		$("#inserirSuggestionEtiqueta").submit(function (e) {
+			e.preventDefault();
+			var post_url = $(this).attr("action");
+			var request_method = $(this).attr("method");
+			var form_data = $(this).serialize();
+			$.ajax({
+				url: post_url,
+				type: request_method,
+				data: form_data
+			}).done(function (response) {
+				if (response.msg == "Nova etiqueta inserida com sucesso") {
+
+					addNewOption4Ticket(response.etiqueta, response.cor)
+					document.getElementById("inserirSuggestionEtiqueta").reset();
+					$('#modal_add_tag').modal('hide')
+
+				}
+			})
+		})
+
+		function makeSwal(icon, data) {
+			Swal.fire({
+				customClass: {
+					confirmButton: 'btn btn-black btn-login',
+				},
+				buttonsStyling: false,
+				position: 'center',
+				icon: icon,
+				title: data,
+				showConfirmButton: true,
+				timer: 0
+			});
+		}
+
+		/* remover uma tag existente */
+		function deleteEtiqueta(etiqueta) {
+			if (etiqueta) {
+				$.ajax(
+					{
+						url: '/notas/remover-etiqueta',
+						type: 'post',
+						data: {
+							"etiqueta": etiqueta
+						},
+					}).done(async function (data) {
+						if (data) {
+							icon = 'warning';
+							if (data == "Etiqueta deletada com sucesso!") {
+								icon = 'success'
+								delete userEtiquetas[etiqueta]
+								makeSwal(icon, data)
+								$("#rowtag").empty() //limpar a div para inserir novamente os elementos
+								if (userEtiquetas.length == 0) {
+									$("#rowtag").append('<h5 class="text-center">Você ainda não possui adesivos</h5>')
+								} else {
+									Object.entries(userEtiquetas).forEach(([nomeEt, corEt]) => {
+										$("#rowtag").append(`<div class="row" style="font-weight: bold; color: #fff; text-shadow: 2px 2px 2px #000; padding: 6px; background:${corEt};">${nomeEt}
+									<span name="tagnamedelete" style="width:90%!important; position: absolute"</span>
+										<button id="${nomeEt}" onClick="deleteEtiqueta('${nomeEt}')" class="btn pull-right" style="margin: 0!important;padding: 5px!important;">
+											<i class="material-icons">clear</i>
+										</button>
+									</div>`)
+									});
+								}
+
+								populateTicketsFilter(await refreshOptions(userEtiquetas))
+
+								populateTicketsTableBody(await refreshOptions(userEtiquetas))
+
+								setTimeout(function () {
+									pickerSetSelected()
+								}, 200)
+
+							} else {
+								makeSwal(icon, data)
+							}
+						} else {
+							makeSwal(icon, data)
+						}
+					})
+			}
+		}
+
+		function removerTag() {
+			$('#modal_delete_tag').modal('show');
+			$("#rowtag").empty()
+			if (userEtiquetas.length == 0) {
+				$("#rowtag").append('<h5 class="text-center">Você ainda não possui adesivos</h5>')
+			} else {
+				Object.entries(userEtiquetas).forEach(([nomeEt, corEt]) => {
+					$("#rowtag").append(`<div class="row" style="font-weight: bold; color: #fff; text-shadow: 2px 2px 2px #000; padding: 6px; background:${corEt};">${nomeEt}
+					<span name="tagnamedelete" style="width:90%!important; position: absolute"</span>
+						<button id="${nomeEt}" onClick="deleteEtiqueta('${nomeEt}')" class="btn pull-right" style="margin: 0!important;padding: 5px!important;">
+							<i class="material-icons">clear</i>
+						</button>
+					</div>`)
+				});
+			}
+		}
+
+
+
+
+		/* Adiciona options do select na tabela */
+		function populateTicketsTableBody() {
+			//optionsForSelect é uma variável local, atualizada pelo refreshOptions
+			$('.areaSelectTableBody').each(function (index, element) {
+				var rowData = $(this).data('row')
+				if (rowData) {
+					//verifica se a cor ainda existe, se nao existir seta 'Selecionar'
+					if (!userEtiquetas[rowData.tag]) {
+						rowData.tag = 'Selecionar'
+					}
+					var SelectTableBody = '<select title="Nenhum" id="' + rowData.chavedeacesso + '" data-tagvalue="' + rowData.tag + '" class="custom-select form-control selectpicker dropdown-toggle-suggestions-target">' +
+						optionsForSelect +
+						'</select>'
+					//var simpleselect = "<select><option>Selecionar teste</option></select>"
+					//children é o select que acabou de ser adicionado no append
+					$(this).empty().append(SelectTableBody).children().selectpicker('refresh')
+				}
+
+			})
+		}
+
+
+
+		//Para cada elemento seta o valor do botão como o valor do select e muda a cor
+		async function pickerSetSelected() {
+			$(".areaSelectTableBody").each(function (index, el) {
+				let value = $(el).data('row')
+				if (value) {
+
+					if (!value.tag) {
+						value.tag = "Selecionar"
+					}
+
+					$(`#${value.chavedeacesso}`).val(value.tag).selectpicker('refresh')
+					var color = userEtiquetas[value.tag]
+					if (color) {
+						$(el).find('button').attr("style", "color: #272727 !important").css('background', color)
+					} else {
+						$(el).find('button').attr("style", "color: #ffff !important").css('background', color)
+					}
+				}
+			})
+		}
+
+
+		/* renderiza a div que vai conter o select em cada linha da tabela */
+		const renderEtiquetasDataTables = function (data, type, row) {
+			if (data == null) {
+				data = 'Selecionar'
+			}
+			var obj = {}
+			if (row) {
+				obj.tag = row.tag
+				obj.chavedeacesso = row.chavedeacesso
+				obj.id_chavedeacesso = row.id_chavedeacesso
+			}
+			//var rowStr = JSON.stringify(row) //todos os dados da linha
+			var selectPicker = `<div class="areaSelectTableBody disabled" data-row='${JSON.stringify(obj)}'></div>`
+			if (type === 'display') {
+				return selectPicker
+			} else {
+				return data;
+			}
+		}
+
+
+		function ShowPlaceHolderOnEveryTableHeaderInputSearch() {
+			/* multi-search table header - item */
+			$('#mytable thead th').each(function (index, element) {
+				//excluir primeiro e último
+				if (index > 3) {
+					var title = $(this).text();
+					/* style="visibility: hidden" */
+					$(this).html(`<h6>${title}</h6> <input class="filtercolumnhead" type="text" placeholder="Filtrar" />`);
+				}
+			});
+		}
+
+		async function realoadTable(data) {
+			if (data) {
+				//$("#mytable").DataTable().clear().rows.add(data).draw()
+				if (tabelaNotasFiscais) {
+					tabelaNotasFiscais.clear().rows.add(data).draw()
+					//buttonBackgroudColor()
+				}
+			}
+		}
+
+		//criação da tabela
+		$(document).ready(function () {
+			ShowPlaceHolderOnEveryTableHeaderInputSearch()
+
+			var collapsedGroups = {};
+			const data = moment();
+
+			$("#form_busca").submit(function (e) {
+				e.preventDefault(); //prevent default action
+				var post_url = $(this).attr("action"); //get form action url /importnotas
+				var request_method = $(this).attr("method"); //get form GET/POST method
+				var form_data = $(this).serialize(); //Encode form elements for submission
+				showLoading();
+				$.ajax({
+					url: post_url,
+					type: request_method,
+					data: form_data
+				}).done(function (response) {
+
+					/* aqui */
+
+					hideLoading();
+					let cardTitleNode = document.getElementById('cardTitle'); //Atribui o titulo do card 2 (CARD DA TABELA)
+					cardTitleNode.textContent = (response.nomeBuscadoNotas);
+
+					dadosTabelaNotasFiscais = JSON.parse(response.datasend)
+					staticsTableNF(dadosTabelaNotasFiscais)
+
+
+
+
+					tabelaNotasFiscais = $('#mytable').DataTable({
+						destroy: true,
+						data: dadosTabelaNotasFiscais,
+						columns: [{
+							defaultContent: '<div class="form-check">' +
+								'<label class="form-check-label">' +
+								'<input name="checkbox" class="form-check-input bodycheckbox" type="checkbox" value="" onchange="marcados(this.checkbox)">' +
+								'<span class="form-check-sign">' +
+								'<span class="check"></span>' +
+								'</span>' +
+								'</label>' +
+								'</div>'
+						}, //CHECKBOXES 
+						{
+							data: "id_nota"
+						},
+
+						{
+							data: '',
+							render: function (data, type, row) {
+								var erp = row.erp
+								row.cnpj_destinatario = row.cnpj_destinatario ? row.cnpj_destinatario : '';
+								var btn_ver_nota = `<button title="Ver Nota" type="button" onClick="getByChavedeAcesso('${row.chavedeacesso}', '${row.cnpj_emitente}', '${row.cnpj_destinatario}', '${row.tag}', '${row.modelo_doc}', '${row.uf_origem}', '${row.uf_destino}', '${row.id_empresa}')" class="btn"><i class="material-icons">visibility</i></button>`
+								var btn_alterar_data = `<button id="btnalterardata" onClick="alterarDatadeEntrada(this)" title="Alterar Data" type="button" class="btn"><i class="material-icons">calendar_today</i></button>`
+								var visible_buttons = ''
+
+								if (erp == 'Dominio' || erp == 'Questor') {
+									visible_buttons = `${btn_ver_nota} ${btn_alterar_data}`
+								} else {
+									visible_buttons = `${btn_ver_nota}${btn_alterar_data}`
+								}
+
+								var div = `<div class="row td-notas">${visible_buttons}</div>`
+
+								return div
+							}
+
+						},
+
+						{
+							data: "tag",
+							render: renderEtiquetasDataTables //Insere os selects no corpo da tabela
+						},
+
+						{
+							data: "",
+							className: "td-anotacoes",
+							render: function (data, type, row) {
+								var obj = {};
+								if (row.anotacoes) {
+									obj.anotacoes = row.anotacoes;
+								} else {
+									obj.anotacoes = '';
+								}
+
+								if (row.chavedeacesso) {
+									obj.chavedeacesso = row.chavedeacesso;
+								} else {
+									obj.chavedeacesso = null;
+								}
+								if (row.id_chavedeacesso) {
+									obj.id_chavedeacesso = row.id_chavedeacesso;
+								} else {
+									obj.id_chavedeacesso = null;
+								}
+
+								obj = JSON.stringify(obj)
+
+
+								var divAnotacoes = `<div class="anotacoes-div" data-objanotacoes='${obj}'></div>`
+								return divAnotacoes
+							}
+						},
+
+						{
+							data: "status_manifestacao",
+							className: "td-status_manifestacao hideIdTable",
+						}, {
+							data: "status_manifestacao_resumo",
+							className: "td-status_manifestacao_resumo",
+						},
+
+						{
+							data: "emitente"
+						}, {
+							data: "numero_nota"
+						},
+						{
+							data: "valor_nf",
+							render: $.fn.dataTable.render.number('.', ',', 2, 'R$')
+						},
+
+						{
+							data: "data_emissao",
+							type: "date-eu"
+						},
+
+						{
+							data: "data_entrada",
+							type: "date-eu"
+
+						},
+
+						{
+							data: "chavedeacesso",
+							className: "td-chavedeacesso",
+						},
+
+						{
+							data: "cnpj_emitente"
+						},
+
+						{
+							data: "inscricao_estadual_emitente"
+						},
+
+						{
+							data: "status"
+						},
+						//{ data: "data_entrada", type: "date-eu" },
+						{
+							data: "origem"
+						}, {
+							data: "modelo_doc"
+						}, {
+							data: "serie_nota"
+						}, {
+							data: "uf_origem"
+						}, {
+							data: "uf_destino"
+						}, {
+							data: "protocolada",
+
+						},
+						{
+							data: "id_chavedeacesso",
+							className: "td-id_chavedeacesso hideIdTable",
+
+						}, {
+							data: 'destinatario',
+							className: "td-destinatario hideIdTable",
+
+						}, {
+							data: 'cnpj_destinatario',
+							className: "td-cnpj_destinatario hideIdTable",
+
+						}
+						],
+						columnDefs: [{
+							orderable: false,
+							targets: [0, 1, 2]
+						}, {
+							targets: 2,
+							className: "td-actions"
+						},
+						{
+							"targets": [13],
+							"visible": true,
+							"searchable": false,
+							"render": function (data, type, row) {
+								if (data) {
+									if (data.length == 14) {
+										//É um cnpj
+										return data.substring(0, 2) + "." + data.substring(2, 5) + "." + data.substring(5, 8) + "/" + data.substring(8, 12) + "-" + data.substring(12, 14);
+									}
+									if (data.length == 11) {
+										//É um CPF
+										data = data.substring(0, 3) + "." + data.substring(3, 6) + "." + data.substring(6, 9) + "-" + data.substring(9, 11);
+										//console.log("CPF !!!! ", data )
+										return data
+									}
+								}
+							}
+						},
+						//{ visible: false, targets: 1 }, //ocultar coluna ID desse modo não teremos id no corpo da tabela > solução abaixo
+						{
+							sClass: "hideIdTable",
+							aTargets: [1, 16, 21]
+						} //15, 21, 22id visivelmente oculto (presente)
+						],
+						processing: true,
+						order: [
+							[5, 'desc']
+						],
+						fixedHeader: {
+							header: false,
+							footer: false
+						},
+						select: {
+							style: 'os',
+							items: 'cell',
+							selector: `
+								tr>td:nth-child(6), 
+								tr>td:nth-child(7),
+								tr>td:nth-child(8), 
+								tr>td:nth-child(9), 
+								tr>td:nth-child(10), 
+								tr>td:nth-child(11), 
+								tr>td:nth-child(12), 
+								tr>td:nth-child(13), 
+								tr>td:nth-child(14), 
+								tr>td:nth-child(15), 
+								tr>td:nth-child(16), 
+								tr>td:nth-child(17), 
+								tr>td:nth-child(18), 
+								tr>td:nth-child(19), 
+								tr>td:nth-child(20),
+								tr>td:nth-child(21)`
+						},
+						dom: 'Blfrtip',
+						buttons: [
+								 {
+								extend: 'collection',
+								attr: {
+									id: 'tbBtnPeriodo',
+									title: 'Filtrar dados da busca'
+								},
+								text: 'Periodo',
+								className: 'dropdown',
+								background: false,
+								buttons: [{
+									text: 'Mês Atual',
+									action: function () {
+
+										var month = data.format('MM')
+										var newDataTables = [];
+
+										for (var i = 0; i < dadosTabelaNotasFiscais.length; i++) {
+											var aux = dadosTabelaNotasFiscais[i].data_emissao.split("/")
+											if (aux[1] == month) {
+												newDataTables.push(dadosTabelaNotasFiscais[i]);
+											}
+										}
+										if (newDataTables) {
+											realoadTable(newDataTables)
+										}
+									}
+								}, {
+									text: 'Mês Anterior',
+									action: function () {
+										var month = data.format('MM');
+										var newDataTables = []
+
+										for (var i = 0; i < dadosTabelaNotasFiscais.length; i++) {
+											var aux = dadosTabelaNotasFiscais[i].data_emissao.split("/")
+											if (aux[1] == month - 1) {
+												newDataTables.push(dadosTabelaNotasFiscais[i]);
+											}
+										}
+
+										realoadTable(newDataTables)
+
+									}
+								}, {
+									text: 'Ano Atual',
+									action: function () {
+
+										var year = data.format('YYYY');
+										var newDataTables = []
+
+										for (var i = 0; i < dadosTabelaNotasFiscais.length; i++) {
+											var aux = dadosTabelaNotasFiscais[i].data_emissao.split("/")
+											if (aux[2] == year) {
+												newDataTables.push(dadosTabelaNotasFiscais[i])
+											}
+										}
+
+										realoadTable(newDataTables)
+
+									}
+								}, {
+									text: 'Ano Anterior',
+									action: function () {
+
+										var year = data.format('YYYY')
+										var newDataTables = []
+
+										for (var i = 0; i < dadosTabelaNotasFiscais.length; i++) {
+											var aux = dadosTabelaNotasFiscais[i].data_emissao.split("/")
+
+											if (aux[2] == year - 1) {
+												newDataTables.push(dadosTabelaNotasFiscais[i])
+											}
+
+										}
+
+										realoadTable(newDataTables)
+
+									}
+								}, {
+									text: 'Todos',
+									action: function () {
+										realoadTable(dadosTabelaNotasFiscais)
+									}
+								}]
+							}, {
+								extend: 'collection',
+								className: 'dropdown',
+								attr: {
+									'id': 'tbBtnDownload',
+									title: 'Realizar download das notas selecionadas',
+									disabled: true
+								},
+								text: 'Baixar <i class="material-icons">download</i>',
+								buttons: [{
+									text: 'XML',
+									action: downloadCheckedXML
+								}, {
+									text: 'PDF',
+									action: downloadCheckedPDF
+								}]
+							},
+							{
+								extend: 'excel',
+								text: 'Exportar Tabela',
+								attr: {
+									title: 'Exportar dados da tabela do excel'
+								},
+							},
+						],
+						pagingType: "full_numbers",
+						lengthMenu: [
+							[50, 100, 500, 1000, -1],
+							[50, 100, 500, 1000, "Todos"]
+						],
+						responsive: false,
+						language: {
+							"url": "../assets/js/plugins/dataTables.ptbr.lang",
+							search: "_INPUT_",
+							searchPlaceholder: "",
+						},
+						sScrollXInner: "100%",
+						/*scrollY: false,*/
+						rowCallback: function (row, data) {
+							//Função que Habilita os botões de AÇÕES ao clicarem em qualquer checkbox do tbody
+							var element = $(row).find('.form-check-input');
+							element.on("change", function () {
+								//Habilita o select Manifestar
+								$('#tbBtnManifestar').prop('disabled', !$("input[name='checkbox']:checked").length);
+
+								//Habilita o select Download
+								$('#tbBtnDownload').prop('disabled', !$("input[name='checkbox']:checked").length);
+
+								//Desabilita os dois botões de ações do corpo da tabela ao selecionar qualquer checkbox
+								$('.td-notas button').prop('disabled', $("input[name='checkbox']:checked").length);
+
+
+							});
+
+						},
+						initComplete: function (settings, json) {
+
+							populateTicketsTableBody();
+
+							setTimeout(function () {
+								pickerSetSelected();
+							}, 500)
+
+							setTimeout(function () {
+								inicializarAnotacoes();
+							}, 500)
+
+							$('#mytable').on('draw.dt', function () {
+								lockAnotacoesUpdate = true
+								//recarregr etiquetas aqui
+								//setOptionsEtiquetasOffline()
+								setTimeout(function () {
+									populateTicketsTableBody();
+									//initTagsInputAnotacoesTableBody()
+									inicializarAnotacoes();
+									//suggestionsAnotacoes();
+									setTimeout(function () {
+										pickerSetSelected()
+										lockAnotacoesUpdate = false
+									}, 500)
+								}, 500)
+								// $(".dropdown-toggle-suggestions-target").selectpicker('refresh')
+							});
+
+							// Enable TFOOT scoll bars
+							$('.dataTables_scrollFoot').css('overflow', 'auto');
+
+							$('.dataTables_scrollHead').css('overflow', 'auto');
+
+							// Sync TFOOT scrolling with TBODY
+							$('.dataTables_scrollFoot').on('scroll', function () {
+								$('.dataTables_scrollBody').scrollLeft($(this).scrollLeft());
+							});
+
+							$('.dataTables_scrollHead').on('scroll', function () {
+								$('.dataTables_scrollBody').scrollLeft($(this).scrollLeft());
+							});
+
+
+							/* multi-search table header */
+							this.api().columns().every(function () {
+								var that = this;
+
+								$('input', this.header()).on('keyup change clear', function () {
+									if (that.search() !== this.value) {
+										that.search(this.value).draw();
+									}
+								});
+							});
+
+
+						}
+					});
+
+					if (dadosTabelaNotasFiscais.length == 0 && tabelaNotasFiscais) {
+						tabelaNotasFiscais.clear().draw()
+					}
+
+
+					$("#rowDataTable").removeClass('hideRowCard')
+					$('#mytable tbody').on('click', 'tr.group-start', function () {
+						var numero = $(this).data('numero');
+						collapsedGroups[numero] = !collapsedGroups[numero];
+						tabelaNotasFiscais.draw(false);
+					});
+					
+
+				});
+
+
+			});
+		});
+
+
+
+
+	</script>
+
+	<script>
+		$(document).ready(function () {
+			//modal alterar nf devolvida
+			$('#btnnotadevolvida').on('click', function () {
+				var rows_chavesdeAcesso = checkedChaveDeAcesso;
+				$('.marcados_nota_devolvida').val(rows_chavesdeAcesso);
+				$('#ModalNotaDevolvida').modal('show');
+			});
+
+		});
+
+
+		//modal alterar data
+		function alterarDatadeEntrada(element) {
+			var row = $(element).closest('tr').children()
+			var row_datadeentrada = row[11].textContent;
+			var row_chavedeacesso = row[12].textContent;
+			var row_id_chavedeacesso = row[22].textContent;
+			console.log("row_chavedeacesso ", row_chavedeacesso, " row_datadeentrada ", row_datadeentrada, "row_id_chavedeacesso ", row_id_chavedeacesso);
+			$('#ModalalterarData').modal('show');
+			$('#nova_dataentrada').val(row_datadeentrada);
+			$('#chavedeacesso_alterar_data').val(row_chavedeacesso);
+			$('#id_chavedeacesso_alterar_data').val(row_id_chavedeacesso);
+
+		}
+		//------------------------------------------------------------------------------X
+
+		function printElement(elem, append, delimiter) {
+			var domClone = elem.cloneNode(true);
+			var $printSection = document.getElementById("printSection");
+			if (!$printSection) {
+				var $printSection = document.createElement("div");
+				$printSection.id = "printSection";
+				document.body.appendChild($printSection);
+			}
+			if (append !== true) {
+				$printSection.innerHTML = "";
+			}
+			else if (append === true) {
+				if (typeof (delimiter) === "string") {
+					$printSection.innerHTML += delimiter;
+				}
+				else if (typeof (delimiter) === "object") {
+					$printSection.appendChlid(delimiter);
+				}
+			}
+			$printSection.appendChild(domClone);
+		}
+	</script>
+
+	<script>
+
+
+	</script>
+
+
+
+
+
+
+	<script>
+		const inicializarAnotacoes = async () => {
+			$('.anotacoes-div').each(function (index, element) {
+				var div = $(element);
+				var dataObj = $(element).data('objanotacoes');
+				var inputExists = $(element).find('.anotacoes-input').length;
+
+				//Se não houver input inicializado na div, adiciona input.
+				if (!inputExists) {
+					var input = `<input value="${dataObj.anotacoes}" class="anotacoes-input" disabled>`;
+					div.append(input);
+					$(element).find('.anotacoes-input').tagsinput();
+					$(element).find('[data-role="remove"]').remove()  //disable remove
+				}
+			})
+		}
+	</script>
+
+
+
+	<script>
+
+
+		function confirmarManifestacaoDaNota(manifestacao) {
+
+			var data = {
+				'manifestacao': manifestacao,
+				'dataParaManifestacao': checkedDataParaManifestacao, //array
+				'chaveDeAcesso': checkedChaveDeAcesso, //array
+				'idChaveDeAcesso': checkedIdChaveDeAcesso //array
+			}
+
+			Swal.fire({
+				title: 'Confirmação',
+				text: "Deseja realmente manifestar as notas selecionada?",
+				icon: 'warning',
+				customClass: {
+					confirmButton: 'btn btn-black btn-login',
+					cancelButton: 'btn btn-black btn-login'
+				},
+				buttonsStyling: false,
+				showCancelButton: true,
+				showConfirmButton: true,
+				confirmButtonText: 'Sim',
+				cancelButtonText: 'Não'
+			}).then((result) => {
+				if (result.value) {
+					showLoading();
+					$.ajax({
+						async: true,
+						url: '/notas/manifestar-nota',
+						type: 'post',
+						data: data
+					}).done(function (response) {
+						hideLoading();
+						console.log("Manifestar Nota Response ", response)
+						if (response) {
+							Swal.fire({
+								position: 'center',
+								icon: 'success',
+								title: "Sucesso!",
+								text: "Nota manifestada.",
+								timer: 2000,
+								showConfirmButton: false
+							});
+						}
+						if (!response) {
+							Swal.fire({
+								position: 'center',
+								icon: 'warning',
+								title: "Ops!",
+								text: "Ocorreu um erro ao manifestar a nota, tente novamente.",
+								showConfirmButton: true
+							});
+						}
+					})
+				}
+			})
+		}
+
+
+	</script>
+
+
+</body>
+
+</html>

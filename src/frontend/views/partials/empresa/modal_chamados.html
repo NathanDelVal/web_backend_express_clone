@@ -1,0 +1,721 @@
+<!-- MODAL CHAMADOS -->
+<!-- Exibe e abre modal Criar Chamados -->
+<div class="modal fade" id="modal_suporte" tabindex="-1" role="modal-dialog" aria-labelledby="ModalLabelSuporte" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalLabelSuporte">Suporte
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="msgnenhumchamado"></div>
+                            <div id="tableresponsive" class="table-responsive hideElement box drag">
+                                <table id="tableChamadosAbertos" class="table display table-striped table-hover" cellspacing="0" width="100%" style="width:100%;">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Número do Chamado</th>
+                                            <th>Assunto</th>
+                                            <th>Status</th>
+                                            <th>Aberto</th>
+                                            <th>Descrição</th>
+                                            <th>Tipo</th>
+                                            <th>Resposta</th>
+                                            <th class="text-right td-actions">Ações</th>
+                                        </tr>
+                                    </thead>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="marcados_nota_aprovacao" class="marcados_nota_aprovacao">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <button type="button" class="btn btn-black" id="btn-novoChamado">Abrir
+                            Chamado</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- MODAL CHAMADOS -->
+
+
+<!-- MODAL CHAMADOS - ENVIAR PARA SUPORTE -->
+<!-- Criar Chamados -->
+<div class="modal fade" id="modal_suporte_novoChamado" tabindex="-1" role="modal-dialog" aria-labelledby="ModalLabelAbrirNovoChamado" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <form method="post" action="/create-chamado" id="create-chamado">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalLabelAbrirNovoChamado">Abrir Novo Chamado
+                    </h5>
+                    <button id="fechaModalAbrirNovoChamado" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h6 class="label-modal">Descreva o motivo do seu chamado.</h6>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <h6 class="label-modal">Assunto</h6>
+                                <input name="assunto" class="form-control" type="text" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <h6 class="label-modal">Descrição</h6>
+                                <textarea name="descricao" class="form-control" type="text" rows="4" required> </textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <h6 class="label-modal">Tipo</h6>
+                                <select id="name_regime" title="SELECIONE" class="form-control  selectpicker" data-style="btn btn-link" name="tipo" type="text" required>
+                                    <option value="Problema na página" required>Problema na página</option>
+                                    <option value="Tributação">Tributação</option>
+                                    <option value="Dúvidas">Dúvidas</option>
+                                    <option value="Outros">Outros</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button id="btn-cancelnovoChamado" type="button" class="btn" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn" id="salvs">CONFIRMAR</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- MODAL CHAMADOS - ENVIAR PARA SUPORTE -->
+
+
+
+
+<!-- MODAL CHAMADOS - CHAMADO ABERTO -->
+<div class="modal fade" id="modal_suporte_chamadoAberto" tabindex="-1" role="modal-dialog" aria-labelledby="ModalLabelchamadoAberto" aria-hidden="true" style="overflow: auto; display: none">
+    <div class="modal-dialog modal-lg" role="document">
+
+        <div class="modal-content">
+            <form method="post" action="/create-chamado">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalLabelchamadoAberto">Detalhes do Chamado
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                            <h6 id='inputChamado' class="label-modal">
+                            </h6>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="row">
+
+                        <div class="col-sm-4 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <h6 class="label-modal">Status</h6>
+                                <input id="statusInput" class="form-control" name="status" type="text" disabled>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <h6 class="label-modal">Tipo</h6>
+                                <input id="tipoInput" class="form-control" name="tipo" type="text" disabled>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <h6 class="label-modal">Aberto</h6>
+                                <input id="abertoInput" class="form-control" name="aberto" type="text" disabled>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                            <div class="form-group">
+                                <h6 class="label-modal">Assunto</h6>
+                                <input id="assuntoInput" name="assunto" class="form-control" type="text" disabled>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                            <div class="form-group">
+                                <h6 class="label-modal">Descrição</h6>
+                                <textarea id="descricaoInput" name="descricao" class="form-control" type="text" rows="4" disabled> </textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                            <div class="form-group">
+                                <h6 class="label-modal">Resposta</h6>
+                                <textarea id="respostaInput" name="resposta" class="form-control" type="text" rows="4" disabled> </textarea>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                            <div class="form-group">
+                                <h6 class="label-modal">Suporte Chat</h6>
+                                <div id="chatArea" class="chatArea"></div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-10 col-md-10 col-lg-10">
+                            <div>
+                                <h6 class="label-modal">Nova Mensagem</h6>
+                                <input id="UInewMsg" name="userWrite" class="form-control" type="text">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-2 col-md-2 col-lg-2">
+                            <button type="button" id="btn_NovaMensagem" class="btn" style="margin-top: 20px;" onclick="SendChat(this)">
+                                <i class="material-icons ">send</i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="btn_EncerrarChamadoAberto" type="button" class="btn" onclick="LoadConfirmacaoEncerrarChamado(this)" data-dismiss="modal">Encerrar
+                        Chamado</button>
+                    <button id="btn_hideModalChamadoAberto" type="button" class="btn" data-dismiss="modal">Fechar</button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- MODAL CHAMADOS - CHAMADO ABERTO- FIM-->
+
+
+
+<!-- MODAL CONFIRMAÇÃO-->
+<div class="modal fade" id="ModalConfirmacaoCloseChamado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form method="post" action="/close-chamado" id="ConfirmEncerrarChamado_form">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Encerrar Chamado de Suporte</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h6 class="label-modal">Você gostaria de concluir esse chamado?
+                                </h6>
+                                <h6 class="label-modal">(Ao selecionar "CONFIRMAR" você está sinalizando que o problema foi solucionado)
+                                </h6>
+                            </div>
+                            <input id="encerrarChamadoByNumero" type="hidden" name="numeroChamado">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn">CONFIRMAR</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- MODAL CONFIRMAÇÃO - FIM-->
+
+
+
+<script>
+    function RowToBottom() {
+        $(".chatArea").animate({
+            scrollTop: $(
+                '.chatArea').get(0).scrollHeight
+        }, 1000);
+    };
+</script>
+
+
+<script src="../local/plugins/socketio/socket.io.js"></script>
+<script src="../local/plugins/drag/drag.js"></script>
+
+<!--continuar daqui = chatX.Bruno["CH#33c3a7cb009f"][0].view -->
+
+
+
+<!--____________________VARIÁVEIS____________________-->
+
+<!--VARIÁVEIS LOCAIS-->
+<script>
+    var flagResposta = 0;
+    var ChamadoUserEmail;
+    var ChatAtual;
+    var numeroChamado;
+</script>
+<!--_________________________________________________-->
+
+
+
+<!--______________DATATABLES CHAMADOS________________-->
+
+<!--DATA TABLES & AJAX LOAD DATA ON DOCUMENT READY-->
+<script>
+    var chamadosTable;
+    const loadChamadosTable = async() => {
+        //AJAX QUE SOLICITA OS DADOS PARA A TABELA DE SUPORTE CHAMADOS
+        var post_url = '/get-chamados'
+        var request_method = 'get'
+        $.ajax({
+            url: post_url,
+            type: request_method,
+        }).done(function(response) { //
+            //console.log("/get-chamados >>>>> ", response)
+            var DadosChamados = JSON.parse(response.dataTableChamados)
+            if (DadosChamados.length > 0) {
+                /* var tablenotas = tablenotas.draw(true); */
+                chamadosTable = $('#tableChamadosAbertos').DataTable({
+                    destroy: true, //retirar essa linha caso você nunca recarregar a tabela
+                    data: DadosChamados,
+                    createdRow: function(row, data, dataIndex) {
+                        if (data.status == "Pendente") {
+                            $(row).addClass('ColorAlertChat');
+
+                        }
+                    },
+                    columns: [{
+                            data: "id_chamado"
+                        }, //id (hidden)
+                        {
+                            data: "numerochamado"
+                        }, {
+                            data: "assunto"
+                        }, {
+                            data: "status"
+                        }, {
+                            data: "inserido"
+                        }, //DATA DE ABERTURA - INSERIDO , type: "date-eu"
+                        {
+                            data: "descricao"
+                        }, {
+                            data: "tipo"
+                        }, {
+                            data: "resposta"
+                        }, {
+                            className: "td-actions",
+                            defaultContent: '<button id="btn-detalhesChamado" onclick="modal_details(this)" name="tbl_td_btn_editarlinha"' +
+                                'type="button" rel="tooltip" class="btn btn-black">' +
+                                '<i class="material-icons">mode_comment</i>' +
+                                '</button>'
+                        } //AÇÕES
+                    ],
+                    columnDefs: [
+                        //{ visible: false, targets: 0 }, //ocultar ID Porém desse modo não conseguiremossalvar o id numa var posteriormente (caso necessario)
+                        {
+                            orderable: false,
+                            targets: 0
+                        }, {
+                            sClass: "hideIdTable",
+                            "aTargets": [5, 6, 7]
+                        } //id visivelmente oculto (presente)
+                    ],
+                    order: [
+                        [4, 'desc']
+                    ],
+
+                    fixedHeader: {
+                        header: false,
+                        footer: false
+                    },
+                    dom: 'Blfrtip',
+                    buttons: [{
+                        extend: 'excel',
+                        text: 'Exportar'
+                    }],
+                    pagingType: "full_numbers",
+                    lengthMenu: [
+                        [20, 25, 50, -1],
+                        [20, 25, 50, "Todos"]
+                    ],
+                    responsive: false,
+                    language: {
+                        "url": "../assets/js/plugins/dataTables.ptbr.lang",
+                        search: "_INPUT_",
+                        searchPlaceholder: "",
+                    }
+                });
+                $('#msgnenhumchamado').empty()
+                    //console.log("vou ocultar a tabela")
+                $('#tableresponsive').removeClass('hideElement');
+                if (response.email) {
+                    ChamadoUserEmail = response.email
+                }
+
+            } else {
+                //console.log("vou ocultar a tabela")
+                $('#tableresponsive').addClass('hideElement');
+                $('#msgnenhumchamado').empty().append('<div class="col-md-12">' +
+                    '<center>' +
+                    '<h5 class="NenhumChamado"> Você Não Possui Nenhum Chamado Aberto </h5>' +
+                    '<center>' +
+                    '</div>')
+            }
+        });
+        //Exibir modal_suporte
+        $('#modal_suporte').modal('show');
+
+        //------------------------------------------------------------------------------X
+    }
+
+    //MODAL HIDE-------------------------------------------------------------[FUNÇÃO]
+    function modal_suporte_hide() {
+        $('#modal_suporte').modal('hide')
+    }
+
+    $(document).ready(function() {
+        //----------------------------------------------------------------------[ONCLICK] -Exibir modal novoChamado
+        $('#btn-novoChamado').on('click', function() {
+            $('#modal_suporte').modal('hide');
+            $('#modal_suporte_novoChamado').modal('show');
+        });
+
+        $('#suporte_btn').on('click', function() {
+            loadChamadosTable();
+            $('#overbadgeSupporteMSG').addClass("hideElement")
+        });
+    });
+</script>
+<!--_________________________________________________-->
+
+
+<!--_____________________SOCKET______________________-->
+
+<!--SOCEKT CONNECT & TOPICOS-->
+<script>
+    var socketInst = io.connect({
+        'transports': ['websocket'],
+        'reconnection': true,
+        'reconnectionDelay': 10000,
+        'reconnectionDelayMax': 60000,
+        'reconnectionAttempts': 6
+    });
+
+    socketInst.on('connect', function() {
+        //console.log("SOCKET CONECTADO")
+        //O email é atribuido ao ouvinte, na renderização HBS
+        socketInst.on('auth', function() {
+            socketInst.emit('userParameters', {
+                user: "{{{ email }}}"
+            });
+        });
+        //LISTENING SERVER
+        socketInst.on("{{{ email }}}", function(msg) {
+            //console.log("-SOCKET NOTIFY OVERBADGE-  ", msg)
+            if (msg > 0) {
+                $('#overbadgeSupporteMSG').removeClass("hideElement")
+            } else if (msg == 0) {
+                $('#overbadgeSupporteMSG').addClass("hideElement")
+            }
+        });
+
+        socketInst.on('disconnect', function() {
+            //console.log("CONEXÃO SOCKET PERDIDA !!! ")
+        });
+    });
+
+    //< !--SOCKET DYNAMICO-- >
+    var canaisAbertos = []; //Armazena os tópicos abertos
+    function OuvinteSocket(chamadoHASH) {
+        //LISTENING SERVER MSGs BY USER CH
+        if (chamadoHASH) {
+            //Verifica se o topico do socket já existe
+            if (canaisAbertos.includes(chamadoHASH) == false) {
+                //console.log("A brindo ouvinte socket")
+                if (socketInst.connected == true) {
+                    //console.log("Novo topico: ", chamadoHASH)
+                    socketInst.on(chamadoHASH, function(msgSocket) {
+                        //console.log("-SOCKET CHAT INCOMING-  ", msgSocket)
+                        if (msgSocket) {
+                            //ChatAtual.push(msgSocket.msg)
+                            LoadChat(msgSocket)
+                        }
+                    })
+                } else {
+                    //console.log("ELLLLSEEE")
+                    var empyt = []
+                        //Sem conexão com o servidor recarrega o chat sem novos chats
+                    LoadChat(empyt)
+                }
+                canaisAbertos.push(chamadoHASH)
+            } else {
+                //console.log("Já abri esse socket uma vez.")
+            }
+        } else {}
+    }
+</script>
+<!--_________________________________________________-->
+
+<!--_____________________FUNÇÕES_____________________-->
+
+<!--ENVIANDO CHAT VIA AJAX-->
+<script>
+    function ajaxDespatchChatMsg(DATA, POSTURL) {
+        $.ajax({
+            url: POSTURL,
+            type: 'POST',
+            data: DATA
+        }).done(function(response) {
+
+        })
+    }
+</script>
+
+<!--ABRE MODAL DE CONFIRMAÇÃO PARA ENCERRAR CHAMADO-->
+<script>
+    function LoadConfirmacaoEncerrarChamado(btnEncerrarCh) {
+        var form = btnEncerrarCh.parentNode.parentNode;
+        var modalBody = form.children;
+        var tagNumeroChamado = modalBody[1].children[0].children[0].children[0].innerHTML;
+        $('#encerrarChamadoByNumero').val(tagNumeroChamado);
+        $('#ModalConfirmacaoCloseChamado').modal('show');
+    }
+</script>
+
+<!--CARREGA CHAT NA PAGINA - RENDER HTML-->
+<script>
+    function LoadChat(ChatAtualMSG) {
+        //console.log('Loading chat... = ', ChatAtualMSG)
+        if (ChatAtualMSG) {
+            if (Array.isArray(ChatAtualMSG)) {
+                //console.log("IS ARRAY")
+                document.getElementById('chatArea').innerHTML = "";
+                var chats = [];
+                var str = '';
+                ChatAtualMSG.forEach(ChatAtualMSG => str += '<br><div class="' + ChatAtualMSG.from + '">' + ChatAtualMSG.msg + '</div>')
+                chats.push(str)
+                document.getElementById('chatArea').innerHTML = chats.join('<hr>');
+                RowToBottom();
+            } else if (!Array.isArray(ChatAtualMSG)) {
+                //console.log("NOT ARRAY")
+                var str = ('<br><div class="' + ChatAtualMSG.from + '">' + ChatAtualMSG.msg + '</div>');
+                //console.log("DISPLAY string ", str)
+                //$('#chatArea').append(str);
+                document.getElementById('chatArea').insertAdjacentHTML('beforeend', str);
+                //console.log("display ok")
+                RowToBottom();
+            }
+        }
+    }
+</script>
+
+<!--ENVIA MSG DO CHAT PARA O SERVIDOR-->
+<script>
+    function SendChat(button) {
+        var msg = document.getElementById('UInewMsg').value
+        var body = button.parentNode.parentNode.parentNode
+        var numeroChamado = $(body)[0].children[0].children[0].children[0].innerHTML
+            //console.log("Numero do chamado: ", numeroChamado)
+        if (msg) {
+            var socketMsg = {
+                    "chamado": numeroChamado,
+                    "msg": msg,
+                    "emailusuario": ChamadoUserEmail,
+                    "from": 'userChatMsg'
+                }
+                //console.log("tenho ema il ", ChamadoUserEmail)
+            if (socketMsg) {
+                socketInst.emit("ServerChannel", socketMsg)
+            }
+            //Apagando Input
+            $('#UInewMsg').val('')
+        }
+    }
+</script>
+
+
+<!--ABRE O MODAL COM INFORMAÇÕES ESPECIFICAS DE UM CHAMADO-->
+<script>
+    function modal_details(rowN) {
+        $('#modal_suporte').modal('hide'); //Oculta o modal modal_suporte
+        var linha = rowN.parentNode.parentNode
+        numeroChamado = $(linha)[0].children[1].innerHTML
+        var assunto = $(linha)[0].children[2].innerHTML
+        var status = $(linha)[0].children[3].innerHTML
+        var aberto = $(linha)[0].children[4].innerHTML
+        var descricao = $(linha)[0].children[5].innerHTML
+        var tipo = $(linha)[0].children[6].innerHTML
+        var resposta = $(linha)[0].children[7].innerHTML
+        $('#inputChamado').text(numeroChamado);
+        $('#statusInput').val(status);
+        $('#abertoInput').val(aberto);
+        $('#assuntoInput').val(assunto);
+        $('#descricaoInput').val(descricao);
+        $('#tipoInput').val(tipo);
+        $('#respostaInput').val(resposta);
+        //CHAT REFERENTE AO ROW SELECIONADO
+        OuvinteSocket(numeroChamado);
+        $.ajax({
+            url: '/get-chat-chamado',
+            type: 'POST',
+            data: {
+                'hashChat': numeroChamado
+            }
+        }).done(function(response) {
+            //Carrega o chat pela primeira vez
+            LoadChat(response.ActualChat)
+        })
+        $('#modal_suporte_chamadoAberto').modal('show'); //Abre o modal chamadoAberto
+    }
+</script>
+<!--________________________________________________-->
+
+
+
+
+<!--_____________________SUBMITS_____________________-->
+
+<!--ABRIR CHAMADO - FORM SUBMIT BY AJAX-->
+<script>
+    $("#create-chamado").submit(function(e) {
+        e.preventDefault(); //prevent default action
+        var post_url = $(this).attr("action"); //get form action url   /importnotas
+        var request_method = $(this).attr("method"); //get form GET/POST method
+        var form_data = $(this).serialize(); //Encode form elements for submission
+        $.ajax({
+            url: post_url,
+            type: request_method,
+            data: form_data
+        }).done(function(response) {
+            if (response != undefined && response != "") {
+                //resetForm($('#create-chamado')); //Limpando Formulario
+                $('#create-chamado')[0].reset();
+                $('#name_regime').val("");
+                $("#fechaModalAbrirNovoChamado").trigger("click");
+                var badMsg1 = "Erro ao abrir ao abrir chamado. Tente novamente!"
+                var badMsg2 = "Não foi possivel abrir seu chamado. Tente novamente!"
+                var gif = "";
+                if (response == "Chamado aberto com sucesso! Já estamos verificando como podemos ajudar.") {
+                    gif = "success";
+                }
+                if (response == badMsg1 || response == badMsg2) {
+                    gif = "warning";
+                }
+                Swal.fire({
+                    position: 'center',
+                    icon: gif,
+                    title: response,
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+                setTimeout(function() {
+                    $("#suporte_btn").trigger("click");
+                }, 2000);
+            }
+        });
+    });
+</script>
+
+
+<!--ENCERRAR CAHMADO - FORM SUBMIT BY AJAX-->
+<script>
+    $("#ConfirmEncerrarChamado_form").submit(function(e) {
+        e.preventDefault(); //prevent default action
+        var post_url = $(this).attr("action"); //get form action url   /importnotas
+        var request_method = $(this).attr("method"); //get form GET/POST method
+        var form_data = $(this).serialize(); //Encode form elements for submission
+        $.ajax({
+            url: post_url,
+            type: request_method,
+            data: form_data
+        }).done(function(response) {
+            if (response) {
+                $('#ModalConfirmacaoCloseChamado').modal('hide');
+                var gif = "";
+                if (response == "Chamado encerrado com sucesso. Obrigado!") {
+                    loadChamadosTable();
+                    gif = "success";
+                } else {
+                    gif = "warning";
+                }
+
+                Swal.fire({
+                    position: 'center',
+                    icon: gif,
+                    title: response,
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+            }
+        });
+    });
+</script>
+
+<!--________________________________________________-->
+
+<script>
+    $("#UInewMsg").keyup(function(event) {
+        if (event.which === 13) {
+            $("#btn_NovaMensagem").click();
+        }
+    });
+</script>
+
+
+<!--________________ONCLICK BUTTON__________________-->
+
+<!--AO FECHAR MODAL 2 RE-ABRE O MODAL SUPORTE-->
+<script>
+    $('#btn_hideModalChamadoAberto').on('click', function() {
+        //TRIGGER RE-OPENCHAMADOS MODAL ABERTOS
+        $("#suporte_btn").trigger("click");
+    });
+</script>
+<!--________________________________________________-->

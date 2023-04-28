@@ -1,0 +1,9 @@
+# Ignore artifacts:
+build
+coverage
+
+# Ignore all HBS and XML files:
+*.hbs
+*.xml
+# Ignore all JS files:
+#*.js

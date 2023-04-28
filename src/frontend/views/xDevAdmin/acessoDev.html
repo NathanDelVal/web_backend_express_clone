@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="../images/icon/apple-icon-mezzomo.png">
+    <link rel="icon" type="image/png" href="../images/icon/favicon_mezzomo3.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>
+        Robotax: Acesso Dev
+    </title>
+    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' /> {{!-- Fonts and icons --}}
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"> {{!--Custom CSS styles--}}
+    <link rel="stylesheet" type="text/css" href="../local/styleacessomezzomo.css"> {{!--SWEET ALERT--}}
+    <link rel="stylesheet" href="../local/plugins/sweetalert/css/sweetalert2.min.css" id="theme-styles" />
+
+    <script src="../assets/js/core/jquery-3.5.1.js"></script>
+
+</head>
+
+<body class="off-canvas-sidebar" style="overflow-y: auto;">
+
+    {{!-- Navbar --}}
+    <nav class="navbar navbar-expand-lg navbar-transparent text-white" style="z-index: 2;">
+        <div class="container-fluid">
+            <div class="navbar-wrapper">
+                <a class="navbar-brand" href="/">
+                    <div class="row align-items-center" style="margin-top: 2rem; margin-left: 2rem;">
+                        <img src="../images/logo-black-fixed.svg" style="height: 8rem">
+                        <span class="txt-rotate" style="font-weight: 800; margin-left: 0.5rem;" data-period="2000" data-rotate='[ "Antecipados", "Robô Fiscal", "Documentos", "Robô Contábil", "Notas Fiscais"]'></span>
+                    </div>
+                </a>
+            </div>
+            {{!--
+            <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="navbar-toggler-icon icon-bar"></span>
+                <span class="navbar-toggler-icon icon-bar"></span>
+                <span class="navbar-toggler-icon icon-bar"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end">
+                <ul class="navbar-nav">
+                    <li class="nav-item ">
+                        <a href="/acesso" class="nav-link">
+                            <i class="material-icons">undo</i> Voltar
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            --}}
+        </div>
+    </nav>
+    <div class="wrapper wrapper-full-page">
+        <div class="page-header cadastro-page header-filter" filter-color="yellow">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-5 col-md-8 col-sm-10 ml-auto mr-auto">
+                        <div class="card card-login card-hidden card-cadastro">
+                            <div class="card-header card-header-black text-center">
+                                <h2 class="card-title">Acesso Dev Interno</h2>
+                            </div>
+                            <form id="formulario_login" class="form" method="post" action="/dev/loginDev">
+                                <div class="card-body">
+                                    <span class="bmd-form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="material-icons">lock_outline</i>
+                                                </span>
+                                            </div>
+                                            <input id="login-password" name="password" type="password" class="form-control" placeholder="Senha..." autocomplete="current-password">
+                                        </div>
+                                    </span>
+                                </div>
+                                    <div class="card-footer justify-content-center">
+                                        <button id="button-login" class="btn-login btn-black btn" type="submit">Login</button>
+                                    </div>
+                                    <hr>
+                            </form>
+                        </div>
+                        <svg class="linesacesso" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1946.9 1523.9" style="position: fixed; width: 70rem; right: -100px; bottom: -100px; z-index: -1;">
+                            <defs>
+                                <style>
+                                    .cls-1 {
+                                        fill: none;
+                                    }
+                                </style>
+                            </defs>
+                            <g id="Camada_2" data-name="Camada 2">
+                                <g id="Camada_1-2" data-name="Camada 1">
+                                    <g id="Camada_2-2" data-name="Camada 2">
+                                        <g id="home-anim">
+                                            <g id="home">
+                                                <g id="light-yellow">
+                                                    <line class="cls-1" x1="915.6" y1="1175.7" x2="761.1" y2="1330.2" />
+                                                    <line class="cls-1" x1="1351.7" y1="739.6" x2="1197.2" y2="894.1" />
+                                                    <line class="cls-1" x1="1787.8" y1="303.5" x2="1633.3" y2="458" />
+                                                    <line class="cls-1" x1="150.1" y1="956.3" x2="304.6" y2="801.8" />
+                                                    <line class="cls-1" x1="358.8" y1="590.6" x2="204.3" y2="745.1" />
+                                                    <line class="cls-1" x1="586.2" y1="520.2" x2="740.7" y2="365.7" />
+                                                    <line class="cls-1" x1="794.9" y1="154.5" x2="640.4" y2="309" />
+                                                    <line class="cls-1" x1="196.2" y1="1290.3" x2="350.7" y2="1135.8" />
+                                                    <line class="cls-1" x1="404.9" y1="924.5" x2="250.4" y2="1079.1" />
+                                                    <line class="cls-1" x1="632.3" y1="854.2" x2="786.8" y2="699.7" />
+                                                    <line class="cls-1" x1="841" y1="488.5" x2="686.5" y2="643" />
+                                                    <line class="cls-1" x1="1068.4" y1="418.1" x2="1222.9" y2="263.6" />
+                                                    <line class="cls-1" x1="442.4" y1="1267.2" x2="287.8" y2="1421.7" />
+                                                    <line class="cls-1" x1="669.7" y1="1196.9" x2="824.2" y2="1042.3" />
+                                                    <line class="cls-1" x1="878.4" y1="831.1" x2="723.9" y2="985.7" />
+                                                    <line class="cls-1" x1="1105.8" y1="760.8" x2="1260.3" y2="606.3" />
+                                                    <line class="cls-1" x1="1314.5" y1="395" x2="1160" y2="549.6" />
+                                                    <line class="cls-1" x1="1541.9" y1="324.7" x2="1696.4" y2="170.2" />
+                                                </g>
+                                                <g id="grey">
+                                                    <line class="cls-1" x1="979.4" y1="1116.2" x2="1134" y2="961.7" />
+                                                    <line class="cls-1" x1="1415.5" y1="680.1" x2="1570" y2="525.6" />
+                                                    <line class="cls-1" x1="484.9" y1="237" x2="330.4" y2="391.5" />
+                                                    <line class="cls-1" x1="522.3" y1="579.7" x2="367.8" y2="734.2" />
+                                                    <line class="cls-1" x1="422.6" y1="531.1" x2="577.1" y2="376.6" />
+                                                    <line class="cls-1" x1="958.4" y1="143.6" x2="803.9" y2="298.1" />
+                                                    <line class="cls-1" x1="568.5" y1="913.6" x2="414" y2="1068.2" />
+                                                    <line class="cls-1" x1="468.8" y1="865.1" x2="623.3" y2="710.6" />
+                                                    <line class="cls-1" x1="1004.6" y1="477.6" x2="850" y2="632.1" />
+                                                    <line class="cls-1" x1="904.8" y1="429" x2="1059.4" y2="274.5" />
+                                                    <line class="cls-1" x1="605.9" y1="1256.3" x2="451.4" y2="1410.8" />
+                                                    <line class="cls-1" x1="506.2" y1="1207.8" x2="660.7" y2="1053.2" />
+                                                    <line class="cls-1" x1="1042" y1="820.2" x2="887.5" y2="974.8" />
+                                                    <line class="cls-1" x1="942.3" y1="771.7" x2="1096.8" y2="617.2" />
+                                                    <line class="cls-1" x1="1478.1" y1="384.1" x2="1323.5" y2="538.7" />
+                                                    <line class="cls-1" x1="1378.3" y1="335.6" x2="1532.9" y2="181.1" />
+                                                </g>
+                                                <g id="yellow">
+                                                    <line class="cls-1" x1="510.6" y1="1432.4" x2="819.7" y2="1123.3" />
+                                                    <line class="cls-1" x1="946.7" y1="996.3" x2="1255.8" y2="687.3" />
+                                                    <line class="cls-1" x1="1382.8" y1="560.2" x2="1691.9" y2="251.2" />
+                                                    <line class="cls-1" x1="517.6" y1="356.9" x2="208.6" y2="666" />
+                                                    <line class="cls-1" x1="555" y1="699.6" x2="246" y2="1008.7" />
+                                                    <line class="cls-1" x1="389.9" y1="411.2" x2="699" y2="102.2" />
+                                                    <line class="cls-1" x1="991.1" y1="263.5" x2="682.1" y2="572.6" />
+                                                    <line class="cls-1" y1="1181.3" x2="309" y2="872.2" />
+                                                    <line class="cls-1" x1="601.2" y1="1033.6" x2="292.1" y2="1342.6" />
+                                                    <line class="cls-1" x1="436.1" y1="745.2" x2="745.1" y2="436.1" />
+                                                    <line class="cls-1" x1="1037.3" y1="597.5" x2="728.2" y2="906.5" />
+                                                    <line class="cls-1" x1="872.1" y1="309.1" x2="1181.2" />
+                                                    <line class="cls-1" x1="1473.4" y1="161.4" x2="1164.3" y2="470.4" />
+                                                    <line class="cls-1" x1="37.4" y1="1523.9" x2="346.4" y2="1214.9" />
+                                                    <line class="cls-1" x1="473.5" y1="1087.8" x2="782.5" y2="778.8" />
+                                                    <line class="cls-1" x1="1074.7" y1="940.2" x2="765.6" y2="1249.2" />
+                                                    <line class="cls-1" x1="909.6" y1="651.8" x2="1218.6" y2="342.7" />
+                                                    <line class="cls-1" x1="1510.8" y1="504.1" x2="1201.7" y2="813.1" />
+                                                    <line class="cls-1" x1="1946.9" y1="68" x2="1637.8" y2="377" />
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            {{> escritorio/footer_outside}}
+        </div>
+    </div>
+
+
+    {{!-- MODAL RECUPERAR SENHA --}}
+    <form id="form_recuperarsenha" method="post" action="/recuperaracesso">
+        <div class="modal fade no-scroll" id="ModalRecuperar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="padding-bottom:150px">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title modal-text" id="exampleModalLabel">Insira seu email, para receber o link de
+                            <br>alteração de senha
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="material-icons">email</i>
+                                    </span>
+                                </div>
+                                <input type="email" id="input_email_rec" name="email_rec" class="form-control input-box" placeholder="exemplo@gmail.com" autocomplete="on" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn-modal btn" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn-modal btn" id="enviar_email">Enviar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    {{!-- MODAL RECUPERAR SENHA - X--}} 
+    
+    <!--Correção do Violation Scroll non-passive event-->
+    <script src=" ../local/plugins/fix-non-passive.js"></script>
+    {{!-- Core JS Files --}}
+    <script src="../assets/js/core/popper.min.js"></script>
+    <script src="../assets/js/core/bootstrap-material-design.js"></script>
+    <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+    {{!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc --}}
+    <script src="../assets/js/material-dashboard.min.js" type="text/javascript"></script>
+    {{!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+    {{!-- Notifications Plugin --}}
+    <script src="../assets/js/plugins/bootstrap-notify.js"></script>
+
+    {{!--SWEET ALERT--}}
+    <script src="../local/plugins/sweetalert/js/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="../local/plugins/sweetalert/css/sweetalert2.min.css" id="theme-styles"> {{!-- AJAX POST FORM RECUPERAR SENHA MODAL --}}
+    <script src="../local/metodos/post/form_recuperar_senha.js"></script>
+
+
+    <script>
+        $(document).ready(function() {
+            //{{!--CARD login EFECT - FADE SHOW--}}
+            setTimeout(function() {
+                $('.card').removeClass('card-hidden');
+            }, 400);
+
+            //{{!--Modal Recuperar Senha--}}
+            $('#btn_recuperarsenha').on('click', '.edit', function() {
+
+                $('#ModalRecuperar').modal('show');
+
+            });
+
+        });
+    </script>
+
+
+    <script>
+        //{{!--Reativa o botão em um dado tempo--}}
+        LoginBtnAvabiality = async(status) => {
+            $('#button-login').prop("disabled", !status);
+        }
+
+
+        $("#formulario_login").submit(function(e) {
+            e.preventDefault(); //{{!--prevent default action--}}
+
+            LoginBtnAvabiality(false) //{{!--Desabilita o botão de Login--}}
+
+            var post_url = encodeURI($(this).attr("action")); //{{!--get form action url /importnotas --}}
+            var request_method = $(this).attr("method"); //{{!--get form GET/POST method --}}
+            var form_data = $(this).serialize(); //{{!--Encode form elements for submission --}}
+            $.ajax({
+                url: post_url,
+                type: request_method,
+                data: form_data
+            }).done(function(response) {
+                //alert(response)
+                //response = JSON.parse(response)
+                if (response) {
+                    if (response.redirect) {
+
+                        window.location.href = response.redirect;
+                    } else if (response.msg) {
+
+                        if (response.msg == "Seu email não possui cadastro") {
+                            gif = "warning"
+                        } else if (response.msg == "O link perdeu a validade. Tente novamente.") {
+                            gif = "warning"
+                        } else if (response.msg == "Seu link pode ter sido modificado, e não pode ser validado.") {
+                            gif = "warning"
+                        } else if (response.msg == "Seu cadastro foi validado com sucesso!") {
+                            gif = "success"
+                        } else if (response.msg == "Credênciais inválidas!") {
+                            gif = "warning"
+                        } else if (response.msg == "Você não possui as permissões necessárias") {
+                            gif = "warning"
+                        } else {
+                            gif = "warning"
+                        }
+
+                        Swal.fire({
+                            customClass: {
+                                confirmButton: 'btn btn-black btn-login',
+                            },
+                            buttonsStyling: false,
+                            position: 'center',
+                            icon: gif,
+                            title: response.msg,
+                            showConfirmButton: true,
+                            timer: 0
+                        });
+                    }
+                }
+                LoginBtnAvabiality(true) //{{!--Habilita o botão de Login novamente--}}
+            }).always(function(jqXHR, textStatus) {
+                //{{!--jqXHR OUT: Obj do retorno--}}
+                //{{!--textStatus OUT: 'success' or 'error'--}}
+                if (textStatus != "success") {
+                    LoginBtnAvabiality(true) //{{!--Habilita o botão de Login novamente--}}
+                        //{{!--alert("Error: " + jqXHR.statusText);--}}
+                };
+            });
+        });
+    </script>
+
+
+    {{#if msgEmail }} {{!-- HBS will load msgEmail when user arrives from email link--}}
+    <script>
+        //{{!--SWEET ALERT - Redirect do link enviado para o email--}}
+        var msgEmail = JSON.parse('{{{json msgEmail}}}')
+        if (msgEmail.length > 0) {
+            var gif = "";
+            if (msgEmail == "Seu email não possui cadastro") {
+                gif = "warning"
+            }
+            if (msgEmail == "O link perdeu a validade. Tente novamente.") {
+                gif = "warning"
+            }
+            if (msgEmail == "Seu link pode ter sido modificado, e não pode ser validado.") {
+                gif = "warning"
+            }
+            if (msgEmail == "Seu cadastro foi validado com sucesso!") {
+                gif = "success"
+            }
+            if (msgEmail == "Credênciais inválidas!") {
+                gif = "warning"
+            }
+            Swal.fire({
+                position: 'center',
+                icon: gif,
+                title: msgEmail,
+                showConfirmButton: false,
+                timer: 0
+            });
+        }
+    </script>
+    {{/if}}
+
+    <script>
+        var TxtRotate = function(el, toRotate, period) {
+            this.toRotate = toRotate;
+            this.el = el;
+            this.loopNum = 0;
+            this.period = parseInt(period, 10) || 2000;
+            this.txt = '';
+            this.tick();
+            this.isDeleting = false;
+        };
+
+        TxtRotate.prototype.tick = function() {
+            var i = this.loopNum % this.toRotate.length;
+            var fullTxt = this.toRotate[i];
+
+            if (this.isDeleting) {
+                this.txt = fullTxt.substring(0, this.txt.length - 1);
+            } else {
+                this.txt = fullTxt.substring(0, this.txt.length + 1);
+            }
+
+            this.el.innerHTML = '<span class="wrap">' + this.txt + '</span>';
+
+            var that = this;
+            var delta = 300 - Math.random() * 100;
+
+            if (this.isDeleting) {
+                delta /= 2;
+            }
+
+            if (!this.isDeleting && this.txt === fullTxt) {
+                delta = this.period;
+                this.isDeleting = true;
+            } else if (this.isDeleting && this.txt === '') {
+                this.isDeleting = false;
+                this.loopNum++;
+                delta = 500;
+            }
+
+            setTimeout(function() {
+                that.tick();
+            }, delta);
+        };
+
+        window.onload = function() {
+            var elements = document.getElementsByClassName('txt-rotate');
+            for (var i = 0; i < elements.length; i++) {
+                var toRotate = elements[i].getAttribute('data-rotate');
+                var period = elements[i].getAttribute('data-period');
+                if (toRotate) {
+                    new TxtRotate(elements[i], JSON.parse(toRotate), period);
+                }
+            }
+            // INJECT CSS
+            var css = document.createElement("style");
+            css.type = "text/css";
+            css.innerHTML = ".txt-rotate > .wrap { border-right: 0.08em solid #666 }";
+            document.body.appendChild(css);
+        };
+    </script>
+
+</body>
+
+</html>

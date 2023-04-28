@@ -1,0 +1,367 @@
+<style>
+  .nfce-body {
+    font-family: "Montserrat", sans-serif;
+    color: black !important;
+    font-weight: 500 !important;
+  }
+
+  .nfce-row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .nfce-container {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .nfce-col-lg,
+  .nfce-col-lg-1,
+  .nfce-col-lg-2,
+  .nfce-col-lg-3,
+  .nfce-col-lg-4,
+  .nfce-col-lg-5,
+  .nfce-col-lg-6,
+  .nfce-col-lg-7,
+  .nfce-col-lg-8,
+  .nfce-col-lg-9,
+  .nfce-col-lg-10,
+  .nfce-col-lg-11,
+  .nfce-col-lg-12,
+  .nfce-col-lg-auto,
+  .nfce-col-md,
+  .nfce-col-md-1,
+  .nfce-col-md-2,
+  .nfce-col-md-3,
+  .nfce-col-md-4,
+  .nfce-col-md-5,
+  .nfce-col-md-6,
+  .nfce-col-md-7,
+  .nfce-col-md-8,
+  .nfce-col-md-9,
+  .nfce-col-md-10,
+  .nfce-col-md-11,
+  .nfce-col-md-12,
+  .nfce-col-md-auto,
+  .nfce-col-sm,
+  .nfce-col-sm-1,
+  .nfce-col-sm-2,
+  .nfce-col-sm-3,
+  .nfce-col-sm-4,
+  .nfce-col-sm-5,
+  .nfce-col-sm-6,
+  .nfce-col-sm-7,
+  .nfce-col-sm-8,
+  .nfce-col-sm-9,
+  .nfce-col-sm-10,
+  .nfce-col-sm-11,
+  .nfce-col-sm-12,
+  .nfce-col-sm-auto {
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+
+  .nfce-col {
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
+  }
+
+  .nfce-border {
+    border: 1px solid #000;
+    border-radius: 5px;
+  }
+
+  .nfce-align {
+    align-items: center;
+  }
+
+  .nfce-mt {
+    margin-top: .6rem;
+  }
+
+  .nfce-resumo {
+    justify-content: space-between;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .nfce-text {
+    color: #edcd00;
+    font-weight: bold;
+    margin-bottom: .5rem;
+  }
+
+  .nfce-table th {
+    border-right: 1px solid #000;
+  }
+
+  .nfce-table th:last-child {
+    border-right: 0px solid #000;
+  }
+
+  .nfce-table td {
+    border-right: 1px solid #000;
+  }
+
+  .nfce-table td:last-child {
+    border-right: 0px solid #000;
+  }
+
+  .qrcode-col {
+    display: flex;
+    justify-content: center;
+  }
+
+  #qrCode{
+    padding: 10px;
+  }
+
+  /*.svg_qr {
+    display: flex;
+    margin: 1rem auto;
+    height: 280px;
+  }*/
+</style>
+
+<div class="nfce-body">
+  <div class="nfce-container nfce-mt">
+    <div class="nfce-border">
+      <div class="nfce-row nfce-align">
+        <div class="nfce-col-md-6">
+          <img src="">
+        </div>
+        <div class="nfce-col-md-6">
+          <h6 style="font-weight: bold;">{{emitente.nome}}</h6>
+          <div class="nfce-row">
+            <h6>CNPJ: {{emitente.inscricao_nacional}}</h6>
+            <h6 style="margin-left: 25%;">IE: {{emitente.ie}}</h6>
+          </div>
+          <h6>{{emitente.endereco}}, {{emitente.numero}}, {{emitente.bairro}}, {{emitente.municipio}}, {{emitente.uf}}
+          </h6>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nfce-container nfce-mt">
+    <div class="nfce-border">
+      <div class="nfce-row text-center">
+        <div class="nfce-col">
+          <h6>DANFE NFC-e - Documento Auxiliar da Nota Fiscal de Consumidor Eletrônica</h6>
+          <h6 style="font-weight: bold;">NFC-e não permite aproveitamento de crédito de ICMS</h6>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nfce-container nfce-mt">
+    <h5 class="nfce-text">Produtos</h5>
+    <div class="nfce-border">
+      <div class="nfce-row text-center">
+        <div class="nfce-col">
+          <table class="nfce-table" style="width: 100%;">
+            <thead>
+              <tr style="border-bottom: 1px solid">
+                <th style="font-size: .8rem;">Código</th>
+                <th style="font-size: .8rem;">Descrição</th>
+                <th style="font-size: .8rem;">Qtde</th>
+                <th style="font-size: .8rem;">Un</th>
+                <th style="font-size: .8rem;">Vl Unit</th>
+                <th style="font-size: .8rem;">Vl Total</th>
+                <th style="font-size: .8rem;">CFOP</th>
+                <th class="bg-yellow" style="font-size: .8rem;">Acumulador</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {{#each itens}}
+              <tr>
+                <td style="font-size: .75rem;">{{codigo}}</td>
+                <td style="font-size: .75rem;">{{this.descricao}}</td>
+                <td style="font-size: .75rem;">{{this.quantidade}}</td>
+                <td style="font-size: .75rem;">{{this.unidade}}</td>
+                <td style="font-size: .75rem;">{{this.valor}}</td>
+                <td style="font-size: .75rem;">{{this.total}}</td>
+                <td style="font-size: .75rem;">{{this.cfop}}</td>
+                <td style="font-size: .75rem;"><input style="text-align:center; max-width: 3rem;!important" type="text" class="input-acumulador-bg input-danfe" value="{{this.acumulador}}" onChange="updateAcumuladorNFCe(this, '{{this.cfop}}', '{{this.forma_pagamento}}')"></td>
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nfce-container nfce-mt">
+    <h5 class="nfce-text">Resumo</h5>
+    <div class="nfce-border" style="line-height: 0px;">
+      {{#each itens}}
+      <div class="nfce-col">
+        <div class="nfce-row text-center nfce-resumo">
+          <h6>Quantidade Total de Itens</h6>
+          <h6 style="font-weight: bold;">{{this.quantidade}}</h6>
+        </div>
+      </div>
+      {{/each}}
+      <div class="nfce-col">
+        <div class="nfce-row text-center nfce-resumo">
+          <h6>Valor Total</h6>
+          <h6 style="font-weight: bold;">R$ {{total_produtos}}</h6>
+        </div>
+      </div>
+      <div class="nfce-col">
+        <div class="nfce-row text-center nfce-resumo">
+          <h6>Desconto Total</h6>
+          <h6 style="font-weight: bold;">R$ {{total_desconto}}</h6>
+        </div>
+      </div>
+      <div class="nfce-col">
+        <div class="nfce-row text-center nfce-resumo">
+          <h6>Forma de pagamento</h6>
+          <h6>{{forma_pagamento}}</h6>
+        </div>
+      </div>
+      <div class="nfce-col">
+        <div class="nfce-row text-center nfce-resumo">
+          <h6>Valor Pago em R$</h6>
+          <h6 style="font-weight: bold;">{{valor_pagamento}}</h6>
+        </div>
+      </div>
+      {{#if valor_troco}}
+      <div class="nfce-col">
+        <div class="nfce-row text-center nfce-resumo">
+          <h6>Troco</h6>
+          <h6 style="font-weight: bold;">{{valor_troco}}</h6>
+        </div>
+      </div>
+      {{/if}}
+    </div>
+  </div>
+
+  <div class="nfce-container nfce-mt">
+    <h5 class="nfce-text">Impostos</h5>
+    <div class="nfce-border">
+      <div class="nfce-col">
+        <div class="nfce-row text-center nfce-resumo">
+          <h6>Tributos Totais incidentes (Lei Federal 12.741/2012)</h6>
+          <h6 style="font-weight: bold;">{{imposto_tributos}}</h6>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nfce-container nfce-mt">
+    <h5 class="nfce-text">Informações</h5>
+    <div class="nfce-border">
+      <div class="nfce-col">
+        <div class="nfce-row text-center nfce-resumo">
+          <h6>NFC-e nº {{numero}}</h6>
+          <h6>Série: {{serie}}</h6>
+          <h6>{{data_emissao}}</h6>
+        </div>
+      </div>
+
+      <div class="nfce-col text-center">
+        <h6>Consulte pela Chave de Acesso em</h6>
+        <h7>http://nfce.fazenda.pa.gov.br/consulta</h7>
+        <h6 style="font-weight: bold;">Chave de Acesso</h6>
+        <h6>{{chave}}</h6>
+      </div>
+    </div>
+  </div>
+
+  {{#if destinatario.nome}}
+  <div class="nfce-container nfce-mt">
+    <h5 class="nfce-text">Consumidor</h5>
+    <div class="nfce-border">
+      <div class="nfce-col text-center">
+        <h6>{{destinatario.nome}}</h6>
+        <h6>CNPJ/CPF/ID Estrangeiro: {{destinatario.inscricao_nacional}}</h6>
+        <h6>{{destinatario.endereco}}, {{destinatario.numero}}, {{destinatario.bairro}}, {{destinatario.municipio}},
+          {{destinatario.uf}}</h6>
+      </div>
+    </div>
+  </div>
+  {{/if}}
+
+  <div class="nfce-container nfce-mt">
+    <h5 class="nfce-text">QR Code</h5>
+    <div class="nfce-border">
+      <div class="qrcode-col">
+        <span style="visibility: hidden; position: absolute" id="qrcode_raw">{{qrcode}}</span>
+        <div id="qrCode">
+        </div>
+      </div>
+      <div class="nfce-row nfce-resumo">
+        <h6>Protocolo de Autorização: {{protocolo}}</h6>
+        <h6>{{data_protocolo}}</h6>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+  /*  BRUNO VAI PRECISAR??
+$(document).ready(function(){
+ setTimeout(alertPendenteNFCE, 500)
+   
+})
+function alertPendenteNFCE(){
+  var InputTextCfopEntrada = $('.input-cfopentrada-bg').val()
+  if (InputTextCfopEntrada.length != 4) {
+    $('.input-cfopentrada-bg').css("background-color", "#ff000042", "important");
+  } else {
+    $('.input-cfopentrada-bg').css("background-color", "#fff");
+  }
+
+
+  var InputTextAcumulador = $('.input-acumulador-bg').val()
+  if (InputTextAcumulador.length < 2 || InputTextAcumulador.length > 3){
+    $('.input-acumulador-bg').css("background-color", "#ff000042", "important");
+  } else {
+    $('.input-acumulador-bg').css("background-color", "#fff");
+  }
+
+  
+  var msgDeErro = $(".msg-erro").text()
+  
+  if(msgDeErro.length > 0) {
+    console.log("entrei aqui")
+    $('.input-cfopentrada-bg').css("background-color", "#ff000042", "important");
+    $('.input-acumulador-bg').css("background-color", "#ff000042", "important");
+    $('.erroinserir').css("background-color", "#ff000042", "important");
+
+  }
+}
+*/
+
+
+
+function updateAcumuladorNFCe(input, cfop, forma_pagamento) {
+      var cnpj = localStorage.getItem('cnpj_destinatario')
+      var acumulador_input = input.value
+      var cfop = cfop
+if(forma_pagamento){
+      if(acumulador_input.length > 0 && acumulador_input.length < 4) {
+        $.ajax({
+          type: "POST",
+          url: '/notas/update-acumulador-danfe-nfce',
+          data: { 'cnpj' : cnpj , 'acumulador_input' : acumulador_input, 'cfop_nfce': cfop , 'formadepag' : forma_pagamento}
+        }).done(function(data) {
+          //response aqui
+          hideLoading()
+          getDataPreviewXMLNFCe()
+          //setTimeout(alertPendenteNFCE, 200)
+        })
+      }
+  }
+}
+</script>

@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="../images/icon/apple-icon-mezzomo.png">
+    <link rel="icon" type="image/png" href="../images/icon/favicon_mezzomo3.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>
+        Robotax: Corrigir Aprovados
+    </title>
+    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css"
+        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link href="../assets/css/material-dashboard.min.css" rel="stylesheet" />
+    <!--local CSS -->
+    <link rel="stylesheet" type="text/css" href="../local/aprovar-itens.css">
+    <script src="../assets/js/core/jquery-3.5.1.js"></script>
+</head>
+
+<body class="off-canvas-sidebar">
+    <div class="wrapper ">
+        <!-- Navbar -->
+        <div class="sidebar" data-color="yellow" data-background-color="black"
+            data-image="../assets/img/contabeisbw.jpg">
+            <div class="sidebar-wrapper">
+                <ul class="nav">
+                    {{> escritorio/navbar_gerenciar}}
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="main-panel">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-transparent">
+                <div class="container-fluid">
+                    <div class="navbar-wrapper">
+                        <div class="navbar-minimize">
+                            <button id="minimizeSidebar" class="btn btn-just-icon btn-white btn-fab btn-round">
+                                <i class="material-icons text_align-center visible-on-sidebar-regular">more_vert</i>
+                                <i class="material-icons design_bullet-list-67 visible-on-sidebar-mini">view_list</i>
+                            </button>
+                        </div>
+                        <a class="navbar-brand" href="/gerenciar/corrigir-aprovados">Corrigir Aprovados</a>
+                    </div>
+
+                    {{> escritorio/menu_apps_back}} {{> escritorio/help_btn}}
+                    <!--{{> escritorio/help_btn}}-->
+
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="navbar-toggler-icon icon-bar"></span>
+                        <span class="navbar-toggler-icon icon-bar"></span>
+                        <span class="navbar-toggler-icon icon-bar"></span>
+                    </button>
+
+                </div>
+            </nav>
+            <!-- End Navbar -->
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header card-header-info2">
+                                    <h4 class="card-title">Tabela de correção de aprovação</h4>
+                                    <p class="card-category">Corrija as tributações utilizando a coluna "AÇÕES"</p>
+                                </div>
+                                <div class="card-body">
+
+                                    <!-- NNEWWWWWWWWWWWWWWWWWWWWWWWWW -->
+
+                                    <br>
+
+                                    <!--FOMULARIO-->
+                                    <form id="form_busca_corrigir_aprovados" role="form" method="post"
+                                        action="/gerenciar/busca-corrigir-aprovados">
+                                        <div class="row justify-content-center">
+                                            <!--NOMEPJ-->
+                                            <div class="col-sm-11 col-md-11 col-lg-11"
+                                                style="box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.100); border-radius: 5px; padding: 30px; padding-left: 120px; padding-right: 120px;">
+                                                <div class="input-group form-group card-body-input"
+                                                    style="padding:4px; margin-bottom:15px;">
+                                                    <label class="bmd-label-floating">Digite sua busca</label>
+                                                    <input id="input_corrigir_aprovados" name="buscado_corrigir_aprovados_itens"
+                                                        type="text" class="form-control" required autocomplete="off"
+                                                        value="">
+                                                </div>
+
+                                                <div class="form-check form-check-radio">
+                                                    <label class="form-check-label radio-label">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="corrigirRadios" id="corrigirRadios1" value="contem"
+                                                            onclick="radioBold(this)" checked>
+                                                        Busca por Descrição
+                                                        <span class="circle">
+                                                            <span class="check"></span>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check form-check-radio">
+                                                    <label class="form-check-label radio-label">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="corrigirRadios" id="corrigirRadios2" value="numero_nota"
+                                                            onclick="radioBold(this)">
+                                                        Busca por Número da nota
+                                                        <span class="circle">
+                                                            <span class="check"></span>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check form-check-radio">
+                                                    <label class="form-check-label radio-label">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="corrigirRadios" id="corrigirRadios3" value="ncm_nota"
+                                                            onclick="radioBold(this)">
+                                                        Busca por NCM
+                                                        <span class="circle">
+                                                            <span class="check"></span>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                                <p>
+                                                    <button class="btn btn-link btn-sm" type="button" data-toggle="collapse"
+                                                        data-target="#collapseFiltros" aria-expanded="false"
+                                                        aria-controls="collapseFiltros">
+                                                        Filtrar<i class="material-icons">expand_more</i>
+                                                    </button>
+                                                </p>
+                                                <div class="collapse filtro-dialog" id="collapseFiltros">
+                                                    <h6 class="text-center filtro-topico text-bold">Código Especificador da Substituição Tributária</h6>
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-4 mr-auto">
+                                                            <h6 class="label-modal">CEST</h6>
+                                                            <input id="input_filtro_cest" name="input_filtro_cest" type="text" class="form-control "
+                                                                autocomplete="off" >
+                                                            <div class="row space-evenly">
+                                                                <div class="form-check form-check-radio text-center">
+                                                                    <label class="form-check-label radio-label d-inline" >
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="radio_filtro_cest" id="corrigirRadios1_filtro_cest" value="igual"
+                                                                            onclick="radioBold(this)" checked>
+                                                                        <h6>Igual</h6>
+                                                                        <span class="circle">
+                                                                            <span class="check"></span>
+                                                                        </span>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check form-check-radio text-center">
+                                                                    <label class="form-check-label radio-label d-inline">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="radio_filtro_cest" id="corrigirRadios2_filtro_cest" value="diferente"
+                                                                            onclick="radioBold(this)">
+                                                                        <h6>Diferente</h6>
+                                                                        <span class="circle">
+                                                                            <span class="check"></span>
+                                                                        </span>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <hr>
+                                                        <div class="form-row">
+                                                            <div class="form-group col-md-4">
+                                                                <h6 class="label-modal">Redução Base PA</h6>
+                                                                <input id="input_filtro_reducao_base_saida_pa_modal" name="input_filtro_reducao_base_saida_pa" type="text" class="form-control " autocomplete="off" 
+                                                                onkeypress="$(this).mask('9,9999', {reverse: true});" >
+                                                                <div class="row space-evenly">
+                                                                    <div class="form-check form-check-radio text-center">
+                                                                        <label class="form-check-label radio-label d-inline" >
+                                                                            <input class="form-check-input" type="radio" id="corrigirRadios1_filtro_reducao_base_saida_pa"
+                                                                                name="radio_filtro_reducao_base_saida_pa"  value="igual"
+                                                                                onclick="radioBold(this)" checked>
+                                                                            <h6>Igual</h6>
+                                                                            <span class="circle">
+                                                                                <span class="check"></span>
+                                                                            </span>
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="form-check form-check-radio text-center">
+                                                                        <label class="form-check-label radio-label d-inline">
+                                                                            <input class="form-check-input" type="radio" id="corrigirRadios2_filtro_reducao_base_saida_pa"
+                                                                                name="radio_filtro_reducao_base_saida_pa" value="diferente"
+                                                                                onclick="radioBold(this)">
+                                                                            <h6>Diferente</h6>
+                                                                            <span class="circle">
+                                                                                <span class="check"></span>
+                                                                            </span>
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group col-md-4">
+                                                                <h6 class="label-modal">Redução Base Fora PA</h6>
+                                                                <input id="input_filtro_reducao_base_saida_fora_pa_modal" name="input_filtro_reducao_base_saida_fora_pa" type="text" class="form-control " autocomplete="off" 
+                                                                onkeypress="$(this).mask('9,9999', {reverse: true});" >
+                                                                <div class="row space-evenly">
+                                                                    <div class="form-check form-check-radio text-center">
+                                                                        <label class="form-check-label radio-label d-inline" >
+                                                                            <input class="form-check-input" type="radio"
+                                                                                name="radio_filtro_reducao_base_saida_fora_pa" id="corrigirRadios1_filtro_reducao_base_saida_fora_pa" value="igual"
+                                                                                onclick="radioBold(this)" checked>
+                                                                            <h6>Igual</h6>
+                                                                            <span class="circle">
+                                                                                <span class="check"></span>
+                                                                            </span>
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="form-check form-check-radio text-center">
+                                                                        <label class="form-check-label radio-label d-inline">
+                                                                            <input class="form-check-input" type="radio"
+                                                                                name="radio_filtro_reducao_base_saida_fora_pa" id="corrigirRadios2_filtro_reducao_base_saida_fora_pa" value="diferente"
+                                                                                onclick="radioBold(this)">
+                                                                            <h6>Diferente</h6>
+                                                                            <span class="circle">
+                                                                                <span class="check"></span>
+                                                                            </span>
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    <hr>
+
+                                                    <h6 class="text-center filtro-topico text-bold">Antecipados</h6>
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-4">
+                                                            <h6 class="label-modal">MVA 4</h6>
+                                                            <input id="input_filtro_mva_4_modal" name="input_filtro_mva4" type="text" class="form-control " autocomplete="off" 
+                                                            onkeypress="$(this).mask('9,9999', {reverse: true});" >
+                                                            <div class="row space-evenly">
+                                                                <div class="form-check form-check-radio text-center">
+                                                                    <label class="form-check-label radio-label d-inline" >
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="radio_filtro_mva4" id="corrigirRadios1_filtro_mva4" value="igual"
+                                                                            onclick="radioBold(this)" checked>
+                                                                        <h6>Igual</h6>
+                                                                        <span class="circle">
+                                                                            <span class="check"></span>
+                                                                        </span>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check form-check-radio text-center">
+                                                                    <label class="form-check-label radio-label d-inline">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="radio_filtro_mva4" id="corrigirRadios2_filtro_mva4" value="diferente"
+                                                                            onclick="radioBold(this)">
+                                                                        <h6>Diferente</h6>
+                                                                        <span class="circle">
+                                                                            <span class="check"></span>
+                                                                        </span>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group col-md-4">
+                                                            <h6 class="label-modal">MVA 7</h6>
+                                                            <input id="input_filtro_mva_7_modal" name="input_filtro_mva7" type="text" class="form-control " autocomplete="off" 
+                                                            onkeypress="$(this).mask('9,9999', {reverse: true});" >
+                                                            <div class="row space-evenly">
+                                                                <div class="form-check form-check-radio text-center">
+                                                                    <label class="form-check-label radio-label d-inline" >
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="radio_filtro_mva7" id="corrigirRadios1_filtro_mva7" value="igual"
+                                                                            onclick="radioBold(this)" checked>
+                                                                        <h6>Igual</h6>
+                                                                        <span class="circle">
+                                                                            <span class="check"></span>
+                                                                        </span>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check form-check-radio text-center">
+                                                                    <label class="form-check-label radio-label d-inline">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="radio_filtro_mva7" id="corrigirRadios2_filtro_mva7" value="diferente"
+                                                                            onclick="radioBold(this)">
+                                                                        <h6>Diferente</h6>
+                                                                        <span class="circle">
+                                                                            <span class="check"></span>
+                                                                        </span>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group col-md-4">
+                                                            <h6 class="label-modal">MVA 12</h6>
+                                                            <input id="input_filtro_mva_12_linha_modal" name="input_filtro_mva12" type="text" class="form-control "
+                                                                autocomplete="off" onkeypress="$(this).mask('9,9999', {reverse: true});" >
+                                                            <div class="row space-evenly">
+                                                                <div class="form-check form-check-radio text-center" >
+                                                                    <label class="form-check-label radio-label d-inline" >
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="radio_filtro_mva12" id="corrigirRadios1_filtro_mva12" value="igual"
+                                                                            onclick="radioBold(this)" checked>
+                                                                        <h6>Igual</h6>
+                                                                        <span class="circle">
+                                                                            <span class="check"></span>
+                                                                        </span>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check form-check-radio text-center">
+                                                                    <label class="form-check-label radio-label d-inline" >
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="radio_filtro_mva12" id="corrigirRadios2_filtro_mva12" value="diferente"
+                                                                            onclick="radioBold(this)">
+                                                                        <h6>Diferente</h6>
+                                                                        <span class="circle">
+                                                                            <span class="check"></span>
+                                                                        </span>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group col-md-4">
+                                                            <h6 class="label-modal">Tipo Antecipado</h6>
+                                                            <select title='SELECIONE UMA OPÇÃO' class="form-control selectpicker"
+                                                                data-style="btn btn-link btn-md" id="input_filtro_tipo_antecipado_modal" name="input_filtro_tipoantecipado"
+                                                                type="text" >
+                                                                <option value="ANTECIPADO_DE_ENTRADAS" >ANTECIPADO_DE_ENTRADAS</option>
+                                                                <option value="ANTECIPADO_ESPECIAL">ANTECIPADO_ESPECIAL</option>
+                                                                <option value="CESTA_BASICA">CESTA_BASICA</option>
+                                                                <option value="ISENTO">ISENTO</option>
+                                                                <option value="MEDICAMENTOS">MEDICAMENTOS</option>
+                                                                <option value="CREDITO_PRESUMIDO">CREDITO_PRESUMIDO</option>
+                                                            </select>
+                                                            <div class="row space-evenly">
+                                                                <div class="form-check form-check-radio text-center">
+                                                                    <label class="form-check-label radio-label d-inline" >
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="radio_filtro_tipoant" id="corrigirRadios1_filtro_tipoant" value="igual"
+                                                                            onclick="radioBold(this)" checked>
+                                                                        <h6>Igual</h6>
+                                                                        <span class="circle">
+                                                                            <span class="check"></span>
+                                                                        </span>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check form-check-radio text-center">
+                                                                    <label class="form-check-label radio-label d-inline">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="radio_filtro_tipoant" id="corrigirRadios2_filtro_tipoant" value="diferente"
+                                                                            onclick="radioBold(this)">
+                                                                        <h6>Diferente</h6>
+                                                                        <span class="circle">
+                                                                            <span class="check"></span>
+                                                                        </span>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <hr>
+                                                    <h6 class="text-center filtro-topico text-bold">ICMS</h6>
+                                                    <div class="form-row">
+
+                                                        <div class="form-group col-md-6">
+                                                            <h6 class="label-modal">CST-ICMS</h6>
+                                                            <input id="input_filtro_cst_icms" name="input_filtro_cst_icms" type="text" class="form-control "
+                                                                autocomplete="off" >
+                                                            <div class="row space-evenly">
+                                                                <div class="form-check form-check-radio text-center">
+                                                                    <label class="form-check-label radio-label d-inline" >
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="radio_filtro_csticms" id="corrigirRadios1_filtro_csticms" value="igual"
+                                                                            onclick="radioBold(this)" checked>
+                                                                        <h6>Igual</h6>
+                                                                        <span class="circle">
+                                                                            <span class="check"></span>
+                                                                        </span>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check form-check-radio text-center">
+                                                                    <label class="form-check-label radio-label d-inline">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="radio_filtro_csticms" id="corrigirRadios2_filtro_csticms" value="diferente"
+                                                                            onclick="radioBold(this)">
+                                                                        <h6>Diferente</h6>
+                                                                        <span class="circle">
+                                                                            <span class="check"></span>
+                                                                        </span>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group col-md-6">
+                                                            <h6 class="label-modal">CSOSN-ICMS</h6>
+                                                            <input id="input_filtro_csosn" name="input_filtro_csosn" type="text" class="form-control " autocomplete="off">
+                                                            <div class="row space-evenly">
+                                                                <div class="form-check form-check-radio text-center">
+                                                                    <label class="form-check-label radio-label d-inline">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="radio_filtro_csosnicms" id="corrigirRadios1_filtro_csosnicms" value="igual"
+                                                                            onclick="radioBold(this)" checked>
+                                                                        <h6>Igual</h6>
+                                                                        <span class="circle">
+                                                                            <span class="check"></span>
+                                                                        </span>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check form-check-radio text-center">
+                                                                    <label class="form-check-label radio-label d-inline">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="radio_filtro_csosnicms" id="corrigirRadios2_filtro_csosnicms" value="diferente"
+                                                                            onclick="radioBold(this)">
+                                                                        <h6>Diferente</h6>
+                                                                        <span class="circle">
+                                                                            <span class="check"></span>
+                                                                        </span>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <hr>
+                                                    <h6 class="text-center filtro-topico text-bold">PIS/COFINS</h6>
+                                                    <div class="form-row">
+
+                                                        
+                                                        <div class="form-group col-md-4">
+                                                            <h6 class="label-modal">CST PIS/COFINS ENTRADA</h6>
+                                                            <input id="input_filtro_cst_piscofins_entrada" name="input_filtro_cst_piscofins_entrada" type="text"
+                                                                class="form-control " autocomplete="off">
+                                                            <div class="row space-evenly">
+                                                                <div class="form-check form-check-radio text-center">
+                                                                    <label class="form-check-label radio-label d-inline">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="radio_filtro_piscofent" id="corrigirRadios1_filtro_piscofent" value="igual"
+                                                                            onclick="radioBold(this)" checked>
+                                                                        <h6>Igual</h6>
+                                                                        <span class="circle">
+                                                                            <span class="check"></span>
+                                                                        </span>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check form-check-radio text-center">
+                                                                    <label class="form-check-label radio-label d-inline">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="radio_filtro_piscofent" id="corrigirRadios2_filtro_piscofent" value="diferente"
+                                                                            onclick="radioBold(this)">
+                                                                        <h6>Diferente</h6>
+                                                                        <span class="circle">
+                                                                            <span class="check"></span>
+                                                                        </span>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group col-md-4">
+                                                            <h6 class="label-modal">CST PIS/COFINS SAÍDA</h6>
+                                                            <input id="input_filtro_cst_piscofins_saida" name="input_filtro_cst_piscofins_saida" type="text"
+                                                                class="form-control " autocomplete="off">
+                                                            <div class="row space-evenly">
+                                                                <div class="form-check form-check-radio text-center">
+                                                                    <label class="form-check-label radio-label d-inline">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="radio_filtro_piscofsai" id="corrigirRadios1_filtro_piscofsai" value="igual"
+                                                                            onclick="radioBold(this)" checked>
+                                                                        <h6>Igual</h6>
+                                                                        <span class="circle">
+                                                                            <span class="check"></span>
+                                                                        </span>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check form-check-radio text-center">
+                                                                    <label class="form-check-label radio-label d-inline">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="radio_filtro_piscofsai" id="corrigirRadios2_filtro_piscofsai" value="diferente"
+                                                                            onclick="radioBold(this)">
+                                                                        <h6>Diferente</h6>
+                                                                        <span class="circle">
+                                                                            <span class="check"></span>
+                                                                        </span>
+                                                                    </label>
+                                                                </div>    
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group col-md-4">
+                                                            <h6 class="label-modal">NATUREZA</h6>
+                                                            <input id="natureza_receita" name="input_filtro_natureza" type="text" class="form-control "
+                                                                autocomplete="off">
+                                                            <div class="row space-evenly">
+                                                                <div class="form-check form-check-radio text-center">
+                                                                    <label class="form-check-label radio-label d-inline">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="radio_filtro_natureza" id="corrigirRadios1_filtro_natureza" value="igual"
+                                                                            onclick="radioBold(this)" checked>
+                                                                        <h6>Igual</h6>
+                                                                        <span class="circle">
+                                                                            <span class="check"></span>
+                                                                        </span>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check form-check-radio text-center">
+                                                                    <label class="form-check-label radio-label d-inline">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="radio_filtro_natureza" id="corrigirRadios2_filtro_natureza" value="diferente"
+                                                                            onclick="radioBold(this)">
+                                                                        <h6>Diferente</h6>
+                                                                        <span class="circle">
+                                                                            <span class="check"></span>
+                                                                        </span>
+                                                                    </label>
+                                                                </div>    
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--Botão BUSCAR-->
+                                                <div class="card-body-button">
+                                                    <button type="submit" class="btn pull-right" name="btn_busca_corrigir_aprovados"
+                                                        id="btn_busca_corrigir_aprovados">Buscar</button>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </form>
+                                    <br>
+
+                                    <!-- DIV Sobre a Tabela -->
+                                    <div class="row">
+
+                                        <div class="col-md-4"></div>
+                                        <div class="col-md-4 ml-auto" style="text-align: end;">
+                                            <p>
+                                                <button class="btn btn-link btn-sm" type="button" data-toggle="collapse"
+                                                    data-target="#collapseColunas" aria-expanded="false"
+                                                    aria-controls="collapseColunas">
+                                                    Colunas<i class="material-icons">expand_more</i>
+                                                </button>
+                                            </p>
+                                            <div class="collapse" id="collapseColunas">
+                                                <div class="row">
+                                                    <div class="col-sm-12 col-md-12 col-lg-12 text-right">
+                                                        <div class="row">
+                                                            <button id="btn-antecipadoscol" onclick="hideColumns([7, 8, 9, 10, 11])"
+                                                                name="btn-antecipadoscol" type="submit"
+                                                                class="btn btn-link btn-sm toggle-button">
+                                                                Antecipados
+                                                            </button>
+                                                            <button type="submit" name="btn-icmscol" id="btn-icmscol"
+                                                                onclick="hideColumns([4, 5, 6, 9, 10, 11])"
+                                                                class="btn btn-link btn-sm toggle-button">
+                                                                ICMS
+                                                            </button>
+                                                            <button type="submit" name="btn-piscofinscol"
+                                                                id="btn-piscofinscol" onclick="hideColumns([4, 5, 6, 7, 8])"
+                                                                class="btn btn-link btn-sm toggle-button">
+                                                                PIS/Cofins
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- DIV -->
+                                    <br>
+                                    <br>
+                                    <div class="table-responsive box drag">
+                                        <table id="tabelaCorrigir"
+                                            class="table display table-striped table-no-bordered table-hover hideObjectInit"
+                                            cellspacing="0" width="100%" style="width:100%">
+                                            <thead>
+                                                <tr class="table-header">
+                                                    <th>
+                                                        <div class="form-check">
+                                                            <label class="form-check-label">
+                                                                <input id="checkall" name="checkbox"
+                                                                    onchange="marcartodos()"
+                                                                    class="form-check-input thcheckbox checkinput"
+                                                                    type="checkbox" value="">
+                                                                <span class="form-check-sign">
+                                                                    <span class="check"></span>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                                    </th>
+                                                    <th class="text-right td-actions">
+                                                        <button id="editar_selecionados_tbl"
+                                                            name="editar_selecionados_tbl" type="button"
+                                                            class="btn btn-warning" title="Editar" disabled>
+                                                            <i class="material-icons">edit</i>
+                                                        </button>
+                                                    </th>
+                                                    <th>Descrição</th>
+                                                    <th>CEST</th>
+                                                    <th>NCM</th>
+                                                    <th>MVA4</th>
+                                                    <th>MVA7</th>
+                                                    <th>MVA12</th>
+                                                    <th>Tipo Antecipado</th>
+                                                    <th>CST-ICMS</th>
+                                                    <th>CSOSN-ICMS</th>
+                                                    <th>CST PIS/COF ENT</th>
+                                                    <th>CST PIS/COF SAI</th>
+                                                    <th>Reduçao Base PA</th>
+                                                    <th>Reduçao Base Fora PA</th>
+                                                    <th>NATUREZA</th>
+                                                    <th>ID ITEM</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--FOOTER-->
+            {{> escritorio/footer_internal}}
+        </div>
+    </div>
+
+
+    <!-- Edit Aprovar_Itens Modal-->
+    <form id="update_form_pendente" method="post" action="/gerenciar/corrigir-update-pendente">
+        <div class="modal fade" id="EditModal_Corrigir" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title " id="exampleModalLabel">Alterar Atributos do Item
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-row">
+
+                            <input id="id_produto" name="id_produto" type="hidden">
+
+                            <div class="form-group col-md-9">
+                                <h6 class="label-modal">Descrição</h6>
+                                <input id="descricao_modal_disabled" name="descricao" type="text" class="form-control" disabled>
+                                <input id="descricao_modal" name="descricao_produtos" type="hidden">
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <h6 class="label-modal">NCM</h6>
+                                <input id="ncm_linha_modal" name="ncm" type="text" class="form-control " disabled>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <h6 class="label-modal">Redução Base PA</h6>
+                                <input id="reducao_base_saida_pa_modal" name="nt_saida_reducao_base_pa" type="text" class="form-control" autocomplete="off" onkeypress="$(this).mask('9,9999', {reverse: true});">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <h6 class="label-modal">Redução Base Fora PA</h6>
+                                <input id="reducao_base_saida_fora_pa_modal" name="nt_saida_reducao_base_fora_pa" type="text" class="form-control" autocomplete="off" onkeypress="$(this).mask('9,9999', {reverse: true});">
+                            </div>
+                        </div>
+
+                        <br>
+                        <h5 class="text-justify">Antecipados</h5>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <h6 class="label-modal">MVA 7</h6>
+                                <input id="mva_7_modal" name="mva_7" type="text" class="form-control " autocomplete="off" 
+                                onkeypress="$(this).mask('9,9999', {reverse: true});" required>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <h6 class="label-modal">MVA 4</h6>
+                                <input id="mva_4_modal" name="mva_4" type="text" class="form-control " autocomplete="off" 
+                                onkeypress="$(this).mask('9,9999', {reverse: true});">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <h6 class="label-modal">MVA 12</h6>
+                                <input id="mva_12_linha_modal" name="mva_12" type="text" class="form-control "
+                                    autocomplete="off" onkeypress="$(this).mask('9,9999', {reverse: true});" required>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <h6 class="label-modal">Tipo Antecipado</h6>
+                                <select title='SELECIONE UMA OPÇÃO' class="form-control selectpicker"
+                                    data-style="btn btn-link btn-md" id="tipo_antecipado_modal" name="tipoantecipado"
+                                    type="text" required>
+                                    <option value="ANTECIPADO_DE_ENTRADAS" required>ANTECIPADO_DE_ENTRADAS</option>
+                                    <option value="ANTECIPADO_ESPECIAL">ANTECIPADO_ESPECIAL</option>
+                                    <option value="CESTA_BASICA">CESTA_BASICA</option>
+                                    <option value="ISENTO">ISENTO</option>
+                                    <option value="MEDICAMENTOS">MEDICAMENTOS</option>
+                                    <option value="CREDITO_PRESUMIDO">CREDITO_PRESUMIDO</option>
+                                </select>
+                            </div>
+                        </div>
+                        <hr>
+                        <br>
+                        <h5 class="text-justify">ICMS</h5>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <h6 class="label-modal">CST-ICMS</h6>
+                                <input id="cst_icms" name="cst_icms" type="text" class="form-control "
+                                    autocomplete="off" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <h6 class="label-modal">CSOSN-ICMS</h6>
+                                <input id="csosn_icms" name="csosn_icms" type="text" class="form-control " autocomplete="off"
+                                    required>
+                            </div>
+                        </div>
+                        <hr>
+                        <h5 class="text-justify">PIS/COFINS</h5>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <h6 class="label-modal">CST PIS/COFINS ENTRADA</h6>
+                                <input id="cst_piscofins_entrada" name="cst_piscofins_entrada" type="text"
+                                    class="form-control " autocomplete="off" required>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <h6 class="label-modal">CST PIS/COFINS SAÍDA</h6>
+                                <input id="cst_piscofins_saida" name="cst_piscofins_saida" type="text"
+                                    class="form-control " autocomplete="off" required>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <h6 class="label-modal">NATUREZA RECEITA MONOFÁSICO/ALIQ ZERO</h6>
+                                <input id="natureza" name="natureza" type="text" class="form-control "
+                                    autocomplete="off" required>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn">SALVAR</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- Edit Aprovar_Itens Modal - FIM-->
+
+    <!-- Edit Aprovar_Multiplos_Itens Modal-->
+
+    <div class="modal fade" id="EditModal_Corrigir_Multiplos" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Editar Itens Selecionados</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+
+                    <form id="update_form_pendente_multiplos" method="post"
+                        action="/gerenciar/corrigir-update-pendente-multiplos">
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <h6 class="label-modal">Redução Base PA</h6>
+                                <input id="nt_saida_reducao_base_pa_modal_multiplos" name="nt_saida_reducao_base_pa" type="text" class="form-control" autocomplete="off" onkeypress="$(this).mask('9,9999', {reverse: true});" >
+                            </div>
+                            <div class="form-group col-md-4">
+                                <h6 class="label-modal">Redução Base Fora Pa</h6>
+                                <input id="nt_saida_reducao_base_fora_pa_modal_multiplos" name="nt_saida_reducao_base_fora_pa" type="text" class="form-control" autocomplete="off" onkeypress="$(this).mask('9,9999', {reverse: true});" >
+                            </div>
+                        </div>
+
+                        <h5 class="text-justify"><b>Antecipados</b></h5>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <h6 class="label-modal">MVA 7</h6>
+                                <input id="mva_7_modal_multiplos" name="mva_7" type="text" class="form-control"
+                                    autocomplete="off" onkeypress="$(this).mask('9,9999', {reverse: true});">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <h6 class="label-modal">MVA 4</h6>
+                                <input id="mva_4_modal_multiplos" name="mva_4" type="text" class="form-control"
+                                    autocomplete="off" onkeypress="$(this).mask('9,9999', {reverse: true});">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <h6 class="label-modal">MVA 12</h6>
+                                <input id="mva_12_linha_modal_multiplos" name="mva_12" type="text"
+                                    class="form-control" autocomplete="off" onkeypress="$(this).mask('9,9999', {reverse: true});">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <h6 class="label-modal">Tipo Antecipado</h6>
+                                <select id="tipo_antecipado_modal_multiplos" title='SELECIONE UMA OPÇÃO'
+                                    class="form-control selectpicker" name="tipoantecipado"
+                                    data-style="btn btn-link btn-md">
+                                    <option value="ANTECIPADO_DE_ENTRADAS" required>ANTECIPADO_DE_ENTRADAS</option>
+                                    <option value="ANTECIPADO_ESPECIAL">ANTECIPADO_ESPECIAL</option>
+                                    <option value="CESTA_BASICA">CESTA_BASICA</option>
+                                    <option value="ISENTO">ISENTO</option>
+                                    <option value="MEDICAMENTOS">MEDICAMENTOS</option>
+                                    <option value="CREDITO_PRESUMIDO">CREDITO_PRESUMIDO</option>
+                                </select>
+                            </div>
+                        </div>
+                        <hr>
+                        <br>
+                        <h5 class="text-justify"><b>ICMS</b></h5>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <h6 class="label-modal">CST-ICMS</h6>
+                                <input id="cst_icms_multiplos" name="cst_icms" type="text"
+                                    class="form-control" autocomplete="off">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <h6 class="label-modal">CSOSN-ICMS</h6>
+                                <input id="csosn_icms_multiplos" name="csosn_icms" type="text" class="form-control"
+                                    autocomplete="off">
+                            </div>
+                        </div>
+                        <hr>
+                        <br>
+                        <h5 class="text-justify"><b>PIS/COFINS</b></h5>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <h6 class="label-modal">CST PIS/COFINS ENTRADA</h6>
+                                <input id="cst_piscofins_entrada_multiplos" name="cst_piscofins_entrada"
+                                    type="text" class="form-control" autocomplete="off">
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <h6 class="label-modal">CST PIS/COFINS SAIDA</h6>
+                                <input id="cst_piscofins_saida_multiplos" name="cst_piscofins_saida"
+                                    type="text" class="form-control" autocomplete="off">
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <h6 class="label-modal">NATUREZA RECEITA MONOFÁSICO/ALIQ ZERO</h6>
+                                <input id="natureza_receita_multiplos" name="natureza" type="text"
+                                    class="form-control" autocomplete="off">
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="modal-footer">
+                            <button type="button" class="btn" data-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn">SALVAR</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Edit Aprovar_Multiplos_Itens Modal - FIM-->
+    </div>
+
+    {{> escritorio/modal_chamados}}
+        <!--   Core JS Files   -->
+        <script src="../assets/js/core/jquery-3.5.1.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+        <script src="../assets/js/core/popper.min.js"></script>
+        <script src="../assets/js/core/bootstrap-material-design.js"></script>
+        <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+        <!-- Plugin for the momentJs  -->
+        <script src="../assets/js/plugins/moment.min.js"></script>
+        <!-- Plugin for the momentJs TRADUÇÕES LOCAIS  -->
+        <script src="../assets/js/plugins/moment-with-locales.js"></script>
+        <!--  Plugin for Sweet Alert -->
+        <script src="../assets/js/plugins/sweetalert2.js"></script>
+        <!-- Forms Validations Plugin -->
+        <script src="../assets/js/plugins/jquery.validate.min.js"></script>
+        <!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
+        <script src="../assets/js/plugins/jquery.bootstrap-wizard.js"></script>
+        <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+        <script src="../assets/js/plugins/bootstrap-selectpicker.js"></script>
+        <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+        <script src="../assets/js/plugins/bootstrap-datetimepicker.min.js"></script>
+        <!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
+        <script src="../assets/js/plugins/bootstrap-tagsinput.js"></script>
+        <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+        <script src="../assets/js/plugins/jasny-bootstrap.min.js"></script>
+        <!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
+        <script src="../assets/js/plugins/fullcalendar.min.js"></script>
+        <!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
+        <script src="../assets/js/plugins/jquery-jvectormap.js"></script>
+        <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+        <script src="../assets/js/plugins/nouislider.min.js"></script>
+        <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+        <!-- Library for adding dinamically elements -->
+        <script src="../assets/js/plugins/arrive.min.js"></script>
+        <!-- Chartist JS -->
+        <script src="../assets/js/plugins/chartist.min.js"></script>
+        <!--  Notifications Plugin    -->
+        <script src="../assets/js/plugins/bootstrap-notify.js"></script>
+
+        <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+        <script src="../assets/js/material-dashboard.min.js?v=2.1.2" type="text/javascript"></script>
+        <!-- Material Dashboard DEMO methods, don't include it in your project!
+  <script src="../assets/demo/demo.js"></script>-->
+
+        <!--SWEET ALERT-->
+        <!--LOCAL-->
+        <script src="../local/plugins/sweetalert/js/sweetalert2.min.js"></script>
+        <script src="../local/metodos/alert/loading.js"></script>
+        <link rel="stylesheet" href="../local/plugins/sweetalert/css/sweetalert2.min.css" id="theme-styles">
+        <script src="../local/plugins/drag/drag.js"></script>
+        <!-- DATATABLE() -->
+        <!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
+        <script src="../local/plugins/dataTables/dataTables.min.js"></script>
+        <!--SORTING DATE EU-->
+        <script src="https://cdn.datatables.net/plug-ins/1.10.12/sorting/date-eu.js"></script>
+        <!--ROWGROUP-->
+        <script src="https://cdn.datatables.net/rowgroup/1.0.2/js/dataTables.rowGroup.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.colVis.min.js"></script>
+        <!--local-->
+        <!-- AJAX JQUERY POST FORM
+  <script src="../local/metodos/post/update_modal_aprovar_itens.js"></script> -->
+        <!-- AJAX JQUERY POST UPDATE update_form_pendente MODAL  <script src="../local/metodos/post/update_input_aprovar_notas.js"></script> -->
+
+        <!--MASK FOR FORMS
+        <script src="../local/plugins/mask_input/jquery.maskedinput.js"></script>-->
+
+        <!-- HANDLE SELECT BoxeS ON TABLE
+  <script src="../assets/js/plugins/datatables_select_rows.js"></script> -->
+
+        <!-- HANDLE CheckBoxes
+  <script src="../local/metodos/post/update_aprovar_desc_itens_selecionados.js" type="text/javascript"> </script>
+-->
+
+        <!-- HANDLE CheckBoxes
+  <script src="../local/metodos/post/update_aprovar_desc_itens_selecionados.js" type="text/javascript"> </script>
+-->
+
+
+
+        <script src="../local/plugins/dataTables/selected2clipboard.js"></script>
+
+        <script type="text/javascript">
+            var tabelaCorrigir;
+
+            //var desc_itens_selecionados = [];
+            //var id_itens_selecionados = [];
+            var id_item_selecionados = [];
+
+            //CARREGA JUNTO COM A PÁGINA
+            $(document).ready(function () {
+                //ACTIVE NAV-ITEM
+                const navs = document.getElementsByClassName('nav-item');
+                if (navs.length > 0) {
+                    for (var x = 0; x < navs.length; x++) {
+                        if (navs[x].childNodes[1].attributes[1].nodeValue) {
+                            if (navs[x].childNodes[1].attributes[1].nodeValue == location.pathname) {
+                                $(navs[x]).addClass('active')
+                            }
+                        }
+                    }
+                }
+                //MASK PARA FORMULÁRIOS
+                jQuery(function ($) {
+                    $("#datamodal").mask("99/99/9999", {
+                        placeholder: "DD/MM/AAAA"
+                    });
+                });
+          
+                //_________________________________________________________________x
+
+                //FUNÇÃO PARA CONTAR OS ITENS
+
+
+                //let cardTitleNode = document.getElementById('cardTitle');  //Atribui o titulo do card 2 (CARD DA TABELA)
+                //cardTitleNode.textContent = (response.nomepjemitente);
+
+
+                //___________________________________BOTÃO EDITAR_____________________________________________
+                //---------------------------------------------------------------OUVINTE DO BOTÃO EDITAR MODAL
+                $(document).on('click', '#editar_linha_tbl', function (e) {
+                    e.preventDefault;
+
+                    
+
+                    $('#descricao_modal_disabled').val($(this).closest('tr').find('.td-descricao_item').text()); //just to show because form dont send disable inputs
+                    $('#descricao_modal').val($(this).closest('tr').find('.td-descricao_item').text()); // input for descricao
+                    $('#ncm_linha_modal').val($(this).closest('tr').find('.td-ncm').text());
+                    $('#mva_7_modal').val($(this).closest('tr').find('.td-mva_4').text());
+                    $('#mva_7_modal').val($(this).closest('tr').find('.td-mva_7').text());
+                    $('#mva_12_linha_modal').val($(this).closest('tr').find('.td-mva_12').text());
+                    $('#tipo_antecipado_modal').val($(this).closest('tr').find('.td-tipo_antecipado').text());
+                    $('#cst_icms').val($(this).closest('tr').find('.td-cst_icms').text())
+                    $('#csosn_icms').val($(this).closest('tr').find('.td-csosn_icms').text())
+                    $('#cst_piscofins_entrada').val($(this).closest('tr').find('.td-cst_piscofins_entrada').text())
+                    $('#cst_piscofins_saida').val($(this).closest('tr').find('.td-cst_piscofins_saida').text())
+                    $('#natureza').val($(this).closest('tr').find('.td-natureza_receita_monofasico_aliqzero').text())
+                    $('#id_produto').val($(this).closest('tr').find('.td-id_item').text())
+                    
+                    //$('#red_bc_icms_sai_pa').val($(this).closest('tr').find('.td-red_bc_icms_sai_pa').text());
+                    $('#reducao_base_saida_pa_modal').val($(this).closest('tr').find('.td-red_bc_icms_sai_pa').text());
+                    $('#reducao_base_saida_fora_pa_modal').val($(this).closest('tr').find('.td-red_bc_icms_sai_fora_pa').text());
+                                //className: "td-cst_piscofins_saida"
+                                //className: "td-red_bc_icms_sai_pa"
+
+                    $('#EditModal_Corrigir').modal('show');
+                    $('.selectpicker').selectpicker('refresh') //to show selected option on selectpicker
+                });
+                //____________________________________BOTÃO VALIDAR_______________________________________
+
+                $(document).on('click', '#editar_selecionados_tbl', function (e) {
+                    e.preventDefault;
+                    //itens selecionados estão na variável -> desc_itens_selecionados
+                    $('#EditModal_Corrigir_Multiplos').modal('show');
+                });
+
+                //____________________________________BOTÃO SALVAR MODAL_______________________________________
+                //--------------------------------------------------------------AJAX POST DO BOTÃO SALVAR MODAL
+                $("#update_form_pendente").submit(function (e) {
+                    
+                    e.preventDefault(); //prevent default action
+                    var post_url = $(this).attr("action"); //get form action url
+                    var request_method = $(this).attr("method"); //get form GET/POST method
+                    var form_data = $(this).serialize(); //Encode form elements for submission
+                    //showLoading();
+                    $.ajax({
+                        url: post_url,
+                        type: request_method,
+                        data: form_data
+                    }).done(function (response) { //
+                        //$("#server-results").html(response);
+                        //hideLoading(); -> removi pq o swetalert executa primeiro e da erro no loading
+                        var gif = "";
+                        if (response == "Dados atualizados!") {
+                            gif = "success";
+                        }
+                        if (response == "Erro ao gravar dados!") {
+                            gif = "warning";
+                        }
+                        Swal.fire({
+                            position: 'center',
+                            icon: gif,
+                            title: response,
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
+                        setTimeout(function () {
+                            $("#btn_busca_corrigir_aprovados").trigger("click");
+                            modal_hide();
+                            $('#EditModal_Corrigir').modal('hide')
+                        }, 2000);
+                    });
+                });
+                //----------------------------------------------------------------------------------------x
+
+                //--------------------------------------------------------------AJAX POST DO BOTÃO SALVAR MODAL MULTIPLOS
+                $("#update_form_pendente_multiplos").submit(function (e) {
+                    e.preventDefault(); //prevent default action
+
+                    var post_url = $(this).attr("action"); //get form action url
+                    var request_method = $(this).attr("method"); //get form GET/POST method
+                    //var sendData = new FormData($("#update_form_pendente_multiplos")[0])
+                    //var form_data = $(this).serialize(); //Encode form elements for submission
+
+                    var formData = {
+                        //'descricao_produtos': desc_itens_selecionados,
+                        //'id_produtos': id_itens_selecionados,
+                        'id_item_selecionados': id_item_selecionados,
+                        'tipoantecipado': $('#tipo_antecipado_modal_multiplos').val()
+                    }
+                    $(this).find("input[name]").each(function (index, node) {
+                        formData[node.name] = node.value
+                    });
+
+
+                    //console.log("dados antes de enviar", form_data)
+                    //console.log("sendData", sendData)
+                    //console.log("dados antes de enviar nao serializado", $(this))
+
+                    //showLoading();
+                    $.ajax({
+                        url: post_url,
+                        type: request_method,
+                        data: formData
+                    }).done(function (response) { //
+                        //$("#server-results").html(response);
+                       // hideLoading();
+                        if (response) {
+
+
+                    //limpa selects do modal
+                    $('#EditModal_Corrigir_Multiplos').find("select").each(function (index, select) {
+                        select.value = ''
+                        $(select).change()
+                    });
+                    //limpa inputs modal
+                    $('#update_form_pendente_multiplos')[0].reset();
+                    //oculta modal
+                    $('#EditModal_Corrigir_Multiplos').modal('hide');
+
+
+                    var gif = 'warning'
+                    if(response == "Dados atualizados!") {
+                        gif = 'success'
+                    }
+                        
+                    Swal.fire({
+                        customClass: {
+                            confirmButton: 'btn btn-black btn-login',
+                        },
+                        buttonsStyling: false,
+                        position: 'center',
+                        icon: gif,
+                        title: response,
+                        showConfirmButton: false,
+                        timer: 1000
+                    }).then((result) => {
+                         Swal.fire({
+                           customClass: {confirmButton: 'btn btn-black btn-login col-lg-3'},
+                           buttonsStyling: false, /*default style off*/
+                           position: 'center',
+                           title: 'Correções adicionadas a fila de execução!',
+                           html:'<b>As alterações podem levar um tempo, aguarde</b><br>(Você pode aprovar outros itens por enquanto)',
+                           icon:'success',
+                           confirmButtonText:"OK",
+                           showConfirmButton: true,
+                           }).then((result) => {
+                               if(result.isConfirmed){
+                                   setTimeout(function () {
+                                   $("#btn_busca_corrigir_aprovados").trigger("click");
+                                   modal_hide();
+                                   $('#EditModal_Corrigir').modal('hide')
+                                    }, 2000);
+                                }
+                             });
+                          });
+                        }
+                    });
+                });
+                //----------------------------------------------------------------------------------------x
+
+
+
+
+                //________________________________________________________________________________________x
+
+                //--------------------------------Habilita botão editar se algum check box estiver selecionado & desabilita os botões dos rows
+                $("input[name='checkbox']").on('change', function () {
+                    //Habilita o botão EDITAR MARCADOS (HEADER) se algum check box estiver selecionado - disabled = true
+                    $("button[name='editar_selecionados_tbl']").prop('disabled', !$(
+                        "input[name='checkbox']:checked").length);
+                    //Habilita o botão VALIDAR marcados (HEADER) se algum check box estiver selecionado - disabled = true
+                    $("button[name='validar_selecionados_tbl']").prop('disabled', !$(
+                        "input[name='checkbox']:checked").length);
+                    //Desabilita os botões validar linha se algum check box estiver selecionado - disabled = true
+                    $("button[name='validar_linha_tbl']").prop('disabled', $(
+                        "input[name='checkbox']:checked").length);
+                    //Desabilita os botões editar da linha se algum check box estiver selecionado - disabled = true
+                    $("button[name='editar_linha_tbl']").prop('disabled', $(
+                        "input[name='checkbox']:checked").length);
+                })
+
+            });
+
+            $('button.toggle-button').on('click', function (e) {
+                $(this).toggleClass('btnpressed');
+            });
+
+
+            //----------- FUNÇÃO PARA ESCONDER COLUNAS -------------------------------
+            function hideColumns(colunas) {
+                var table = $('#tabelaCorrigir').DataTable();
+
+                //console.log("tabela", table)
+
+                for (i = 0; i < colunas.length; i++) {
+                    var table = $('#tabelaCorrigir').DataTable();
+                    //console.log("table ====> ", table)
+                    //console.log("table column ====> ", table.column)
+                    table.column(colunas[i]).visible(!table.column(colunas[i]).visible());
+                }
+            }
+
+
+
+            //---------------------------[FUNÇÕES]---------------------------------
+            //PEGA O ID DOS ITENS MARCADOS-----------------------------------------------
+            function marcados(temp) {
+                id_item_selecionados = [];
+                $('#tabelaCorrigir :checkbox:checked').each(function (index) {
+                    var currentRow = $(this).closest('tr');
+                    var id_item  = $(currentRow).find('.td-id_item').text()
+                    if(id_item){
+                        if(typeof id_item != "undefined" ){
+                            if(id_item.length >0){
+                                id_item_selecionados.push(id_item)
+                            }
+                        }
+                    }
+                });
+            }
+
+            function desmarcartodos() {
+                $('input[type="checkbox"]:checked').prop('checked', false);
+                //Re-contar itens marcados
+                marcados();
+            }
+
+            function modal_hide() {
+                $('#EditModal').modal('hide')
+            }
+
+            function reloadPage() {
+                location.reload(true);
+            }
+            //---------------------------[SUBMIT FORMS]---------------------------------
+            $("#form_busca_corrigir_aprovados").submit(function (e) {
+                e.preventDefault();
+                var post_url = $(this).attr("action"); //get form action url
+                var request_method = $(this).attr("method"); //get form GET/POST method
+                var form_data = $(this).serialize(); //Encode form elements for submission
+                showLoading();
+                $.ajax({
+                    async: true,
+                    url: post_url,
+                    type: request_method,
+                    data: form_data
+                }).done(function (response) {
+                    hideLoading()
+
+                    dados = response.dataTable
+                    var dadosTabelaNotas = JSON.parse(response.dataTable)
+
+                    tabelaCorrigir = $('#tabelaCorrigir').DataTable({
+                        //scrollX: true,
+                        data: dadosTabelaNotas,
+                        destroy: true,
+                        columns: [{
+                                defaultContent: '<div class="form-check">' +
+                                    '<label class="form-check-label">' +
+                                    '<input name="checkbox" class="form-check-input checkinput" type="checkbox" value=""' +
+                                    'onchange="marcados(this.checkbox)">' +
+                                    '<span class="form-check-sign">' +
+                                    '<span class="check"></span>' +
+                                    '</span>' +
+                                    '</label>' +
+                                    '</div>'
+                            }, //CHECKBOX
+                            {
+                                data: '',
+                                render: function (data, type, row) {
+                                    let stringRow = JSON.stringify(row)
+                                    return `<button id="editar_linha_tbl" name="editar_linha_tbl" data-row='${stringRow}' type="button" rel="tooltip" class="btn btn-warning" title="Editar">
+                            <i class="material-icons">edit</i>
+                            </button >`
+                                }
+                            },
+                            {
+                                data: "descricao_item",
+                                className: "td-descricao_item"
+                            }, { 
+                                data: "cest",
+                                className: "td-cest"
+                            }, {
+                                data: "ncm",
+                                className: "td-ncm"
+                            }, {
+                                data: "mva_4",
+                                className: "td-mva_4"
+                                
+                            }, {
+                                data: "mva_7",
+                                className: "td-mva_7"
+                            }, {
+                                data: "mva_12",
+                                className: "td-mva_12"
+                            }, {
+                                data: "tipo_antecipado",
+                                className: "td-tipo_antecipado"
+                            }, {
+                                data: "cst_icms",
+                                className: "td-cst_icms"
+                            }, {
+                                data: "csosn_icms",
+                                className: "td-csosn_icms"
+                            }, {
+                                data: "cst_piscofins_entrada",
+                                className: "td-cst_piscofins_entrada"
+                            }, {
+                                data: "cst_piscofins_saida",
+                                className: "td-cst_piscofins_saida"
+                            }, {
+                                data: "red_bc_icms_sai_pa",
+                                className: "td-red_bc_icms_sai_pa"
+                            },
+                            {
+                                data: "red_bc_icms_sai_fora_pa",
+                                className: "td-red_bc_icms_sai_fora_pa"
+                            },
+                             {
+                                data: "natureza_receita_monofasico_aliqzero",
+                                className: "td-natureza_receita_monofasico_aliqzero"
+                            },
+                            {
+                                data: "id_item",
+                                className: "td-id_item hideElement"
+                            }                        
+                        ],
+                        processing: true,
+                        fixedHeader: {
+                            "header": false,
+                            "footer": false
+                        },
+                        select: {
+                            "style": 'os',
+                            "items": 'cell'
+                        },
+                        dom: 'Blftip',
+                        buttons: [{
+                            extend: 'excel',
+                            text: 'Exportar'
+                        }],
+                        pagingType: "full_numbers",
+                        lengthMenu: [
+                            [50, 100, 500, -1],
+                            [50, 100, 500, "Todos"]
+                        ],
+                        responsive: false,
+                        language: {
+                            "url": "../assets/js/plugins/dataTables.ptbr.lang",
+                            "search": "_INPUT_",
+                            "searchPlaceholder": "",
+                            //processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Carregando...</span>'
+                        },/*
+                        fixedColumns: {
+                            leftColumns: -1,
+                            rightColumns: 1
+                        },*/
+                        columnDefs: [
+                        {
+                            "className": 'hideElement',
+                            "targets": [ 16 ]  //hide id_item
+                        },
+                        {
+                            "orderable": false,
+                            "targets": [0, 1]
+                        }, {
+                            "className": 'td-actions',
+                            "targets": 1
+                        }, {
+                            "targets": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+                            "className": 'text-center'
+                        }],
+                        order: [
+                            [2, 'asc']
+                        ],
+                        rowCallback: function (row, data) {
+                            //Inicializa os botões dos rows como ativos - disabled = false
+                            var validar_linha_tbl = $(row).find(
+                                "button[name='validar_linha_tbl']");
+                            validar_linha_tbl.prop('disabled', false);
+                            $('#tabelaCorrigir').removeClass('hideObjectInit');
+
+                            //DEIXAR A TABELA VISIVEL DEPOIS DA INICIALIZAÇÂO
+                            //$("#ContadorGeralItens").removeClass('hideObjectInit')
+                            //--------------------------------Habilita botão editar se algum check box estiver selecionado & desabilita os botões dos rows
+                            var element = $(row).find('.checkinput');
+                            element.on("change", function () {
+                                //Habilita o botão EDITAR MARCADOS (HEADER) se algum check box estiver selecionado - disabled = true
+                                $("button[name='editar_selecionados_tbl']").prop(
+                                    'disabled', !$(
+                                        "input[name='checkbox']:checked").length
+                                );
+                                //Habilita o botão VALIDAR marcados (HEADER) se algum check box estiver selecionado - disabled = true
+                                $("button[name='validar_selecionados_tbl']").prop(
+                                    'disabled', !$(
+                                        "input[name='checkbox']:checked").length
+                                );
+                                //Desabilita os botões validar linha se algum check box estiver selecionado - disabled = true
+                                $("button[name='validar_linha_tbl']").prop(
+                                    'disabled', $(
+                                        "input[name='checkbox']:checked").length
+                                );
+                                //Desabilita os botões editar da linha se algum check box estiver selecionado - disabled = true
+                                $("button[name='editar_linha_tbl']").prop(
+                                    'disabled', $(
+                                        "input[name='checkbox']:checked").length
+                                );
+                            })
+                        },
+                        //xing
+                        initComplete: function (settings, json) {
+                            $('table').removeClass('hideObjectInit');
+                            // Enable TFOOT scoll bars
+                            $('.dataTables_scrollFoot').css('overflow', 'auto');
+
+                            $('.dataTables_scrollHead').css('overflow', 'auto');
+
+                            // Sync TFOOT scrolling with TBODY
+                            $('.dataTables_scrollFoot').on('scroll', function () {
+                                $('.dataTables_scrollBody').scrollLeft($(this)
+                                    .scrollLeft());
+                            });
+
+                            $('.dataTables_scrollHead').on('scroll', function () {
+                                $('.dataTables_scrollBody').scrollLeft($(this)
+                                    .scrollLeft());
+                            });
+
+
+                            /* multi-search table header */
+                            this.api().columns().every( function () {
+                                var that = this;
+                
+                                $('input', this.header()).on( 'keyup change clear', function () {
+                                    if (that.search() !== this.value ) {
+                                        that.search(this.value).draw();
+                                    }
+                                });
+                            });
+
+                            }
+                        });
+
+
+                    /*
+                    tabelaCorrigir.clear().draw();
+                    tabelaCorrigir.rows.add(dadosTabelaNotas); // Add new data
+                    tabelaCorrigir.columns.adjust().draw(); // Redraw the DataTable
+                    hideLoading();*/
+                });
+            });
+
+            /* multi-search table header - item */
+            $('#tabelaCorrigir thead th').each( function (index, element) {
+                //excluir primeiro e último
+                if(index != 0 && index != 1) {
+                    var title = $(this).text();
+                    $(this).html( '<input class="filtercolumnhead" type="text" placeholder="'+title+'" />' );
+                }
+            });
+
+
+
+            //-------QUANDO MUDAR A PAGINA DA TABELA DESMARCAR TODOS OS CHECKBOXES------
+            $("#tabelaCorrigir").on("page.dt", function () {
+                desmarcartodos();
+                //console.log("1")
+            }).on('search.dt', function () {
+                desmarcartodos();
+                //console.log("2")
+            });
+
+            //--------------SELECIONAR TODOS OS CHECK BOXs VISIVEIS-----------------------
+            function marcartodos() {
+                $("#checkall").each(function () {
+                    var state = $(this).prop("checked")
+                    $(".checkinput:visible").each(function () {
+                        $(this).prop("checked", state)
+                    })
+                    if (state == true) {
+                        marcados();
+                    }
+                })
+            }
+
+
+        </script>
+
+        <script>
+            function radioBold(thisRadio) {
+                //removendo classe radio-label de todos
+                var labelradios = $(".radio-label");
+                labelradios.map(function () {
+                    $(this).removeClass('radio-bold');
+                })
+
+                //adicionando classe radio-label somente ao item clicado
+                var label = thisRadio.parentNode
+                $(label).addClass('radio-bold');
+            }
+        </script>
+
+</body>
+
+</html>

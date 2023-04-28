@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<!--HEADER-->
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="../images/icon/apple-icon-mezzomo.png" />
+    <link rel="icon" type="image/png" href="../images/icon/favicon_mezzomo3.png" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Robotax: Explorador de Arquivos</title>
+    <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css"
+        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+    <!-- CSS Files -->
+    <link href="../assets/css/material-dashboard.min.css?v=2.1.2" rel="stylesheet" />
+    <!--local CSS -->
+    <link rel="stylesheet" type="text/css" href="../local/styleGED.css" />
+
+    <!-- dropzone css -->
+    <link href="../local/plugins/dropzone/css/dropzone.css" rel="stylesheet" />
+    <link href="../local/plugins/dropzone/css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../local/plugins/filemanager/filemanager-light.css" />
+    <script src="../assets/js/core/jquery-3.5.1.js"></script>
+</head>
+
+<body class="">
+    <div class="wrapper">
+        <!-- SIDEBAR -->
+        <div class="sidebar" data-color="yellow" data-background-color="black"
+            data-image="../assets/img/contabeisbw.jpg">
+            <div class="sidebar-wrapper">
+                <ul class="nav">
+                    {{> escritorio/navbar_ged}}
+                </ul>
+            </div>
+        </div>
+
+        <div class="main-panel">
+            <nav class="navbar navbar-expand-lg navbar-transparent">
+                <div class="container-fluid">
+                    <div class="row justify-content-end" id="nav-ged" style="margin-left: auto; z-index: 2">
+                        <div class="navbar-minimize">
+                            <button id="minimizeSidebar" class="btn btn-just-icon btn-white btn-fab btn-round">
+                                <i class="material-icons text_align-center visible-on-sidebar-regular">more_vert</i>
+                                <i class="material-icons design_bullet-list-67 visible-on-sidebar-mini">view_list</i>
+                            </button>
+                        </div>
+                        <a class="navbar-brand" href="/ged">Explorador de Arquivos</a>
+                    </div>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a style="font-weight: 600 !important" href="/menu/apps" class="nav-link nav-link-back">
+                                <i class="material-icons">undo</i> Voltar
+                            </a>
+                        </li>
+                        {{> escritorio/help_btn}}
+                    </ul>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="navbar-toggler-icon icon-bar"></span>
+                        <span class="navbar-toggler-icon icon-bar"></span>
+                        <span class="navbar-toggler-icon icon-bar"></span>
+                    </button>
+                </div>
+            </nav>
+            <div class="content">
+
+                <div class="container-fluid padding-lr">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header card-header-info2">
+                                <h4 class="card-title">Explorar</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="">
+                                    <div id="file-manager"></div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="arquivo" class="container-fluid padding-lr hideElement">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header card-header-info2">
+                                <h4 class="card-title">Arquivos</h4>
+                            </div>
+                            <div class="card-body">
+                               <div id="previewFile"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            {{> escritorio/footer_internal}}
+        </div>
+    </div>
+
+    <!--Correção do Violation Scroll non-passive event-->
+    <script src=" ../local/plugins/fix-non-passive.js"></script>
+    <!--   Core JS Files   -->
+    <script src="../assets/js/core/popper.min.js"></script>
+    <script src="../assets/js/core/bootstrap-material-design.js"></script>
+    <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+    <!-- Plugin for the momentJs  -->
+    <script src="../assets/js/plugins/moment.min.js"></script>
+    <!-- Plugin for the momentJs TRADUÇÕES LOCAIS  -->
+    <script src="../assets/js/plugins/moment-with-locales.js"></script>
+    <!--  Plugin for Sweet Alert -->
+    <script src="../assets/js/plugins/sweetalert2.js"></script>
+    <!-- Forms Validations Plugin -->
+    <script src="../assets/js/plugins/jquery.validate.min.js"></script>
+    <!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
+    <script src="../assets/js/plugins/jquery.bootstrap-wizard.js"></script>
+    <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+    <script src="../assets/js/plugins/bootstrap-selectpicker.js"></script>
+    <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+    <script src="../assets/js/plugins/bootstrap-datetimepicker.min.js"></script>
+    <!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
+    <script src="../assets/js/plugins/jquery.dataTables.min.js"></script>
+    <!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
+    <script src="../assets/js/plugins/bootstrap-tagsinput.js"></script>
+    <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+    <script src="../assets/js/plugins/jasny-bootstrap.min.js"></script>
+    <!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
+    <script src="../assets/js/plugins/fullcalendar.min.js"></script>
+    <!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
+    <script src="../assets/js/plugins/jquery-jvectormap.js"></script>
+    <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+    <script src="../assets/js/plugins/nouislider.min.js"></script>
+    <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+    <!-- Library for adding dinamically elements -->
+    <script src="../assets/js/plugins/arrive.min.js"></script>
+    <!-- Chartist JS -->
+    <script src="../assets/js/plugins/chartist.min.js"></script>
+    <!--  Notifications Plugin    -->
+    <script src="../assets/js/plugins/bootstrap-notify.js"></script>
+    <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="../assets/js/material-dashboard.min.js?v=2.1.2" type="text/javascript"></script>
+    <!-- Material Dashboard DEMO methods, don't include it in your project!
+    <script src="../assets/demo/demo.js"></script>-->
+    <script src="../local/plugins/pdfObject/pdfobject.min.js"></script>
+    <!-- AJAX JQUERY POST UPDATE update_form_pendente MODAL -->
+    <script src="../local/metodos/post/update_modal_alterar_regras.js"></script>
+
+    <!--SWEET ALERT-->
+    <!--LOCAL-->
+    <script src="../local/plugins/sweetalert/js/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="../local/plugins/sweetalert/css/sweetalert2.min.css" id="theme-styles" />
+    <script src="../local/plugins/drag/drag.js"></script>
+
+    <!--MASK FOR FORMS-->
+    <script src="../local/plugins/mask_input/jquery.maskedinput.js" type="text/javascript"></script>
+
+    <!-- HANDLE SELECT BoxeS ON TABLE
+        <script src="../assets/js/plugins/datatables_select_rows.js"></script> -->
+
+    <script src="https://ajax.cloudflare.com/cdn-cgi/scripts/7089c43e/cloudflare-static/rocket-loader.min.js"
+        data-cf-settings="c96413aceea3f1ce8593f0e8-|49" defer=""></script>
+
+    <script src="../local/metodos/alert/loading.js"></script>
+    <!-- file manager -->
+
+    <script src="../local/plugins/filemanager/filemanager-all.js"></script>
+
+    <!-- dropzone_ged -->
+    <script src="../local/plugins/dropzone/dropzone.min.js"></script>
+
+    <script src="../local/plugins/dropzone/dropzoneinit_ged.js"></script>
+
+    {{> escritorio/modal_chamados}}
+
+    <script>
+        Dropzone.autoDiscover = false;
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //ACTIVE NAV-ITEM
+            var navs = document.getElementsByClassName("nav-item");
+            for (var x = 0; x < navs.length; x++) {
+                if (
+                    navs[x].childNodes[1].attributes[1].nodeValue == location.pathname
+                ) {
+                    var nav = navs[x];
+                    $(nav).addClass("active");
+                }
+            }
+        });
+    </script>
+
+    <script>
+        var mouseOnFileMangerInit = false;
+        //aqui
+        function fileManagerGetDoc(fileName, fileExtension) {
+            showLoading();
+            //fileName = false;
+            if (!fileName) {
+                setTimeout(function () {
+                    $("#previewFile").empty().append(`
+                        <div class="col-lg-12" style="position:absolute; z-index:3!important;">
+                            <div id="item-preview-file-manager" class="col-lg-12" style="margin-top:3rem!important">
+                                <h6>Arquivo não encontrado!</h6>
+                            </div>
+                        </div>`);
+                }, 100);
+                hideLoading();
+            }
+            if (fileName) {
+                $.ajax({
+                    url: "/ged/file-manager-get-doc",
+                    type: "post",
+                    data: {
+                        documento: fileName,
+                    },
+                }).done(function (response) {
+                    if(!response) {
+                        hideLoading();
+                        gif = "warning";
+                        Swal.fire({
+                            customClass: {
+                                confirmButton: "btn btn-black col-lg-3",
+                            },
+                            heightAuto: false,
+                            buttonsStyling: false,
+                            position: "center",
+                            icon: gif,
+                            title: msg,
+                            showConfirmButton: true,
+                            timer: 0,
+                        });
+                        return;
+                    }
+                    var {msg, status, error, data} = response;
+
+                    if(!status || !data) {
+                        hideLoading();
+                        gif = "warning";
+                        Swal.fire({
+                            customClass: {
+                                confirmButton: "btn btn-black col-lg-3",
+                            },
+                            heightAuto: false,
+                            buttonsStyling: false,
+                            position: "center",
+                            icon: gif,
+                            title: msg,
+                            showConfirmButton: true,
+                            timer: 0,
+                        });
+                        return;
+                    }
+
+                    if(error){
+                        hideLoading();
+                        gif = "warning";
+                        msg = "Erro ao carregar o arquivo!";
+                        Swal.fire({
+                            customClass: {
+                                confirmButton: "btn btn-black col-lg-3",
+                            },
+                            heightAuto: false,
+                            buttonsStyling: false,
+                            position: "center",
+                            icon: gif,
+                            title: msg,
+                            showConfirmButton: true,
+                            timer: 0,
+                        });
+                        return;
+                    }
+                    
+                    var previewType = null;
+                    if ([".jpeg", ".jpg"].includes(fileExtension)) previewType = 'image/jpeg';
+                    if ([".png", ".gif", ".webm",".weba", ".webp" ].includes(fileExtension))  previewType = `image/${fileExtension.replace(/\./g,'')}`;
+                    if ([".tif", ".tiff"].includes(fileExtension)) previewType = 'image/tiff';
+                    if ([".svg"].includes(fileExtension)) previewType = 'image/svg+xml';
+                    if (fileExtension == ".pdf") previewType = "application/pdf";
+                    if (fileExtension == ".xml")  previewType = "application/xml";
+
+                        const byteArray = new Uint8Array(data.Body.data);
+                        var fileURL = URL.createObjectURL (
+                            new Blob([byteArray], {
+                                type: previewType,
+                            })
+                        );
+                        if (fileURL) {
+                            $("#previewFile").empty().append(`
+                                <form id="form_detalhes_filemanager" action="/ged/update-detalhes" method="POST"> 
+                                    <div id="cardDocViewPreview" class="col-lg-4" style="position:absolute; z-index:3;">
+                                        <button id="button-detalhes" type="button" class="btn btn-sm btn-black">Detalhes</button>
+                                        <ul class="detalhes" id="button-detalhes2">
+                                        </ul>
+                                    </div>
+                                </form>`
+                            );
+                            $("#previewFile").append(`
+                                <div id="item-preview-file-manager" class="col-lg-12" style="margin-top:3rem!important">
+                                </div>`
+                            );
+                            PDFObject.embed(fileURL, "#item-preview-file-manager");
+                            $.ajax({
+                                url: "/ged/get-by-name-doc",
+                                type: "post",
+                                data: {
+                                    nome_documento: fileName,
+                                },
+                            }).done(function (data) {
+                                if (data) {
+                                    var dataDetalhes = data;
+                                    $("#cardDocViewPreview ul").empty();
+
+                                    $("#cardDocViewPreview").append(
+                                        `<input name="id_documento" value="${data.id_documento}" class="form-control hideElement input_id_documento input_changed">`
+                                    );
+
+                                    var checkIfdataHaveAnyDetails = false;
+
+                                    Object.entries(data).forEach(([columnkey, columnvalue]) => {
+                                        if (
+                                            columnvalue !== null &&
+                                            columnkey != "id_escritorio" &&
+                                            columnkey != "imgbase64" &&
+                                            columnkey != "id_documento" &&
+                                            columnkey != "nome_do_arquivo" &&
+                                            columnkey != "path" &&
+                                            columnkey != "json_path" &&
+                                            columnkey != "texto_doc"
+                                        ) {
+                                            //Adiciona Detalhe se tiver Key e Valor
+                                            if (columnkey && columnvalue) {
+                                                $("#cardDocViewPreview ul")
+                                                    .append(`<li style="list-style: none;">
+                                                        <div class="input-group form-group input-card-border align-items-center">
+                                                            <label class="bmd-label-floating" style="font-weight: bold; text-transform: uppercase; margin-left: .5rem;">${columnkey}</label>
+                                                            <input type="text" class="form-control input-detalhes" style="margin-right: .5rem; border-radius: 5px;" autocomplete="off" name="${columnkey}" value="${columnvalue}" onkeyup="$(this).addClass('input_changed')">
+                                                        </div>
+                                                    </li>`
+                                                );
+                                            } else {
+                                                /*do nothing */
+                                            }
+                                        } else {
+                                            /*do nothing */
+                                        }
+                                    });
+
+                                    $("#cardDocViewPreview ul.detalhes").append(`
+                                    <button type="button" onClick="updateDetalhesfilemanager()" class="btn btn-black btn-sm button-detalhes">
+                                        Salvar Alterações
+                                    </button>`);
+
+                                    //Se não estiver Inicializado, inicializa.
+                                    if (!mouseOnFileMangerInit) mouseEventlistenerInFileManger();
+                                }
+                                hideLoading();
+                            });
+                        }
+                });
+            }
+        }
+
+        function mouseEventlistenerInFileManger() {
+            $(function () {
+                $("#button-detalhes").mouseenter(function () {
+                    //$(this).css('visibility', 'visible')
+                    $("#button-detalhes2").show(350);
+                }),
+                    $("#button-detalhes2").mouseleave(function () {
+                        //Ao remover o cursor da div
+                        $("#button-detalhes2").hide(350);
+                    });
+            });
+            //Setando como inicializado, para evitar ser inicializado novamente
+            mouseOnFileMangerInit = true;
+        }
+
+
+
+        //load filemanager
+        $(document).ready(function () {
+            $.ajax({
+                url: "/ged/file-manager",
+                type: "get",
+            }).done(function (response) {
+                
+                var {msg, status, error, data} = response;
+                if (error) {
+                    console.log(msg);     
+                    return;
+                }
+                if (status && data) {
+                    data = JSON.parse(data);
+                    $(function () {
+                        $("#file-manager").dxFileManager({
+                            name: "fileManager",
+                            fileSystemProvider: data,
+                            height: 90,
+                            //alignment: "center",
+                            permissions: {
+                                //download: true
+                            },
+                            //thales  //https://js.devexpress.com/Demos/WidgetsGallery/Demo/FileManager/UICustomization/jQuery/Light/
+                            itemView: {
+                                details: {
+                                    columns: [
+                                        "thumbnail",
+                                        {
+                                            dataField: "name",
+                                            caption: "Nome",
+                                            width: 600,
+                                        },
+                                        ,
+                                        {
+                                            dataField: "natureza",
+                                            caption: "Natureza",
+                                            //width: 95,
+                                        },
+                                        {
+                                            dataField: "uploadDate",
+                                            caption: "Enviado",
+                                            dataType: "datetime",
+                                            //width: 95,
+                                        },
+                                        {
+                                            dataField: "size",
+                                            caption: "Tamanho",
+                                            alignment: "center",
+                                            //width: 95,
+                                        },
+                                    ],
+                                },
+                                showParentFolder: false,
+                            },
+                            toolbar: {
+                                items: [
+                                    {
+                                        name: "showNavPane",
+                                        visible: true,
+                                    },
+                                    "switchView",
+                                ],
+                            },
+                            contextMenu: {
+                                items: [
+                                    //'refresh',
+                                ],
+                            },
+                            customizeThumbnail: function (fileManagerItem) {
+                                if (fileManagerItem.isDirectory) { return "../images/gedimg/folder.svg"; }
+                                var fileExtension = fileManagerItem.getFileExtension();
+                                switch (fileExtension) {
+                                    case ".pdf":
+                                        return "../images/gedimg/pdf.svg";
+                                    case ".pdf":
+                                        return "../images/gedimg/doc-rtf.svg";
+                                    case ".xml":
+                                        return "../images/gedimg/doc-xml.svg";
+                                }
+                            },
+                            
+                            onSelectedFileOpened: function (e) {
+                                var fileExtension = e.file.getFileExtension().toLowerCase();
+                                fileManagerGetDoc(e.file.key, fileExtension);
+                                $("#arquivo").removeClass('hideElement');
+                            },
+                            onContentReady: fileExplorerDataFormater,
+                            onCurrentDirectoryChanged: fileExplorerDataFormater,
+                        });
+                    });
+                }
+
+
+                function fileExplorerDataFormater() {
+                    setTimeout(() => {
+                        $("#file-manager")
+                            .find("tbody tr")
+                            .each((index, tr) => {
+                                var td = $(tr).find("td");
+                                var data = $(td[4]).text();
+                                if (data && data.length > 12) {
+                                    data = data.replace(/,/g, "");
+                                    var justDateFomatted =
+                                        moment(data).format("DD/MM/YYYY HH:MM");
+                                    var dateTimeFormatted = justDateFomatted;
+
+                                    $(td[4]).text(dateTimeFormatted);
+                                }
+                            });
+                    }, 50);
+                }
+
+
+            });
+        });
+    </script>
+
+    <script>
+        function downloadPDFGED(id_documento) {
+            if (id_documento) {
+                $.ajax({
+                    url: "/ged/download-pdf",
+                    type: "post",
+                    data: {
+                        id_documento: id_documento,
+                    },
+                    xhr: function () {
+                        var xhr = new XMLHttpRequest();
+                        xhr.onreadystatechange = function () {
+                            if (xhr.readyState == 2) {
+                                if (xhr.status == 200) {
+                                    xhr.responseType = "blob";
+                                } else {
+                                    xhr.responseType = "text";
+                                }
+                            }
+                        };
+                        return xhr;
+                    },
+                }).done(function (data) {
+                    if (data == "Arquivo não encontrado") {
+                        //sweetalert aqui
+                    } else {
+                        //Convert the Byte Data to BLOB object.
+                        var blob = new Blob([data], {
+                            type: "application/octet-stream",
+                        });
+                        //Check the Browser type and download the File.
+                        var isIE = false || !!document.documentMode;
+                        if (isIE) {
+                            window.navigator.msSaveBlob(blob, `${id_documento}.pdf`);
+                        } else {
+                            var url = window.URL || window.webkitURL;
+                            var link = url.createObjectURL(blob);
+                            var a = $("<a />");
+                            a.attr("download", `${id_documento}.pdf`);
+                            a.attr("href", link);
+                            $("body").append(a);
+                            a[0].click();
+                            $("body").remove(a);
+                        }
+                    }
+                });
+            }
+        }
+
+        //to download pdf
+        $("#download_doc").on("click", function () {
+            var id_docs = arrUnique;
+            if (id_docs) {
+                for (var i = 0; i < id_docs.length; i++) {
+                    downloadPDFGED(id_docs[i]);
+                }
+            }
+        });
+    </script>
+
+    <script>
+        function updateDetalhesfilemanager() {
+            var form = $("#form_detalhes_filemanager");
+            var method = $(form).attr("method");
+            var action = $(form).attr("action");
+            var form_data = $(
+                "#form_detalhes_filemanager .input_changed"
+            ).serialize();
+
+            $.ajax({
+                url: action,
+                type: method,
+                data: form_data,
+            }).done(function (response) {
+                if (response) {
+                    var id = $("#id_documento").val();
+
+                    //$('#modal-doc-atribute').modal('hide')
+                    //document.getElementById("form-updte-detalhes").reset();
+
+                    var icon = "";
+                    if (response == "Detalhe atualizado com sucesso") {
+                        icon = "success";
+                    }
+                    if (response == "Erro ao atualizar detalhe, tente novamente") {
+                        icon = "warning";
+                    }
+
+                    Swal.fire({
+                        customClass: {
+                            confirmButton: "btn btn-black btn-login",
+                        },
+                        buttonsStyling: false,
+                        position: "center",
+                        icon: icon,
+                        title: response,
+                        showConfirmButton: true,
+                        timer: 0,
+                    });
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

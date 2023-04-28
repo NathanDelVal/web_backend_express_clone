@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="../images/icon/apple-icon-mezzomo.png">
+    <link rel="icon" type="image/png" href="../images/icon/favicon_mezzomo3.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>
+        Robotax: Robô Fiscal
+    </title>
+    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css"
+        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+
+    <!--Custom CSS styles-->
+    <link rel="stylesheet" type="text/css" href="/local/stylerobo-fiscal.css">
+    <!--Custom CSS styles-->
+    <link rel="stylesheet" type="text/css" href="/assets/css/material-dashboard.min.css">
+    <!--SWEET ALERT-->
+    <link rel="stylesheet" href="/local/plugins/sweetalert/css/sweetalert2.min.css" id="theme-styles">
+    <link rel="stylesheet" href="../local/plugins/multiselect/bootstrap-multiselect.css" type="text/css" />
+
+    <script src="../assets/js/core/jquery-3.5.1.js"></script>
+
+</head>
+
+<body class="">
+
+    <div class="wrapper">
+		
+		<div class="sidebar" data-color="yellow" data-background-color="black"
+			data-image="../assets/img/contabeisbw.jpg">
+			<div class="sidebar-wrapper">
+				<ul class="nav">
+                    {{> escritorio/navbar_rf}}
+				</ul>
+			</div>
+		</div>
+
+		<div class="main-panel">
+			
+			<nav class="navbar navbar-expand-lg navbar-transparent">
+				<div class="container-fluid">
+					<div class="navbar-wrapper">
+						<div class="navbar-minimize">
+							<button id="minimizeSidebar" class="btn btn-just-icon btn-white btn-fab btn-round">
+								<i class="material-icons text_align-center visible-on-sidebar-regular">more_vert</i>
+								<i class="material-icons design_bullet-list-67 visible-on-sidebar-mini">view_list</i>
+							</button>
+						</div>
+						<a class="navbar-brand" href="/robo-fiscal">Robô Fiscal</a>
+					</div>
+					{{> escritorio/menu_apps_back}} {{> escritorio/help_btn}}
+					<button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
+						aria-expanded="false" aria-label="Toggle navigation">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="navbar-toggler-icon icon-bar"></span>
+						<span class="navbar-toggler-icon icon-bar"></span>
+						<span class="navbar-toggler-icon icon-bar"></span>
+					</button>
+				</div>
+			</nav>
+
+			<div class="content">
+				
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 header-robo" style="z-index: 2;">
+                            <h2>Monitor de Processamento</h2>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6" style="z-index: 3!important;">
+                            <div class="card card-stats">
+                                <div class="card-header card-header-black card-header-icon">
+                                    <div class="card-icon">
+                                        <img id="total_entrada_loading" src="../images/loading.svg"></img>
+                                        <h4 class="info-valor" id="total_entrada_valor"></h4>
+                                    </div>
+                                    <p class="card-category">Notas de Entrada</p>
+                                    <h3 class="card-title">Total</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6" style="z-index: 3!important;">
+                            <div class="card card-stats">
+                                <div class="card-header card-header-black card-header-icon">
+                                    <div class="card-icon">
+                                        <img id="total_entrada_lancadas_loading" src="../images/loading.svg"></img>
+                                        <h4 class="info-valor" id="total_entrada_lancadas_valor"></h4>
+                                    </div>
+                                    <p class="card-category">Notas de Entrada</p>
+                                    <h3 class="card-title">Lançadas</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6" style="z-index: 3!important;">
+                            <div class="card card-stats">
+                                <div class="card-header card-header-black card-header-icon">
+                                    <div class="card-icon">
+                                        <img id="total_saida_loading" src="../images/loading.svg"></img>
+                                        <h4 class="info-valor" id="total_saida_valor"></h4>
+                                    </div>
+                                    <p class="card-category">Notas de Saída</p>
+                                    <h3 class="card-title">Total</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6" style="z-index: 3!important;">
+                            <div class="card card-stats">
+                                <div class="card-header card-header-black card-header-icon">
+                                    <div class="card-icon">
+                                        <img id="total_saida_lancadas_loading" src="../images/loading.svg"></img>
+                                        <h4 class="info-valor" id="total_saida_lancadas_valor"></h4>
+                                    </div>
+                                    <p class="card-category">Notas de Saída</p>
+                                    <h3 class="card-title">Lançadas</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card" style="z-index: 3!important;">
+                                <div class="card-header card-header-yellow">
+                                    <h4 class="card-title">Notas Atualizadas</h4>
+                                    <p class="card-category">Listagem das notas fiscais atualizadas em seu ERP</p>
+                                </div>
+                                <div class="card-body">
+                                    <div class="col-md-2 ml-auto text-center">
+                                        <label>
+                                            <h6 style="font-weight: bold;"> Periodo</h6>
+                                        </label>
+                                        <div class="input-group form-group input-card-border p-0 m-0"
+                                            style="margin-left: auto!important;">
+                                            <input name="mes" id="datepickerRoboFiscal" type="text"
+                                                class="form-control p-2 monthPicker" placeholder="Selecionar Periodo"
+                                                autocomplete="off" value="">
+                                            <span class="input-group-addon group-addon" style="display: flex; align-items: center;">
+                                                <i class="material-icons">today</i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <div class="table-responsive box drag">
+                                                <table id="tabela-robo-fiscal-notas"
+                                                    class="table display table-striped table-no-bordered table-hover"
+                                                    cellspacing="0" width="100%" style="width:100%">
+                                                    <thead>
+                                                        <tr class="table-header">
+                                                            <th class="text-center">Cliente</th>
+                                                            <th class="text-center">Notas Entrada XML</th>
+                                                            <th class="text-center">Notas Entrada Lançadas Dominio</th>
+                                                            <th class="text-center">Notas Saída XML</th>
+                                                            <th class="text-center">Notas Saída Lançadas Dominio</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header card-header-yellow">
+                                    <h4 class="card-title">Análise de dados</h4>
+                                    <p class="card-category"> </p>
+                                </div>
+                                <div class="card-body">
+                                    <iframe id="frameBI" class="col-sm-12 powerBI_ajust" width="100%"
+                                        src="https://app.powerbi.com/view?r={{bi_dominio_vs_app}}"
+                                        frameborder="0" allowFullScreen="true">
+                                    </iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+			</div>
+
+			{{> escritorio/footer_internal}}
+		</div>
+
+	</div>
+
+
+
+    {{!-- MODAL TO VIEW NOTA BY CHAVE DE ACESSO--}}
+    <div class="modal fade" id="modal_view_by_chave_acesso" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-center ml-4" id="exampleModalLabel">
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="container" style="width: 35%;">
+                        <button id="btn_imprimir_pdf" class="btn btn-sm buttons-excel buttons-html5" tabindex="0"
+                            aria-controls="mytable" type="button"><span><i class="material-icons">print</i>
+                            </span>
+                            <div class="ripple-container"></div>
+                        </button>
+                        <button id="btn_download_pdf" class="btn btn-sm buttons-excel buttons-html5" tabindex="0"
+                            aria-controls="mytable" type="button">PDF<span>
+                            </span>
+                            <div class="ripple-container"></div>
+                        </button>
+                        <button id="btn_download_xml" class="btn btn-sm buttons-excel buttons-html5" tabindex="0"
+                            aria-controls="mytable" type="button">XML<span>
+                            </span>
+                            <div class="ripple-container"></div>
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div id="viewer_by_chave_acesso">
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+
+<!--Correção do Violation Scroll non-passive event-->
+<script src=" ../local/plugins/fix-non-passive.js"></script>
+<!--   Core JS Files   -->
+<script src="../assets/js/core/popper.min.js"></script>
+<script src="../assets/js/core/bootstrap-material-design.js"></script>
+<script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+<!-- Plugin for the momentJs-->
+<script src="../assets/js/plugins/moment.min.js"></script>
+<!-- Plugin for the momentJs TRADUÇÕES LOCAIS-->
+<script src="../assets/js/plugins/moment-with-locales.js"></script>
+<!--  Plugin for Sweet Alert -->
+<script src="../assets/js/plugins/sweetalert2.js"></script>
+<!-- Forms Validations Plugin -->
+<script src="../assets/js/plugins/jquery.validate.min.js"></script>
+<!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
+<script src="../assets/js/plugins/jquery.bootstrap-wizard.js"></script>
+<!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+<script src="../assets/js/plugins/bootstrap-selectpicker.js"></script>
+<!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+<script src="../assets/js/plugins/bootstrap-datetimepicker.min.js"></script>
+<!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
+<script src="../assets/js/plugins/bootstrap-tagsinput.js"></script>
+<!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+<script src="../assets/js/plugins/jasny-bootstrap.min.js"></script>
+<!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
+<script src="../assets/js/plugins/fullcalendar.min.js"></script>
+<!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
+<script src="../assets/js/plugins/jquery-jvectormap.js"></script>
+<!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+<script src="../assets/js/plugins/nouislider.min.js"></script>
+<!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+<!-- Library for adding dinamically elements -->
+<script src="../assets/js/plugins/arrive.min.js"></script>
+<!-- Chartist JS -->
+<script src="../assets/js/plugins/chartist.min.js"></script>
+<!--  Notifications Plugin    -->
+<script src="../assets/js/plugins/bootstrap-notify.js"></script>
+<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+<script src="../assets/js/material-dashboard.min.js?v=2.1.2" type="text/javascript"></script>
+
+<!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
+<script src="../local/plugins/dataTables/dataTables.min.js"></script>
+<!--SORTING DATE EU-->
+<script src="https://cdn.datatables.net/plug-ins/1.10.12/sorting/date-eu.js"></script>
+<!--ROWGROUP-->
+<script src="https://cdn.datatables.net/rowgroup/1.0.2/js/dataTables.rowGroup.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.colVis.min.js"></script>
+<!--<script src="https://cdn.datatables.net/rowgroup/1.1.2/js/dataTables.rowGroup.min.js"></script>-->
+
+<!-- Include the plugin's CSS and JS multiselect: -->
+<script type="text/javascript" src="../local/plugins/multiselect/bootstrap-multiselect.js"></script>
+<!--SWEET ALERT-->
+<script src="../local/plugins/sweetalert/js/sweetalert2.min.js"></script>
+<link rel="stylesheet" href="../local/plugins/sweetalert/css/sweetalert2.min.css" id="theme-styles">
+
+<!-- AJAX POST FORM RECUPERAR SENHA MODAL -->
+<script src="../local/metodos/post/form_recuperar_senha.js"></script>
+<script src="../local/plugins/drag/drag.js"></script>
+<script src="../local/plugins/mascara/abreviaNumero.js"></script>
+
+<!-- JSBarCode | para o código de barras -->
+<script src="../local/plugins/JsBarCode/JsBarcode.code128.min.js"></script>
+
+<script src="../local/plugins/printjs/print.min.js"></script>
+
+<script src="../local/metodos/alert/loading.js"></script>
+{{> escritorio/modal_chamados}}
+
+<script>
+    const LoadRoboFiscalInfo = async (total) => {
+        //console.log('wwww', total, total.length)
+        if (!total) {
+            $('#total_entrada_loading').addClass('hideElement')
+            $('#total_entrada_lancadas_loading').addClass('hideElement')
+            $('#total_saida_loading').addClass('hideElement')
+            $('#total_saida_lancadas_loading').addClass('hideElement')
+
+            $('#total_entrada_valor').text('0')
+            $('#total_saida_valor').text('0')
+            $('#total_saida_lancadas_valor').text('0')
+            $('#total_entrada_lancadas_valor').text('0')
+        } else {
+            $('#total_entrada_loading').addClass('hideElement')
+            $('#total_entrada_lancadas_loading').addClass('hideElement')
+            $('#total_saida_loading').addClass('hideElement')
+            $('#total_saida_lancadas_loading').addClass('hideElement')
+
+            /*
+            total_qtd_entrada: 382,
+            total_qtd_entrada_lancadas: 0,
+            total_qtd_saida: 18641,
+            total_qtd_saida_lancadas: 0
+            */
+            const total_entrada_sum = await abreviaNumero(total.total_qtd_entrada);
+            const total_entrada_lancadas_sum = await abreviaNumero(total.total_qtd_entrada_lancadas)
+            const total_saida_sum = await abreviaNumero(total.total_qtd_saida)
+            const total_saida_lancadas_sum = await abreviaNumero(total.total_qtd_saida_lancadas)
+
+            if (!total_entrada_sum) {
+                $('#total_entrada_valor').text('0')
+            } else {
+                $('#total_entrada_valor').text(total_entrada_sum)
+            }
+            if (!total_saida_sum) {
+                $('#total_saida_valor').text('0')
+            } else {
+                $('#total_saida_valor').text(total_saida_sum)
+            }
+            if (!total_saida_lancadas_sum) {
+                $('#total_saida_lancadas_valor').text('0')
+            } else {
+                $('#total_saida_lancadas_valor').text(total_saida_lancadas_sum)
+            }
+            if (!total_entrada_lancadas_sum) {
+                $('#total_entrada_lancadas_valor').text('0')
+            } else {
+                $('#total_entrada_lancadas_valor').text(total_entrada_lancadas_sum)
+            }
+        }
+
+    }
+
+    //GET DEFAULT DATA BY AJAX
+    function LoadDeafaultDataTableRoboContabilNotas() {
+        $('#total_entrada_loading').removeClass('hideElement')
+        $('#total_entrada_lancadas_loading').removeClass('hideElement')
+        $('#total_saida_loading').removeClass('hideElement')
+        $('#total_saida_lancadas_loading').removeClass('hideElement')
+
+        var dateNow = moment(moment(), 'YYYY/MM/DD');
+        var mes = dateNow.format('MM');
+        var ano = dateNow.format('YYYY');
+
+        $.ajax({
+            url: '/robo-fiscal/count-notas-entrada-saida',
+            type: 'POST',
+            data: {
+                "months": mes,
+                "year": ano
+            }
+        }).done(function (response) {
+            //console.log("ok sr. pic")
+            //console.log(response)
+            if (response) {
+                response = JSON.parse(response)
+                var data4Table = []
+                var total = []
+                if (response.data4Table) {
+                    if (response.data4Table.length) {
+                        data4Table = response.data4Table
+                    }
+                }
+                if (response.total) {
+                    LoadRoboFiscalInfo(response.total)
+                }
+
+                if (data4Table.length > 0) {
+                    InitTableRoboContabilNotas(data4Table) //Inicializa a tabela pela primeira vez.
+                } else {
+                    InitTableRoboContabilNotas(data4Table)
+                    //roboContabilNotas.clear().draw()
+                }
+            } else {
+                return
+            }
+        });
+    }
+
+    /* DATATABLE DA TABELA NOTAS*/
+    var roboContabilNotas;
+    var collapsedGroups = {};
+
+    /*
+    function getByProdIdAndCliente(chave_de_acesso) {
+        localStorage.setItem('chave_de_acesso', chave_de_acesso) //salvando a chave de acesso no click
+
+        if (chave_de_acesso) {
+            $.ajax({
+                url: '/robo-fiscal/get-pdf-by-chave',
+                type: 'post',
+                data: {
+                    "chave_de_acesso": chave_de_acesso
+                },
+            }).done(function(data) {
+                if (data) {
+                    if (data == "Nenhuma nota encontrada") {
+                        gif = 'warning';
+                        Swal.fire({
+                            customClass: {
+                                confirmButton: 'btn btn-black btn-login',
+                            },
+                            buttonsStyling: false,
+                            position: 'center',
+                            icon: gif,
+                            title: data,
+                            showConfirmButton: true,
+                            timer: 0
+                        });
+                    } else {
+                        $('#viewer_by_chave_acesso').empty().append(data)
+                        $("#coddebarras_chavedeacesso").JsBarcode(chave_de_acesso, {
+                            displayValue: false
+                        });
+                        $('#modal_view_by_chave_acesso').modal('show')
+                    }
+                } else {
+                    gif = 'warning';
+                    Swal.fire({
+                        customClass: {
+                            confirmButton: 'btn btn-black btn-login',
+                        },
+                        buttonsStyling: false,
+                        position: 'center',
+                        icon: gif,
+                        title: data,
+                        showConfirmButton: true,
+                        timer: 0
+                    });
+                }
+            })
+        }
+    }
+
+    function downloadPDF() {
+        let chave_de_acesso = localStorage.getItem('chave_de_acesso')
+        if (chave_de_acesso) {
+            $.ajax({
+                url: '/robo-fiscal/download-pdf',
+                type: 'post',
+                data: {
+                    "chave_de_acesso": chave_de_acesso
+                },
+                xhr: function() {
+                    var xhr = new XMLHttpRequest();
+                    xhr.onreadystatechange = function() {
+                        if (xhr.readyState == 2) {
+                            if (xhr.status == 200) {
+                                xhr.responseType = "blob";
+                            } else {
+                                xhr.responseType = "text";
+                            }
+                        }
+                    };
+                    return xhr;
+                },
+            }).done(function(data) {
+                if (data == "Arquivo não encontrado") {
+                    //sweetalert aqui
+                } else {
+                    //Convert the Byte Data to BLOB object.
+                    var blob = new Blob([data], {
+                        type: "application/octet-stream"
+                    });
+                    //Check the Browser type and download the File.
+                    var isIE = false || !!document.documentMode;
+                    if (isIE) {
+                        window.navigator.msSaveBlob(blob, `${chave_de_acesso}.pdf`);
+                    } else {
+                        var url = window.URL || window.webkitURL;
+                        var link = url.createObjectURL(blob);
+                        var a = $("<a />");
+                        a.attr("download", `${chave_de_acesso}.pdf`);
+                        a.attr("href", link);
+                        $("body").append(a);
+                        a[0].click();
+                        $("body").remove(a);
+                    }
+                }
+            })
+        }
+    }
+
+    function downloadXML() {
+        let chave_de_acesso = localStorage.getItem('chave_de_acesso')
+        if (chave_de_acesso) {
+            $.ajax({
+                url: '/robo-fiscal/download-xml',
+                type: 'post',
+                data: {
+                    "chave_de_acesso": chave_de_acesso
+                },
+                xhr: function() {
+                    var xhr = new XMLHttpRequest();
+                    xhr.onreadystatechange = function() {
+                        if (xhr.readyState == 2) {
+                            if (xhr.status == 200) {
+                                xhr.responseType = "blob";
+                            } else {
+                                xhr.responseType = "text";
+                            }
+                        }
+                    };
+                    return xhr;
+                },
+            }).done(function(data) {
+                if (data == "Arquivo não encontrado") {
+                    //sweetalert aqui
+                } else {
+                    //Convert the Byte Data to BLOB object.
+                    var blob = new Blob([data], {
+                        type: "application/xml"
+                    });
+                    //Check the Browser type and download the File.
+                    var isIE = false || !!document.documentMode;
+                    if (isIE) {
+                        window.navigator.msSaveBlob(blob, `${chave_de_acesso}.xml`);
+                    } else {
+                        var url = window.URL || window.webkitURL;
+                        link = url.createObjectURL(blob);
+                        var a = $("<a />");
+                        a.attr("download", `${chave_de_acesso}.xml`);
+                        a.attr("href", link);
+                        $("body").append(a);
+                        a[0].click();
+                        $("body").remove(a);
+                    }
+                }
+            })
+        }
+    }
+
+    function printPDF() {
+        let chave_de_acesso = localStorage.getItem('chave_de_acesso')
+        if (chave_de_acesso) {
+            $.ajax({
+                url: '/robo-fiscal/download-pdf',
+                type: 'post',
+                data: {
+                    "chave_de_acesso": chave_de_acesso
+                },
+                xhr: function() {
+                    var xhr = new XMLHttpRequest();
+                    xhr.onreadystatechange = function() {
+                        if (xhr.readyState == 2) {
+                            if (xhr.status == 200) {
+                                xhr.responseType = "blob";
+                            } else {
+                                xhr.responseType = "text";
+                            }
+                        }
+                    };
+                    return xhr;
+                },
+            }).done(function(data) {
+                if (data == "Arquivo não encontrado") {
+                    //sweetalert aqui
+                } else {
+                    //Convert the Byte Data to BLOB object.
+                    var blob = new Blob([data], {
+                        type: "application/octet-stream"
+                    });
+                    //Check the Browser type and download the File.
+                    var isIE = false || !!document.documentMode;
+                    if (isIE) {
+                        window.navigator.msSaveBlob(blob, `${chave_de_acesso}.pdf`);
+                    } else {
+                        var pdfFile = new Blob([data], {
+                            type: "application/pdf"
+                        });
+                        var pdfUrl = URL.createObjectURL(pdfFile);
+                        //window.open(pdfUrl);
+                        printJS(pdfUrl);
+                    }
+                }
+            })
+        }
+    }
+*/
+
+    $("#btn_imprimir_pdf").on('click', function () {
+        printPDF()
+    })
+    $("#btn_download_pdf").on("click", function () {
+        downloadPDF()
+    })
+    $("#btn_download_xml").on("click", function () {
+        downloadXML()
+    })
+    $('#tabela-robo-fiscal-notas tbody').on('click', 'tr.group-start', function () {
+        var cliente = $(this).data('cliente');
+        collapsedGroups[cliente] = !collapsedGroups[cliente];
+        //console.log('colapse gruops: ', collapsedGroups)
+        roboContabilNotas.draw(false);
+    });
+
+    //Inicializa a tabela
+    function InitTableRoboContabilNotas(data4table) {
+        let idTable = '#tabela-robo-fiscal-notas'
+        roboContabilNotas = $(idTable).DataTable({
+            destroy: true,
+            deferRender: true,
+            data: data4table,
+            columns: [{
+                data: "fantasia"
+            }, {
+                data: "",
+                render: function (data, type, row) {
+                    var item = '0'
+                    if (row.qtd_entrada) {
+                        if (row.qtd_entrada > 0) {
+                            item = row.qtd_entrada
+                        }
+                    }
+                    return item
+                }
+            }, {
+                data: "",
+                render: function (data, type, row) {
+                    var item = '0'
+                    if (row.qtd_entrada_lancadas) {
+                        if (row.qtd_entrada_lancadas > 0) {
+                            item = row.qtd_entrada_lancadas
+                        }
+                    }
+                    return item
+                }
+            }, {
+                data: "",
+                render: function (data, type, row) {
+                    var item = '0'
+                    if (row.qtd_saida) {
+                        if (row.qtd_saida > 0) {
+                            item = row.qtd_saida
+                        }
+                    }
+                    return item
+                }
+            }, {
+                data: "",
+                render: function (data, type, row) {
+                    var item = '0'
+                    if (row.qtd_saida_lancadas) {
+                        if (row.qtd_saida_lancadas > 0) {
+                            item = row.qtd_saida_lancadas
+                        }
+                    }
+                    return item
+                }
+            }],
+            /*
+            columnDefs: [{
+                    orderable: false,
+                    targets: [0]
+                },
+                //{ visible: false, targets: 1 }, //ocultar coluna ID desse modo não teremos id no corpo da tabela > solução abaixo
+                {
+                    sClass: "hideIdTable",
+                    targets: [0]
+                }, //id visivelmente oculto (presente)
+                {
+                    targets: [1],
+                    className: 'td-actions'
+                ],
+            },*/
+            processing: true,
+            fixedHeader: {
+                header: false,
+                footer: false
+            },
+            dom: 'Blfrtip',
+            buttons: [{
+                extend: 'excel',
+                text: 'Exportar'
+            }],
+            pagingType: "full_numbers",
+            lengthMenu: [
+                [50, 100, 1000, -1],
+                [50, 100, 1000, "Todos"]
+            ],
+            responsive: false,
+            language: {
+                "url": "../assets/js/plugins/dataTables.ptbr.lang",
+                search: "_INPUT_",
+                searchPlaceholder: "",
+            },
+            /*
+            rowGroup: {
+                // Uses the 'row group' plugin
+                dataSrc: 'cliente',
+                startRender: function(rows, group) {
+
+                    var collapsed = !!collapsedGroups[group];
+
+                    rows.nodes().each(function(r) {
+                        r.style.display = collapsed ? 'none' : '';
+                    });
+
+                    // Add category name to the <tr>. NOTE: Hardcoded colspan
+                    return $('<tr/>')
+                        .append('<td colspan="8" style="background-color: #333; color: white; text-align: left!important; border-radios: 5px;">' + 'Cliente: ' + group + ' (' + rows.count() + ')</td>')
+                        .attr('data-cliente', group)
+                        .toggleClass('collapsed', collapsed);
+                },
+
+            },
+            rowCallback: function(row, data) {
+
+                var validar_linha_tbl = $(row).find("button[name='resend_linha']");
+                validar_linha_tbl.prop('disabled', false);
+                $("#tabela-robo-fiscal-notas").removeClass('hideObjectInit')
+
+                var element = $(row).find('.checkinput');
+                element.on("change", function() {
+                    //Habilita o botão EDITAR MARCADOS (HEADER) se algum check box estiver selecionado - disabled = true
+                    $("button[name='resend_linha']").prop('disabled', $("input[name='checkbox']:checked").length);
+
+                    $("button[name='resend']").prop('disabled', !$("input[name='checkbox']:checked").length);
+                })
+            },*/
+
+            initComplete: function (settings, json) {
+                /* multi-search table header */
+                this.api().columns().every(function () {
+                    var that = this;
+
+                    $('input', this.header()).on('keyup change clear', function () {
+                        if (that.search() !== this.value) {
+                            that.search(this.value).draw();
+                        }
+                    });
+                });
+            }
+        });
+    }
+
+    /* multi-search table header - item */
+    $('#tabela-robo-fiscal-notas thead th').each(function (index, element) {
+        var title = $(this).text();
+        $(this).html('<input class="filtercolumnhead" type="text" placeholder="' + title + '" />');
+
+    });
+
+    //Carrega a tabela com dados novos
+    function LoadTableRoboContabilNotas(data) {
+        if (data) {
+            if (data.length > 0 && roboContabilNotas) {
+                roboContabilNotas.clear().draw();
+                roboContabilNotas.rows.add(data); // Add new data
+                roboContabilNotas.columns.adjust().draw();
+            } else if (roboContabilNotas) {
+                roboContabilNotas.clear().draw();
+            } else {
+                if (data.length > 0) {
+                    InitTableRoboContabilNotas(data) //Inicializa a tabela pela primeira vez selecionando mês.
+                } else {
+                    InitTableRoboContabilNotas(data)
+                    roboContabilNotas.clear().draw()
+                }
+            }
+        } else {
+            if (roboContabilNotas) {
+                roboContabilNotas.clear().draw()
+            }
+        }
+    }
+
+    $(document).ready(function () {
+
+        //Primeira solicitação para iniciar a tabela Notas
+        LoadDeafaultDataTableRoboContabilNotas()
+
+
+    });
+
+    /*
+    $("input[name='checkbox']").on('change', function() {
+        //Habilita o botão EDITAR MARCADOS (HEADER) se algum check box estiver selecionado - disabled = true
+        $("button[name='resend_linha']").prop('disabled', $("input[name='checkbox']:checked").length);
+        $("button[name='resend']").prop('disabled', !$("input[name='checkbox']:checked").length);
+    })
+    */
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#examplemultiple').multiselect();
+
+        $('#datepickerRoboFiscal').datetimepicker({
+            useCurrent: false, //Important! See issue #1075
+            viewMode: 'months',
+            format: 'MM/YYYY',
+            toolbarPlacement: "top",
+            allowInputToggle: true,
+            defaultDate: moment(),
+            icons: {
+                time: 'fa fa-time',
+                date: 'fa fa-calendar',
+                up: 'fa fa-chevron-up',
+                down: 'fa fa-chevron-down',
+                previous: 'fa fa-chevron-left',
+                next: 'fa fa-chevron-right',
+                today: 'fa fa-screenshot',
+                clear: 'fa fa-trash',
+                close: 'fa fa-remove'
+            }
+        });
+
+        $("#datepickerRoboFiscal").on("dp.show", function (e) {
+            $(e.target).data("DateTimePicker").viewMode("months");
+        });
+
+        $("#datepickerRoboFiscal").on("dp.change", function (e) {
+            var dataString = $('#datepickerRoboFiscal').data().date
+            if (dataString) {
+                var mesEano = dataString.split('/')
+                fetch_DataNotasTable(mesEano[0], mesEano[1])
+            }
+        });
+
+        
+
+    });
+    //Multiselect Meses
+    /*
+    $('#datepickerRoboFiscal').on('dp.change', function (event) {
+       //console.log(event.date)
+        //fetch_DataNotasTable($('#mes').val())
+    });
+
+*/
+</script>
+
+<script>
+    //--> FUNÇÕES
+    var desc_itens_selecionados = [];
+
+    fetch_DataNotasTable = async (months, year) => {
+        if (months && year) {
+            if (months.length > 0 && year.length > 0) {
+                showLoading()
+                $.ajax({
+                    async: true,
+                    url: '/robo-fiscal/count-notas-entrada-saida',
+                    type: 'post',
+                    data: {
+                        "months": months,
+                        "year": year
+                    }
+                }).done(function (response) {
+                    hideLoading()
+                    //console.log("response =====>", response)
+                    response = JSON.parse(response)
+                    if (response.total) {
+                        //console.log("entrei na criado do objeto")
+                        if (response.total) {
+                            //console.log("maior que zero")
+                            //atualizar dados do monitor de processo
+                            var total = response.total
+                            //console.log("dados do mes ====>", response.total)
+
+                            LoadRoboFiscalInfo(total)
+
+                        }
+                    } else {
+                        //console.log("passei no else")
+                        var total = []
+                        LoadRoboFiscalInfo(total)
+
+                    }
+
+                    if (response.data4Table) {
+                        // if (response.data4Table.length > 0) {
+                        let data = response.data4Table
+                        if (data) {
+                            if (data.length > 0) {
+                                LoadTableRoboContabilNotas(data)
+                            } else if (roboContabilNotas) {
+                                roboContabilNotas.clear().draw() //renderiza a tabela sem dados
+                                //$("#row_tableproduto").addClass("hideElement")  //Descomentar caso não queira mostrar a tabela sem dados
+                                return
+                            }
+                        } else if (roboContabilNotas) {
+                            roboContabilNotas.clear().draw() //renderiza a tabela sem dados
+                            //$("#row_tableproduto").addClass("hideElement")  //Descomentar caso não queira mostrar a tabela sem dados
+                            return
+                        }
+                        // }
+                    } else {
+                        if (roboContabilNotas) {
+                            roboContabilNotas.clear().draw()
+                        }
+                    }
+                });
+            } else {
+                LoadDeafaultDataTableRoboContabilNotas()
+                return
+            }
+        } else {
+            //console.log("fetch_DataNotasTable(Nenhum dado foi passado)")
+            return
+        }
+    }
+
+    /*
+    function marcados(temp) {
+        desc_itens_selecionados = [];
+        $('#tabela-robo-fiscal-notas :checkbox:checked').each(function(index) {
+            var currentRow = this.parentNode.parentNode.parentNode.parentNode;
+            var closestTr = currentRow.getElementsByTagName("td")[3];
+
+            //var a = closestTr.className.textContent;
+            if (typeof closestTr !== "undefined") {
+                desc_itens_selecionados.push(closestTr.textContent);
+            }
+        });
+        //console.log('marcados: ', desc_itens_selecionados)
+    }
+
+    function desmarcartodos() {
+        $('input[type="checkbox"]:checked').prop('checked', false);
+        //Re-contar itens marcados
+        marcados();
+    }
+
+    //-------QUANDO MUDAR A PAGINA DA TABELA DESMARCAR TODOS OS CHECKBOXES------
+    $("#tabela-robo-fiscal-notas").on("page.dt", function() {
+        desmarcartodos();
+        //console.log("1")
+    }).on('search.dt', function() {
+        desmarcartodos();
+        //console.log("2")
+    });
+
+    //--------------SELECIONAR TODOS OS CHECK BOXs VISIVEIS-----------------------
+    function marcartodos() {
+        $("#checkall").each(function() {
+            //console.log('cheguei aqui')
+            $(".checkinput:visible").prop("checked", $(this).prop("checked"))
+            if (checkall.checked == true) {
+                //console.log('cheguei no if')
+                marcados();
+            }
+        })
+    }*/
+</script>
+
+</html>
